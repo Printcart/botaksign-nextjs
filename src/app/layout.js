@@ -1,4 +1,4 @@
-import Footer from '../../components/Footer';
+import Footer from './components/Footer';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import 'bootstrap/dist/css/bootstrap.min.css';
