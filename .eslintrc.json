@@ -44,6 +44,7 @@
     "eqeqeq": "error",
     "func-style": ["error", "expression", { "allowArrowFunctions": true }],
     "camelcase": "error",
-    "object-shorthand": "error"
+    "object-shorthand": "error",
+    "react/prop-types": "off"
   }
 }
