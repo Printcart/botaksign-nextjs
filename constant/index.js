@@ -44,5 +44,8 @@ export const footerLinks = [
         icon: <FontAwesomeIcon icon={faHouse} />
       }
     ]
+  },
+  {
+    copyright: '© Copyright 2021 Botak Sign Pte Ltd'
   }
 ];

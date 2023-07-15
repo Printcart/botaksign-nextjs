@@ -40,7 +40,7 @@ a {
 .footer {
   background: rgb(237, 237, 237);
 }
-.imgae-footer {
+.image-footer {
   display: flex;
   justify-content: center;
 }
@@ -64,7 +64,7 @@ a {
   padding: 0 !important;
 }
 .footer-list li a {
-  font-size: 14px;
+  font-size: 16px;
 }
 .footer-descripton {
   font-size: 14px;
