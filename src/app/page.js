@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styles from './page.module.css';
+import TestComponent from './TestComponent/page';
 
 export default async function Home() {
   return (
@@ -39,7 +40,7 @@ export default async function Home() {
         />
       </div>
 
-      <div className="d-flex p-2">
+      <div className="d-flex p-2 text-warning">
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
@@ -88,6 +89,7 @@ export default async function Home() {
           <p>Instantly deploy your Next.js site to a shareable URL with Vercel.</p>
         </a>
       </div>
+      <TestComponent />
     </main>
   );
 }
