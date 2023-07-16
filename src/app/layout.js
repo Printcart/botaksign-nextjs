@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import Header from './component/Header';
+import Header from './component/Header/page';
 
 export const metadata = {
   title: 'Home Page Botak',
