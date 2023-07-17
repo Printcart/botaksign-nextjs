@@ -1,3 +1,7 @@
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCoffee, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faCoffee, faPhone, faHouse);
 
 export const footerLinks = [
   {
@@ -31,7 +35,7 @@ export const footerLinks = [
         url: '/',
         icon: {
           lib: 'fa',
-          attr: 'coffee'
+          attr: 'phone'
         }
       },
       {
@@ -39,7 +43,7 @@ export const footerLinks = [
         url: '/',
         icon: {
           lib: 'fa',
-          attr: 'coffee'
+          attr: 'phone'
         }
       },
       {
@@ -47,7 +51,7 @@ export const footerLinks = [
         url: '/',
         icon: {
           lib: 'fa',
-          attr: 'coffee'
+          attr: 'house'
         }
       }
     ]
