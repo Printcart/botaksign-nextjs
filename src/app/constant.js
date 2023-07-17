@@ -1,7 +1,6 @@
-import LogoBotak from '../../public/Botak-Logo_v3.png';
 export const headerData = {
   logo: {
-    src: LogoBotak?.src,
+    src: 'https://botaksign.com/wp-content/uploads/2020/05/Botak-Logo_v3.png',
     title: 'Logo Botak'
   },
   icon: {
