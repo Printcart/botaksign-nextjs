@@ -1,15 +1,19 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import React from 'react';
+import { ListGroup } from 'react-bootstrap';
+import styles from './footer.module.css';
 
-const FooterLink = ({ link, index }) => {
+const FooterLink = ({ link }) => {
   return (
     <>
-      <li key={`index${index}`} className=" mb-2">
-        <span className="link-icon"> {link.icon}</span>
-        <Link href={link.url} className="footer-list">
+      <ListGroup.Item className={styles.listItems}>
+        {link.icon && link.icon.lib === 'fa' && (
+          <FontAwesomeIcon icon={link.icon.attr} />
+        )}
+        <Link href={link.url} className={styles.footerList}>
           {link.title}
         </Link>
-      </li>
+      </ListGroup.Item>
     </>
   );
 };

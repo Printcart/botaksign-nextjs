@@ -1,31 +1,28 @@
 import Image from 'next/image';
 import React from 'react';
-import imagefooter from '../../../../public/botak-logo_v3-2.png';
-import { footerLinks } from '../../../../constant';
+import { footerLinks } from '../../constant';
+import { Col, Container } from 'react-bootstrap';
+import styles from './footer.module.css';
 import FooterDescripton from './FooterDescripton';
 
 const FooterLeft = () => {
   return (
     <>
-      <div className="col-lg-4 col-md-12 col-sm-12 border-end ">
-        <div className="image-footer">
+      <Col className="col-lg-4 col-md-12 col-sm-12 border-end ">
+        <Container className={styles.imageFooter}>
           <Image
             width={157}
             height={56}
             alt="image footer"
-            src={imagefooter}
+            src=""
             className="mb-4"
           />
-        </div>
+        </Container>
 
         {footerLinks.map((item, index) => {
-          if (item) {
-            return <FooterDescripton key={index} item={item} />;
-          } else {
-            return null;
-          }
+          return <FooterDescripton key={`index${index}`} item={item} />;
         })}
-      </div>
+      </Col>
     </>
   );
 };

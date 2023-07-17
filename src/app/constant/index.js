@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faHouse, faPhoneFlip } from '@fortawesome/free-solid-svg-icons';
 
 export const footerLinks = [
   {
@@ -31,17 +29,26 @@ export const footerLinks = [
       {
         title: '+(65) 9190 7688 / +(65) 6286 2298',
         url: '/',
-        icon: <FontAwesomeIcon icon={faPhoneFlip} />
+        icon: {
+          lib: 'fa',
+          attr: 'coffee'
+        }
       },
       {
         title: '+(65) 9731 6551 ',
         url: '/',
-        icon: <FontAwesomeIcon icon={faPhoneFlip} />
+        icon: {
+          lib: 'fa',
+          attr: 'coffee'
+        }
       },
       {
         title: 'Singapore 545535 Highland Centre 01-3422 Yio Chu Kang Road',
         url: '/',
-        icon: <FontAwesomeIcon icon={faHouse} />
+        icon: {
+          lib: 'fa',
+          attr: 'coffee'
+        }
       }
     ]
   },

@@ -1,23 +1,20 @@
-import Link from 'next/link';
-import React from 'react';
+import { Col, Form, ListGroup, Row } from 'react-bootstrap';
+import styles from './footer.module.css';
 import FooterLink from './FooterLink';
 
-const FooterList = ({ item, index }) => {
+const FooterList = ({ item }) => {
   return (
     <>
-      <div
-        key={`footer${index}`}
-        className="col-lg-2 col-md-6 col-sm-12 justify-content-between"
-      >
-        <h3 className="mb-4 fs-1.7 footer-title">{item.title}</h3>
-        <div className="d-flex flex-column ">
-          <ul className="footer-list">
+      <Col className="col-lg-2 col-md-6 col-sm-12 justify-content-between">
+        <Form.Label className={styles.footerTitle}>{item.title}</Form.Label>
+        <Row className="d-flex flex-column ">
+          <ListGroup className={styles.footerList}>
             {item?.links?.map((link, index) => (
-              <FooterLink key={index} link={link} />
+              <FooterLink key={`${item.title}-${index}`} link={link} />
             ))}
-          </ul>
-        </div>
-      </div>
+          </ListGroup>
+        </Row>
+      </Col>
     </>
   );
 };

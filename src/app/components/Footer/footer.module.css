@@ -1,0 +1,53 @@
+/* --------------css start footer------------ */
+.footer {
+  background: rgb(237, 237, 237);
+}
+.imageFooter {
+  display: flex;
+  justify-content: center;
+}
+.footerTop {
+  padding: 30px 0 30px 0;
+}
+.footerBotom {
+  border-top: 1px solid rgba(179, 179, 179, 1);
+}
+.copyrightFooter {
+  margin: auto 0;
+  padding: 15px 0;
+}
+.footerTitle {
+  font-size: 28px !important;
+  font-weight: bold;
+  color: #28c475 !important;
+  margin: 0 0 24px 0;
+}
+.listItems {
+  background: transparent !important;
+  border: none !important;
+}
+.footerList {
+  padding: 0 !important;
+}
+.footerList * a {
+  font-size: 16px;
+}
+.footerDescripton {
+  font-size: 14px;
+  text-align: justify;
+  line-height: 20px;
+}
+
+.footerList > :nth-child(1) {
+  white-space: nowrap;
+}
+.footerList > :nth-child(3) {
+  display: flex;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .footerBotom > div {
+    justify-content: center !important;
+  }
+}
+/* --------------css end footer------------ */

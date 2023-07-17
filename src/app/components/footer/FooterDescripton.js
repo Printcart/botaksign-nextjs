@@ -1,12 +1,12 @@
-import React from 'react';
-
-const FooterDescripton = ({ item, index }) => {
+import { Container, Form } from 'react-bootstrap';
+import styles from './footer.module.css';
+const FooterDescripton = ({ item }) => {
   return (
     <>
-      <div key={`footer${index}`} className="pe-5">
-        <p className=" footer-descripton">{item?.year}</p>
-        <p className="footer-descripton">{item?.descripton}</p>
-      </div>
+      <Container className="pe-5">
+        <Form.Text className={styles.footerDescripton}>{item?.year}</Form.Text>
+        <Form.Text className={styles.footerDescripton}>{item?.descripton}</Form.Text>
+      </Container>
     </>
   );
 };
