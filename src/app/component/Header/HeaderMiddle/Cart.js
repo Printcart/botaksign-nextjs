@@ -16,8 +16,10 @@ const Cart = () => {
               </span>
             </span>
           </span>
+          <div className="iconcart"></div>
         </div>
       </div>
+      <div className="statuscart"></div>
     </div>
   );
 };

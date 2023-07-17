@@ -7,15 +7,16 @@ import Search from './Search';
 const HeaderMiddle = () => {
   return (
     <Container>
-      <Row>
-        <Col className="logoheader">
+      <Row className="align-items-center">
+        <Col xs={3} className="logoheader">
           <Logo headerData={headerData} />
         </Col>
-        <Col xs={6} className="search px-3 m-auto">
+        <Col xs={6} className="search px-3">
           <Search />
         </Col>
         <Col
-          className="cart float-end text-end m-auto "
+          xs={3}
+          className="cart float-end text-end "
           style={{ cursor: 'pointer' }}
         >
           <Cart />
