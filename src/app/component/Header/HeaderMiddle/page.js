@@ -1,15 +1,25 @@
-import { Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
+import { headerData } from 'botak/app/constant';
+import { Col, Container, Row } from 'react-bootstrap';
+import Cart from './Cart';
 import Logo from './Logo';
 import Search from './Search';
-import Cart from './Cart';
 
 const HeaderMiddle = () => {
   return (
     <Container>
       <Row>
-        <Logo />
-        <Search />
-        <Cart />
+        <Col className="logoheader">
+          <Logo headerData={headerData} />
+        </Col>
+        <Col xs={6} className="search px-3 m-auto">
+          <Search />
+        </Col>
+        <Col
+          className="cart float-end text-end m-auto "
+          style={{ cursor: 'pointer' }}
+        >
+          <Cart />
+        </Col>
       </Row>
     </Container>
   );
