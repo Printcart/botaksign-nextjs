@@ -22,8 +22,6 @@
 @media screen and (max-width: 768px) {
   .container {
     margin: 0px !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
     width: 100% !important;
   }
 }
