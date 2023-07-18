@@ -6,10 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 library.add(fas, far, fab);
 
 const FontIcon = (props) => {
-  const { prefix, iconName } = props;
+  const { prefix, iconName, size } = props;
   return (
     <>
-      {prefix && iconName && <FontAwesomeIcon icon={[`${prefix}`, `${iconName}`]} />}
+      {prefix && iconName && (
+        <FontAwesomeIcon icon={[`${prefix}`, `${iconName}`]} size={size} />
+      )}
     </>
   );
 };

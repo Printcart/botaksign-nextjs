@@ -1,4 +1,5 @@
 'use client';
+import HeaderMenus from './HeaderMenus/page';
 import HeaderMiddle from './HeaderMiddle/page';
 import HeaderTop from './HeaderTop/page';
 
@@ -9,8 +10,11 @@ const Header = () => {
         <div>
           <HeaderTop />
         </div>
-        <div>
+        <div className="pb-3">
           <HeaderMiddle />
+        </div>
+        <div className='stickywrapper'>
+          <HeaderMenus />
         </div>
       </header>
     </div>
