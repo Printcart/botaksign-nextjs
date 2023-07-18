@@ -1,4 +1,4 @@
-import { Form, ListGroup, Row } from 'react-bootstrap';
+import { Form, ListGroup } from 'react-bootstrap';
 import FooterLink from './FooterLink';
 import styles from './footer.module.css';
 

@@ -31,6 +31,8 @@
 }
 .footerList * a {
   font-size: 16px;
+  text-decoration: none;
+  color: rgb(96, 97, 97);
 }
 .footerDescripton {
   font-size: 14px;

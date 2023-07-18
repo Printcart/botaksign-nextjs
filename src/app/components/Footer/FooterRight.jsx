@@ -1,6 +1,5 @@
-import { Col, Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import FooterList from './FooterList';
-import styles from './footer.module.css';
 
 const FooterRight = ({ item }) => {
   return (
