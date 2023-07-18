@@ -10,19 +10,32 @@ export const footerLinks = {
     {
       title: 'Explore',
       links: [
-        { title: 'Print Products', url: '/' },
-        { title: 'Display Products', url: '/' },
-        { title: 'About Us', url: '/' },
-        { title: 'Careers', url: '/' }
+        {
+          title: 'Print Products',
+          url: 'https://botaksign.com/product-category/printing-products/'
+        },
+        {
+          title: 'Display Products',
+          url: 'https://botaksign.com/product-category/display-products/'
+        },
+        { title: 'About Us', url: 'https://botaksign.com/about-us/' },
+        { title: 'Careers', url: 'https://botaksign.com/career/' },
+        { title: 'Blog', url: 'https://botaksign.com/blog/' }
       ]
     },
     {
       title: 'Need help?',
       links: [
-        { title: 'FAQ', url: '/' },
-        { title: 'Corporate Partners', url: '/' },
-        { title: 'Terms & Conditions', url: '/' },
-        { title: 'Privacy Policy', url: '/' }
+        { title: 'FAQ', url: 'https://botaksign.tawk.help/' },
+        {
+          title: 'Corporate Partners',
+          url: 'https://botaksign.com/corporate-partner/'
+        },
+        {
+          title: 'Terms & Conditions',
+          url: 'https://botaksign.com/terms-and-conditions/'
+        },
+        { title: 'Privacy Policy', url: 'https://botaksign.com/privacy-policy/' }
       ]
     },
     {
@@ -30,7 +43,7 @@ export const footerLinks = {
       links: [
         {
           title: '+(65) 9190 7688 / +(65) 6286 2298',
-          url: '/',
+          url: 'tel:91907688',
           icon: {
             lib: 'fa',
             attr: 'phone'
@@ -38,7 +51,7 @@ export const footerLinks = {
         },
         {
           title: '+(65) 9731 6551 ',
-          url: '/',
+          url: 'http://wa.me/message/PFRE2EMUCA4DP1',
           icon: {
             lib: 'fa',
             attr: 'phone'
