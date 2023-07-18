@@ -1,0 +1,9 @@
+.footerYear {
+  padding-bottom: 20px;
+}
+.footerDescripton {
+  font-size: 14px;
+  text-align: justify;
+  line-height: 20px;
+  color: rgb(96, 97, 97);
+}

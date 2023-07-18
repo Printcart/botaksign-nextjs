@@ -1,0 +1,32 @@
+.listItems {
+  background: transparent !important;
+  border: none !important;
+  display: flex !important;
+}
+.footerList {
+  padding: 0 !important;
+  margin: auto 0;
+}
+.footerList {
+  font-size: 16px;
+  text-decoration: none;
+  color: rgb(105, 105, 105) !important;
+}
+.footerList:hover {
+  color: #28c475 !important;
+}
+
+.listItems:nth-child(1) {
+  white-space: nowrap !important;
+}
+
+@media screen and (max-width: 768px) {
+  .listItems {
+    padding: 7px 0 !important;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .listItems:nth-child(1) {
+    white-space: normal !important;
+  }
+}

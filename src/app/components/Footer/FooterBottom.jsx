@@ -1,5 +1,5 @@
 import { Container, Form } from 'react-bootstrap';
-import styles from './footer.module.css';
+import styles from './footerBotom.module.css';
 
 const FooterBottom = ({ copyright }) => {
   return (

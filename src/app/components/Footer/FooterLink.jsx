@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ListGroup } from 'react-bootstrap';
-import IconFooter from './IconFooter';
-import styles from './footer.module.css';
+import styles from './footerLink.module.css';
+import IconFooter from '../Icon';
 
 const FooterLink = ({ link }) => {
   return (

@@ -1,12 +1,13 @@
 import { Form } from 'react-bootstrap';
-import styles from './footer.module.css';
+import styles from './footerDescripton.module.css';
+
 const FooterDescripton = ({ descripton, year }) => {
   return (
     <>
-      <Form.Text className={styles.footerDescripton}>{year}</Form.Text>
-      <br />
-      <br />
-      <Form.Text className={styles.footerDescripton}>{descripton}</Form.Text>
+      <Form.Label className={`${styles.footerDescripton} ${styles.footerYear}`}>
+        {year}
+      </Form.Label>
+      <Form.Label className={styles.footerDescripton}>{descripton}</Form.Label>
     </>
   );
 };

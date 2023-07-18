@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Container } from 'react-bootstrap';
 import FooterDescripton from './FooterDescripton';
-import styles from './footer.module.css';
+import styles from './footerLeft.module.css';
 
 const FooterLeft = ({ descriptons }) => {
   const { year, image, descripton } = descriptons;

@@ -1,6 +1,6 @@
 import { Form, ListGroup } from 'react-bootstrap';
 import FooterLink from './FooterLink';
-import styles from './footer.module.css';
+import styles from './footerList.module.css';
 
 const FooterList = ({ item }) => {
   return (
