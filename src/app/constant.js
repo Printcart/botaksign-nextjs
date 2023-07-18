@@ -4,7 +4,7 @@ export const headerData = {
     title: 'Logo Botak'
   },
   icon: {
-    content: '',
-    title: 'Cart Icon'
+    prefix: 'fas',
+    iconName: 'bag-shopping'
   }
 };

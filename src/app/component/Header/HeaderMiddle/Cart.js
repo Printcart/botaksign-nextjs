@@ -1,10 +1,17 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { headerData } from 'botak/app/constant';
+import FontIcon from '../../FontIcon';
 
 const Cart = () => {
   return (
     <div className="cartheadwrapper d-inline-block position-relative">
       <div className="cartwrapper d-flex align-items-center">
-        <div className="showcat position-relative text-start">
+        <div className="iconcart text-success px-1 fs-1">
+          <FontIcon
+            prefix={headerData?.icon?.prefix}
+            iconName={headerData?.icon?.iconName}
+          />
+        </div>
+        <div className="showcat position-relative text-start px-1">
           <span className="textcart d-block fw-medium text-secondary fs-6 px-1">
             <span>Your Cart</span>
           </span>
@@ -18,9 +25,6 @@ const Cart = () => {
               </span>
             </span>
           </span>
-          <div className="iconcart text-success">
-            <FontAwesomeIcon icon={['fas', 'basket-shopping']} />
-          </div>
         </div>
       </div>
       <div className="statuscart"></div>
