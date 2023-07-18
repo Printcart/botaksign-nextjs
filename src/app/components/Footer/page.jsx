@@ -5,6 +5,7 @@ import FooterLeft from './FooterLeft';
 import FooterRight from './FooterRight';
 import styles from './page.module.css';
 import { Col, Container, Row } from 'react-bootstrap';
+import { Fragment } from 'react';
 
 const Footer = () => {
   const { copyright, descriptons } = footerLinks;
@@ -19,7 +20,13 @@ const Footer = () => {
             <Row>
               {footerLinks.linkMenu &&
                 footerLinks.linkMenu.map((item, index) => {
-                  return <FooterRight item={item} key={`index${index}`} />;
+                  return (
+                    <Fragment key={`index${index}`}>
+                      <Col lg={4} md={12} sm={12}>
+                        <FooterRight item={item} />
+                      </Col>
+                    </Fragment>
+                  );
                 })}
             </Row>
           </Col>
