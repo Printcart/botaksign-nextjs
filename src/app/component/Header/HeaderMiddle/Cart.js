@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 const Cart = () => {
   return (
     <div className="cartheadwrapper d-inline-block position-relative">
@@ -16,7 +18,9 @@ const Cart = () => {
               </span>
             </span>
           </span>
-          <div className="iconcart"></div>
+          <div className="iconcart text-success">
+            <FontAwesomeIcon icon={['fas', 'basket-shopping']} />
+          </div>
         </div>
       </div>
       <div className="statuscart"></div>

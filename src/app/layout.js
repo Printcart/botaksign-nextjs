@@ -1,5 +1,8 @@
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Header from './component/Header/page';
+config.autoAddCss = false;
 
 export const metadata = {
   title: 'Home Page Botak',
