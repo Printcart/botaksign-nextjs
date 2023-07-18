@@ -1,19 +1,12 @@
-import { Container } from 'react-bootstrap';
-import { footerLinks } from '../../constant';
+import { Col, Row } from 'react-bootstrap';
 import FooterList from './FooterList';
 import styles from './footer.module.css';
 
-const FooterRight = () => {
+const FooterRight = ({ item }) => {
   return (
-    <Container className={styles.footerRight}>
-      {footerLinks.map((item, index) => {
-        if (item.title && item.links) {
-          return <FooterList key={`${item.title}-${index}`} item={item} />;
-        } else {
-          return <></>;
-        }
-      })}
-    </Container>
+    <Col lg={4} md={12} sm={12}>
+      <FooterList item={item} />
+    </Col>
   );
 };
 

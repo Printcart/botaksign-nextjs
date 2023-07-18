@@ -1,19 +1,13 @@
-import React from 'react';
-import { footerLinks } from '../../constant';
 import { Container, Form } from 'react-bootstrap';
 import styles from './footer.module.css';
 
-const FooterBottom = () => {
+const FooterBottom = ({ copyright }) => {
   return (
     <div className={styles.footerBotom}>
-      <Container className="container d-flex justify-content-end">
-        {footerLinks.map((item, index) => {
-          return (
-            <Form.Text key={`index${index}`} className={styles.copyrightFooter}>
-              {item.copyright}
-            </Form.Text>
-          );
-        })}
+      <Container className="d-flex justify-content-end">
+        <Form.Text className={styles.copyrightFooter}>
+          {copyright?.copyright}
+        </Form.Text>
       </Container>
     </div>
   );
