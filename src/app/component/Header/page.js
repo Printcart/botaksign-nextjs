@@ -1,4 +1,5 @@
 'use client';
+import { menus } from 'botak/app/constant';
 import HeaderMenus from './HeaderMenus/page';
 import HeaderMiddle from './HeaderMiddle/page';
 import HeaderTop from './HeaderTop/page';
@@ -13,8 +14,8 @@ const Header = () => {
         <div className="pb-3">
           <HeaderMiddle />
         </div>
-        <div className='stickywrapper'>
-          <HeaderMenus />
+        <div className="stickywrapper">
+          <HeaderMenus menus={menus} />
         </div>
       </header>
     </div>

@@ -12,143 +12,1024 @@ export const headerData = {
 export const menus = [
   {
     id: '1',
-    title: 'Home',
-    nav: '/'
+    title: {
+      rendered: 'Home'
+    },
+    status: 'publish',
+    url: '/'
   },
   {
     id: '2',
-    title: 'Promotion',
-    nav: '/'
+    title: {
+      rendered: 'Promotion'
+    },
+    status: 'publish',
+    url: '/promotion'
   },
   {
     id: '3',
-    title: 'New Products',
-    nav: '/'
+    title: {
+      rendered: 'New Products'
+    },
+    status: 'publish',
+    url: '/new-products'
   },
   {
     id: '4',
-    title: 'Printing Products',
-    nav: '/',
+    title: {
+      rendered: 'Printing Products'
+    },
+    status: 'publish',
+    url: '/printing-products',
     subMenu: [
       {
         id: '1',
-        title: 'Stickers & Labels',
-        nav: '/'
+        title: {
+          rendered: 'Stickers & Labels'
+        },
+        status: 'publish',
+        url: '/stickers-labels',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '6',
+            title: {
+              rendered: 'Window Glass Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '7',
+            title: {
+              rendered: 'Miscellaneous Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '2',
-        title: 'Banners & Signs',
-        nav: '/'
+        title: {
+          rendered: 'Banners & Signs'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '6',
+            title: {
+              rendered: 'Window Glass Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '7',
+            title: {
+              rendered: 'Miscellaneous Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '8',
+            title: {
+              rendered: 'Singapore Standard Safety Signs'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '9',
+            title: {
+              rendered: 'Miscellaneous Signs'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '3',
-        title: 'Posters & Cards',
-        nav: '/'
+        title: {
+          rendered: 'Posters & Cards'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '6',
+            title: {
+              rendered: 'Window Glass Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '7',
+            title: {
+              rendered: 'Miscellaneous Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '8',
+            title: {
+              rendered: 'Singapore Standard Safety Signs'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '9',
+            title: {
+              rendered: 'Miscellaneous Signs'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '4',
-        title: 'Marketing Materials',
-        nav: '/'
+        title: {
+          rendered: 'Marketing Materials'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '6',
+            title: {
+              rendered: 'Window Glass Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '7',
+            title: {
+              rendered: 'Miscellaneous Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '5',
-        title: 'Foam Board Products',
-        nav: '/'
+        title: {
+          rendered: 'Foam Board Products'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '6',
+            title: {
+              rendered: 'Window Glass Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '7',
+            title: {
+              rendered: 'Miscellaneous Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '8',
+            title: {
+              rendered: 'Singapore Standard Safety Signs'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '9',
+            title: {
+              rendered: 'Miscellaneous Signs'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '6',
-        title: 'Gifts & Décor',
-        nav: '/'
+        title: {
+          rendered: 'Gifts & Décor'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '6',
+            title: {
+              rendered: 'Window Glass Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '7',
+            title: {
+              rendered: 'Miscellaneous Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '8',
+            title: {
+              rendered: 'Singapore Standard Safety Signs'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '9',
+            title: {
+              rendered: 'Miscellaneous Signs'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '7',
-        title: 'Industry & Essentials',
-        nav: '/'
+        title: {
+          rendered: 'Industry & Essentials'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '8',
-        title: 'Board Printing / Cutting',
-        nav: '/'
+        title: {
+          rendered: 'Board Printing / Cutting'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       }
     ]
   },
   {
     id: '5',
-    title: 'Display Products',
-    nav: '/',
+    title: {
+      rendered: 'Display Products'
+    },
+    status: 'publish',
+    url: '/banners-signs',
     subMenu: [
       {
         id: '1',
-        title: 'Stickers & Labels',
-        nav: '/'
+        title: {
+          rendered: 'Display System With Print'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '6',
+            title: {
+              rendered: 'Window Glass Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '7',
+            title: {
+              rendered: 'Miscellaneous Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '8',
+            title: {
+              rendered: 'Singapore Standard Safety Signs'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '9',
+            title: {
+              rendered: 'Miscellaneous Signs'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '2',
-        title: 'Banners & Signs',
-        nav: '/'
+        title: {
+          rendered: 'Display Stand'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '3',
-        title: 'Posters & Cards',
-        nav: '/'
+        title: {
+          rendered: 'Posters & Frame'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '6',
+            title: {
+              rendered: 'Window Glass Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '7',
+            title: {
+              rendered: 'Miscellaneous Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '4',
-        title: 'Marketing Materials',
-        nav: '/'
+        title: {
+          rendered: 'Table Top Display'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '6',
+            title: {
+              rendered: 'Window Glass Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '7',
+            title: {
+              rendered: 'Miscellaneous Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '5',
-        title: 'Foam Board Products',
-        nav: '/'
+        title: {
+          rendered: 'Accessories, Tapes & Tools'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Wall Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '2',
+            title: {
+              rendered: 'Labels Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '3',
+            title: {
+              rendered: 'Backlit Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '4',
+            title: {
+              rendered: 'Vehicle Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '5',
+            title: {
+              rendered: 'Color Vinyl Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          },
+          {
+            id: '6',
+            title: {
+              rendered: 'Window Glass Stickers'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '6',
-        title: 'Gifts & Décor',
-        nav: '/'
+        title: {
+          rendered: 'System Only (Without Print)'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'View Here'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '7',
-        title: 'Industry & Essentials',
-        nav: '/'
+        title: {
+          rendered: 'Print Only (Without System)'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'View Here'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       },
       {
         id: '8',
-        title: 'Board Printing / Cutting',
-        nav: '/'
+        title: {
+          rendered: 'Ready Sign'
+        },
+        status: 'publish',
+        url: '/banners-signs',
+        subMenuEnd: [
+          {
+            id: '1',
+            title: {
+              rendered: 'Ready Signs'
+            },
+            status: 'publish',
+            url: '/'
+          }
+        ]
       }
     ]
   },
   {
     id: '6',
-    title: 'Guides',
-    nav: '/',
+    title: {
+      rendered: 'Guides'
+    },
+    status: 'publish',
+    url: '/banners-signs',
     subMenu: [
       {
         id: '1',
-        title: 'FAQ',
-        nav: '/'
+        title: {
+          rendered: 'FAQ'
+        },
+        status: 'publish',
+        url: '/banners-signs'
       },
       {
         id: '2',
-        title: 'Colour Charts',
-        nav: '/'
+        title: {
+          rendered: 'Colour Charts'
+        },
+        status: 'publish',
+        url: '/banners-signs'
       },
       {
         id: '3',
-        title: 'Corporate Partner',
-        nav: '/'
+        title: {
+          rendered: 'Corporate Partner'
+        },
+        status: 'publish',
+        url: '/banners-signs'
       }
     ]
   },
   {
     id: '7',
-    title: 'Contact Us',
-    nav: '/'
+    title: {
+      rendered: 'Contact Us'
+    },
+    status: 'publish',
+    url: '/banners-signs'
   },
   {
     id: '8',
-    title: 'Careers',
-    nav: '/'
+    title: {
+      rendered: 'Careers'
+    },
+    status: 'publish',
+    url: '/banners-signs'
   }
 ];
