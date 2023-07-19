@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import FooterBottom from './FooterBottom';
 import FooterLeft from './FooterLeft';
-import FooterRight from './FooterRight';
+import FooterList from './FooterList';
 import styles from './page.module.css';
 
 const Footer = () => {
@@ -23,7 +23,7 @@ const Footer = () => {
                   return (
                     <Fragment key={`index${index}`}>
                       <Col lg={4} md={12} sm={12}>
-                        <FooterRight item={item} />
+                        <FooterList item={item} />
                       </Col>
                     </Fragment>
                   );

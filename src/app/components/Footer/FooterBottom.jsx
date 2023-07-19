@@ -4,11 +4,11 @@ import styles from './footerBotom.module.css';
 const FooterBottom = ({ copyright }) => {
   return (
     <div className={styles.footerBotom}>
-      <Container className="d-flex justify-content-end">
+      <div className="container d-flex justify-content-end">
         <Form.Text className={styles.copyrightFooter}>
           {copyright?.copyright}
         </Form.Text>
-      </Container>
+      </div>
     </div>
   );
 };

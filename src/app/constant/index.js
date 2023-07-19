@@ -58,16 +58,23 @@ export const footerLinks = {
           }
         },
         {
-          title: '+(65) 9731 6551 ',
-          url: 'http://wa.me/message/PFRE2EMUCA4DP1',
+          title: [
+            {
+              phone: '+(65) 9731 6551 ',
+              url: 'http://wa.me/message/PFRE2EMUCA4DP1'
+            }
+          ],
           icon: {
-            lib: 'fa',
-            attr: 'phone'
+            lib: 'fab',
+            attr: 'whatsapp'
           }
         },
         {
-          title: 'Singapore 545535 Highland Centre 01-3422 Yio Chu Kang Road',
-          url: '/',
+          title: [
+            {
+              phone: 'Singapore 545535 Highland Centre 01-3422 Yio Chu Kang Road'
+            }
+          ],
           icon: {
             lib: 'fa',
             attr: 'house'

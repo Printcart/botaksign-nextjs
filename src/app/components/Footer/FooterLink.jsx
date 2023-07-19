@@ -12,13 +12,17 @@ const FooterLink = ({ link }) => {
           {link.title}
         </Link>
       ) : (
-        link.title.map((title, subIndex) => {
-          return (
+        link.title.map((title, subIndex) =>
+          title.url ? (
             <Link href={title.url} key={subIndex} className={styles.footerList}>
               {title.phone}
             </Link>
-          );
-        })
+          ) : (
+            <span key={subIndex} className={styles.footerList}>
+              {title.phone}
+            </span>
+          )
+        )
       )}
     </ListGroup.Item>
   );
