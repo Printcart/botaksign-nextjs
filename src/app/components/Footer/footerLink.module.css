@@ -19,7 +19,11 @@
 .listItems:nth-child(1) {
   white-space: nowrap !important;
 }
-
+.listItems:nth-child(2) > svg {
+  height: 24px;
+  width: 24px;
+  padding: 4px;
+}
 @media screen and (max-width: 768px) {
   .listItems {
     padding: 7px 0 !important;
