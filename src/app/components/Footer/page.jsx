@@ -1,11 +1,11 @@
 'use client';
 import { footerLinks } from 'botak/app/constant';
+import { Fragment } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import FooterBottom from './FooterBottom';
 import FooterLeft from './FooterLeft';
 import FooterRight from './FooterRight';
 import styles from './page.module.css';
-import { Col, Container, Row } from 'react-bootstrap';
-import { Fragment } from 'react';
 
 const Footer = () => {
   const { copyright, descriptons } = footerLinks;
@@ -32,6 +32,8 @@ const Footer = () => {
           </Col>
         </Row>
       </Container>
+
+
       <FooterBottom copyright={copyright} />
     </div>
   );

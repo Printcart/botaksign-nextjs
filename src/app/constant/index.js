@@ -42,10 +42,18 @@ export const footerLinks = {
       title: 'Get in touch',
       links: [
         {
-          title: '+(65) 9190 7688 / +(65) 6286 2298',
-          url: 'tel:91907688',
+          title: [
+            {
+              phone: '+(65) 9190 7688 /',
+              url: 'tel:91907688'
+            },
+            {
+              phone: ' +(65) 6286 2298',
+              url: 'tel:62862298'
+            }
+          ],
           icon: {
-            lib: 'fa',
+            lib: 'fas',
             attr: 'phone'
           }
         },
