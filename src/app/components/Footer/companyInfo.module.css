@@ -1,0 +1,16 @@
+.footerImage {
+  display: flex;
+  margin: auto;
+  margin-bottom: 20px;
+}
+.footerDescripton {
+  font-size: 14px;
+  text-align: justify;
+  color: rgb(96, 97, 97);
+}
+
+.footerCompanyInfo {
+  padding-right: 40px;
+  border-right: 2px solid #e4e4e4;
+  min-height: 100%;
+}

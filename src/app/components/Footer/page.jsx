@@ -1,40 +1,19 @@
 'use client';
-import { footerLinks } from 'botak/app/constant';
-import { Fragment } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import FooterBottom from './FooterBottom';
-import FooterLeft from './FooterLeft';
-import FooterList from './FooterList';
+import { data } from 'botak/app/data';
+import Bottom from './Bottom';
+import Top from './Top';
 import styles from './page.module.css';
 
 const Footer = () => {
-  const { copyright, descriptons } = footerLinks;
+  const footerData = data;
   return (
-    <div className={styles.footer}>
-      <Container className={styles.footerTop}>
-        <Row>
-          <Col lg={4} md={12} sm={12} className={styles.footerLeft}>
-            <FooterLeft descriptons={descriptons} />
-          </Col>
-          <Col lg={8} md={12} sm={12} className={styles.footerRights}>
-            <Row>
-              {footerLinks.linkMenu &&
-                footerLinks.linkMenu.map((item, index) => {
-                  return (
-                    <Fragment key={`index${index}`}>
-                      <Col lg={4} md={12} sm={12}>
-                        <FooterList item={item} />
-                      </Col>
-                    </Fragment>
-                  );
-                })}
-            </Row>
-          </Col>
-        </Row>
-      </Container>
-
-
-      <FooterBottom copyright={copyright} />
+    <div className={styles.siteFooter}>
+      <Top
+        companyInfo={footerData.companyInfo}
+        footerMenu={footerData.footerMenu}
+        footerContact={footerData.footerContact}
+      />
+      <Bottom copyright={footerData.copyright} />
     </div>
   );
 };

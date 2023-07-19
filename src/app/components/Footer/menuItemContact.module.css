@@ -1,0 +1,11 @@
+.listItems {
+  display: flex !important;
+  margin-bottom: 12px;
+}
+.linkContact {
+  white-space: nowrap !important;
+  margin: auto 0;
+}
+.linkContact:hover {
+  color: rgb(40, 196, 117);
+}

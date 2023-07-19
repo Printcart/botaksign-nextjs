@@ -1,0 +1,10 @@
+.listItems {
+  margin-bottom: 12px !important;
+}
+.footerList {
+  color: rgb(96, 97, 97);
+  font-size: 16px;
+}
+.footerList:hover {
+  color: rgb(40, 196, 117);
+}

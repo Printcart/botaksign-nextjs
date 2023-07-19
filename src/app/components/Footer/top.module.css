@@ -1,0 +1,11 @@
+.footerTop {
+  padding: 40px 0;
+}
+.footerTopRight {
+  padding-left: 25px;
+}
+@media (max-width: 768px) {
+  .footerTopRight {
+    padding-left: 0 !important;
+  }
+}
