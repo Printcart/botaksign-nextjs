@@ -24,7 +24,7 @@ export const menus = [
       rendered: 'Promotion'
     },
     status: 'publish',
-    url: '/promotion'
+    url: '/#'
   },
   {
     id: '3',
@@ -32,7 +32,7 @@ export const menus = [
       rendered: 'New Products'
     },
     status: 'publish',
-    url: '/new-products'
+    url: '/#'
   },
   {
     id: '4',
