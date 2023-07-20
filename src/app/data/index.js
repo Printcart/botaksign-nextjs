@@ -55,7 +55,7 @@ export const data = {
         ],
         icon: {
           lib: 'fas',
-          attr: 'phone'
+          attr: 'phone-flip'
         }
       },
       {

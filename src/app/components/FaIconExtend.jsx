@@ -10,10 +10,12 @@ const IconFooter = (props) => {
   const { attr, lib, hasCircle = false } = props;
 
   return (
-    <FontAwesomeIcon
-      icon={[`${lib}`, `${attr}`]}
-      className={`${styles.iconFooter} ${hasCircle ? styles.hasCircle : ''}`}
-    />
+    <div className={styles.iconFooterItem}>
+      <FontAwesomeIcon
+        icon={[`${lib}`, `${attr}`]}
+        className={`${styles.iconFooter} ${hasCircle ? styles.hasCircle : ''}`}
+      />
+    </div>
   );
 };
 

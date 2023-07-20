@@ -2,9 +2,10 @@
   margin-right: 10px;
   border-radius: 50%;
   border: 2px solid #cecece;
-  padding: 7px;
+  padding: 6px;
 }
-.iconFooter > path {
+.iconFooterItem svg {
   color: rgb(96, 97, 97) !important;
+  width: 20px;
+  height: 20px;
 }
-
