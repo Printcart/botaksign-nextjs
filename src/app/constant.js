@@ -40,7 +40,7 @@ export const menus = [
       rendered: 'Printing Products'
     },
     status: 'publish',
-    url: '/printing-products',
+    url: '/#',
     subMenu: [
       {
         id: '1',
@@ -610,7 +610,7 @@ export const menus = [
       rendered: 'Display Products'
     },
     status: 'publish',
-    url: '/banners-signs',
+    url: '/#',
     subMenu: [
       {
         id: '1',
@@ -988,7 +988,7 @@ export const menus = [
       rendered: 'Guides'
     },
     status: 'publish',
-    url: '/banners-signs',
+    url: '/#',
     subMenu: [
       {
         id: '1',

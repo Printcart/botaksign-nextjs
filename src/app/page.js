@@ -1,7 +1,7 @@
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import { Nunito } from 'next/font/google';
+import './globals.css';
+const nunito = Nunito({ subsets: ['latin'] });
 
 export default function Home() {
-  return <main className={inter.className}></main>;
+  return <main className={nunito.className}></main>;
 }
