@@ -9,3 +9,9 @@
 .linkContact:hover {
   color: rgb(40, 196, 117);
 }
+.listItems {
+  font-size: 16px;
+}
+.listItems:last-child {
+  font-size: 14px;
+}
