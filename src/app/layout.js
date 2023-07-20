@@ -1,4 +1,3 @@
-import './globals.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Inter } from 'next/font/google';
 
@@ -12,6 +11,41 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          id="js_composer_front-css"
+          href="http://botak.loc/wp-content/plugins/js_composer/assets/css/js_composer.min.css?ver=6.1"
+          type="text/css"
+          media="all"
+        />
+        <link
+          rel="stylesheet"
+          id="nivo-slider-css-css"
+          href="http://botak.loc/wp-content/plugins/js_composer/assets/lib/bower/nivoslider/nivo-slider.min.css?ver=6.1"
+          type="text/css"
+          media="all"
+        ></link>
+        <link
+          rel="stylesheet"
+          id="info-box-style-css"
+          href="http://botak.loc/wp-content/plugins/Ultimate_VC_Addons/assets/min-css/info-box.min.css?ver=3.19.0"
+          type="text/css"
+          media="all"
+        ></link>
+        <link
+          rel="stylesheet"
+          id="nivo-slider-theme-css"
+          href="http://botak.loc/wp-content/plugins/js_composer/assets/lib/bower/nivoslider/themes/default/default.min.css?ver=6.1"
+          type="text/css"
+          media="all"
+        ></link>
+        <script
+          type="text/javascript"
+          src="http://botak.loc/wp-content/plugins/js_composer/assets/lib/bower/isotope/dist/isotope.pkgd.min.js?ver=6.1"
+          id="isotope-js"
+        ></script>
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
