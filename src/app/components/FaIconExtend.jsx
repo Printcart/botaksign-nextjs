@@ -6,17 +6,14 @@ import styles from './FaIconExtend.module.css';
 
 library.add(fas, fab);
 
-const IconFooter = (props) => {
+const FaIconExtend = (props) => {
   const { attr, lib, hasCircle = false } = props;
 
   return (
-    <div className={styles.iconFooterItem}>
-      <FontAwesomeIcon
-        icon={[`${lib}`, `${attr}`]}
-        className={`${styles.iconFooter} ${hasCircle ? styles.hasCircle : ''}`}
-      />
+    <div className={`${styles.wrapIcon}  ${hasCircle ? styles.hasCircle : ''}`}>
+      <FontAwesomeIcon icon={[lib, attr]} />
     </div>
   );
 };
 
-export default IconFooter;
+export default FaIconExtend;

@@ -1,11 +1,11 @@
 'use client';
+import { data } from 'botak/app/data/footer';
 import Image from 'next/image';
 import Link from 'next/link';
-import FaIconExtend from '../FaIconExtend';
-import { Col, Container, ListGroup, Row } from 'react-bootstrap';
-import { data } from 'botak/app/data';
-import styles from './page.module.css';
 import { Fragment } from 'react';
+import { Col, Container, ListGroup, Row } from 'react-bootstrap';
+import FaIconExtend from '../FaIconExtend';
+import styles from './page.module.css';
 
 const CompanyInfo = (props) => {
   const { logoSrc, introduce, descripton } = props;
@@ -64,10 +64,12 @@ const MenuItemContact = (props) => {
 
   return (
     <ListGroup.Item className={styles.listItems}>
-      {icon && <FaIconExtend lib={icon.lib} attr={icon.attr} />}
+      {icon && (
+        <FaIconExtend lib={icon.lib} attr={icon.attr} hasCircle={icon.hasCircle} />
+      )}
       {subContacts?.length > 0 &&
         subContacts.map((subContact, index) => (
-          <Fragment key={`index${index}`}>
+          <Fragment key={`SubContact-${index}`}>
             {!subContact?.url && <p>{subContact.title}</p>}
             {subContact?.url && (
               <Link

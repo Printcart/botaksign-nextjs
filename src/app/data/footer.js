@@ -55,7 +55,8 @@ export const data = {
         ],
         icon: {
           lib: 'fas',
-          attr: 'phone-flip'
+          attr: 'phone-flip',
+          hasCircle: true
         }
       },
       {
@@ -67,7 +68,8 @@ export const data = {
         ],
         icon: {
           lib: 'fab',
-          attr: 'whatsapp'
+          attr: 'whatsapp',
+          hasCircle: false
         }
       },
       {
@@ -77,8 +79,9 @@ export const data = {
           }
         ],
         icon: {
-          lib: 'fa',
-          attr: 'house'
+          lib: 'fas',
+          attr: 'house',
+          hasCircle: true
         }
       }
     ]
