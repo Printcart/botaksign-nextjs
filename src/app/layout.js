@@ -1,5 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { Nunito } from 'next/font/google';
+import Script from 'next/script';
+import './globals.css';
 
 const nunito = Nunito({ subsets: ['latin'] });
 
@@ -40,6 +42,18 @@ export default function RootLayout({ children }) {
           type="text/css"
           media="all"
         ></link>
+        <Script
+          type="text/javascript"
+          src="https://botaksign.com/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"
+        ></Script>
+        <Script
+          type="text/javascript"
+          src="https://botaksign.com/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min.js?ver=6.1"
+        ></Script>
+        <Script
+          type="text/javascript"
+          src="https://botaksign.com/wp-content/plugins/js_composer/assets/lib/bower/nivoslider/jquery.nivo.slider.pack.js?ver=6.1"
+        ></Script>
       </head>
       <body className={nunito.className}>{children}</body>
     </html>

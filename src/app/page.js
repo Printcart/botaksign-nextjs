@@ -1,15 +1,12 @@
-import { fetchHomePage } from 'botak/api/page';
+import Homepage from '../components/Homepage';
+import HomepageServer from '../components/HomepageServer';
 
-const Home = async () => {
-  const rawMarkup = await fetchHomePage();
-
-  const markup = { __html: rawMarkup?.content?.rendered || '' };
-
+export default function Home() {
   return (
-    <div>
-      <div dangerouslySetInnerHTML={markup}></div>
+    <div className="site-content" id="content">
+      <Homepage>
+        <HomepageServer />
+      </Homepage>
     </div>
   );
-};
-
-export default Home;
+}
