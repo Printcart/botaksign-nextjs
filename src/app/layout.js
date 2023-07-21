@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import { Inter } from 'next/font/google';
+import { Nunito } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const nunito = Nunito({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Botaksign App',
@@ -40,13 +40,8 @@ export default function RootLayout({ children }) {
           type="text/css"
           media="all"
         ></link>
-        <script
-          type="text/javascript"
-          src="http://botak.loc/wp-content/plugins/js_composer/assets/lib/bower/isotope/dist/isotope.pkgd.min.js?ver=6.1"
-          id="isotope-js"
-        ></script>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={nunito.className}>{children}</body>
     </html>
   );
 }

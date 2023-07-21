@@ -3,8 +3,12 @@ import { fetchHomePage } from 'botak/api/page';
 const Home = async () => {
   const rawMarkup = await fetchHomePage();
 
+  const markup = { __html: rawMarkup?.content?.rendered || '' };
+
   return (
-    <div dangerouslySetInnerHTML={{ __html: rawMarkup.content.rendered }}></div>
+    <div>
+      <div dangerouslySetInnerHTML={markup}></div>
+    </div>
   );
 };
 
