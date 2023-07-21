@@ -17,6 +17,7 @@ const HeaderMenus = (props) => {
               <React.Fragment key={items.id}>
                 {items.subMenu ? (
                   <Menu
+                    menuClassName={`${styles.ulstyle}`}
                     menuButton={
                       <Nav.Item>
                         <Nav.Link
@@ -42,9 +43,14 @@ const HeaderMenus = (props) => {
                             <SubMenu
                               label={`${submenu.title.rendered}`}
                               key={submenu.id}
+                              className="border-bottom"
                             >
                               {submenu?.subMenuEnd?.map((menuend) => (
-                                <MenuItem key={menuend.id}>
+                                <MenuItem
+                                  key={menuend.id}
+                                  className="border-bottom"
+                                  menuClassName={`${styles.ulstyle}`}
+                                >
                                   {menuend?.title.rendered}
                                 </MenuItem>
                               ))}
