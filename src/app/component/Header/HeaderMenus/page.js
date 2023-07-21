@@ -15,45 +15,64 @@ const HeaderMenus = (props) => {
           {menus &&
             menus.map((items) => (
               <React.Fragment key={items.id}>
-                <Menu
-                  menuButton={
-                    <Nav.Item>
-                      <Nav.Link
-                        href={`${items?.url}`}
-                        className={`${styles.linkmenus} text-secondary-emphasis fw-semibold`}
-                        style={{ fontSize: '14px' }}
-                      >
-                        {items?.title?.rendered}
-                        {items.subMenu && (
-                          <FontIcon prefix="fas" iconName="chevron-down" size="xs" />
-                        )}
-                      </Nav.Link>
-                    </Nav.Item>
-                  }
-                >
-                  {items.subMenu
-                    ? items?.subMenu?.map((submenu) =>
-                        submenu.subMenuEnd ? (
-                          <SubMenu
-                            label={`${submenu.title.rendered}`}
-                            key={submenu.id}
-                          >
-                            {submenu?.subMenuEnd?.map((menuend) => (
-                              <MenuItem key={menuend.id}>
-                                {menuend?.title.rendered}
-                              </MenuItem>
-                            ))}
-                          </SubMenu>
-                        ) : (
-                          <MenuItem key={submenu.id}>
-                            {submenu.title.rendered}
-                          </MenuItem>
+                {items.subMenu ? (
+                  <Menu
+                    menuButton={
+                      <Nav.Item>
+                        <Nav.Link
+                          href={`${items?.url}`}
+                          className={`${styles.linkmenus} text-secondary-emphasis fw-semibold`}
+                          style={{ fontSize: '14px' }}
+                        >
+                          {items?.title?.rendered}
+                          {items.subMenu && (
+                            <FontIcon
+                              prefix="fas"
+                              iconName="chevron-down"
+                              size="xs"
+                            />
+                          )}
+                        </Nav.Link>
+                      </Nav.Item>
+                    }
+                  >
+                    {items.subMenu
+                      ? items?.subMenu?.map((submenu) =>
+                          submenu.subMenuEnd ? (
+                            <SubMenu
+                              label={`${submenu.title.rendered}`}
+                              key={submenu.id}
+                            >
+                              {submenu?.subMenuEnd?.map((menuend) => (
+                                <MenuItem key={menuend.id}>
+                                  {menuend?.title.rendered}
+                                </MenuItem>
+                              ))}
+                            </SubMenu>
+                          ) : (
+                            <MenuItem key={submenu.id}>
+                              {submenu.title.rendered}
+                            </MenuItem>
+                          )
                         )
-                      )
-                    : items?.subMenu?.map((submenu) => (
-                        <MenuItem key={submenu.id}>{''}</MenuItem>
-                      ))}
-                </Menu>
+                      : items?.subMenu?.map((submenu) => (
+                          <MenuItem key={submenu.id}>{''}</MenuItem>
+                        ))}
+                  </Menu>
+                ) : (
+                  <Nav.Item>
+                    <Nav.Link
+                      href={`${items?.url}`}
+                      className={`${styles.linkmenus} text-secondary-emphasis fw-semibold`}
+                      style={{ fontSize: '14px' }}
+                    >
+                      {items?.title?.rendered}
+                      {items.subMenu && (
+                        <FontIcon prefix="fas" iconName="chevron-down" size="xs" />
+                      )}
+                    </Nav.Link>
+                  </Nav.Item>
+                )}
               </React.Fragment>
             ))}
         </Nav>
