@@ -1,4 +1,4 @@
-import { headerData } from 'botak/app/constant';
+import { headerData } from 'botak/app/data/menus';
 import FontIcon from '../../FontIcon';
 
 const Cart = () => {

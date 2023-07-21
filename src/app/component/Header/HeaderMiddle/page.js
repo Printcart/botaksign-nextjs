@@ -1,4 +1,4 @@
-import { headerData } from 'botak/app/constant';
+import { headerData } from 'botak/app/data/menus';
 import { Col, Container, Row } from 'react-bootstrap';
 import Cart from './Cart';
 import Logo from './Logo';

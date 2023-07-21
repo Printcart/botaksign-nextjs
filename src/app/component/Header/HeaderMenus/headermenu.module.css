@@ -1,6 +1,36 @@
 .linkmenus:hover {
   color: rgb(40, 196, 117) !important;
 }
+
 .ulstyle {
   border-top: 3px solid #28c475;
+  border-radius: unset;
+  font-size: 14px;
+}
+
+.submenu {
+  color: #666;
+  border-bottom: 1px solid #ededed;
+}
+
+.submenu:last-child {
+  border: none;
+}
+
+.submenu:hover {
+  color: rgb(40, 196, 117);
+}
+
+.menuitems:hover {
+  color: rgb(40, 196, 117);
+}
+
+.menuitems {
+  border-radius: unset;
+  color: #666;
+  border-bottom: 1px solid #ededed;
+}
+
+.menuitems:last-child {
+  border: none;
 }

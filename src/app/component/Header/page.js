@@ -1,5 +1,5 @@
 'use client';
-import { menus } from 'botak/app/constant';
+import { menus } from 'botak/app/data/menus';
 import HeaderMenus from './HeaderMenus/page';
 import HeaderMiddle from './HeaderMiddle/page';
 import HeaderTop from './HeaderTop/page';

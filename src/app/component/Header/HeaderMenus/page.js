@@ -1,4 +1,4 @@
-import { Menu, MenuButton, MenuItem, SubMenu } from '@szhsin/react-menu';
+import { Menu, MenuItem, SubMenu } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import React from 'react';
 import { Container, Nav } from 'react-bootstrap';
@@ -17,58 +17,58 @@ const HeaderMenus = (props) => {
               <React.Fragment key={items.id}>
                 {items.subMenu ? (
                   <Menu
-                    menuClassName={`${styles.ulstyle}`}
+                    menuClassName={styles.ulstyle}
                     menuButton={
                       <Nav.Item>
                         <Nav.Link
-                          href={`${items?.url}`}
-                          className={`${styles.linkmenus} text-secondary-emphasis fw-semibold`}
+                          href={items?.url}
+                          className={`${styles.linkmenus} text-secondary-emphasis fw-semibold d-flex `}
                           style={{ fontSize: '14px' }}
                         >
                           {items?.title?.rendered}
-                          {items.subMenu && (
+                          <div className="ps-1">
                             <FontIcon
                               prefix="fas"
                               iconName="chevron-down"
                               size="xs"
                             />
-                          )}
+                          </div>
                         </Nav.Link>
                       </Nav.Item>
                     }
                   >
-                    {items.subMenu
-                      ? items?.subMenu?.map((submenu) =>
-                          submenu.subMenuEnd ? (
-                            <SubMenu
-                              label={`${submenu.title.rendered}`}
-                              key={submenu.id}
-                              className="border-bottom"
-                            >
-                              {submenu?.subMenuEnd?.map((menuend) => (
-                                <MenuItem
-                                  key={menuend.id}
-                                  className="border-bottom"
-                                  menuClassName={`${styles.ulstyle}`}
-                                >
-                                  {menuend?.title.rendered}
-                                </MenuItem>
-                              ))}
-                            </SubMenu>
-                          ) : (
-                            <MenuItem key={submenu.id}>
-                              {submenu.title.rendered}
-                            </MenuItem>
-                          )
-                        )
-                      : items?.subMenu?.map((submenu) => (
-                          <MenuItem key={submenu.id}>{''}</MenuItem>
-                        ))}
+                    {items?.subMenu?.map((submenu) =>
+                      submenu.subMenuEnd ? (
+                        <SubMenu
+                          label={submenu.title.rendered}
+                          key={submenu.id}
+                          className={`${styles.submenu} fw-semibold`}
+                        >
+                          <div className={styles.ulstyle}>
+                            {submenu?.subMenuEnd?.map((menuend) => (
+                              <MenuItem
+                                key={menuend.id}
+                                className={styles.menuitems}
+                              >
+                                {menuend?.title.rendered}
+                              </MenuItem>
+                            ))}
+                          </div>
+                        </SubMenu>
+                      ) : (
+                        <MenuItem
+                          key={submenu.id}
+                          className={`${styles.submenu} fw-semibold`}
+                        >
+                          {submenu.title.rendered}
+                        </MenuItem>
+                      )
+                    )}
                   </Menu>
                 ) : (
                   <Nav.Item>
                     <Nav.Link
-                      href={`${items?.url}`}
+                      href={items?.url || '#'}
                       className={`${styles.linkmenus} text-secondary-emphasis fw-semibold`}
                       style={{ fontSize: '14px' }}
                     >
