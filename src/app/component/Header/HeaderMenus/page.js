@@ -42,10 +42,15 @@ const HeaderMenus = (props) => {
                         <SubMenu
                           label={submenu.title.rendered}
                           key={submenu.id}
-                          className={`${styles.submenu} fw-semibold`}
+                          className={`${styles.submenuend} fw-semibold`}
                         >
-                          <div className={styles.ulstyle}>
-                            {submenu?.subMenuEnd?.map((menuend) => (
+                          <div className={styles.parentmenu}>
+                            <div
+                              className={`${styles.menuparent} fs-5 fw-medium py-2  mb-2 text-center`}
+                            >
+                              {submenu?.subMenuEnd?.parent}
+                            </div>
+                            {submenu?.subMenuEnd?.menus?.map((menuend) => (
                               <MenuItem
                                 key={menuend.id}
                                 className={styles.menuitems}
