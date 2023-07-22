@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { Nunito } from 'next/font/google';
-import Script from 'next/script';
+import EmbedScripts from '../components/EmbedScripts';
 import './globals.css';
 
 const nunito = Nunito({ subsets: ['latin'] });
@@ -14,46 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link
-          rel="stylesheet"
-          id="js_composer_front-css"
-          href="http://botak.loc/wp-content/plugins/js_composer/assets/css/js_composer.min.css?ver=6.1"
-          type="text/css"
-          media="all"
-        />
-        <link
-          rel="stylesheet"
-          id="nivo-slider-css-css"
-          href="http://botak.loc/wp-content/plugins/js_composer/assets/lib/bower/nivoslider/nivo-slider.min.css?ver=6.1"
-          type="text/css"
-          media="all"
-        ></link>
-        <link
-          rel="stylesheet"
-          id="info-box-style-css"
-          href="http://botak.loc/wp-content/plugins/Ultimate_VC_Addons/assets/min-css/info-box.min.css?ver=3.19.0"
-          type="text/css"
-          media="all"
-        ></link>
-        <link
-          rel="stylesheet"
-          id="nivo-slider-theme-css"
-          href="http://botak.loc/wp-content/plugins/js_composer/assets/lib/bower/nivoslider/themes/default/default.min.css?ver=6.1"
-          type="text/css"
-          media="all"
-        ></link>
-        <Script
-          type="text/javascript"
-          src="https://botaksign.com/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"
-        ></Script>
-        <Script
-          type="text/javascript"
-          src="https://botaksign.com/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min.js?ver=6.1"
-        ></Script>
-        <Script
-          type="text/javascript"
-          src="https://botaksign.com/wp-content/plugins/js_composer/assets/lib/bower/nivoslider/jquery.nivo.slider.pack.js?ver=6.1"
-        ></Script>
+        <EmbedScripts />
       </head>
       <body className={nunito.className}>{children}</body>
     </html>
