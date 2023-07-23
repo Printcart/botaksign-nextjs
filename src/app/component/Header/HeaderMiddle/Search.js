@@ -22,7 +22,7 @@ const Search = () => {
           <Col xs={2} className="h-100">
             <InputGroup.Text
               type="submit"
-              className="h-100 lh-base m-0 rounded-end-pill position-relative text-capitalize bg-transparent text-secondary justify-content-center"
+              className="h-100 lh-base m-0 rounded-end-pill position-relative bg-transparent text-secondary justify-content-center"
             >
               Search
             </InputGroup.Text>

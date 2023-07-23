@@ -1,8 +1,10 @@
 import { Menu, MenuItem, SubMenu } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
-import React from 'react';
-import { Container, Nav } from 'react-bootstrap';
+import { headerData, menus } from 'botak/app/data/menus';
+import React, { useState } from 'react';
+import { Button, Col, Container, Nav, Row } from 'react-bootstrap';
 import FontIcon from '../../FontIcon';
+import Search from '../HeaderMiddle/Search';
 import styles from './headermenu.module.css';
 
 const HeaderMenus = (props) => {
@@ -93,3 +95,49 @@ const HeaderMenus = (props) => {
 };
 
 export default HeaderMenus;
+
+const CartMobile = () => {
+  return (
+    <div className="cartheadwrapper d-inline-block position-relative">
+      <div className="cartwrapper d-flex align-items-center">
+        <div className="iconcart text-success px-1 fs-2">
+          <FontIcon
+            prefix={headerData?.icon?.prefix}
+            iconName={headerData?.icon?.iconName}
+          />
+        </div>
+      </div>
+      <div className="statuscart"></div>
+    </div>
+  );
+};
+export const MenusMobile = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpenMenu = () => {
+    setIsOpen(!isOpen);
+  };
+  return (
+    <Container>
+      <Row className="align-items-center">
+        <Col sm={2}>
+          <Button
+            className="d-flex text-secondary align-items-center bg-transparent border-0"
+            onClick={handleOpenMenu}
+          >
+            <div className="fs-4 px-2">
+              <FontIcon prefix="fa" iconName="bars" />
+            </div>
+            MENU
+          </Button>
+        </Col>
+        <Col sm={7}>
+          <Search />
+        </Col>
+        <Col sm={3} className="float-end text-end">
+          <CartMobile />
+        </Col>
+        <div></div>
+      </Row>
+    </Container>
+  );
+};
