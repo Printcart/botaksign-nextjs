@@ -124,8 +124,12 @@ export const MenusMobile = () => {
             className="d-flex text-secondary align-items-center bg-transparent border-0"
             onClick={handleOpenMenu}
           >
-            <div className="fs-4 px-2">
-              <FontIcon prefix="fa" iconName="bars" />
+            <div className="fs-5 px-2">
+              {isOpen === false ? (
+                <FontIcon prefix="fa" iconName="bars" />
+              ) : (
+                <FontIcon prefix="fa" iconName="xmark" />
+              )}
             </div>
             MENU
           </Button>
