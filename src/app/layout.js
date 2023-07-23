@@ -12,7 +12,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <head>
+        <EmbedScripts />
+        <base href="/"></base>
+      </head>
+      <body className={`${nunito.variable} ${oduda.variable}`}>
         <Header />
         {children}
       </body>
