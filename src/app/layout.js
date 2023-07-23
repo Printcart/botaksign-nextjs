@@ -2,6 +2,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EmbedScripts from './components/EmbedScripts';
+import Header from './components/Header/page';
 import Footer from './components/Footer/page';
 import { nunito, oduda } from './fonts';
 import './globals.css';
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
         <EmbedScripts />
       </head>
       <body className={`${nunito.variable} ${oduda.variable}`}>
+        <Header />
         {children}
         <Footer />
       </body>
