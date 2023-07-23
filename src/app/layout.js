@@ -17,6 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <EmbedScripts />
+        <base href="/"></base>
       </head>
       <body className={`${nunito.variable} ${oduda.variable}`}>
         {children}
