@@ -1,11 +1,10 @@
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import EmbedScripts from './components/EmbedScripts';
 import Footer from './components/Footer/page';
+import Header from './components/Header/page';
 import { nunito, oduda } from './fonts';
 import './globals.css';
-import Header from './components/Header/page';
 config.autoAddCss = false;
 
 export const metadata = {

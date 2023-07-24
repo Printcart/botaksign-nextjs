@@ -1,9 +1,9 @@
 'use client';
 import { menus } from 'botak/app/data/menus';
 import styles from './header.module.css';
-import HeaderTop from './HeaderTop/page';
-import HeaderMiddle, { HeaderMiddleMobile } from './HeaderMiddle/page';
-import HeaderMenus, { MenusMobile } from './HeaderMenus/page';
+import HeaderTop from './HeaderTop';
+import HeaderMiddle, { HeaderMiddleMobile } from './HeaderMiddle';
+import HeaderMenus, { MenusMobile } from './HeaderMenus';
 
 const Header = () => {
   return (

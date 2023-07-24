@@ -1,11 +1,12 @@
+'use client';
 import { Menu, MenuItem, SubMenu } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import { headerData } from 'botak/app/data/menus';
 import React, { useState } from 'react';
 import { Button, Col, Container, Nav, Row } from 'react-bootstrap';
-import FontIcon from '../../FontIcon';
-import Search from '../HeaderMiddle/Search';
-import styles from './headerMenus.module.css';
+import FontIcon from '../FontIcon';
+import { Search } from './HeaderMiddle';
+import styles from './header.module.css';
 const CartMobile = () => {
   return (
     <div className="cartheadwrapper d-inline-block position-relative">
