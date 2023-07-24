@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // next.config.js
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'botaksign.com',
+        hostname: 'botaksign-library.s3.ap-southeast-1.amazonaws.com',
         port: '',
-        pathname: '/wp-content/**'
+        pathname: '/2020/**'
       }
     ]
   }

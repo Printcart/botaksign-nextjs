@@ -1,0 +1,15 @@
+.wrapIcon {
+  margin-right: 15px;
+}
+.wrapIcon svg {
+  width: 36px;
+  height: 36px;
+  color: #606161;
+}
+.wrapIcon.hasCircle svg {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #cecece;
+  padding: 0.5em;
+}
