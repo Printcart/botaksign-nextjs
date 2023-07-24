@@ -73,8 +73,12 @@ const HeaderMenus = (props) => {
                       <Nav.Item>
                         <Nav.Link
                           href={items?.url}
-                          className={`${styles.linkmenus} text-secondary-emphasis fw-semibold d-flex `}
-                          style={{ fontSize: '14px' }}
+                          className={`${styles.linkmenus} text-secondary-emphasis fw-bold d-flex `}
+                          style={{
+                            fontSize: '14px',
+                            paddingTop: '14px',
+                            paddingBottom: '15px'
+                          }}
                         >
                           {items?.title?.rendered}
                           <div className="ps-1">
@@ -94,7 +98,7 @@ const HeaderMenus = (props) => {
                           menuClassName={styles.megamenus}
                           label={submenu.title.rendered}
                           key={submenu.id}
-                          className={`${styles.submenuend} fw-semibold`}
+                          className={`${styles.submenuend}`}
                         >
                           <div
                             className={`${styles.menuparent} fs-5 fw-medium py-2  mb-2`}
@@ -108,21 +112,22 @@ const HeaderMenus = (props) => {
                           ))}
                         </SubMenu>
                       ) : (
-                        <MenuItem
-                          key={submenu.id}
-                          className={`${styles.submenu} fw-semibold`}
-                        >
+                        <MenuItem key={submenu.id} className={`${styles.submenu}`}>
                           {submenu.title.rendered}
                         </MenuItem>
                       )
                     )}
                   </Menu>
                 ) : (
-                  <Nav.Item>
+                  <Nav.Item className={styles.linksingle}>
                     <Nav.Link
                       href={items?.url || '#'}
-                      className={`${styles.linkmenus} text-secondary-emphasis fw-semibold`}
-                      style={{ fontSize: '14px' }}
+                      className="text-secondary-emphasis fw-bold"
+                      style={{
+                        fontSize: '14px',
+                        paddingTop: '14px',
+                        paddingBottom: '15px'
+                      }}
                     >
                       {items?.title?.rendered}
                       {items.subMenu && (

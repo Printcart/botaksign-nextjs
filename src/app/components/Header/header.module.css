@@ -20,6 +20,10 @@
         color: rgb(40, 196, 117) !important;
     }
 
+    .linksingle:first-child a {
+        color: rgb(40, 196, 117) !important;
+    }
+
     .ulstyle {
         display: inline-block;
         border-top: 3px solid #28c475;
@@ -67,6 +71,7 @@
     .submenuend {
         color: #666;
         border-bottom: 1px solid #ededed;
+        font-weight: 500;
     }
 
     .submenuend:last-child {
