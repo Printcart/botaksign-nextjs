@@ -1,7 +1,12 @@
-import { Nunito } from 'next/font/google';
-import './globals.css';
-const nunito = Nunito({ subsets: ['latin'] });
+import Homepage from './components/Homepage';
+import HomepageServer from './components/HomepageServer';
 
 export default function Home() {
-  return <main className={nunito.className}></main>;
+  return (
+    <div className="site-content" id="content">
+      <Homepage>
+        <HomepageServer />
+      </Homepage>
+    </div>
+  );
 }
