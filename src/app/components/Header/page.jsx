@@ -1,15 +1,15 @@
 'use client';
 import { menus } from 'botak/app/data/menus';
-import styles from './header.module.css';
-import HeaderTop from './HeaderTop';
-import HeaderMiddle, { HeaderMiddleMobile } from './HeaderMiddle';
 import HeaderMenus, { MenusMobile } from './HeaderMenus';
+import HeaderMiddle, { HeaderMiddleMobile } from './HeaderMiddle';
+import HeaderTop from './HeaderTop';
+import styles from './header.module.css';
 
 const Header = () => {
   return (
     <div className="text-white transition border-bottom">
       <header className={styles.headerDesktop}>
-        <div>
+        <div className={styles.sizeheader}>
           <HeaderTop />
         </div>
         <div className="pb-2">

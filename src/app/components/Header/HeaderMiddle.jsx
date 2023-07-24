@@ -29,10 +29,7 @@ export const Search = () => {
       style={{ height: '46px' }}
     >
       <Form className="w-100 h-100">
-        <InputGroup
-          size="lg"
-          className="searchform w-100 d-flex align-items-center  h-100"
-        >
+        <InputGroup size="lg" className="searchform w-100 align-items-center h-100">
           <Col xs={10} className="d-inline-block  h-100">
             <Form.Control
               className="h-100 rounded-start-pill ps-3 shadow-none lh-base m-0 bg-transparent text-secondary"
@@ -110,16 +107,19 @@ const HeaderTopMobile = () => {
 };
 const HeaderMiddle = () => {
   return (
-    <Container>
+    <Container className="position-relative">
       <Row className="align-items-center">
-        <Col xs={3} className="logoheader">
+        <Col xs={3} lg={3} md={3} sm={12} className="logoheader">
           <Logo headerData={headerData} />
         </Col>
-        <Col xs={6} className="search px-3">
+        <Col xs={6} lg={6} md={6} sm={9} className="search px-3">
           <Search />
         </Col>
         <Col
           xs={3}
+          lg={3}
+          md={3}
+          sm={3}
           className="cart float-end text-end "
           style={{ cursor: 'pointer' }}
         >
