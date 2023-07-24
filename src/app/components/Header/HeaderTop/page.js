@@ -1,6 +1,5 @@
-import React from 'react';
-import styles from './headerTop.module.css';
 import { Col, Container, Nav, Row } from 'react-bootstrap';
+import styles from './headerTop.module.css';
 
 const HeaderTop = () => {
   return (

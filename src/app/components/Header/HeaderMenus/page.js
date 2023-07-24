@@ -1,6 +1,6 @@
 import { Menu, MenuItem, SubMenu } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
-import { headerData, menus } from 'botak/app/data/menus';
+import { headerData } from 'botak/app/data/menus';
 import React, { useState } from 'react';
 import { Button, Col, Container, Nav, Row } from 'react-bootstrap';
 import FontIcon from '../../FontIcon';
@@ -9,7 +9,6 @@ import styles from './headermenu.module.css';
 
 const HeaderMenus = (props) => {
   const { menus } = props;
-  console.log(menus);
   return (
     <div className="headerlist border-top p-0">
       <Container>
