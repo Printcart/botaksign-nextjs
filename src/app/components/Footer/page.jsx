@@ -1,6 +1,6 @@
 'use client';
 import { fetchDataFooterList } from 'botak/api/homepage';
-import { dataTest } from 'botak/app/data/footer';
+import { data } from 'botak/app/data/footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import styles from './page.module.css';
 
 const Footer = (props) => {
   const { dataFooter } = props;
-  const footerData = dataTest;
+  const footerData = data;
   return (
     <div className={styles.siteFooter}>
       <Top

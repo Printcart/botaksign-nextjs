@@ -5,6 +5,7 @@ import { fetchDataFooterTitle } from 'botak/api/homepage';
 import Footer from './components/Footer/page';
 import { nunito, oduda } from './fonts';
 import './globals.css';
+import EmbedScripts from './components/EmbedScripts';
 config.autoAddCss = false;
 
 export const metadata = {
@@ -18,7 +19,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* <EmbedScripts /> */}
+        <EmbedScripts />
         <base href="/"></base>
       </head>
       <body className={`${nunito.variable} ${oduda.variable}`}>
