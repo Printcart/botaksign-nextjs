@@ -81,6 +81,7 @@ const FooterMenuItem = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const apiData = await fetchDataFooterList(id);
+      
       setData(apiData);
     };
     fetchData();
