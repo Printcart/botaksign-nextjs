@@ -25,7 +25,6 @@ const Footer = (props) => {
 
 const Top = (props) => {
   const { companyInfo, footerMenu, footerContact } = props;
-
   const menuTitle = footerMenu.dataTitle.filter((i) => {
     if (i.id === 55 || i.id === 56) {
       return i;
@@ -77,18 +76,14 @@ const FooterMenu = (props) => {
 const FooterMenuItem = (props) => {
   const { id } = props;
   const [data, setData] = useState([]);
-  console.log(data);
   useEffect(() => {
     const fetchData = async () => {
       const apiData = await fetchDataFooterList(id);
-      
       setData(apiData);
     };
     fetchData();
   }, [id]);
-  if (data === null) {
-    return null; // You can render a loading indicator or a different component here
-  }
+
   return (
     <>
       {data?.length > 0 &&
@@ -96,7 +91,7 @@ const FooterMenuItem = (props) => {
           return (
             <MenuItem
               key={`MenuItem-${index}`}
-              label={item?.title}
+              label={item?.title?.rendered}
               url={item?.url}
             />
           );
@@ -106,7 +101,6 @@ const FooterMenuItem = (props) => {
 };
 
 const MenuItem = (props) => {
-  console.log(props);
   const { label, url } = props;
 
   return (

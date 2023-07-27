@@ -100,7 +100,8 @@ export const fetchDataFooterTitle = async () => {
 };
 
 export const fetchDataFooterList = async (id) => {
-  console.log(id);
+  const API_URL = process.env.WORDPRESS_API_URL;
+
   const headers = {
     'Content-Type': 'application/json',
     Authorization: `Basic ${btoa(`cmsmart:NOq8 n7uz Kbsk ugrS uqoo S913`)}`
