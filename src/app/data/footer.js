@@ -6,39 +6,6 @@ export const data = {
     descripton:
       'With the motto of "DESTROY TO BUILD", we have been involved in many different printing industries. From vinyl cutting to large format to digital printing, we never stop trying new things and always invest in new technologies to provide our customers with fun and high-quality products at reasonable prices.😊'
   },
-  footerMenu: [
-    {
-      title: 'Explore',
-      menuItems: [
-        {
-          title: 'Print Products',
-          url: 'https://botaksign.com/product-category/printing-products/'
-        },
-        {
-          title: 'Display Products',
-          url: 'https://botaksign.com/product-category/display-products/'
-        },
-        { title: 'About Us', url: 'https://botaksign.com/about-us/' },
-        { title: 'Careers', url: 'https://botaksign.com/career/' },
-        { title: 'Blog', url: 'https://botaksign.com/blog/' }
-      ]
-    },
-    {
-      title: 'Need help?',
-      menuItems: [
-        { title: 'FAQ', url: 'https://botaksign.tawk.help/' },
-        {
-          title: 'Corporate Partners',
-          url: 'https://botaksign.com/corporate-partner/'
-        },
-        {
-          title: 'Terms & Conditions',
-          url: 'https://botaksign.com/terms-and-conditions/'
-        },
-        { title: 'Privacy Policy', url: 'https://botaksign.com/privacy-policy/' }
-      ]
-    }
-  ],
   footerContact: {
     title: 'Get in touch',
     menuItems: [

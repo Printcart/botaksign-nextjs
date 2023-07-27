@@ -1,5 +1,5 @@
 'use client';
-import { fetchDataFooterList } from 'botak/api/homepage';
+import { fetchMenuFooterById } from 'botak/api/homepage';
 import { data } from 'botak/app/data/footer';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -79,7 +79,7 @@ const FooterMenuItem = (props) => {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const apiData = await fetchDataFooterList(id);
+      const apiData = await fetchMenuFooterById(id);
       setData(apiData);
     };
     fetchData();
