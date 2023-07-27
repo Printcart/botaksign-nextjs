@@ -99,20 +99,14 @@ export const fetchDataFooterTitle = async () => {
   return data;
 };
 
-export const fetchDataFooterListExplore = async () => {
-  const fetUrl = `${API_URL}/wp-json/wp/v2/menu-items?menus=56`;
+export const fetchDataFooterList = async (id) => {
+  console.log(id);
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Basic ${btoa(`cmsmart:NOq8 n7uz Kbsk ugrS uqoo S913`)}`
+  };
 
-  const res = await fetch(fetUrl, {
-    headers,
-    method: 'GET'
-  });
-
-  const dataList = await res.json();
-
-  return dataList;
-};
-export const fetchDataFooterListNeedHelp = async () => {
-  const fetUrl = `${API_URL}/wp-json/wp/v2/menu-items?menus=55`;
+  const fetUrl = `https://botakdev.printcart.com/wp-json/wp/v2/menu-items?menus=${id}`;
 
   const res = await fetch(fetUrl, {
     headers,

@@ -1,9 +1,6 @@
 'use client';
-import {
-  fetchDataFooterListExplore,
-  fetchDataFooterListNeedHelp
-} from 'botak/api/homepage';
-import { data } from 'botak/app/data/footer';
+import { fetchDataFooterList } from 'botak/api/homepage';
+import { dataTest } from 'botak/app/data/footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
@@ -11,8 +8,9 @@ import { Col, Container, ListGroup, Row } from 'react-bootstrap';
 import FaIconExtend from '../FaIconExtend';
 import styles from './page.module.css';
 
-const Footer = ({ dataFooter }) => {
-  const footerData = data;
+const Footer = (props) => {
+  const { dataFooter } = props;
+  const footerData = dataTest;
   return (
     <div className={styles.siteFooter}>
       <Top
@@ -28,6 +26,11 @@ const Footer = ({ dataFooter }) => {
 const Top = (props) => {
   const { companyInfo, footerMenu, footerContact } = props;
 
+  const menuTitle = footerMenu.dataTitle.filter((i) => {
+    if (i.id === 55 || i.id === 56) {
+      return i;
+    }
+  });
   return (
     <div className={styles.footerTop}>
       <Container>
@@ -41,14 +44,12 @@ const Top = (props) => {
           </Col>
           <Col lg={8}>
             <Row className={styles.footerTopRight}>
-              {footerMenu.dataTitle?.length > 0 &&
-                footerMenu.dataTitle.map((menu, index) =>
-                  menu.id === 55 || menu.id === 56 ? (
-                    <Col lg={4} key={`footerMenu-${index}`}>
-                      <FooterMenu menuItems={menu.menuItems} title={menu.name} />
-                    </Col>
-                  ) : null
-                )}
+              {menuTitle?.length > 0 &&
+                menuTitle.map((menu, index) => (
+                  <Col lg={4} key={`footerMenu-${index}`}>
+                    <FooterMenu menuId={menu.id} title={menu.name} />
+                  </Col>
+                ))}
               <Col lg={4}>
                 <MenuContact
                   contacts={footerContact.menuItems}
@@ -64,33 +65,47 @@ const Top = (props) => {
 };
 
 const FooterMenu = (props) => {
-  const { menuItems, title } = props;
-  const [footerMenuData, setFooterMenuData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const dataList = await fetchDataFooterListExplore();
-        setFooterMenuData(dataList);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { menuId, title } = props;
   return (
     <>
       <MenuTitle title={title} />
-      {menuItems?.length > 0 &&
-        menuItems.map((item, index) => (
-          <MenuItem key={`MenuItem-${index}`} label={item.title} url={item.url} />
-        ))}
+      <FooterMenuItem id={menuId} />
+    </>
+  );
+};
+
+const FooterMenuItem = (props) => {
+  const { id } = props;
+  const [data, setData] = useState([]);
+  console.log(data);
+  useEffect(() => {
+    const fetchData = async () => {
+      const apiData = await fetchDataFooterList(id);
+      setData(apiData);
+    };
+    fetchData();
+  }, [id]);
+  if (data === null) {
+    return null; // You can render a loading indicator or a different component here
+  }
+  return (
+    <>
+      {data?.length > 0 &&
+        data?.map((item, index) => {
+          return (
+            <MenuItem
+              key={`MenuItem-${index}`}
+              label={item?.title}
+              url={item?.url}
+            />
+          );
+        })}
     </>
   );
 };
 
 const MenuItem = (props) => {
+  console.log(props);
   const { label, url } = props;
 
   return (

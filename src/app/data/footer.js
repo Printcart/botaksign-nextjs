@@ -1,4 +1,4 @@
-export const data = {
+export const dataTest = {
   companyInfo: {
     logoSrc:
       'https://botaksign-library.s3.ap-southeast-1.amazonaws.com/2020/09/botak-logo_v3-2.png',

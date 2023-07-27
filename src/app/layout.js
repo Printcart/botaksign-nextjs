@@ -1,10 +1,11 @@
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { fetchDataFooterListExplore, fetchDataFooterTitle } from 'botak/api/homepage';
+import { fetchDataFooterList, fetchDataFooterTitle } from 'botak/api/homepage';
 import Footer from './components/Footer/page';
 import { nunito, oduda } from './fonts';
 import './globals.css';
+import MenuItems from './components/Footer/MenuItems';
 config.autoAddCss = false;
 
 export const metadata = {
@@ -13,10 +14,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const [dataTitle, cc] = await Promise.all([
-    fetchDataFooterTitle(),
-    fetchDataFooterListExplore()
-  ]);
+  const [dataTitle] = await Promise.all([fetchDataFooterTitle()]);
 
   return (
     <html lang="en">
@@ -26,7 +24,7 @@ export default async function RootLayout({ children }) {
       </head>
       <body className={`${nunito.variable} ${oduda.variable}`}>
         {children}
-        <Footer dataFooter={{ dataTitle, cc }} />
+        <Footer dataFooter={{ dataTitle }} />
       </body>
     </html>
   );
