@@ -1,10 +1,12 @@
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import EmbedScripts from './components/EmbedScripts';
+import { fetchDataFooterTitle } from 'botak/api/homepage';
 import Footer from './components/Footer/page';
 import { nunito, oduda } from './fonts';
 import './globals.css';
+import EmbedScripts from './components/EmbedScripts';
+import FooterServer from './components/Footer/FooterServer';
 config.autoAddCss = false;
 
 export const metadata = {
@@ -21,7 +23,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${nunito.variable} ${oduda.variable}`}>
         {children}
-        <Footer />
+        <FooterServer />
       </body>
     </html>
   );

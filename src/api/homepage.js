@@ -1,8 +1,14 @@
 const PAGE_ID = 12599;
-const API_URL = process.env.WORDPRESS_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+
+const headers = {
+  'Content-Type': 'application/json',
+  Authorization: `Basic ${btoa(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_USER}:${process.env.NEXT_PUBLIC_WORDPRESS_API_PASS}`
+  )}`
+};
 
 export const fetchHomePageHeader = async () => {
-  const API_URL = process.env.WORDPRESS_API_URL;
   const headers = { 'Content-Type': 'application/json' };
 
   const fetUrl = `${API_URL}pc/v2/vc-api/header?id=${PAGE_ID}`;
@@ -22,7 +28,6 @@ export const fetchHomePageHeader = async () => {
 };
 
 export const fetchHomePageFooter = async () => {
-  const API_URL = process.env.WORDPRESS_API_URL;
   const headers = { 'Content-Type': 'application/json' };
 
   const fetUrl = `${API_URL}pc/v2/vc-api/footer`;
@@ -77,4 +82,30 @@ export const fetcAssets = async () => {
   }
 
   return json;
+};
+
+export const fetchDataFooterTitle = async () => {
+  const fetUrl = `${API_URL}wp/v2/menus`;
+
+  const res = await fetch(fetUrl, {
+    headers,
+    method: 'GET'
+  });
+
+  const data = await res.json();
+
+  return data;
+};
+
+export const fetchMenuFooterById = async (id) => {
+  const fetUrl = `${API_URL}wp/v2/menu-items?menus=${id}`;
+
+  const res = await fetch(fetUrl, {
+    headers,
+    method: 'GET'
+  });
+
+  const data = await res.json();
+
+  return data;
 };
