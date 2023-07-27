@@ -6,6 +6,7 @@ import Footer from './components/Footer/page';
 import { nunito, oduda } from './fonts';
 import './globals.css';
 import EmbedScripts from './components/EmbedScripts';
+import FooterServer from './components/Footer/FooterServer';
 config.autoAddCss = false;
 
 export const metadata = {
@@ -13,9 +14,7 @@ export const metadata = {
   description: 'Botak Sign Pte Ltd | One Stop Solution For Everything About Printing'
 };
 
-export default async function RootLayout({ children }) {
-  const [dataTitle] = await Promise.all([fetchDataFooterTitle()]);
-
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
@@ -24,7 +23,7 @@ export default async function RootLayout({ children }) {
       </head>
       <body className={`${nunito.variable} ${oduda.variable}`}>
         {children}
-        <Footer dataFooter={{ dataTitle }} />
+        <FooterServer />
       </body>
     </html>
   );
