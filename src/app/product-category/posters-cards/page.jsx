@@ -103,7 +103,9 @@ const Products = () => {
 const SelectFilter = () => {
   return (
     <div className={styles.select}>
-      <Form.Select aria-label="Default select example"></Form.Select>
+      <Form.Select aria-label="Default select example">
+        <OptionSelect/>
+      </Form.Select>
     </div>
   );
 };

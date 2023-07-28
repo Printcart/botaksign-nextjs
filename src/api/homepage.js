@@ -85,47 +85,39 @@ export const fetcAssets = async () => {
 };
 
 export const fetchDataFooterTitle = async () => {
-  try {
-    const res = await fetch(fetUrl, {
-      headers,
-      method: 'GET'
-    });
-    const fetUrl = `${API_URL}wp/v2/menus`;
-    if (!fetUrl.ok) {
-      if (!fetUrl.status === 404) {
-        return null;
-      }
-    } else {
-      const data = await res.json();
-      return data;
+  const fetUrl = `${API_URL}wp/v2/menus`;
+  const res = await fetch(fetUrl, {
+    headers,
+    method: 'GET'
+  });
+  if (res.ok) {
+    const data = await res.json();
+    return data;
+  } else {
+    if (!res.status === 404) {
+      return null;
     }
-  } catch (error) {
-    return null;
   }
 };
 
 export const fetchMenuFooterById = async (id) => {
-  try {
-    const res = await fetch(fetUrl, {
-      headers,
-      method: 'GET'
-    });
-    const fetUrl = `${API_URL}wp/v2/menu-items?menus=${id}`;
-    if (!fetUrl.ok) {
-      if (!fetUrl.status === 404) {
-        return null;
-      }
-    } else {
-      const data = await res.json();
-      return data;
+  const fetUrl = `${API_URL}wp/v2/menu-items?menus=${id}`;
+  const res = await fetch(fetUrl, {
+    headers,
+    method: 'GET'
+  });
+  if (res.ok) {
+    const data = await res.json();
+    return data;
+  } else {
+    if (!res.status === 404) {
+      return null;
     }
-  } catch (error) {
-    return null;
   }
 };
 
 export const fetchArchiveProduct = async () => {
-  const fetUrl = `${API_URL}wc/v3/products?category=295`;
+  const fetUrl = `http://botakdev.printcart.com/wp-json/wc/v3/products?category=295`;
 
   const res = await fetch(fetUrl, {
     headers,
