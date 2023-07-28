@@ -90,14 +90,13 @@ export const fetchDataFooterTitle = async () => {
     headers,
     method: 'GET'
   });
-  if (res.ok) {
-    const data = await res.json();
-    return data;
-  } else {
-    if (!res.status === 404) {
-      return null;
-    }
+
+  const data = await res.json();
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
   }
+
+  return data;
 };
 
 export const fetchMenuFooterById = async (id) => {
@@ -106,29 +105,26 @@ export const fetchMenuFooterById = async (id) => {
     headers,
     method: 'GET'
   });
-  if (res.ok) {
-    const data = await res.json();
-    return data;
-  } else {
-    if (!res.status === 404) {
-      return null;
-    }
+  const data = await res.json();
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
   }
+  return data;
 };
 
 export const fetchArchiveProduct = async () => {
-  const fetUrl = `http://botakdev.printcart.com/wp-json/wc/v3/products?category=295`;
-  const headers = {
+  const fetUrl = 'https://botakdev.printcart.com/wp-json/wc/v3/products?category=295';
+  const headerswoo = {
     'Content-Type': 'application/json',
     Authorization: `Basic ${btoa(
-      `${process.env.NEXT_PUBLIC_CONSUMER_KEY}:${process.env.NEXT_PUBLIC_CONSUMER_SECRET}`
+      `${process.env.CONSUMER_KEY}:${process.env.CONSUMER_SECRET}`
     )}`
   };
+
   const res = await fetch(fetUrl, {
-    headers,
+    headerswoo,
     method: 'GET'
   });
-
   const data = await res.json();
 
   return data;
