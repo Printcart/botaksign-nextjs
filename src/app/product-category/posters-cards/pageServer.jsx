@@ -4,6 +4,7 @@ import ArchiveProduct from './page';
 
 const pageServer = async () => {
   const data = await fetchArchiveProduct();
+  console.log(data);
   return (
     <div>
       <ArchiveProduct data={data} />

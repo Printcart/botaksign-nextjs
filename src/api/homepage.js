@@ -118,7 +118,12 @@ export const fetchMenuFooterById = async (id) => {
 
 export const fetchArchiveProduct = async () => {
   const fetUrl = `http://botakdev.printcart.com/wp-json/wc/v3/products?category=295`;
-
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Basic ${btoa(
+      `${process.env.NEXT_PUBLIC_CONSUMER_KEY}:${process.env.NEXT_PUBLIC_CONSUMER_SECRET}`
+    )}`
+  };
   const res = await fetch(fetUrl, {
     headers,
     method: 'GET'

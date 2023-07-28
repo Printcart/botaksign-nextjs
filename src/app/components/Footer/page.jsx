@@ -26,10 +26,15 @@ const Footer = (props) => {
 
 const Top = (props) => {
   const { companyInfo, footerMenu, footerContact } = props;
-  let menuTitle = null;
-  if (footerMenu && Array.isArray(footerMenu)) {
-    menuTitle = footerMenu.filter((i) => i.id === 55 || i.id === 56);
-  }
+
+  const menuTitle =
+    footerMenu?.length > 0
+      ? footerMenu.filter((i) => {
+          if (i.id === 55 || i.id === 56) {
+            return i;
+          }
+        })
+      : [];
 
   return (
     <div className={styles.footerTop}>
