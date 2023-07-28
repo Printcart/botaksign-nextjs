@@ -94,9 +94,7 @@ export const fetchDataFooterTitle = async () => {
     const data = await res.json();
     return data;
   } else {
-    if (!res.status === 404) {
-      return null;
-    }
+    return null;
   }
 };
 
@@ -110,8 +108,6 @@ export const fetchMenuFooterById = async (id) => {
     const data = await res.json();
     return data;
   } else {
-    if (!res.status === 404) {
-      return null;
-    }
+    return null;
   }
 };
