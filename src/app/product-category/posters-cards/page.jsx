@@ -104,7 +104,7 @@ const SelectFilter = () => {
   return (
     <div className={styles.select}>
       <Form.Select aria-label="Default select example">
-        <OptionSelect/>
+        <OptionSelect />
       </Form.Select>
     </div>
   );
