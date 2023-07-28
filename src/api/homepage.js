@@ -93,7 +93,7 @@ export const fetchDataFooterTitle = async () => {
 
   const data = await res.json();
 
-  if (json.errors) {
+  if (data.errors) {
     throw new Error('Failed to fetch API');
   }
 
@@ -107,7 +107,7 @@ export const fetchMenuFooterById = async (id) => {
     method: 'GET'
   });
   const data = await res.json();
-  if (json.errors) {
+  if (data.errors) {
     throw new Error('Failed to fetch API');
   }
   return data;
