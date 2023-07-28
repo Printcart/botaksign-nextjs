@@ -85,20 +85,47 @@ export const fetcAssets = async () => {
 };
 
 export const fetchDataFooterTitle = async () => {
-  const fetUrl = `${API_URL}wp/v2/menus`;
-
-  const res = await fetch(fetUrl, {
-    headers,
-    method: 'GET'
-  });
-
-  const data = await res.json();
-
-  return data;
+  try {
+    const res = await fetch(fetUrl, {
+      headers,
+      method: 'GET'
+    });
+    const fetUrl = `${API_URL}wp/v2/menus`;
+    if (!fetUrl.ok) {
+      if (!fetUrl.status === 404) {
+        return null;
+      }
+    } else {
+      const data = await res.json();
+      return data;
+    }
+  } catch (error) {
+    return null;
+  }
 };
 
 export const fetchMenuFooterById = async (id) => {
-  const fetUrl = `${API_URL}wp/v2/menu-items?menus=${id}`;
+  try {
+    const res = await fetch(fetUrl, {
+      headers,
+      method: 'GET'
+    });
+    const fetUrl = `${API_URL}wp/v2/menu-items?menus=${id}`;
+    if (!fetUrl.ok) {
+      if (!fetUrl.status === 404) {
+        return null;
+      }
+    } else {
+      const data = await res.json();
+      return data;
+    }
+  } catch (error) {
+    return null;
+  }
+};
+
+export const fetchArchiveProduct = async () => {
+  const fetUrl = `${API_URL}wc/v3/products?category=295`;
 
   const res = await fetch(fetUrl, {
     headers,

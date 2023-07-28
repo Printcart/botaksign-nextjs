@@ -1,12 +1,10 @@
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { fetchDataFooterTitle } from 'botak/api/homepage';
-import Footer from './components/Footer/page';
-import { nunito, oduda } from './fonts';
-import './globals.css';
 import EmbedScripts from './components/EmbedScripts';
 import FooterServer from './components/Footer/FooterServer';
+import { nunito, oduda } from './fonts';
+import './globals.css';
 config.autoAddCss = false;
 
 export const metadata = {

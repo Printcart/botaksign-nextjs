@@ -10,6 +10,7 @@ import styles from './page.module.css';
 
 const Footer = (props) => {
   const { dataFooter } = props;
+  console.log(dataFooter);
   const footerData = data;
   return (
     <div className={styles.siteFooter}>
