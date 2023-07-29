@@ -9,18 +9,23 @@ export const Products = (props) => {
     <>
       <Row className={styles.product}>
         {data.length > 0 &&
-          data.map((item) => (
-            <Col key={item.id} lg={4} md={4} xs={6} className={styles.propducCol}>
-              <Card className={styles.propductItem}>
-                <Link href={item?.permalink}>
-                  <ImageProduct images={item.images} />
-                </Link>
-                <ContentProduct name={item.name} permalink={item?.permalink} />
-              </Card>
-            </Col>
-          ))}
+          data.map((item) => <ItemProduct item={item} key={item.id} />)}
       </Row>
     </>
+  );
+};
+
+const ItemProduct = (props) => {
+  const { item } = props;
+  return (
+    <Col key={item.id} lg={4} md={4} xs={6} className={styles.productCol}>
+      <Card className={styles.propductItem}>
+        <Link href={item?.permalink}>
+          <ImageProduct images={item.images} />
+        </Link>
+        <ContentProduct name={item.name} permalink={item?.permalink} />
+      </Card>
+    </Col>
   );
 };
 

@@ -112,22 +112,8 @@ export const fetchMenuFooterById = async (id) => {
   return data;
 };
 
-export const fetchArchiveProduct = async () => {
-  const fetUrl = `${API_URL}wc/v3/products?category`;
-
-  const res = await fetch(fetUrl, {
-    headers,
-    method: 'GET'
-  });
-  const data = await res.json();
-  if (data.errors) {
-    throw new Error('Failed to fetch API');
-  }
-  return data;
-};
-
-export const fetchArchiveProductId = async () => {
-  const fetUrl = `${API_URL}wc/v3/products?category=295`;
+export const fetchArchiveProductId = async (id) => {
+  const fetUrl = `${API_URL}wc/v3/products?category=${id}`;
 
   const res = await fetch(fetUrl, {
     headers,

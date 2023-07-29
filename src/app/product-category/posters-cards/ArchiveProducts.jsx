@@ -5,8 +5,7 @@ import { Products } from './[product]';
 import styles from './page.module.css';
 
 const ArchiveProducts = (props) => {
-  const { data, datacc } = props;
-  console.log(datacc);
+  const { data } = props;
   return (
     <>
       <Container className={styles.archiveProduct}>
@@ -40,5 +39,3 @@ export const ShopAction = () => {
     </>
   );
 };
-
-
