@@ -86,26 +86,29 @@ export const fetcAssets = async () => {
 
 export const fetchDataFooterTitle = async () => {
   const fetUrl = `${API_URL}wp/v2/menus`;
-
   const res = await fetch(fetUrl, {
     headers,
     method: 'GET'
   });
 
   const data = await res.json();
+
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
 
   return data;
 };
 
 export const fetchMenuFooterById = async (id) => {
   const fetUrl = `${API_URL}wp/v2/menu-items?menus=${id}`;
-
   const res = await fetch(fetUrl, {
     headers,
     method: 'GET'
   });
-
   const data = await res.json();
-
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
   return data;
 };
