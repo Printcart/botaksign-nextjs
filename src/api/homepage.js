@@ -1,16 +1,14 @@
 const PAGE_ID = 12599;
-const API_URL = process.env.WORDPRESS_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
 
 const headers = {
   'Content-Type': 'application/json',
   Authorization: `Basic ${btoa(
-    `${process.env.WORDPRESS_API_USER}:${process.env.WORDPRESS_API_PASS}`
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_USER}:${process.env.NEXT_PUBLIC_WORDPRESS_API_PASS}`
   )}`
 };
 
 export const fetchHomePageHeader = async () => {
-  const API_URL = process.env.WORDPRESS_API_URL;
-
   const fetUrl = `${API_URL}pc/v2/vc-api/header?id=${PAGE_ID}`;
 
   const res = await fetch(fetUrl, {
@@ -28,8 +26,6 @@ export const fetchHomePageHeader = async () => {
 };
 
 export const fetchHomePageFooter = async () => {
-  const API_URL = process.env.WORDPRESS_API_URL;
-
   const fetUrl = `${API_URL}pc/v2/vc-api/footer`;
 
   const res = await fetch(fetUrl, {
