@@ -5,7 +5,7 @@
   margin: auto;
 }
 .title h1 {
-  font-family: 'Oduda-Bold';
+  font-family: var(--font-oduda-bold);
   font-weight: 500;
   color: #444;
   line-height: 18px;
@@ -51,7 +51,7 @@
   padding: 0 0 36px 0;
 }
 .titleItem {
-  font-family: 'Oduda-Bold';
+  font-family: var(--font-oduda-bold);
   margin-left: 0px;
   margin-top: 10px;
   font-size: 18px;

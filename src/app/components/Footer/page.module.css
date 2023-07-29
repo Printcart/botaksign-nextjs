@@ -2,6 +2,7 @@
   background: rgb(237, 237, 237);
 }
 .footerMenuTitle {
+  font-family: var(--font-nunito);
   font-size: 28px !important;
   font-weight: 700;
   color: rgb(40, 196, 117) !important;
@@ -35,6 +36,7 @@
   margin-bottom: 12px !important;
 }
 .footerList {
+  font-family: var(--font-nunito);
   color: #606161;
   font-size: 16px;
   font-weight: 400;
