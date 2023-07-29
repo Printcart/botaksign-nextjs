@@ -29,7 +29,7 @@ const ItemProduct = (props) => {
   );
 };
 
-export const ImageProduct = (props) => {
+const ImageProduct = (props) => {
   const { images } = props;
   return (
     <Card.Img
@@ -42,7 +42,7 @@ export const ImageProduct = (props) => {
   );
 };
 
-export const ContentProduct = (props) => {
+const ContentProduct = (props) => {
   const { name, permalink } = props;
   return (
     <Card.Body className={styles.contentItem}>
