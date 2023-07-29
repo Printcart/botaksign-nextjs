@@ -1,9 +1,9 @@
-import React from 'react';
+import { fetchArchiveProduct, fetchArchiveProductId } from 'botak/api/homepage';
 import ArchiveProducts from './ArchiveProducts';
-import { fetchArchiveProduct } from 'botak/api/homepage';
 
 const ArchiveProductsServer = async () => {
-  const data = await fetchArchiveProduct();
-  return <ArchiveProducts data={data} />;
+  const data = await fetchArchiveProductId();
+  const datacc = await fetchArchiveProduct();
+  return <ArchiveProducts data={data} datacc={datacc} />;
 };
 export default ArchiveProductsServer;
