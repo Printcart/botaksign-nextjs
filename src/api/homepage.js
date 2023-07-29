@@ -113,19 +113,16 @@ export const fetchMenuFooterById = async (id) => {
 };
 
 export const fetchArchiveProduct = async () => {
-  const fetUrl = 'https://botakdev.printcart.com/wp-json/wc/v3/products?category=295';
-  const headerswoo = {
-    'Content-Type': 'application/json',
-    Authorization: `Basic ${btoa(
-      `${process.env.CONSUMER_KEY}:${process.env.CONSUMER_SECRET}`
-    )}`
-  };
+  const fetUrl =
+    'https://botakdev.printcart.com/wp-json/wc/v3/products?category=295';
 
   const res = await fetch(fetUrl, {
-    headerswoo,
+    headers,
     method: 'GET'
   });
   const data = await res.json();
-
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
   return data;
 };
