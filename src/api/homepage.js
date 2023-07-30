@@ -77,18 +77,21 @@ export const fetcAssets = async () => {
 };
 
 export const fetcPrimaryMenu = async () => {
-  const fetUrl = `${API_URL}wp/v2/menu-items?menus=478`;
+  const fetUrl = [
+    `${API_URL}wp/v2/menu-items?menus=478&page=1`,
+    `${API_URL}wp/v2/menu-items?menus=478&page=2`,
+  ]
 
-  const res = await fetch(fetUrl, {
-    headers,
-    method: 'GET'
-  });
+  const [resOne, resTwo] = await Promise.all(
+    fetUrl.map(url => fetch(url, { headers, method: 'GET' }))
+  );
 
-  const json = await res.json();
-
-  if (json.errors) {
+  if (!resOne.ok || !resTwo.ok) {
     throw new Error('Failed to fetch API');
   }
 
-  return json;
+  const [jsonOne, jsonTwo] =
+    await Promise.all([resOne.json(), resTwo.json()]);
+
+  return [...jsonOne, ...jsonTwo];
 };
