@@ -1,51 +1,25 @@
-import { fetcPrimaryMenu } from 'botak/api/homepage';
+// Data Hierarchy
+export function arrHierarchy(arr) {
+  const map = {};
+  const newData = [];
 
-const MegaMenu = async () => {
-  const menuItems = await fetcPrimaryMenu();
+  arr.forEach(item => {
+    map[item.id] = {
+      id: item.id,
+      title: item.title,
+      url: item.url,
+      children: []
+    };
+  });
 
-  const getChildrenItems = (parent, items) => {
-    const parentId = parent.id;
-    let childrenItems = [];
-    if (!items[parentId] || !parentId) return [];
-    items[parentId].forEach((item) => {
-      const childrens = getChildrenItems(item.parentId, items);
-      if (childrens?.length > 0) {
-        childrenItems[parentId] = childrens;
-      }
-    });
+  arr.forEach(item => {
+    if (item.parent !== 0) {
+      const parent = map[item.parent];
+      parent.children.push(map[item.id]);
+    } else {
+      newData.push(map[item.id]);
+    }
+  });
 
-    return childrenItems;
-  };
-
-  const formatMenu = (menus) => {
-    if (!menus?.length) return [];
-
-    const newMenus = [];
-
-    const topLevelElements = [];
-    let childrenElements = [];
-    menus.forEach((menu) => {
-      if (!menu.parent) {
-        topLevelElements.push(menu);
-      } else {
-        childrenElements[menu.parent] = childrenElements[menu.parent]
-          ? childrenElements[menu.parent]
-          : [];
-        childrenElements[menu.parent].push(menu);
-      }
-    });
-    topLevelElements.forEach((e) => {
-      const childrens = getChildrenItems(e.id, childrenElements);
-      if (childrens?.length > 0) {
-      }
-      newMenus.push(childrens);
-    });
-
-    return newMenus;
-  };
-
-  const items = formatMenu(menuItems);
-  return <></>;
-};
-
-export default MegaMenu;
+  return newData;
+}
