@@ -24,7 +24,6 @@ const Footer = (props) => {
 
 const Top = (props) => {
   const { companyInfo, footerMenu, footerContact } = props;
-
   return (
     <div className={styles.footerTop}>
       <Container>

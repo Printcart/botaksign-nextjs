@@ -99,13 +99,13 @@ export const fetchDataFooterTitle = async () => {
     throw new Error('Failed to fetch API');
   }
 
-  const fetchMenu = data
-    ?.filter((i) => i.id === 55 || i.id === 56)
-    .map(async (menu) => {
-      const { id, name } = menu;
+  const fetchMenu = data.map(async (menu) => {
+    const { id, name } = menu;
+    if (id === 55 || id === 56) {
       const child = await fetchMenuFooterById(id);
       return { id, name, children: child.length > 0 ? child : undefined };
-    });
+    }
+  });
 
   const menusWithIdAndName = await Promise.all(fetchMenu);
   return menusWithIdAndName;
