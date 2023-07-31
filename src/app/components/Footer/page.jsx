@@ -41,7 +41,7 @@ const Top = (props) => {
               {footerMenu?.length > 0 &&
                 footerMenu?.map((menu, index) => (
                   <Col lg={4} key={`footerMenu-${index}`}>
-                    <FooterMenu menuId={menu.children} title={menu.name} />
+                    <FooterMenu childrenMenu={menu.children} title={menu.name} />
                   </Col>
                 ))}
               <Col lg={4}>
@@ -59,23 +59,23 @@ const Top = (props) => {
 };
 
 const FooterMenu = (props) => {
-  const { menuId, title } = props;
+  const { childrenMenu, title } = props;
 
   return (
     <>
       <MenuTitle title={title} />
-      <FooterMenuItem menuId={menuId} />
+      <FooterMenuItem childrenMenu={childrenMenu} />
     </>
   );
 };
 
 const FooterMenuItem = (props) => {
-  const { menuId } = props;
+  const { childrenMenu } = props;
 
   return (
     <>
-      {menuId?.length > 0 &&
-        menuId?.map((item, index) => (
+      {childrenMenu?.length > 0 &&
+        childrenMenu?.map((item, index) => (
           <MenuItem
             key={`MenuItem-${index}`}
             label={item?.title?.rendered}
