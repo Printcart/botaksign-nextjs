@@ -9,7 +9,6 @@ const headers = {
 };
 
 export const fetchHomePageHeader = async () => {
-  const API_URL = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
   const headers = { 'Content-Type': 'application/json' };
 
   const fetUrl = `${API_URL}pc/v2/vc-api/header?id=${PAGE_ID}`;
@@ -29,7 +28,6 @@ export const fetchHomePageHeader = async () => {
 };
 
 export const fetchHomePageFooter = async () => {
-  const API_URL = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
   const headers = { 'Content-Type': 'application/json' };
 
   const fetUrl = `${API_URL}pc/v2/vc-api/footer`;
@@ -103,7 +101,7 @@ export const fetchDataFooterTitle = async () => {
     const { id, name } = menu;
     if (id === 55 || id === 56) {
       const child = await fetchMenuFooterById(id);
-      return { id, name, children: child.length > 0 ? child : undefined };
+      return { id, name, children: child?.length > 0 ? child : [] };
     }
   });
 
