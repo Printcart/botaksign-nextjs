@@ -1,3 +1,5 @@
+'use client';
+
 import { headerData } from 'botak/app/data/menus';
 import { Col, Container, Form, InputGroup, Nav, Row } from 'react-bootstrap';
 import styles from './header.module.css';

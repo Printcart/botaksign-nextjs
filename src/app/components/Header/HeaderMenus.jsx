@@ -58,7 +58,8 @@ export const MenusMobile = () => {
 };
 
 const HeaderMenus = (props) => {
-  const { menus } = props;
+  const { menus, dataMenu } = props;
+  console.log(dataMenu);
   return (
     <div className="headerlist border-top p-0">
       <Container>

@@ -1,11 +1,12 @@
-'use client';
 import { menus } from 'botak/app/data/menus';
 import HeaderMenus, { MenusMobile } from './HeaderMenus';
 import HeaderMiddle, { HeaderMiddleMobile } from './HeaderMiddle';
 import HeaderTop from './HeaderTop';
 import styles from './header.module.css';
+import { fetcPrimaryMenu } from 'botak/api/homepage';
 
-const Header = () => {
+const Header = async () => {
+  const dataMenu = await fetcPrimaryMenu();
   return (
     <div className="text-white transition border-bottom">
       <header className={styles.headerDesktop}>
@@ -16,7 +17,7 @@ const Header = () => {
           <HeaderMiddle />
         </div>
         <div className="stickywrapper">
-          <HeaderMenus menus={menus} />
+          <HeaderMenus menus={menus} dataMenu={dataMenu} />
         </div>
       </header>
       <header className={styles.headerMobile}>

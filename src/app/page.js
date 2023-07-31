@@ -4,9 +4,9 @@ import HomepageServer from './components/HomepageServer';
 export default function Home() {
   return (
     <div className="site-content" id="content">
-      {/* <Homepage>
+      <Homepage>
         <HomepageServer />
-      </Homepage> */}
+      </Homepage>
     </div>
   );
 }
