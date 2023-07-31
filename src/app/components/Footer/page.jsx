@@ -1,9 +1,8 @@
 'use client';
-import { fetchMenuFooterById } from 'botak/api/homepage';
 import { data } from 'botak/app/data/footer';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import { Col, Container, ListGroup, Row } from 'react-bootstrap';
 import FaIconExtend from '../FaIconExtend';
 import styles from './page.module.css';
@@ -26,15 +25,11 @@ const Footer = (props) => {
 const Top = (props) => {
   const { companyInfo, footerMenu, footerContact } = props;
 
-  const menuTitle =
-    footerMenu?.length > 0
-      ? footerMenu.filter((i) => {
-          if (i.id === 55 || i.id === 56) {
-            return i;
-          }
-        })
-      : [];
-
+  const menuTitle = footerMenu?.filter((i) => {
+    if (i.id === 55 || i.id === 56) {
+      return i;
+    }
+  });
   return (
     <div className={styles.footerTop}>
       <Container>
@@ -51,7 +46,7 @@ const Top = (props) => {
               {menuTitle?.length > 0 &&
                 menuTitle?.map((menu, index) => (
                   <Col lg={4} key={`footerMenu-${index}`}>
-                    <FooterMenu menuId={menu.id} title={menu.name} />
+                    <FooterMenu menuId={menu.children} title={menu.name} />
                   </Col>
                 ))}
               <Col lg={4}>
@@ -70,29 +65,22 @@ const Top = (props) => {
 
 const FooterMenu = (props) => {
   const { menuId, title } = props;
+
   return (
     <>
       <MenuTitle title={title} />
-      <FooterMenuItem id={menuId} />
+      <FooterMenuItem menuId={menuId} />
     </>
   );
 };
 
 const FooterMenuItem = (props) => {
-  const { id } = props;
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const apiData = await fetchMenuFooterById(id);
-      setData(apiData);
-    };
-    fetchData();
-  }, [id]);
+  const { menuId } = props;
 
   return (
     <>
-      {data?.length > 0 &&
-        data?.map((item, index) => (
+      {menuId?.length > 0 &&
+        menuId?.map((item, index) => (
           <MenuItem
             key={`MenuItem-${index}`}
             label={item?.title?.rendered}
