@@ -1,12 +1,16 @@
-import { menus } from 'botak/app/data/menus';
-import HeaderMenus, { MenusMobile } from './HeaderMenus';
+import { fetcPrimaryMenu, fetchNextMenu } from 'botak/api/homepage';
+import { MenusMobile } from './HeaderMenus';
 import HeaderMiddle, { HeaderMiddleMobile } from './HeaderMiddle';
 import HeaderTop from './HeaderTop';
+import { arrHierarchy } from './MegaMenu';
+import NavMenu from './NavMenu';
 import styles from './header.module.css';
-import { fetcPrimaryMenu } from 'botak/api/homepage';
 
 const Header = async () => {
-  const dataMenu = await fetcPrimaryMenu();
+  const primaryMenu = await fetcPrimaryMenu();
+  const nextMenu = await fetchNextMenu();
+  const dataMenu = [...primaryMenu, ...nextMenu];
+  const menuItems = arrHierarchy(dataMenu);
   return (
     <div className="text-white transition border-bottom">
       <header className={styles.headerDesktop}>
@@ -17,7 +21,8 @@ const Header = async () => {
           <HeaderMiddle />
         </div>
         <div className="stickywrapper">
-          <HeaderMenus menus={menus} dataMenu={dataMenu} />
+          <NavMenu menuItems={menuItems} />
+          {/* <HeaderMenus menus={menus} dataMenu={menuItems} /> */}
         </div>
       </header>
       <header className={styles.headerMobile}>

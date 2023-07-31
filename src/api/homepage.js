@@ -94,3 +94,19 @@ export const fetcPrimaryMenu = async () => {
 
   return json;
 };
+export const fetchNextMenu = async () => {
+  const fetUrl = `${API_URL}wp/v2/menu-items?menus=478&page=2`;
+
+  const res = await fetch(fetUrl, {
+    headers,
+    method: 'GET'
+  });
+
+  const json = await res.json();
+
+  if (json.errors) {
+    throw new Error('Failed to fetch API');
+  }
+
+  return json;
+};
