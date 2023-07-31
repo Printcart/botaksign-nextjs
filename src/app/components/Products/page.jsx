@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Card, Col, Row } from 'react-bootstrap';
-import styles from './page.module.css';
+import styles from './product.module.css';
 
 export const Products = (props) => {
   const { data } = props;
@@ -20,7 +20,7 @@ const ItemProduct = (props) => {
   return (
     <Col key={item.id} lg={4} md={4} xs={6} className={styles.productCol}>
       <Card className={styles.propductItem}>
-        <Link href={item?.permalink}>
+        <Link href={`product/${item.slug}`}>
           <ImageProduct images={item.images} />
         </Link>
         <ContentProduct name={item.name} permalink={item?.permalink} />
