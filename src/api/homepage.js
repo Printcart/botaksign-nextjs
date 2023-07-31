@@ -103,15 +103,19 @@ export const fetchDataFooterTitle = async () => {
     return { id, name };
   });
 
-  for (let i = 0; i < menusWithIdAndName.length; i++) {
-    const cate = menusWithIdAndName[i];
+  const menuTitle = menusWithIdAndName?.filter((i) => {
+    if (i.id === 55 || i.id === 56) {
+      return i;
+    }
+  });
+  for (let i = 0; i < menuTitle.length; i++) {
+    const cate = menuTitle[i];
     const child = await fetchMenuFooterById(cate.id);
     if (child.length > 0) {
       cate.children = child;
     }
-    menusWithIdAndName[i] = cate;
+    menuTitle[i] = cate;
   }
-
   return menusWithIdAndName;
 };
 
