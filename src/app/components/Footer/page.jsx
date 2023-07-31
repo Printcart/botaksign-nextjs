@@ -25,11 +25,6 @@ const Footer = (props) => {
 const Top = (props) => {
   const { companyInfo, footerMenu, footerContact } = props;
 
-  const menuTitle = footerMenu?.filter((i) => {
-    if (i.id === 55 || i.id === 56) {
-      return i;
-    }
-  });
   return (
     <div className={styles.footerTop}>
       <Container>
@@ -43,8 +38,8 @@ const Top = (props) => {
           </Col>
           <Col lg={8}>
             <Row className={styles.footerTopRight}>
-              {menuTitle?.length > 0 &&
-                menuTitle?.map((menu, index) => (
+              {footerMenu?.length > 0 &&
+                footerMenu?.map((menu, index) => (
                   <Col lg={4} key={`footerMenu-${index}`}>
                     <FooterMenu menuId={menu.children} title={menu.name} />
                   </Col>

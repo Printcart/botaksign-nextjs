@@ -98,24 +98,16 @@ export const fetchDataFooterTitle = async () => {
   if (data.errors) {
     throw new Error('Failed to fetch API');
   }
-  const menusWithIdAndName = data.map((menu) => {
+
+  const menuTitle = data?.filter((i) => i.id === 55 || i.id === 56);
+
+  const fetchMenu = menuTitle.map(async (menu) => {
     const { id, name } = menu;
-    return { id, name };
+    const child = await fetchMenuFooterById(id);
+    return { id, name, children: child.length > 0 ? child : undefined };
   });
 
-  const menuTitle = menusWithIdAndName?.filter((i) => {
-    if (i.id === 55 || i.id === 56) {
-      return i;
-    }
-  });
-  for (let i = 0; i < menuTitle.length; i++) {
-    const cate = menuTitle[i];
-    const child = await fetchMenuFooterById(cate.id);
-    if (child.length > 0) {
-      cate.children = child;
-    }
-    menuTitle[i] = cate;
-  }
+  const menusWithIdAndName = await Promise.all(fetchMenu);
   return menusWithIdAndName;
 };
 
