@@ -97,13 +97,16 @@ export const fetchDataFooterTitle = async () => {
     throw new Error('Failed to fetch API');
   }
 
-  const fetchMenu = data.map(async (menu) => {
-    const { id, name } = menu;
-    if (id === 55 || id === 56) {
-      const child = await fetchMenuFooterById(id);
-      return { id, name, children: child?.length > 0 ? child : [] };
-    }
-  });
+  const fetchMenu =
+    data?.length > 0
+      ? data.map(async (menu) => {
+          const { id, name } = menu;
+          if (id === 55 || id === 56) {
+            const child = await fetchMenuFooterById(id);
+            return { id, name, children: child?.length > 0 ? child : [] };
+          }
+        })
+      : [];
 
   const menusWithIdAndName = await Promise.all(fetchMenu);
   return menusWithIdAndName;
