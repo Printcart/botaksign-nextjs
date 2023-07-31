@@ -88,7 +88,6 @@ export const fetcAssets = async () => {
 
 export const fetchDataFooterTitle = async () => {
   const fetUrl = `${API_URL}wp/v2/menus`;
-
   const res = await fetch(fetUrl, {
     headers,
     method: 'GET'
@@ -96,19 +95,35 @@ export const fetchDataFooterTitle = async () => {
 
   const data = await res.json();
 
-  return data;
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
+  const menusWithIdAndName = data.map((menu) => {
+    const { id, name } = menu;
+    return { id, name };
+  });
+
+  for (let i = 0; i < menusWithIdAndName.length; i++) {
+    const cate = menusWithIdAndName[i];
+    const child = await fetchMenuFooterById(cate.id);
+    if (child.length > 0) {
+      cate.children = child;
+    }
+    menusWithIdAndName[i] = cate;
+  }
+
+  return menusWithIdAndName;
 };
 
-export const fetchDataFooterList = async (id) => {
-  
+export const fetchMenuFooterById = async (id) => {
   const fetUrl = `${API_URL}wp/v2/menu-items?menus=${id}`;
-
   const res = await fetch(fetUrl, {
     headers,
     method: 'GET'
   });
-
-  const dataList = await res.json();
-
-  return dataList;
+  const data = await res.json();
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
+  return data;
 };

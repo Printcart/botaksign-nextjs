@@ -3,10 +3,10 @@ import React from 'react';
 import Footer from './page';
 
 const FooterServer = async () => {
-  const dataFooter = await fetchDataFooterTitle();
+  const menusWithIdAndName = await fetchDataFooterTitle();
   return (
     <div>
-      <Footer dataFooter={dataFooter} />
+      <Footer dataFooter={menusWithIdAndName} />
     </div>
   );
 };
