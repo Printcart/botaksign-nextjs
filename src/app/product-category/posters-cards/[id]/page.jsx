@@ -1,5 +1,5 @@
 import { fetchArchiveProductId } from 'botak/api/homepage';
-import ArchiveProducts from './ArchiveProducts';
+import ArchiveProducts from 'botak/app/components/ArchiveProducts';
 
 const ArchiveProductsServer = async ({ params }) => {
   const { id } = params;

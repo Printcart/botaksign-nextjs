@@ -1,6 +1,6 @@
 'use client';
 import { Col, Container, Form, Row } from 'react-bootstrap';
-import styles from './page.module.css';
+import styles from './archiveProducts.module.css';
 import { Products } from 'botak/app/components/Products/page';
 
 const ArchiveProducts = (props) => {
