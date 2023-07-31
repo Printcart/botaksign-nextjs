@@ -3,7 +3,6 @@ import { Card, Col, Row } from 'react-bootstrap';
 import styles from './page.module.css';
 
 export const Products = (props) => {
-  console.log(props);
   const { data } = props;
 
   return (
