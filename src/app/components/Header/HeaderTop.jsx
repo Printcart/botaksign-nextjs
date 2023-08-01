@@ -10,7 +10,7 @@ const HeaderTop = () => {
         <Col lg={6} md={12} sm={12} className="d-flex justify-content-end">
           <Nav defaultActiveKey="/#" as="ul">
             <Nav.Item as="li">
-              <Nav.Link href="/#" className="text-dark px-1 ">
+              <Nav.Link href="/#" className="text-dark px-1">
                 Register |
               </Nav.Link>
             </Nav.Item>
