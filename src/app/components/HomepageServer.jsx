@@ -1,4 +1,7 @@
-import { fetchHomePage, fetchHomePageHeader } from 'botak/api/homepage';
+import {
+  fetchHomePage,
+  fetchHomePageHeader
+} from 'botak/api/homepage';
 
 const HomepageServer = async () => {
   const homePagedata = await fetchHomePage();
