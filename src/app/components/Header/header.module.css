@@ -61,6 +61,11 @@
   font-weight: bold;
 }
 
+.wrapMenu:first-child a {
+  color: rgb(40, 196, 117);
+}
+
+
 .wrapMenu:hover .titleMega a,
 .titleMega:hover a,
 .titleSubOne:hover a,
@@ -69,7 +74,7 @@
 }
 
 .wrapSubOne svg {
-  height: 7px;
+  height: 6px;
 }
 
 .titleSubOne {

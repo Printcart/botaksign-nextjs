@@ -1,15 +1,13 @@
-import { fetcPrimaryMenu, fetchNextMenu } from 'botak/api/homepage';
+import { fetcPrimaryMenu } from 'botak/api/homepage';
+import { arrHierarchy } from '../MegaMenu';
 import HeaderMiddle, { HeaderMiddleMobile } from './HeaderMiddle';
 import HeaderTop from './HeaderTop';
 import NavMenu, { MenusMobile } from './NavMenu';
 import styles from './header.module.css';
-import { arrHierarchy } from '../MegaMenu';
 
 const Header = async () => {
   const primaryMenu = await fetcPrimaryMenu();
-  const nextMenu = await fetchNextMenu();
-  const dataMenu = [...primaryMenu, ...nextMenu];
-  const menuItems = arrHierarchy(dataMenu);
+  const menuItems = arrHierarchy(primaryMenu);
   return (
     <div className="text-white transition border-bottom">
       <header className={styles.headerDesktop}>
