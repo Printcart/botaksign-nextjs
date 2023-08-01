@@ -83,18 +83,51 @@ const SubMenuOne = ({ item }) => {
 };
 
 const SubMenuTwo = ({ subOne }) => {
+  // check sub three
+  const four =
+    subOne?.children?.length > 0 &&
+    subOne.children.filter((item) => item.children.length > 0);
   return (
     <div className={styles.wrapSubTwo}>
-      <div className={styles.titleMenu}>
-        <Link prefetch={false} href={subOne.url}>
-          {subOne.title.rendered}
-        </Link>
-      </div>
+      {four?.length > 0 ? (
+        <SubMenuThree subOne={subOne} />
+      ) : (
+        <div>
+          <div className={styles.titleMenu}>
+            <Link prefetch={false} href={subOne.url}>
+              {subOne.title.rendered}
+            </Link>
+          </div>
+          {subOne.children.map((subTwo) => (
+            <div key={subTwo.id} className={styles.titleSubTwo}>
+              <Link prefetch={false} href={subTwo.url}>
+                {subTwo.title.rendered}
+              </Link>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const SubMenuThree = ({ subOne }) => {
+  return (
+    <div className={styles.wrapSubThree}>
       {subOne.children.map((subTwo) => (
-        <div key={subTwo.id} className={styles.titleSubTwo}>
-          <Link prefetch={false} href={subTwo.url}>
-            {subTwo.title.rendered}
-          </Link>
+        <div key={subTwo.id} className={styles.subThree}>
+          <div className={styles.titleMenu}>
+            <Link prefetch={false} href={subTwo.url}>
+              {subTwo.title.rendered}
+            </Link>
+          </div>
+          {subTwo.children.map((subThree) => (
+            <div key={subThree.id} className={styles.titleSubTwo}>
+              <Link prefetch={false} href={subThree.url}>
+                {subThree.title.rendered}
+              </Link>
+            </div>
+          ))}
         </div>
       ))}
     </div>
