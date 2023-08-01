@@ -31,7 +31,7 @@ export const Search = () => {
     >
       <Form className="w-100 h-100">
         <InputGroup size="lg" className="searchform w-100 align-items-center h-100">
-          <Col xs={10} className="d-inline-block  h-100">
+          <Col xs={10} className="d-inline-block h-100">
             <Form.Control
               className={`${styles.inputsearch} h-100 rounded-start-pill ps-3 shadow-none lh-base m-0 bg-transparent text-secondary`}
               type="text"
@@ -69,15 +69,15 @@ const Cart = () => {
           >
             <span>Your Cart</span>
           </span>
-          <span className="pricewrapper d-inline-block ">
+          <span className="pricewrapper d-inline-block">
             <span
               className="number text-start position-static bg-transparent text-secondary px-1 pe-2 text-uppercase"
               style={{ fontSize: '14px' }}
             >
               0 Item (s)
             </span>
-            <span className="price d-inline-block ">
-              <span className="amount fs-6 " style={{ color: '#21a65b' }}>
+            <span className="price d-inline-block">
+              <span className="amount fs-6" style={{ color: '#21a65b' }}>
                 <span className="curentprice" style={{ fontSize: '14px' }}>
                   SGD $0.00
                 </span>
@@ -121,7 +121,7 @@ const HeaderMiddle = () => {
           lg={3}
           md={3}
           sm={3}
-          className="cart float-end text-end "
+          className="cart float-end text-end"
           style={{ cursor: 'pointer' }}
         >
           <Cart />
