@@ -9,8 +9,6 @@ const headers = {
 };
 
 export const fetchHomePageHeader = async () => {
-  const headers = { 'Content-Type': 'application/json' };
-
   const fetUrl = `${API_URL}pc/v2/vc-api/header?id=${PAGE_ID}`;
 
   const res = await fetch(fetUrl, {
@@ -28,8 +26,6 @@ export const fetchHomePageHeader = async () => {
 };
 
 export const fetchHomePageFooter = async () => {
-  const headers = { 'Content-Type': 'application/json' };
-
   const fetUrl = `${API_URL}pc/v2/vc-api/footer`;
 
   const res = await fetch(fetUrl, {
@@ -47,8 +43,6 @@ export const fetchHomePageFooter = async () => {
 };
 
 export const fetchHomePage = async () => {
-  const headers = { 'Content-Type': 'application/json' };
-
   const fetUrl = `${API_URL}pc/v2/pages/${PAGE_ID}`;
 
   const res = await fetch(fetUrl, {
@@ -66,8 +60,6 @@ export const fetchHomePage = async () => {
 };
 
 export const fetcAssets = async () => {
-  const headers = { 'Content-Type': 'application/json' };
-
   const fetUrl = `${API_URL}pc/v2/assets`;
 
   const res = await fetch(fetUrl, {
@@ -83,6 +75,24 @@ export const fetcAssets = async () => {
 
   return json;
 };
+export const fetcPrimaryMenu = async () => {
+  const fetUrl = [
+    `${API_URL}wp/v2/menu-items?menus=478&page=1`,
+    `${API_URL}wp/v2/menu-items?menus=478&page=2`
+  ];
+
+  const [resOne, resTwo] = await Promise.all(
+    fetUrl.map((url) => fetch(url, { headers, method: 'GET' }))
+  );
+
+  if (!resOne.ok || !resTwo.ok) {
+    throw new Error('Failed to fetch API');
+  }
+
+  const [jsonOne, jsonTwo] = await Promise.all([resOne.json(), resTwo.json()]);
+
+  return [...jsonOne, ...jsonTwo];
+}
 
 export const fetchDataFooterTitle = async () => {
   const fetUrl = `${API_URL}wp/v2/menus`;
