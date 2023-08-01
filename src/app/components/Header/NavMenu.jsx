@@ -1,20 +1,14 @@
 'use client';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { headerData } from 'botak/app/data/menus';
 import Link from 'next/link';
+import { useState } from 'react';
 import { Button, Col, Container, Nav, Row } from 'react-bootstrap';
 import FontIcon from '../FontIcon';
-import styles from './header.module.css';
 import { Search } from './HeaderMiddle';
-import { useState } from 'react';
-import { headerData } from 'botak/app/data/menus';
+import styles from './header.module.css';
 
-// const decodeHTML = (text) => {
-//   const element = document.createElement('textarea');
-//   element.innerHTML = text;
-//   console.log(element);
-//   return element.value;
-// };
 const CartMobile = () => {
   return (
     <div className="cartheadwrapper d-inline-block position-relative">
@@ -32,9 +26,11 @@ const CartMobile = () => {
 };
 export const MenusMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   const handleOpenMenu = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <Container>
       <Row className="align-items-center">
@@ -87,6 +83,7 @@ const SubMenuTwo = ({ subOne }) => {
   const four =
     subOne?.children?.length > 0 &&
     subOne.children.filter((item) => item.children.length > 0);
+
   return (
     <div className={styles.wrapSubTwo}>
       {four?.length > 0 ? (
