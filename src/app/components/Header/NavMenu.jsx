@@ -9,13 +9,6 @@ import FontIcon from '../FontIcon';
 import { Search } from './HeaderMiddle';
 import styles from './header.module.css';
 
-const decodeHTML = (text) => {
-  if (typeof window !== 'undefined') {
-    const element = document.createElement('textarea');
-    element.innerHTML = text;
-    return element.value;
-  }
-};
 const CartMobile = () => {
   return (
     <div className="cartheadwrapper d-inline-block position-relative">
@@ -74,7 +67,7 @@ const SubMenuOne = ({ item }) => {
         <div key={subOne.id} className={styles.itemSubOne}>
           <div className={styles.titleSubOne}>
             <Link prefetch={false} href={subOne.url}>
-              {decodeHTML(subOne.title.rendered)}
+              <div dangerouslySetInnerHTML={{ __html: subOne.title.rendered }} />
               {subOne?.children?.length > 0 && <FontAwesomeIcon icon={faPlay} />}
             </Link>
           </div>
@@ -99,13 +92,13 @@ const SubMenuTwo = ({ subOne }) => {
         <div>
           <div className={styles.titleMenu}>
             <Link prefetch={false} href={subOne.url}>
-              {decodeHTML(subOne.title.rendered)}
+              <div dangerouslySetInnerHTML={{ __html: subOne.title.rendered }} />
             </Link>
           </div>
           {subOne.children.map((subTwo) => (
             <div key={subTwo.id} className={styles.titleSubTwo}>
               <Link prefetch={false} href={subTwo.url}>
-                {decodeHTML(subTwo.title.rendered)}
+                <div dangerouslySetInnerHTML={{ __html: subTwo.title.rendered }} />
               </Link>
             </div>
           ))}
@@ -122,13 +115,13 @@ const SubMenuThree = ({ subOne }) => {
         <div key={subTwo.id} className={styles.subThree}>
           <div className={styles.titleMenu}>
             <Link prefetch={false} href={subTwo.url}>
-              {decodeHTML(subTwo.title.rendered)}
+              <div dangerouslySetInnerHTML={{ __html: subTwo.title.rendered }} />
             </Link>
           </div>
           {subTwo.children.map((subThree) => (
             <div key={subThree.id} className={styles.titleSubTwo}>
               <Link prefetch={false} href={subThree.url}>
-                {decodeHTML(subThree.title.rendered)}
+                <div dangerouslySetInnerHTML={{ __html: subThree.title.rendered }} />
               </Link>
             </div>
           ))}

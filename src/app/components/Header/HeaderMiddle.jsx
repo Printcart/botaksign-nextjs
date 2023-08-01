@@ -1,5 +1,4 @@
 'use client';
-
 import { headerData } from 'botak/app/data/menus';
 import { Col, Container, Form, InputGroup, Nav, Row } from 'react-bootstrap';
 import styles from './header.module.css';
@@ -34,7 +33,7 @@ export const Search = () => {
         <InputGroup size="lg" className="searchform w-100 align-items-center h-100">
           <Col xs={10} className="d-inline-block  h-100">
             <Form.Control
-              className="h-100 rounded-start-pill ps-3 shadow-none lh-base m-0 bg-transparent text-secondary"
+              className={`${styles.inputsearch} h-100 rounded-start-pill ps-3 shadow-none lh-base m-0 bg-transparent text-secondary`}
               type="text"
               id="inputData"
               placeholder="Search"

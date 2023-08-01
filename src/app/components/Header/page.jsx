@@ -17,7 +17,7 @@ const Header = async () => {
         <div className="pb-2">
           <HeaderMiddle />
         </div>
-        <div className="stickywrapper">
+        <div className={styles.wrappermenu}>
           <NavMenu menuItems={menuItems} />
         </div>
       </header>
