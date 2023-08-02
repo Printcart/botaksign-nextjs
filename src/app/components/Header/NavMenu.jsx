@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Button, Col, Container, Nav, Row } from 'react-bootstrap';
 import FontIcon from '../FontIcon';
-import { Search } from './HeaderMiddle';
 import styles from './header.module.css';
+import Search from './Search';
 
 const CartMobile = () => {
   return (

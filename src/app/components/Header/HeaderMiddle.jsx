@@ -5,6 +5,8 @@ import styles from './header.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import FontIcon from '../FontIcon';
+import Search from './Search';
+import { useEffect, useState } from 'react';
 
 const Logo = ({ headerData }) => {
   return (
@@ -23,35 +25,6 @@ const Logo = ({ headerData }) => {
   );
 };
 
-export const Search = () => {
-  return (
-    <div
-      className="searchform d-flex w-100 align-items-center"
-      style={{ height: '46px' }}
-    >
-      <Form className="w-100 h-100">
-        <InputGroup size="lg" className="searchform w-100 align-items-center h-100">
-          <Col xs={10} className="d-inline-block h-100">
-            <Form.Control
-              className={`${styles.inputsearch} h-100 rounded-start-pill ps-3 shadow-none lh-base m-0 bg-transparent text-secondary`}
-              type="text"
-              id="inputData"
-              placeholder="Search"
-            />
-          </Col>
-          <Col xs={2} className="h-100">
-            <InputGroup.Text
-              type="submit"
-              className="h-100 lh-base m-0 rounded-end-pill position-relative bg-transparent text-secondary justify-content-center"
-            >
-              Search
-            </InputGroup.Text>
-          </Col>
-        </InputGroup>
-      </Form>
-    </div>
-  );
-};
 const Cart = () => {
   return (
     <div className="cartheadwrapper d-inline-block position-relative">
@@ -107,6 +80,32 @@ const HeaderTopMobile = () => {
   );
 };
 const HeaderMiddle = () => {
+  const [filters, setFilters] = useState({});
+  const [searchList, setSearchList] = useState([]);
+
+  useEffect(() => {
+    const fetchSearchList = async () => {
+      try {
+        const paramsString = queryString.stringify(filters);
+        const requestUrl = `https://botakdev.printcart.com//wp-json/wc/v3/products?search=${paramsString}`;
+        const respose = await fetch(requestUrl);
+        const responseJSON = await respose.json();
+        console.log(responseJSON);
+        const { data } = responseJSON;
+        console.log(data);
+        setSearchList(data);
+      } catch (error) {
+        throw new error();
+      }
+    };
+    console.log('fetch success');
+    fetchSearchList();
+  }, [filters]);
+  const handleFilterChange = (newFilter) => {
+    setFilters({
+      title: newFilter.searchValue
+    });
+  };
   return (
     <Container className="position-relative">
       <Row className="align-items-center">
@@ -114,7 +113,7 @@ const HeaderMiddle = () => {
           <Logo headerData={headerData} />
         </Col>
         <Col xs={6} lg={6} md={6} sm={9} className="search px-3">
-          <Search />
+          <Search onSubmit={handleFilterChange} />
         </Col>
         <Col
           xs={3}
