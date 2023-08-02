@@ -7,6 +7,7 @@ import Image from 'next/image';
 import FontIcon from '../FontIcon';
 import Search from './Search';
 import { useEffect, useState } from 'react';
+import queryString from 'query-string';
 
 const Logo = ({ headerData }) => {
   return (
@@ -82,30 +83,33 @@ const HeaderTopMobile = () => {
 const HeaderMiddle = () => {
   const [filters, setFilters] = useState({});
   const [searchList, setSearchList] = useState([]);
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Basic ${btoa(
+      `${process.env.NEXT_PUBLIC_WORDPRESS_API_USER}:${process.env.NEXT_PUBLIC_WORDPRESS_API_PASS}`
+    )}`
+  };
 
   useEffect(() => {
     const fetchSearchList = async () => {
       try {
         const paramsString = queryString.stringify(filters);
-        const requestUrl = `https://botakdev.printcart.com//wp-json/wc/v3/products?search=${paramsString}`;
-        const respose = await fetch(requestUrl);
+        const requestUrl = `https://botakdev.printcart.com//wp-json/wc/v3/products?${paramsString}`;
+        const respose = await fetch(requestUrl, { headers, method: 'GET' });
         const responseJSON = await respose.json();
-        console.log(responseJSON);
-        const { data } = responseJSON;
-        console.log(data);
-        setSearchList(data);
+        setSearchList(responseJSON);
       } catch (error) {
-        throw new error();
+        throw new Error(error);
       }
     };
-    console.log('fetch success');
     fetchSearchList();
   }, [filters]);
   const handleFilterChange = (newFilter) => {
     setFilters({
-      title: newFilter.searchValue
+      search: newFilter.searchValue
     });
   };
+  console.log(searchList);
   return (
     <Container className="position-relative">
       <Row className="align-items-center">
@@ -114,6 +118,36 @@ const HeaderMiddle = () => {
         </Col>
         <Col xs={6} lg={6} md={6} sm={9} className="search px-3">
           <Search onSubmit={handleFilterChange} />
+          <div className={styles.wrapperSearch}>
+            {searchList.length > 0 ? (
+              searchList.map((items) => (
+                <div key={items.id} className={styles.wrappItems}>
+                  <div className={styles.imageSearch}>
+                    <Image
+                      src={items?.images[0].src}
+                      width={50}
+                      height={50}
+                      alt="Image Product"
+                    />
+                  </div>
+                  <div className={styles.contentSearch}>
+                    <div className={styles.title}>{items.name}</div>
+                    <div className={styles.badges}>
+                      <span className={styles.outOfStock}>Out of stock</span>
+                    </div>
+                    <span className={styles.fromPrice}>Price: From {''}</span>
+                    <span className={styles.priceSearch}>SGD $0.00</span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className={styles.wrappItems}>
+                <div className={styles.contentSearch}>
+                  <div className={styles.title}> No Results</div>
+                </div>
+              </div>
+            )}
+          </div>
         </Col>
         <Col
           xs={3}
