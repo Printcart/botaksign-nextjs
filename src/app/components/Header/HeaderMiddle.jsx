@@ -109,7 +109,6 @@ const HeaderMiddle = () => {
       search: newFilter.searchValue
     });
   };
-  console.log(searchList);
   return (
     <Container className="position-relative">
       <Row className="align-items-center">

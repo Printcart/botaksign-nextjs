@@ -9,16 +9,19 @@ const Search = (props) => {
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchValue(value);
+    console.log('searchValue', searchValue);
 
     if (typingRef.current) {
       clearTimeout(typingRef.current);
     }
-    typingRef.current = setTimeout(() => {
-      const formValue = {
-        searchValue: value
-      };
-      onSubmit(formValue);
-    }, 500);
+    if (searchValue.length >= 3) {
+      typingRef.current = setTimeout(() => {
+        const formValue = {
+          searchValue: value
+        };
+        onSubmit(formValue);
+      }, 500);
+    }
   };
 
   return (
