@@ -1,11 +1,10 @@
 'use client';
-import React from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import styles from './signIn.module.css';
-import Link from 'next/link';
-import InputForm from '../components/InputForm';
 import { useFormik } from 'formik';
+import Link from 'next/link';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import * as Yup from 'yup';
+import InputForm from '../components/InputForm';
+import styles from './signIn.module.css';
 
 const SignIn = () => {
   return (
@@ -54,13 +53,17 @@ const LoginLeft = () => {
 
       <Form onSubmit={formik.handleSubmit}>
         <InputForm
-          placeholder="Username or email"
+          controlId="inputDataEmail"
+          type="email"
+          label="Email"
           value={formik.values.email}
           onChange={formik.handleChange}
           errors={formik.errors.email && formik.touched.email && formik.errors.email}
         />
         <InputForm
-          placeholder="Password"
+          controlId="inputDataPassword"
+          type="password"
+          label="Password"
           value={formik.values.password}
           onChange={formik.handleChange}
           errors={

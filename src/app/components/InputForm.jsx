@@ -1,14 +1,23 @@
 import { Form } from 'react-bootstrap';
+import styles from '../components/InputForm.module.css';
 
-const InputForm = ({ label, value, onChange, errors, placeholder }) => {
+const InputForm = ({
+  controlId,
+  label,
+  type,
+  value,
+  onChange,
+  errors,
+  placeholder
+}) => {
   return (
-    <Form.Group controlId="validationFormik101" className="position-relative">
+    <Form.Group controlId={controlId} className={styles.subInput}>
       <Form.Label>{label}</Form.Label>
       <Form.Control
-        type="text"
-        placeholder={placeholder}
-        name={label?.toLowerCase() || ''}
+        type={type}
+        name={label?.toLowerCase()}
         value={value}
+        placeholder={placeholder}
         onChange={onChange}
         isInvalid={errors}
       />
