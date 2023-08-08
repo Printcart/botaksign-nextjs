@@ -92,7 +92,7 @@ export const fetcPrimaryMenu = async () => {
   const [jsonOne, jsonTwo] = await Promise.all([resOne.json(), resTwo.json()]);
 
   return [...jsonOne, ...jsonTwo];
-}
+};
 
 export const fetchDataFooterTitle = async () => {
   const fetUrl = `${API_URL}wp/v2/menus`;

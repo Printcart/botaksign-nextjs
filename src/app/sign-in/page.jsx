@@ -43,7 +43,6 @@ const LoginLeft = () => {
         .required('You must fill in this section')
     }),
     onSubmit: (values) => {
-      console.log(values);
     }
   });
   return (
@@ -56,6 +55,7 @@ const LoginLeft = () => {
           controlId="inputDataEmail"
           type="email"
           label="Email"
+          name="email"
           value={formik.values.email}
           onChange={formik.handleChange}
           errors={formik.errors.email && formik.touched.email && formik.errors.email}
@@ -63,6 +63,7 @@ const LoginLeft = () => {
         <InputForm
           controlId="inputDataPassword"
           type="password"
+          name="password"
           label="Password"
           value={formik.values.password}
           onChange={formik.handleChange}

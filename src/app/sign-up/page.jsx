@@ -5,11 +5,12 @@ import styles from './signUp.module.css';
 import { useFormik } from 'formik';
 import InputForm from '../components/InputForm';
 import * as Yup from 'yup';
+import Flag from '../components/Flag';
 
 const SignUp = () => {
   const formik = useFormik({
     initialValues: {
-      firstname: '',
+      firstName: '',
       lastName: '',
       phone: '',
       email: '',
@@ -24,25 +25,31 @@ const SignUp = () => {
       country: ''
     },
     validationSchema: Yup.object({
-      // firstName: Yup.string().required('You must fill in this section'),
-      // lastName: Yup.string().required('You must fill in this section'),
-      // phone: Yup.string().required('You must fill in this section'),
-      // email: Yup.string()
-      //   .email('Invalid Email')
-      //   .required('You must fill in this section'),
-      // password: Yup.string()
-      //   .min(8, 'Password must be at least 8 characters')
-      //   .required('You must fill in this section'),
-      // confirmPassword: Yup.string().oneOf(
-      //   [Yup.ref('password'), null],
-      //   'Passwords must match'
-      // )
+      firstName: Yup.string().required('You must fill in this section'),
+      lastName: Yup.string().required('You must fill in this section'),
+      phone: Yup.string()
+        .matches(/^\d+$/, 'Phone must be a valid number')
+        .required('You must fill in this section'),
+      email: Yup.string()
+        .email('Invalid Email')
+        .required('You must fill in this section'),
+      userName: Yup.string().required('You must fill in this section'),
+      password: Yup.string()
+        .min(8, 'Password must be at least 8 characters')
+        .required('You must fill in this section'),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref('password')], 'Passwords must match')
+        .required('You must fill in this section'),
+      address1: Yup.string().required('You must fill in this section'),
+      postcode: Yup.string()
+        .min(6, 'Post Code must be at least 6 characters')
+        .required('You must fill in this section'),
+      country: Yup.string().required('You must fill in this section')
     }),
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
     }
   });
-  console.log(formik);
   return (
     <Container>
       <div className={`${styles.contentSignUp}  ${styles.signUp}`}>
@@ -55,13 +62,14 @@ const SignUp = () => {
               <InputForm
                 controlId="inputFirstName"
                 type="text"
+                name="firstName"
                 label="First Name"
-                value={formik.values.firstname}
+                value={formik.values.firstName}
                 onChange={formik.handleChange}
                 errors={
-                  formik.errors.firstname &&
-                  formik.touched.firstname &&
-                  formik.errors.firstname
+                  formik.errors.firstName &&
+                  formik.touched.firstName &&
+                  formik.errors.firstName
                 }
               />
             </Col>
@@ -69,6 +77,7 @@ const SignUp = () => {
               <InputForm
                 controlId="inputLastName"
                 type="text"
+                name="lastName"
                 label="Last Name"
                 value={formik.values.lastName}
                 onChange={formik.handleChange}
@@ -83,6 +92,7 @@ const SignUp = () => {
               <InputForm
                 controlId="inputPhone"
                 type="text"
+                name="phone"
                 label="Phone"
                 value={formik.values.phone}
                 onChange={formik.handleChange}
@@ -90,12 +100,14 @@ const SignUp = () => {
                   formik.errors.phone && formik.touched.phone && formik.errors.phone
                 }
               />
+              <Flag />
             </Col>
             <Col lg={6}></Col>
             <Col lg={6}>
               <InputForm
                 controlId="inputEmail"
                 type="email"
+                name="email"
                 label="Email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
@@ -109,6 +121,7 @@ const SignUp = () => {
               <InputForm
                 controlId="inputUserName"
                 type="text"
+                name="userName"
                 label="User Name"
                 value={formik.values.userName}
                 onChange={formik.handleChange}
@@ -125,6 +138,7 @@ const SignUp = () => {
                 controlId="inputPassword"
                 type="password"
                 label="Password"
+                name="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 errors={
@@ -138,6 +152,7 @@ const SignUp = () => {
               <InputForm
                 controlId="inputConfirmPassword"
                 type="password"
+                name="confirmPassword"
                 label="Confirm Password"
                 value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
@@ -154,6 +169,7 @@ const SignUp = () => {
                 controlId="inputCompany"
                 type="text"
                 label="Company"
+                name="company"
                 value={formik.values.company}
                 onChange={formik.handleChange}
                 errors={
@@ -168,6 +184,7 @@ const SignUp = () => {
             controlId="inputAddressLine1"
             type="text"
             label="Address Line 1"
+            name="address1"
             value={formik.values.address1}
             onChange={formik.handleChange}
             errors={
@@ -180,6 +197,7 @@ const SignUp = () => {
             controlId="inputAddressLine2"
             type="text"
             label="Address Line 2"
+            name="address2"
             value={formik.values.address2}
             onChange={formik.handleChange}
             errors={
@@ -192,6 +210,7 @@ const SignUp = () => {
             controlId="inputCity"
             type="text"
             label="City"
+            name="city"
             value={formik.values.city}
             onChange={formik.handleChange}
             errors={formik.errors.city && formik.touched.city && formik.errors.city}
@@ -200,6 +219,7 @@ const SignUp = () => {
             controlId="inputPostcode"
             type="password"
             label="Postcode / ZIP"
+            name="postcode"
             value={formik.values.postcode}
             onChange={formik.handleChange}
             errors={
@@ -212,6 +232,7 @@ const SignUp = () => {
             controlId="inputCountry"
             type="text"
             label="Country"
+            name="country"
             value={formik.values.country}
             onChange={formik.handleChange}
             errors={
@@ -234,7 +255,7 @@ const SignUp = () => {
             />
           </Form.Group>
           <Button className={styles.buttonForm} type="submit">
-            Sign in
+            Register
           </Button>
         </Form>
       </div>

@@ -6,7 +6,7 @@
   backdrop-filter: blur(50px) opacity(0.03) brightness(0.1);
 }
 .contentSignUp.signUp {
-  padding: 15px 40px;
+  padding: 30px 40px 40px 40px;
   border: 1px solid #dedede;
   width: 100%;
   border-radius: 10px;
@@ -24,4 +24,32 @@
   font-size: 22px;
   line-height: 1.5;
   margin-bottom: 30px;
+  font-weight: 500;
+}
+.checkRemember {
+  margin: 20px 0 25px 0;
+}
+.buttonForm {
+  border-radius: 10px;
+  background: transparent
+    linear-gradient(0deg, #1bcb3f 0%, #45d242 33%, #7bdb46 78%, #91df48 100%) 0% 0%
+    no-repeat padding-box;
+  border: none;
+  filter: drop-shadow(0px 0px 12px #0000002f);
+  width: 50%;
+  padding: 10px 0;
+  text-transform: uppercase;
+}
+@media (max-width: 768px) {
+  .contentSignUp.signUp {
+    padding: 30px 20px;
+  }
+  .signUpTitle {
+    font-size: 30px;
+    line-height: 42px;
+  }
+  .signUpDesc {
+    font-size: 17px;
+    line-height: 17px;
+  }
 }

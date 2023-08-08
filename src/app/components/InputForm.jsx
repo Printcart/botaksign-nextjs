@@ -8,14 +8,15 @@ const InputForm = ({
   value,
   onChange,
   errors,
-  placeholder
+  placeholder,
+  name
 }) => {
   return (
     <Form.Group controlId={controlId} className={styles.subInput}>
       <Form.Label>{label}</Form.Label>
       <Form.Control
         type={type}
-        name={label?.toLowerCase()}
+        name={name}
         value={value}
         placeholder={placeholder}
         onChange={onChange}
