@@ -1,13 +1,13 @@
 'use client';
+import { fetchSearch } from 'botak/api/homepage';
 import { headerData } from 'botak/app/data/menus';
-import { Col, Container, Form, InputGroup, Nav, Row } from 'react-bootstrap';
-import styles from './header.module.css';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Col, Container, Nav, Row } from 'react-bootstrap';
 import FontIcon from '../FontIcon';
 import Search from './Search';
-import { useEffect, useState } from 'react';
-import queryString from 'query-string';
+import styles from './header.module.css';
 
 const Logo = ({ headerData }) => {
   return (
@@ -81,34 +81,21 @@ const HeaderTopMobile = () => {
   );
 };
 const HeaderMiddle = () => {
-  const [filters, setFilters] = useState({});
+  const [words, setWords] = useState('');
   const [searchList, setSearchList] = useState([]);
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Basic ${btoa(
-      `${process.env.NEXT_PUBLIC_WORDPRESS_API_USER}:${process.env.NEXT_PUBLIC_WORDPRESS_API_PASS}`
-    )}`
-  };
 
   useEffect(() => {
     const fetchSearchList = async () => {
       try {
-        const paramsString = queryString.stringify(filters);
-        const requestUrl = `https://botakdev.printcart.com//wp-json/wc/v3/products?${paramsString}`;
-        const respose = await fetch(requestUrl, { headers, method: 'GET' });
-        const responseJSON = await respose.json();
+        const responseJSON = await fetchSearch(words);
         setSearchList(responseJSON);
-      } catch (error) {
-        throw new Error(error);
+      } catch (errors) {
+        throw new Error(errors);
       }
     };
     fetchSearchList();
-  }, [filters]);
-  const handleFilterChange = (newFilter) => {
-    setFilters({
-      search: newFilter.searchValue
-    });
-  };
+  }, [words]);
+
   return (
     <Container className="position-relative">
       <Row className="align-items-center">
@@ -116,7 +103,7 @@ const HeaderMiddle = () => {
           <Logo headerData={headerData} />
         </Col>
         <Col xs={6} lg={6} md={6} sm={9} className="search px-3">
-          <Search onSubmit={handleFilterChange} />
+          <Search setWords={setWords} />
           <div className={styles.wrapperSearch}>
             {searchList.length > 0 ? (
               searchList.map((items) => (

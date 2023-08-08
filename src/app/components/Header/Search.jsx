@@ -1,28 +1,12 @@
-import { useRef, useState } from 'react';
 import { Col, Form, InputGroup } from 'react-bootstrap';
 import styles from './header.module.css';
+import { debounce } from 'lodash';
 const Search = (props) => {
-  const { onSubmit } = props;
-  const [searchValue, setSearchValue] = useState('');
-  const typingRef = useRef(null);
+  const { setWords } = props;
 
-  const handleSearch = (e) => {
-    const value = e.target.value;
-    setSearchValue(value);
-    console.log('searchValue', searchValue);
-
-    if (typingRef.current) {
-      clearTimeout(typingRef.current);
-    }
-    if (searchValue.length >= 3) {
-      typingRef.current = setTimeout(() => {
-        const formValue = {
-          searchValue: value
-        };
-        onSubmit(formValue);
-      }, 500);
-    }
-  };
+  const handleSearch = debounce((e) => {
+    setWords(e.target.value);
+  }, 500);
 
   return (
     <div
@@ -34,7 +18,6 @@ const Search = (props) => {
           <Col xs={10} className="d-inline-block h-100">
             <Form.Control
               onChange={handleSearch}
-              value={searchValue}
               className={`${styles.inputsearch} h-100 rounded-start-pill ps-3 shadow-none lh-base m-0 bg-transparent text-secondary`}
               type="text"
               id="inputData"
