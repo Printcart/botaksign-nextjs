@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import InputForm from '../components/InputForm';
 import * as Yup from 'yup';
 import Flag from '../components/Flag';
+import Test from '../components/Flag';
 
 const SignUp = () => {
   const formik = useFormik({
@@ -46,8 +47,9 @@ const SignUp = () => {
         .required('You must fill in this section'),
       country: Yup.string().required('You must fill in this section')
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       // console.log(values);
+      resetForm();
     }
   });
   return (
@@ -89,18 +91,13 @@ const SignUp = () => {
               />
             </Col>
             <Col lg={6}>
-              <InputForm
-                controlId="inputPhone"
-                type="text"
-                name="phone"
-                label="Phone"
-                value={formik.values.phone}
-                onChange={formik.handleChange}
-                errors={
-                  formik.errors.phone && formik.touched.phone && formik.errors.phone
-                }
+              <Flag
+                field={{
+                  name: 'phone',
+                  value: formik.values.phone
+                }}
+                form={formik}
               />
-              <Flag />
             </Col>
             <Col lg={6}></Col>
             <Col lg={6}>

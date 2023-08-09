@@ -42,7 +42,9 @@ const LoginLeft = () => {
         .min(8, 'Password must be at least 8 characters')
         .required('You must fill in this section')
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
+      
+      resetForm();
     }
   });
   return (
