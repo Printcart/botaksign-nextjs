@@ -87,14 +87,18 @@ const HeaderMiddle = () => {
   useEffect(() => {
     const fetchSearchList = async () => {
       try {
-        const responseJSON = await fetchSearch(words);
-        setSearchList(responseJSON);
+        if (words.length > 2) {
+          const responseJSON = await fetchSearch(words);
+          setSearchList(responseJSON);
+        }
       } catch (errors) {
         throw new Error(errors);
       }
     };
     fetchSearchList();
   }, [words]);
+  console.log(words.length);
+  console.log(searchList);
 
   return (
     <Container className="position-relative">
@@ -104,9 +108,9 @@ const HeaderMiddle = () => {
         </Col>
         <Col xs={6} lg={6} md={6} sm={9} className="search px-3">
           <Search setWords={setWords} />
-          <div className={styles.wrapperSearch}>
-            {searchList.length > 0 ? (
-              searchList.map((items) => (
+          {words.length > 2 && searchList.length > 0 && (
+            <div className={styles.wrapperSearch}>
+              {searchList.map((items) => (
                 <div key={items.id} className={styles.wrappItems}>
                   <div className={styles.imageSearch}>
                     <Image
@@ -125,15 +129,18 @@ const HeaderMiddle = () => {
                     <span className={styles.priceSearch}>SGD $0.00</span>
                   </div>
                 </div>
-              ))
-            ) : (
+              ))}
+            </div>
+          )}
+          {searchList.length === 0 && (
+            <div className={styles.wrapperSearch}>
               <div className={styles.wrappItems}>
                 <div className={styles.contentSearch}>
                   <div className={styles.title}> No Results</div>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </Col>
         <Col
           xs={3}
