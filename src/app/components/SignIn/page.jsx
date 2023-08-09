@@ -66,6 +66,24 @@ const LoginLeft = () => {
   );
 };
 
+const LoginMiddle = () => {
+  return (
+    <div className={styles.socialLog}>
+      <span>or</span>
+    </div>
+  );
+};
+
+const LoginRight = () => {
+  return (
+    <div className={styles.signUpNow}>
+      <span>
+        Don’t have account yet? <Link href="#">Sign up</Link>
+      </span>
+    </div>
+  );
+};
+
 const SignIn = () => {
   return (
     <div className={styles.signInContent}>
@@ -87,21 +105,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
-const LoginMiddle = () => {
-  return (
-    <div className={styles.socialLog}>
-      <span>or</span>
-    </div>
-  );
-};
-
-const LoginRight = () => {
-  return (
-    <div className={styles.signUpNow}>
-      <span>
-        Don’t have account yet? <Link href="#">Sign up</Link>
-      </span>
-    </div>
-  );
-};
