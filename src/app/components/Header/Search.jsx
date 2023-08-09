@@ -1,12 +1,12 @@
 import { Col, Form, InputGroup } from 'react-bootstrap';
 import styles from './header.module.css';
 import { debounce } from 'lodash';
+import { memo } from 'react';
 const Search = (props) => {
-  const { setWords } = props;
-
+  const { onChange } = props;
   const handleSearch = debounce((e) => {
-    setWords(e.target.value);
-  }, 500);
+    onChange(e);
+  }, 300);
 
   return (
     <div
@@ -38,4 +38,4 @@ const Search = (props) => {
   );
 };
 
-export default Search;
+export default memo(Search);

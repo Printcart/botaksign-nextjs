@@ -3,7 +3,7 @@ import { fetchSearch } from 'botak/api/homepage';
 import { headerData } from 'botak/app/data/menus';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Col, Container, Nav, Row } from 'react-bootstrap';
 import FontIcon from '../FontIcon';
 import Search from './Search';
@@ -83,6 +83,7 @@ const HeaderTopMobile = () => {
 const HeaderMiddle = () => {
   const [words, setWords] = useState('');
   const [searchList, setSearchList] = useState([]);
+  console.log('render');
 
   useEffect(() => {
     const fetchSearchList = async () => {
@@ -97,8 +98,9 @@ const HeaderMiddle = () => {
     };
     fetchSearchList();
   }, [words]);
-  console.log(words.length);
-  console.log(searchList);
+  const memoChange = useCallback((e) => {
+    setWords(e?.target?.value || '');
+  }, []);
 
   return (
     <Container className="position-relative">
@@ -107,7 +109,7 @@ const HeaderMiddle = () => {
           <Logo headerData={headerData} />
         </Col>
         <Col xs={6} lg={6} md={6} sm={9} className="search px-3">
-          <Search setWords={setWords} />
+          <Search onChange={memoChange} />
           {words.length > 2 && searchList.length > 0 && (
             <div className={styles.wrapperSearch}>
               {searchList.map((items) => (
@@ -132,7 +134,7 @@ const HeaderMiddle = () => {
               ))}
             </div>
           )}
-          {searchList.length === 0 && (
+          {words.length > 2 && searchList.length === 0 && (
             <div className={styles.wrapperSearch}>
               <div className={styles.wrappItems}>
                 <div className={styles.contentSearch}>
