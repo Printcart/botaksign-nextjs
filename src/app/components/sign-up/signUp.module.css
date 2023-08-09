@@ -40,6 +40,25 @@
   padding: 10px 0;
   text-transform: uppercase;
 }
+.checkInput > div {
+  display: flex !important;
+  align-items: center;
+}
+.checkRemember span {
+  font-size: 16px;
+}
+.checkInput input {
+  width: 27px;
+  height: 27px;
+}
+.checkInput label {
+  margin-left: 10px;
+}
+.required {
+  color: #f00;
+  font-weight: 400;
+  margin-left: 3px;
+}
 @media (max-width: 768px) {
   .contentSignUp.signUp {
     padding: 30px 20px;

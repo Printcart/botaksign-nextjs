@@ -1,12 +1,10 @@
 'use client';
-import React from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import styles from './signUp.module.css';
 import { useFormik } from 'formik';
-import InputForm from '../components/InputForm';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import * as Yup from 'yup';
-import Flag from '../components/Flag';
-import Test from '../components/Flag';
+import Flag from '../Flag';
+import InputForm from '../InputForm';
+import styles from './signUp.module.css';
 
 const SignUp = () => {
   const formik = useFormik({
@@ -62,6 +60,7 @@ const SignUp = () => {
           <Row>
             <Col lg={6}>
               <InputForm
+                required
                 controlId="inputFirstName"
                 type="text"
                 name="firstName"
@@ -77,6 +76,7 @@ const SignUp = () => {
             </Col>
             <Col lg={6}>
               <InputForm
+                required
                 controlId="inputLastName"
                 type="text"
                 name="lastName"
@@ -92,8 +92,9 @@ const SignUp = () => {
             </Col>
             <Col lg={6}>
               <Flag
+                required
                 field={{
-                  name: 'phone',
+                  name: 'Phone',
                   value: formik.values.phone
                 }}
                 form={formik}
@@ -102,6 +103,7 @@ const SignUp = () => {
             <Col lg={6}></Col>
             <Col lg={6}>
               <InputForm
+                required
                 controlId="inputEmail"
                 type="email"
                 name="email"
@@ -116,6 +118,7 @@ const SignUp = () => {
             <Col lg={6}></Col>
             <Col lg={6}>
               <InputForm
+                required
                 controlId="inputUserName"
                 type="text"
                 name="userName"
@@ -132,6 +135,7 @@ const SignUp = () => {
             <Col lg={6}></Col>
             <Col lg={6}>
               <InputForm
+                required
                 controlId="inputPassword"
                 type="password"
                 label="Password"
@@ -147,6 +151,7 @@ const SignUp = () => {
             </Col>
             <Col lg={6}>
               <InputForm
+                required
                 controlId="inputConfirmPassword"
                 type="password"
                 name="confirmPassword"
@@ -178,6 +183,7 @@ const SignUp = () => {
             </Col>
           </Row>
           <InputForm
+            required
             controlId="inputAddressLine1"
             type="text"
             label="Address Line 1"
@@ -213,6 +219,7 @@ const SignUp = () => {
             errors={formik.errors.city && formik.touched.city && formik.errors.city}
           />
           <InputForm
+            required
             controlId="inputPostcode"
             type="password"
             label="Postcode / ZIP"
@@ -226,6 +233,7 @@ const SignUp = () => {
             }
           />
           <InputForm
+            required
             controlId="inputCountry"
             type="text"
             label="Country"
@@ -245,11 +253,14 @@ const SignUp = () => {
               incorporate will be treated by with the purpose to manage your
               registration as a user. Your data will not be transferred to third
               parties except for legal obligations.
+              <span className={styles.required}>*</span>
             </span>
-            <Form.Check
-              name="terms"
-              label="I have read and accepted the Terms of Use & Privacy Policy."
-            />
+            <div className={styles.checkInput}>
+              <Form.Check
+                name="terms"
+                label="I have read and accepted the Terms of Use & Privacy Policy."
+              />
+            </div>
           </Form.Group>
           <Button className={styles.buttonForm} type="submit">
             Register

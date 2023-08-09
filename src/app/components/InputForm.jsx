@@ -9,11 +9,14 @@ const InputForm = ({
   onChange,
   errors,
   placeholder,
-  name
+  name,
+  required
 }) => {
   return (
     <Form.Group controlId={controlId} className={styles.subInput}>
-      <Form.Label>{label}</Form.Label>
+      <Form.Label>
+        {label} {required && <span className={styles.required}>*</span>}
+      </Form.Label>
       <Form.Control
         type={type}
         name={name}

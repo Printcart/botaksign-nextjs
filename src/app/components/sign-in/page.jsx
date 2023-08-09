@@ -3,30 +3,8 @@ import { useFormik } from 'formik';
 import Link from 'next/link';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import * as Yup from 'yup';
-import InputForm from '../components/InputForm';
 import styles from './signIn.module.css';
-
-const SignIn = () => {
-  return (
-    <div className={styles.signInContent}>
-      <Container className={`${styles.formLoginWrap} ${styles.signIn}`}>
-        <Row>
-          <Col lg={5} className={styles.loginLeft}>
-            <LoginLeft />
-          </Col>
-          <Col lg={2} className={styles.loginMiddle}>
-            <LoginMiddle />
-          </Col>
-          <Col lg={5} className={styles.loginRight}>
-            <LoginRight />
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  );
-};
-
-export default SignIn;
+import InputForm from '../InputForm';
 
 const LoginLeft = () => {
   const formik = useFormik({
@@ -43,7 +21,6 @@ const LoginLeft = () => {
         .required('You must fill in this section')
     }),
     onSubmit: (values, { resetForm }) => {
-      
       resetForm();
     }
   });
@@ -88,6 +65,28 @@ const LoginLeft = () => {
     </div>
   );
 };
+
+const SignIn = () => {
+  return (
+    <div className={styles.signInContent}>
+      <Container className={`${styles.formLoginWrap} ${styles.signIn}`}>
+        <Row>
+          <Col lg={5} className={styles.loginLeft}>
+            <LoginLeft />
+          </Col>
+          <Col lg={2} className={styles.loginMiddle}>
+            <LoginMiddle />
+          </Col>
+          <Col lg={5} className={styles.loginRight}>
+            <LoginRight />
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
+};
+
+export default SignIn;
 
 const LoginMiddle = () => {
   return (

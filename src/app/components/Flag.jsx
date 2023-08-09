@@ -1,26 +1,24 @@
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import styles from './Flag.module.css';
-const Flag = ({ field, form, ...props }) => {
-  const { name, value } = field;
-  const { touched, errors } = form;
-  const error = touched[name] && errors[name];
+const Flag = (props) => {
+  const { field, form, required } = props;
+  const error = form.touched[field.name] && form.errors[field.name];
 
   const handleChange = (value) => {
-    form.setFieldValue(name, value);
-    form.setFieldTouched(name, true);
+    form.setFieldValue(field.name, value);
+    form.setFieldTouched(field.name, true);
   };
 
   return (
     <>
       <label htmlFor="phone" className={styles.title}>
-        Phone
+        {field.name} {required && <span className={styles.required}>*</span>}
       </label>
       <PhoneInput
         className={styles.inputPhone}
-        {...props}
-        country={'us'}
-        value={value}
+        country={'sg'}
+        value={field.value}
         onChange={handleChange}
         inputProps={{
           required: true
