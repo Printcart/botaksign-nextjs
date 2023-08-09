@@ -3,7 +3,8 @@ import styles from './header.module.css';
 import { debounce } from 'lodash';
 import { memo } from 'react';
 const Search = (props) => {
-  const { onChange } = props;
+  const { onChange, inputRef, handleInputBlur, handleInputFocus } = props;
+  console.log(inputRef);
   const handleSearch = debounce((e) => {
     onChange(e);
   }, 300);
@@ -17,6 +18,9 @@ const Search = (props) => {
         <InputGroup size="lg" className="searchform w-100 align-items-center h-100">
           <Col xs={10} className="d-inline-block h-100">
             <Form.Control
+              ref={inputRef}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
               onChange={handleSearch}
               className={`${styles.inputsearch} h-100 rounded-start-pill ps-3 shadow-none lh-base m-0 bg-transparent text-secondary`}
               type="text"

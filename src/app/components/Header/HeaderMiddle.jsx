@@ -3,7 +3,7 @@ import { fetchSearch } from 'botak/api/homepage';
 import { headerData } from 'botak/app/data/menus';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Col, Container, Nav, Row } from 'react-bootstrap';
 import FontIcon from '../FontIcon';
 import Search from './Search';
@@ -83,7 +83,21 @@ const HeaderTopMobile = () => {
 const HeaderMiddle = () => {
   const [words, setWords] = useState('');
   const [searchList, setSearchList] = useState([]);
+  const inputRef = useRef(null);
+  console.log(inputRef);
   console.log('render');
+
+  useEffect(() => {
+    const handleMouseDown = (e) => {
+      if (inputRef.current && !inputRef.current.contains(e.target)) {
+        setWords('');
+      }
+    };
+    document.addEventListener('mousedown', handleMouseDown);
+    return () => {
+      document.removeEventListener('mousedown', handleMouseDown);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchSearchList = async () => {
@@ -99,9 +113,10 @@ const HeaderMiddle = () => {
     fetchSearchList();
   }, [words]);
   const memoChange = useCallback((e) => {
-    setWords(e?.target?.value || '');
+    setWords(e.target.value);
   }, []);
 
+  console.log(words);
   return (
     <Container className="position-relative">
       <Row className="align-items-center">
@@ -109,7 +124,7 @@ const HeaderMiddle = () => {
           <Logo headerData={headerData} />
         </Col>
         <Col xs={6} lg={6} md={6} sm={9} className="search px-3">
-          <Search onChange={memoChange} />
+          <Search onChange={memoChange} inputRef={inputRef} />
           {words.length > 2 && searchList.length > 0 && (
             <div className={styles.wrapperSearch}>
               {searchList.map((items) => (
