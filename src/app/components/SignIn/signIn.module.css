@@ -51,7 +51,8 @@
 .signUpNow {
   font-size: 17px;
   line-height: 18px;
-  font-weight: 600;
+  font-weight: 500;
+  font-family: var(--font-robotoRegular);
 }
 .signUpNow a {
   color: #f00;
@@ -79,6 +80,11 @@
 }
 .checkRemember {
   padding: 15px 0;
+}
+.checkRemember label {
+  color: #b5b5b5;
+  font-size: 15px;
+  line-height: 17px;
 }
 .buttonForm {
   width: 100%;

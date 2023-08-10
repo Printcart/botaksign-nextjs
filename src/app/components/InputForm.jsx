@@ -12,8 +12,12 @@ const InputForm = ({
   name,
   required
 }) => {
+  const subInput = Boolean(label);
   return (
-    <Form.Group controlId={controlId} className={styles.subInput}>
+    <Form.Group
+      controlId={controlId}
+      className={`${styles.subInput} ${subInput ? '' : styles.noLabel}`}
+    >
       <Form.Label>
         {label} {required && <span className={styles.required}>*</span>}
       </Form.Label>

@@ -24,6 +24,7 @@ const LoginLeft = () => {
       resetForm();
     }
   });
+
   return (
     <div className={styles.formLogin}>
       <h4 className={styles.signinTitle}>Sign In</h4>
@@ -31,19 +32,19 @@ const LoginLeft = () => {
 
       <Form onSubmit={formik.handleSubmit}>
         <InputForm
+          placeholder="Username or email"
           controlId="inputDataEmail"
           type="email"
-          label="Email"
           name="email"
           value={formik.values.email}
           onChange={formik.handleChange}
           errors={formik.errors.email && formik.touched.email && formik.errors.email}
         />
         <InputForm
+          placeholder="Password"
           controlId="inputDataPassword"
           type="password"
           name="password"
-          label="Password"
           value={formik.values.password}
           onChange={formik.handleChange}
           errors={
