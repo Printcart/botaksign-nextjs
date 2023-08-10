@@ -4,7 +4,7 @@ import { headerData } from 'botak/app/data/menus';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { Col, Container, Nav, Row } from 'react-bootstrap';
+import { Col, Container, Nav, Row, Spinner } from 'react-bootstrap';
 import FontIcon from '../FontIcon';
 import Search from './Search';
 import styles from './header.module.css';
@@ -84,15 +84,12 @@ const HeaderMiddle = () => {
   const [words, setWords] = useState('');
   const [searchList, setSearchList] = useState([]);
   const [isResultVisible, setIsResultVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef(null);
 
   useEffect(() => {
     const handleMouseDown = (e) => {
-      if (
-        inputRef.current &&
-        !inputRef.current.contains(e.target) &&
-        !e.target.classList.contains('wrappItems')
-      ) {
+      if (inputRef.current && !inputRef.current.contains(e.target)) {
         setIsResultVisible(false);
       }
     };
@@ -105,9 +102,11 @@ const HeaderMiddle = () => {
   useEffect(() => {
     const fetchSearchList = async () => {
       if (words.length > 2) {
+        setIsLoading(true);
         const responseJSON = await fetchSearch(words);
         setSearchList(responseJSON);
         setIsResultVisible(true);
+        setIsLoading(false);
       }
     };
     fetchSearchList();
@@ -131,12 +130,14 @@ const HeaderMiddle = () => {
         <Col xs={3} lg={3} md={3} sm={12} className="logoheader">
           <Logo headerData={headerData} />
         </Col>
-        <Col xs={6} lg={6} md={6} sm={9} className="search px-3">
+        <Col xs={6} lg={6} md={6} sm={9} className="search px-3" ref={inputRef}>
           <Search
             onChange={handleChange}
             inputRef={inputRef}
             handleClick={hanldeInputClick}
+            isLoading={isLoading}
           />
+
           {words.length > 2 && searchList.length > 0 && isResultVisible && (
             <div className={styles.wrapperSearch}>
               {searchList.map((item) => (
