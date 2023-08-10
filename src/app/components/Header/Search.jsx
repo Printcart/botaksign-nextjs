@@ -1,10 +1,8 @@
+import { debounce } from 'lodash';
 import { Col, Form, InputGroup } from 'react-bootstrap';
 import styles from './header.module.css';
-import { debounce } from 'lodash';
-import { memo } from 'react';
 const Search = (props) => {
-  const { onChange, inputRef, handleInputBlur, handleInputFocus } = props;
-  console.log(inputRef);
+  const { onChange, inputRef, handleClick } = props;
   const handleSearch = debounce((e) => {
     onChange(e);
   }, 300);
@@ -19,8 +17,7 @@ const Search = (props) => {
           <Col xs={10} className="d-inline-block h-100">
             <Form.Control
               ref={inputRef}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
+              onClick={handleClick}
               onChange={handleSearch}
               className={`${styles.inputsearch} h-100 rounded-start-pill ps-3 shadow-none lh-base m-0 bg-transparent text-secondary`}
               type="text"
@@ -42,4 +39,4 @@ const Search = (props) => {
   );
 };
 
-export default memo(Search);
+export default Search;

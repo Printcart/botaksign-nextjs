@@ -3,7 +3,7 @@ import { fetchSearch } from 'botak/api/homepage';
 import { headerData } from 'botak/app/data/menus';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Col, Container, Nav, Row } from 'react-bootstrap';
 import FontIcon from '../FontIcon';
 import Search from './Search';
@@ -83,14 +83,17 @@ const HeaderTopMobile = () => {
 const HeaderMiddle = () => {
   const [words, setWords] = useState('');
   const [searchList, setSearchList] = useState([]);
+  const [isResultVisible, setIsResultVisible] = useState(false);
   const inputRef = useRef(null);
-  console.log(inputRef);
-  console.log('render');
 
   useEffect(() => {
     const handleMouseDown = (e) => {
-      if (inputRef.current && !inputRef.current.contains(e.target)) {
-        setWords('');
+      if (
+        inputRef.current &&
+        !inputRef.current.contains(e.target) &&
+        !e.target.classList.contains('wrappItems')
+      ) {
+        setIsResultVisible(false);
       }
     };
     document.addEventListener('mousedown', handleMouseDown);
@@ -105,6 +108,7 @@ const HeaderMiddle = () => {
         if (words.length > 2) {
           const responseJSON = await fetchSearch(words);
           setSearchList(responseJSON);
+          setIsResultVisible(true);
         }
       } catch (errors) {
         throw new Error(errors);
@@ -112,11 +116,14 @@ const HeaderMiddle = () => {
     };
     fetchSearchList();
   }, [words]);
-  const memoChange = useCallback((e) => {
+  const handleChange = (e) => {
     setWords(e.target.value);
-  }, []);
+    setIsResultVisible(true);
+  };
+  const hanldeInputClick = () => {
+    setIsResultVisible(true);
+  };
 
-  console.log(words);
   return (
     <Container className="position-relative">
       <Row className="align-items-center">
@@ -124,8 +131,12 @@ const HeaderMiddle = () => {
           <Logo headerData={headerData} />
         </Col>
         <Col xs={6} lg={6} md={6} sm={9} className="search px-3">
-          <Search onChange={memoChange} inputRef={inputRef} />
-          {words.length > 2 && searchList.length > 0 && (
+          <Search
+            onChange={handleChange}
+            inputRef={inputRef}
+            handleClick={hanldeInputClick}
+          />
+          {words.length > 2 && searchList.length > 0 && isResultVisible && (
             <div className={styles.wrapperSearch}>
               {searchList.map((items) => (
                 <div key={items.id} className={styles.wrappItems}>
@@ -149,7 +160,7 @@ const HeaderMiddle = () => {
               ))}
             </div>
           )}
-          {words.length > 2 && searchList.length === 0 && (
+          {words.length > 2 && searchList.length === 0 && isResultVisible && (
             <div className={styles.wrapperSearch}>
               <div className={styles.wrappItems}>
                 <div className={styles.contentSearch}>
