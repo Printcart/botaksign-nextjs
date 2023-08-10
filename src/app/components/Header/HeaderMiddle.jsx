@@ -104,24 +104,25 @@ const HeaderMiddle = () => {
 
   useEffect(() => {
     const fetchSearchList = async () => {
-      try {
-        if (words.length > 2) {
-          const responseJSON = await fetchSearch(words);
-          setSearchList(responseJSON);
-          setIsResultVisible(true);
-        }
-      } catch (errors) {
-        throw new Error(errors);
+      if (words.length > 2) {
+        const responseJSON = await fetchSearch(words);
+        setSearchList(responseJSON);
+        setIsResultVisible(true);
       }
     };
     fetchSearchList();
   }, [words]);
+
   const handleChange = (e) => {
     setWords(e.target.value);
     setIsResultVisible(true);
   };
   const hanldeInputClick = () => {
     setIsResultVisible(true);
+  };
+  const hightlightMatchingText = (text, searchTerm) => {
+    const regex = new RegExp(`(${searchTerm})`, 'gi');
+    return text.replace(regex, '<strong>$1</strong>');
   };
 
   return (
@@ -138,23 +139,34 @@ const HeaderMiddle = () => {
           />
           {words.length > 2 && searchList.length > 0 && isResultVisible && (
             <div className={styles.wrapperSearch}>
-              {searchList.map((items) => (
-                <div key={items.id} className={styles.wrappItems}>
+              {searchList.map((item) => (
+                <div key={item.id} className={styles.wrappItems}>
                   <div className={styles.imageSearch}>
                     <Image
-                      src={items?.images[0].src}
+                      src={item?.images[0]?.src}
                       width={50}
                       height={50}
                       alt="Image Product"
                     />
                   </div>
                   <div className={styles.contentSearch}>
-                    <div className={styles.title}>{items.name}</div>
+                    <div
+                      className={styles.title}
+                      dangerouslySetInnerHTML={{
+                        __html: hightlightMatchingText(`${item.name}`, words)
+                      }}
+                    ></div>
                     <div className={styles.badges}>
-                      <span className={styles.outOfStock}>Out of stock</span>
+                      <span className={styles.outOfStock}>
+                        {item?.stock_status === 'outofstock' ? 'Out of stock' : ''}
+                      </span>
                     </div>
-                    <span className={styles.fromPrice}>Price: From {''}</span>
-                    <span className={styles.priceSearch}>SGD $0.00</span>
+                    <span
+                      className={styles.fromPrice}
+                      dangerouslySetInnerHTML={{
+                        __html: `Price: ${item.price_html} `
+                      }}
+                    />
                   </div>
                 </div>
               ))}

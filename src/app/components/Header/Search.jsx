@@ -1,6 +1,7 @@
 import { debounce } from 'lodash';
 import { Col, Form, InputGroup } from 'react-bootstrap';
 import styles from './header.module.css';
+
 const Search = (props) => {
   const { onChange, inputRef, handleClick } = props;
   const handleSearch = debounce((e) => {
