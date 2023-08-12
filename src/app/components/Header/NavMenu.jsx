@@ -1,13 +1,15 @@
 'use client';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fetchSearch } from 'botak/api/homepage';
 import { headerData } from 'botak/app/data/menus';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Col, Container, Nav, Row } from 'react-bootstrap';
 import FontIcon from '../FontIcon';
-import styles from './header.module.css';
 import Search from './Search';
+import styles from './header.module.css';
 
 const CartMobile = () => {
   return (
@@ -26,7 +28,46 @@ const CartMobile = () => {
 };
 export const MenusMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [words, setWords] = useState('');
+  const [searchList, setSearchList] = useState([]);
+  const [isResultVisible, setIsResultVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const inputRef = useRef(null);
 
+  useEffect(() => {
+    const handleMouseDown = (e) => {
+      if (inputRef.current && !inputRef.current.contains(e.target)) {
+        setIsResultVisible(false);
+      }
+    };
+    document.addEventListener('mousedown', handleMouseDown);
+    return () => {
+      document.removeEventListener('mousedown', handleMouseDown);
+    };
+  }, []);
+  useEffect(() => {
+    const fetchSearchList = async () => {
+      if (words.length > 2) {
+        setIsLoading(true);
+        const responseJSON = await fetchSearch(words);
+        setSearchList(responseJSON);
+        setIsResultVisible(true);
+        setIsLoading(false);
+      }
+    };
+    fetchSearchList();
+  }, [words]);
+  const handleChange = (e) => {
+    setWords(e.target.value);
+    setIsResultVisible(true);
+  };
+  const hanldeInputClick = () => {
+    setIsResultVisible(true);
+  };
+  const hightlightMatchingText = (text, searchTerm) => {
+    const regex = new RegExp(`(${searchTerm})`, 'gi');
+    return text.replace(regex, '<strong>$1</strong>');
+  };
   const handleOpenMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -49,8 +90,57 @@ export const MenusMobile = () => {
             MENU
           </Button>
         </Col>
-        <Col sm={7}>
-          <Search />
+        <Col sm={7} ref={inputRef}>
+          <Search
+            onChange={handleChange}
+            inputRef={inputRef}
+            handleClick={hanldeInputClick}
+            isLoading={isLoading}
+          />
+          {words.length > 2 && searchList.length > 0 && isResultVisible && (
+            <div className={styles.wrapperSearch}>
+              {searchList.map((item) => (
+                <div key={item.id} className={styles.wrappItems}>
+                  <div className={styles.imageSearch}>
+                    <Image
+                      src={item?.images[0]?.src}
+                      width={50}
+                      height={50}
+                      alt="Image Product"
+                    />
+                  </div>
+                  <div className={styles.contentSearch}>
+                    <div
+                      className={styles.title}
+                      dangerouslySetInnerHTML={{
+                        __html: hightlightMatchingText(`${item.name}`, words)
+                      }}
+                    ></div>
+                    <div className={styles.badges}>
+                      <span className={styles.outOfStock}>
+                        {item?.stock_status === 'outofstock' ? 'Out of stock' : ''}
+                      </span>
+                    </div>
+                    <span
+                      className={styles.fromPrice}
+                      dangerouslySetInnerHTML={{
+                        __html: `Price: ${item.price_html} `
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          {words.length > 2 && searchList.length === 0 && isResultVisible && (
+            <div className={styles.wrapperSearch}>
+              <div className={styles.wrappItems}>
+                <div className={styles.contentSearch}>
+                  <div className={styles.title}> No Results</div>
+                </div>
+              </div>
+            </div>
+          )}
         </Col>
         <Col sm={3} className="float-end text-end">
           <CartMobile />
