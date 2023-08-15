@@ -1,10 +1,13 @@
 'use client';
+import { fetchSearch } from 'botak/api/homepage';
 import { headerData } from 'botak/app/data/menus';
-import { Col, Container, Form, InputGroup, Nav, Row } from 'react-bootstrap';
-import styles from './header.module.css';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import { Col, Container, Nav, Row, Spinner } from 'react-bootstrap';
 import FontIcon from '../FontIcon';
+import Search from './Search';
+import styles from './header.module.css';
 
 const Logo = ({ headerData }) => {
   return (
@@ -23,35 +26,6 @@ const Logo = ({ headerData }) => {
   );
 };
 
-export const Search = () => {
-  return (
-    <div
-      className="searchform d-flex w-100 align-items-center"
-      style={{ height: '46px' }}
-    >
-      <Form className="w-100 h-100">
-        <InputGroup size="lg" className="searchform w-100 align-items-center h-100">
-          <Col xs={10} className="d-inline-block h-100">
-            <Form.Control
-              className={`${styles.inputsearch} h-100 rounded-start-pill ps-3 shadow-none lh-base m-0 bg-transparent text-secondary`}
-              type="text"
-              id="inputData"
-              placeholder="Search"
-            />
-          </Col>
-          <Col xs={2} className="h-100">
-            <InputGroup.Text
-              type="submit"
-              className="h-100 lh-base m-0 rounded-end-pill position-relative bg-transparent text-secondary justify-content-center"
-            >
-              Search
-            </InputGroup.Text>
-          </Col>
-        </InputGroup>
-      </Form>
-    </div>
-  );
-};
 const Cart = () => {
   return (
     <div className="cartheadwrapper d-inline-block position-relative">
@@ -107,14 +81,107 @@ const HeaderTopMobile = () => {
   );
 };
 const HeaderMiddle = () => {
+  const [words, setWords] = useState('');
+  const [searchList, setSearchList] = useState([]);
+  const [isResultVisible, setIsResultVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    const handleMouseDown = (e) => {
+      if (inputRef.current && !inputRef.current.contains(e.target)) {
+        setIsResultVisible(false);
+      }
+    };
+    document.addEventListener('mousedown', handleMouseDown);
+    return () => {
+      document.removeEventListener('mousedown', handleMouseDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    const fetchSearchList = async () => {
+      if (words.length > 2) {
+        setIsLoading(true);
+        const responseJSON = await fetchSearch(words);
+        setSearchList(responseJSON);
+        setIsResultVisible(true);
+        setIsLoading(false);
+      }
+    };
+    fetchSearchList();
+  }, [words]);
+
+  const handleChange = (e) => {
+    setWords(e.target.value);
+    setIsResultVisible(true);
+  };
+  const hanldeInputClick = () => {
+    setIsResultVisible(true);
+  };
+  const hightlightMatchingText = (text, searchTerm) => {
+    const regex = new RegExp(`(${searchTerm})`, 'gi');
+    return text.replace(regex, '<strong>$1</strong>');
+  };
+
   return (
     <Container className="position-relative">
       <Row className="align-items-center">
         <Col xs={3} lg={3} md={3} sm={12} className="logoheader">
           <Logo headerData={headerData} />
         </Col>
-        <Col xs={6} lg={6} md={6} sm={9} className="search px-3">
-          <Search />
+        <Col xs={6} lg={6} md={6} sm={9} className="search px-3" ref={inputRef}>
+          <Search
+            onChange={handleChange}
+            inputRef={inputRef}
+            handleClick={hanldeInputClick}
+            isLoading={isLoading}
+          />
+
+          {words.length > 2 && searchList.length > 0 && isResultVisible && (
+            <div className={styles.wrapperSearch}>
+              {searchList.map((item) => (
+                <div key={item.id} className={styles.wrappItems}>
+                  <div className={styles.imageSearch}>
+                    <Image
+                      src={item?.images[0]?.src}
+                      width={50}
+                      height={50}
+                      alt="Image Product"
+                    />
+                  </div>
+                  <div className={styles.contentSearch}>
+                    <div
+                      className={styles.title}
+                      dangerouslySetInnerHTML={{
+                        __html: hightlightMatchingText(`${item.name}`, words)
+                      }}
+                    ></div>
+                    <div className={styles.badges}>
+                      <span className={styles.outOfStock}>
+                        {item?.stock_status === 'outofstock' ? 'Out of stock' : ''}
+                      </span>
+                    </div>
+                    <span
+                      className={styles.fromPrice}
+                      dangerouslySetInnerHTML={{
+                        __html: `Price: ${item.price_html} `
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          {words.length > 2 && searchList.length === 0 && isResultVisible && (
+            <div className={styles.wrapperSearch}>
+              <div className={styles.wrappItems}>
+                <div className={styles.contentSearch}>
+                  <div className={styles.title}> No Results</div>
+                </div>
+              </div>
+            </div>
+          )}
         </Col>
         <Col
           xs={3}

@@ -92,7 +92,7 @@ export const fetcPrimaryMenu = async () => {
   const [jsonOne, jsonTwo] = await Promise.all([resOne.json(), resTwo.json()]);
 
   return [...jsonOne, ...jsonTwo];
-}
+};
 
 export const fetchDataFooterTitle = async () => {
   const fetUrl = `${API_URL}wp/v2/menus`;
@@ -128,6 +128,16 @@ export const fetchMenuFooterById = async (id) => {
     headers,
     method: 'GET'
   });
+  const data = await res.json();
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
+  return data;
+};
+
+export const fetchSearch = async (params) => {
+  const fetchUrl = `${API_URL}wc/v3/products?search=${params}`;
+  const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();
   if (data.errors) {
     throw new Error('Failed to fetch API');
