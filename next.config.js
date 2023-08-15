@@ -2,7 +2,6 @@
 const nextConfig = {
   // next.config.js
   images: {
-    domains: ['flagcdn.com', 'upload.wikimedia.org'],
     remotePatterns: [
       {
         protocol: 'https',
