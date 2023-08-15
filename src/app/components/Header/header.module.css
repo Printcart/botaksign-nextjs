@@ -262,5 +262,8 @@
   position: relative;
   padding: 0px 8px;
   display: inline-block;
+}
 
+.wrapImage {
+  color: #28c475;
 }
