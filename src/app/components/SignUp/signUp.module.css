@@ -1,0 +1,77 @@
+.contentSignUp {
+  max-width: 690px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-bottom: 30px;
+  backdrop-filter: blur(50px) opacity(0.03) brightness(0.1);
+}
+.contentSignUp.signUp {
+  padding: 30px 40px 40px 40px;
+  border: 1px solid #dedede;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 60px;
+  margin-top: 20px;
+}
+.signUpTitle {
+  font-size: 55px;
+  line-height: 54px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: var(--font-oduda-roboto);
+}
+.signUpDesc {
+  font-size: 22px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+.checkRemember {
+  margin: 20px 0 25px 0;
+}
+.buttonForm {
+  border-radius: 10px;
+  background: transparent
+    linear-gradient(0deg, #1bcb3f 0%, #45d242 33%, #7bdb46 78%, #91df48 100%) 0% 0%
+    no-repeat padding-box;
+  border: none;
+  filter: drop-shadow(0px 0px 12px #0000002f);
+  width: 50%;
+  padding: 10px 0;
+  text-transform: uppercase;
+}
+.checkInput > div {
+  display: flex !important;
+  align-items: center;
+}
+.checkRemember span {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21px;
+  font-family: var(--font-robotoRegular);
+}
+.checkInput input {
+  width: 27px;
+  height: 27px;
+}
+.checkInput label {
+  margin-left: 10px;
+}
+.required {
+  color: #f00;
+  font-weight: 400;
+  margin-left: 3px;
+}
+@media (max-width: 768px) {
+  .contentSignUp.signUp {
+    padding: 30px 20px;
+  }
+  .signUpTitle {
+    font-size: 30px;
+    line-height: 42px;
+  }
+  .signUpDesc {
+    font-size: 17px;
+    line-height: 17px;
+  }
+}
