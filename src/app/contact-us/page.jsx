@@ -7,21 +7,7 @@ import Image from 'next/image';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import InputForm from '../components/InputForm';
-
-const ContactHeader = () => {
-  return (
-    <div className={styles.contactHeader}>
-      <div className={styles.contactWrap}>
-        <h1>CONTACT us</h1>
-        <span className={styles.contactLink}>
-          <Link href="/">Home</Link>
-          <span>/</span>
-          <span className={styles.breadcrumbLast}>Contact Us</span>
-        </span>
-      </div>
-    </div>
-  );
-};
+import PageCoverHeader from '../components/PageCoverHeader';
 
 const Information = () => {
   return (
@@ -230,7 +216,7 @@ const FormContact = () => {
 const ContactUS = () => {
   return (
     <div>
-      <ContactHeader />
+      <PageCoverHeader title="CONTACT us" link="Home" titlePage="Contact Us" />
       <Container>
         <Row>
           <Information />
