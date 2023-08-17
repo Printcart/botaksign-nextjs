@@ -1,0 +1,151 @@
+.contactHeader {
+  background-image: url(https://botakrevamp.s3.amazonaws.com/Images/Header%20Banner/Guides_Header.jpg);
+  height: 300px;
+  margin-bottom: 20px;
+}
+.contactWrap {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+  align-items: baseline;
+  width: 234px;
+  margin: auto;
+}
+.contactWrap > h1 {
+  color: #0f464e;
+  font-size: 36px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 24px;
+  margin-bottom: 14px;
+}
+.contactLink {
+  display: flex;
+  gap: 5px;
+}
+
+.contactLink a {
+  color: rgb(66, 133, 244);
+}
+.breadcrumbLast {
+  font-family: var(--font-nunito);
+  font-weight: bold;
+  font-size: 16px;
+  color: rgb(105, 105, 105);
+}
+.information {
+  padding: 35px 15px 56px 15px;
+}
+.infoBox {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.infoBoxImage {
+  position: relative;
+}
+.infoBoxImage {
+  font-size: 120px;
+  background: #ffffff;
+  border-style: inset;
+  border-color: #ffffff;
+  border-width: 0px;
+  padding: 50px;
+  border-radius: 500px;
+  display: inline-block;
+  height: 185px;
+  width: 185px;
+}
+.infoBoxImage > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 100 !important;
+}
+.infoBoxImage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(80, 171, 180);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: scale(1);
+  border-radius: 50%;
+}
+.infoBox:hover .infoBoxImage::before {
+  opacity: 1;
+  transform: scale(0.9);
+}
+.infoBoxTitle h3 {
+  font-weight: bold;
+  color: #004250;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin: 4px 0 2px 0 !important;
+}
+.infoBoxPhone {
+  margin: 10px 0 35px 0;
+}
+.infoBoxPhone span {
+  color: #696969;
+  font-size: 16px;
+  line-height: 25px;
+}
+.buttonForm {
+  margin-top: 31px;
+  padding: 10px;
+  width: 150px;
+  max-width: 150px;
+  border: none;
+  border-radius: 5px;
+  color: rgb(255, 255, 255) !important;
+  background-color: rgb(40, 196, 117);
+  text-transform: uppercase;
+}
+.buttonForm:hover {
+  background-color: rgb(40, 196, 117);
+}
+.formContact {
+  margin-bottom: 85px;
+}
+.title {
+  margin-left: 10px;
+  font-family: var(--font-oduda-bold);
+  font-weight: 400;
+  font-size: 20px;
+  color: rgb(51, 51, 51);
+}
+.googleMap {
+  width: 100%;
+  height: 500px;
+}
+.messageMap {
+  padding: 0 15px !important;
+}
+.lableForm {
+  font-weight: 600 !important;
+  margin-bottom: 5px !important;
+  font-weight: 600 !important;
+  margin-bottom: 5px;
+  font-family: var(--font-nunito) !important;
+  color: rgb(105, 105, 105) !important;
+}
+@media (max-width: 768px) {
+  .messageMapWrapper {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .googleMap {
+    margin-bottom: 85px;
+  }
+  .formContact {
+    margin-bottom: 35px;
+  }
+}
