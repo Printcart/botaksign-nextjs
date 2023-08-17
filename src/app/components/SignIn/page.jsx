@@ -79,7 +79,7 @@ const LoginRight = () => {
   return (
     <div className={styles.signUpNow}>
       <span>
-        Don’t have account yet? <Link href="#">Sign up</Link>
+        Don’t have account yet? <Link href="/sign-up">Sign up</Link>
       </span>
     </div>
   );
@@ -87,20 +87,35 @@ const LoginRight = () => {
 
 const SignIn = () => {
   return (
-    <div className={styles.signInContent}>
-      <Container className={`${styles.formLoginWrap} ${styles.signIn}`}>
-        <Row>
-          <Col lg={5} className={styles.loginLeft}>
-            <LoginLeft />
-          </Col>
-          <Col lg={2} className={styles.loginMiddle}>
-            <LoginMiddle />
-          </Col>
-          <Col lg={5} className={styles.loginRight}>
-            <LoginRight />
-          </Col>
-        </Row>
-      </Container>
+    <div className="siteContent">
+      <div className={styles.breadcrumb}>
+        <Container>
+          <Row>
+            <span className={styles.spanBreadcrumb}>
+              <span className={styles.spanBreadcrumb}>
+                <Link className={styles.linkBreadcrumb} href={'/'}>Home</Link>
+                <span className={styles.spanBreadcrumb}>/</span>
+                <strong className={styles.strongBreadcrumb}>My Account</strong>
+              </span>
+            </span>
+          </Row>
+        </Container>
+      </div>
+      <div className={styles.signInContent}>
+        <Container className={`${styles.formLoginWrap} ${styles.signIn}`}>
+          <Row>
+            <Col lg={5} className={styles.loginLeft}>
+              <LoginLeft />
+            </Col>
+            <Col lg={2} className={styles.loginMiddle}>
+              <LoginMiddle />
+            </Col>
+            <Col lg={5} className={styles.loginRight}>
+              <LoginRight />
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 };

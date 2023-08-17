@@ -104,11 +104,32 @@
 .lostPassword a:hover {
   text-decoration: underline;
 }
+.breadcrumb {
+  margin-bottom: 20px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  font-size: 14px;
+}
+.spanBreadcrumb {
+  margin: 0 5px;
+  display: inline-block;
+  font-size: 15px;
+  position: relative;
+  top: 1px;
+  color: #888888;
+}
+.linkBreadcrumb:hover {
+  text-decoration: underline;
+}
+.strongBreadcrumb{
+  font-weight: 700;
+}
 
 @media (max-width: 768px) {
   .formLoginWrap.signIn {
     padding: 22px 25px;
   }
+
   .signInContent {
     margin: 20px 5px 60px 5px;
   }
