@@ -8,11 +8,11 @@ const PageCoverHeader = (props) => {
     <>
       <div className={styles.contactHeader}>
         <div className={styles.contactWrap}>
-          <h1>{title}</h1>
+          <h1>{title || ''}</h1>
           <span className={styles.contactLink}>
-            <Link href="/">{link}</Link>
+            <Link href="/">{link || ''}</Link>
             <span>/</span>
-            <span className={styles.breadcrumbLast}>{titlePage}</span>
+            <span className={styles.breadcrumbLast}>{titlePage || ''}</span>
           </span>
         </div>
       </div>
