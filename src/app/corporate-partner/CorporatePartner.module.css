@@ -9,6 +9,119 @@
   font-weight: bold;
 }
 .image {
+  margin-bottom: 35px;
+}
+.image img {
   width: 100% !important;
+  max-width: 100% !important;
   height: 450px;
+}
+.nbTitle {
+  color: #28c373;
+  font-size: x-large;
+  margin-bottom: 15px;
+}
+.wrapperContent span {
+  display: block;
+  font-family: var(--font-nunito);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgb(105, 105, 105);
+  margin-bottom: 24px;
+}
+.wrapperContent a {
+  color: rgb(66, 133, 244);
+}
+.benefits {
+  color: rgb(105, 105, 105);
+}
+.nbtitle {
+  font-family: var(--font-oduda-bold);
+  font-size: 22px;
+  font-weight: 400;
+  color: rgb(51, 51, 51);
+  margin-bottom: 15px;
+}
+.imageBenefits img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 387px !important;
+  margin-bottom: 35px;
+}
+.lists {
+  list-style: decimal;
+  font-family: var(--font-nunito);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgb(105, 105, 105);
+}
+.lists li ul {
+  list-style-type: circle;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+.criteria {
+  margin-bottom: 35px;
+}
+.titleCriteria {
+  font-family: var(--font-oduda-bold);
+  font-weight: 400;
+  color: rgb(51, 51, 51);
+  font-size: 22px;
+}
+
+.titleApplyJoin {
+  font-weight: bold;
+  font-family: var(--font-oduda-bold);
+  font-size: 22px;
+  color: rgb(51, 51, 51);
+  margin-bottom: 15px;
+}
+
+.buttonForm {
+  display: inline-block;
+  width: auto;
+  border: 1px solid rgb(40, 196, 117);
+  background-color: rgb(40, 196, 117);
+  color: #fff;
+  padding: 10px 20px;
+  margin-top: 15px;
+  transition: all 0.5s;
+  text-transform: uppercase;
+  max-width: 150px;
+  width: 150px;
+  margin-top: 46px;
+}
+.buttonForm:hover {
+  border: 1px solid rgb(40, 196, 117) !important;
+  background-color: transparent;
+  color: rgb(40, 196, 117);
+}
+.applyJoin {
+  margin-bottom: 45px;
+}
+
+.termsConditions {
+  font-family: var(--font-oduda-bold);
+  font-weight: 400;
+  color: rgb(51, 51, 51);
+  font-size: 22px;
+  margin-bottom: 45px;
+}
+.termsConditions ol li {
+  color: rgb(105, 105, 105);
+  font-family: var(--font-nunito);
+  font-weight: 400;
+  font-size: 16px;
+}
+.titleSelect {
+  margin: 21px 0 8px 0;
+}
+@media (max-width: 768px) {
+  .image img {
+    height: 132px !important;
+  }
+  .imageBenefits img {
+    height: 114px !important;
+  }
 }
