@@ -1,0 +1,14 @@
+.wrapper {
+  margin-bottom: 35px;
+  color: rgb(105, 105, 105);
+}
+.wrapper span {
+  margin: 0 10px;
+}
+.wrapper b {
+  font-weight: bold;
+}
+.image {
+  width: 100% !important;
+  height: 450px;
+}
