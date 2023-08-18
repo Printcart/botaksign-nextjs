@@ -1,0 +1,47 @@
+.title {
+  color: rgb(105, 105, 105);
+  font-family: var(--font-nunito);
+  font-weight: 400;
+}
+.title > span {
+  display: block;
+  padding: 18px 0;
+  margin-bottom: 10px;
+}
+.title span span {
+  margin: 0 5px;
+}
+.title h2 {
+  font-size: 48px;
+  color: #28c475;
+  text-align: center;
+  font-family: var(--font-oduda-bold);
+  margin-bottom: 30px;
+}
+.subContent {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: 28px 28px;
+  word-wrap: break-word;
+  border-color: #f0f0f0;
+  background-color: #f7f7f7;
+}
+.contentHeader h4,
+.contentHeader h2 {
+  font-family: var(--font-oduda-bold);
+  font-weight: 400;
+  color: rgb(51, 51, 51);
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+.contentHeader h4 {
+  font-size: 18px;
+}
+.description p {
+  font-size: 14px;
+  color: rgb(105, 105, 105);
+  margin-bottom: 0;
+}
+.description {
+  margin-bottom: 16px;
+}
