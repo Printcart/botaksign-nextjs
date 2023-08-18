@@ -144,3 +144,13 @@ export const fetchSearch = async (params) => {
   }
   return data;
 };
+
+export const fetchTermsAndConditions = async () => {
+  const fetchUrl = `https://botakdev.printcart.com/wp-json/wp/v2/pages/11194`;
+  const res = await fetch(fetchUrl, { headers, method: 'GET' });
+  const data = await res.json();
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
+  return data;
+};
