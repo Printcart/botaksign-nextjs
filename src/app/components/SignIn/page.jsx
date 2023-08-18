@@ -5,6 +5,7 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import * as Yup from 'yup';
 import styles from './signIn.module.css';
 import InputForm from '../InputForm';
+import Breadcrumb from '../Breadcrumb';
 
 const LoginLeft = () => {
   const formik = useFormik({
@@ -88,34 +89,20 @@ const LoginRight = () => {
 const SignIn = () => {
   return (
     <div className="siteContent">
-      <div className={styles.breadcrumb}>
-        <Container>
-          <Row>
-            <span className={styles.spanBreadcrumb}>
-              <span className={styles.spanBreadcrumb}>
-                <Link className={styles.linkBreadcrumb} href={'/'}>Home</Link>
-                <span className={styles.spanBreadcrumb}>/</span>
-                <strong className={styles.strongBreadcrumb}>My Account</strong>
-              </span>
-            </span>
-          </Row>
-        </Container>
-      </div>
-      <div className={styles.signInContent}>
-        <Container className={`${styles.formLoginWrap} ${styles.signIn}`}>
-          <Row>
-            <Col lg={5} className={styles.loginLeft}>
-              <LoginLeft />
-            </Col>
-            <Col lg={2} className={styles.loginMiddle}>
-              <LoginMiddle />
-            </Col>
-            <Col lg={5} className={styles.loginRight}>
-              <LoginRight />
-            </Col>
-          </Row>
-        </Container>
-      </div>
+      <Breadcrumb titlePage="My Account" fontWeight="900" />
+      <Container className={`${styles.formLoginWrap} ${styles.signIn}`}>
+        <Row>
+          <Col lg={5} className={styles.loginLeft}>
+            <LoginLeft />
+          </Col>
+          <Col lg={2} className={styles.loginMiddle}>
+            <LoginMiddle />
+          </Col>
+          <Col lg={5} className={styles.loginRight}>
+            <LoginRight />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };
