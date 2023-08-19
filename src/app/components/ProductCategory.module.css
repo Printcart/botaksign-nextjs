@@ -1,0 +1,25 @@
+.shopSidebar {
+  padding: 0 15px;
+}
+.lists {
+  padding: 8px 0;
+}
+.name:hover {
+  color: rgb(40, 196, 117) !important;
+}
+.name {
+  display: flex;
+  justify-content: space-between;
+}
+.list {
+  display: inline;
+}
+.name {
+  color: rgb(105, 105, 105);
+  font-size: 14px;
+}
+.count {
+  color: rgb(105, 105, 105);
+  font-family: var(--font-nunito);
+  font-weight: 400;
+}

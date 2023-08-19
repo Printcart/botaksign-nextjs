@@ -1,7 +1,8 @@
 'use client';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import styles from './archiveProducts.module.css';
 import { Products } from 'botak/app/components/Products/page';
+import { Col, Container, Form, Row } from 'react-bootstrap';
+import ProductCategory from './ProductCategory';
+import styles from './archiveProducts.module.css';
 
 const ArchiveProducts = (props) => {
   const { data } = props;
@@ -11,6 +12,7 @@ const ArchiveProducts = (props) => {
         <Row>
           <Col lg={3}>
             <h5>PRINTING PRODUCTS</h5>
+            <ProductCategory />
           </Col>
           <Col lg={9}>
             <ShopAction />
