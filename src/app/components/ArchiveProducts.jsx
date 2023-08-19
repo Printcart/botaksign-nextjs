@@ -1,11 +1,14 @@
 'use client';
-import { Products } from 'botak/app/components/Products/page';
 import { Col, Container, Form, Row } from 'react-bootstrap';
-import ProductCategory from './ProductCategory';
 import styles from './archiveProducts.module.css';
+import { Products } from 'botak/app/components/Products/page';
+import ProductCategory from './ProductCategory';
+import LazyLoad from 'react-lazyload';
+import Loading from './Loading';
 
 const ArchiveProducts = (props) => {
   const { data } = props;
+
   return (
     <>
       <Container className={styles.archiveProduct}>
@@ -16,7 +19,9 @@ const ArchiveProducts = (props) => {
           </Col>
           <Col lg={9}>
             <ShopAction />
-            <Products data={data} />
+            <LazyLoad height={100} offset={100} placeholder={<Loading />}>
+              <Products data={data} />
+            </LazyLoad>
           </Col>
         </Row>
       </Container>

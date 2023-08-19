@@ -6,12 +6,10 @@ export const Products = (props) => {
   const { data } = props;
 
   return (
-    <>
-      <Row className={styles.product}>
-        {data.length > 0 &&
-          data.map((item) => <ItemProduct item={item} key={item.id} />)}
-      </Row>
-    </>
+    <Row className={styles.product}>
+      {data.length > 0 &&
+        data.map((item) => <ItemProduct key={item.id} item={item} />)}
+    </Row>
   );
 };
 

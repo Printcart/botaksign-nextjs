@@ -1,9 +1,7 @@
 'use client';
+import Link from 'next/link';
 import useSWR from 'swr';
 import styles from './ProductCategory.module.css';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { useState } from 'react';
 
 const fetcherWithAuthorization = (url) =>
   fetch(url, {
@@ -21,7 +19,6 @@ const fetcherWithAuthorization = (url) =>
   });
 
 const ProductCategory = () => {
-  const router = useRouter();
   const fetUrl = `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}wc/v3/products/categories/`;
   const { data, error } = useSWR(fetUrl, fetcherWithAuthorization, {
     revalidateIfStale: false,
@@ -29,10 +26,7 @@ const ProductCategory = () => {
     revalidateOnReconnect: false
   });
 
-  const handleCategoryClick = (categoryId) => {
-    router.push(`/product-category/posters-cards/${categoryId}`);
-  };
-
+  console.log(data);
   if (error) {
     return <div>Error loading data</div>;
   }
@@ -49,8 +43,7 @@ const ProductCategory = () => {
               <span className={styles.name}>
                 <Link
                   className={styles.list}
-                  href={`/product-category/posters-cards/${item.id}`}
-                  onClick={() => handleCategoryClick(item.id)}
+                  href={`/product-category/${item.id}`}
                   passHref
                 >
                   {item.name}
@@ -65,3 +58,7 @@ const ProductCategory = () => {
 };
 
 export default ProductCategory;
+
+export const TitleCategory = () => {
+  return <></>;
+};
