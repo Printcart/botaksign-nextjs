@@ -1,14 +1,15 @@
 'use client';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import styles from './archiveProducts.module.css';
 import { Products } from 'botak/app/components/Products/page';
-import ProductCategory from './ProductCategory';
+import { useParams } from 'next/navigation';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import LazyLoad from 'react-lazyload';
 import Loading from './Loading';
+import ProductCategory, { TitleCategory } from './ProductCategory';
+import styles from './archiveProducts.module.css';
 
 const ArchiveProducts = (props) => {
   const { data } = props;
-
+  console.log('data product', data);
   return (
     <>
       <Container className={styles.archiveProduct}>
@@ -32,11 +33,14 @@ const ArchiveProducts = (props) => {
 export default ArchiveProducts;
 
 export const ShopAction = () => {
+  const searchParams = useParams();
+  // console.log(searchParams.id, 'searchParams ');
   return (
     <>
       <Row className={styles.shopAction}>
         <Col lg={6} md={6} xs={6} className={styles.title}>
-          <h1>Posters & Cards</h1>
+          title
+          <TitleCategory />
         </Col>
         <Col lg={6} md={6} xs={6}>
           <SelectFilter />

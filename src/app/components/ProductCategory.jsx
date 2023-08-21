@@ -41,13 +41,7 @@ const ProductCategory = () => {
           data.map((item) => (
             <li key={item.id} className={styles.lists}>
               <span className={styles.name}>
-                <Link
-                  className={styles.list}
-                  href={`/product-category/${item.id}`}
-                  passHref
-                >
-                  {item.name}
-                </Link>
+                <TitleCategory item={item} />
                 <span className={styles.count}>{item?.count || 0}</span>
               </span>
             </li>
@@ -59,6 +53,11 @@ const ProductCategory = () => {
 
 export default ProductCategory;
 
-export const TitleCategory = () => {
-  return <></>;
+export const TitleCategory = (props) => {
+  const { item } = props;
+  return (
+    <Link className={styles.list} href={`/product-category/${item?.id}`} passHref>
+      {item?.name}
+    </Link>
+  );
 };
