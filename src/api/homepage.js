@@ -112,16 +112,18 @@ export const fetchMenuFooterById = async (id) => {
   return data;
 };
 
-export const fetchArchiveProductId = async (id) => {
-  const fetUrl = `${API_URL}wc/v3/products?category=${id}`;
+export const fetchArchiveProductId = async (id, page = 1, perPage = 12) => {
+  const fetUrl = `${API_URL}wc/v3/products?category=${id}&page=${page}&per_page=${perPage}`;
 
   const res = await fetch(fetUrl, {
     headers,
     method: 'GET'
   });
   const data = await res.json();
+  const totalProducts = res.headers.get('x-wp-total');
+  const totalPages = res.headers.get('x-wp-totalpages');
   if (data.errors) {
     throw new Error('Failed to fetch API');
   }
-  return data;
+  return { data, totalProducts, totalPages };
 };

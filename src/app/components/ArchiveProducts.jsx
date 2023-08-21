@@ -1,15 +1,38 @@
 'use client';
+import { fetchArchiveProductId } from 'botak/api/homepage';
 import { Products } from 'botak/app/components/Products/page';
 import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import LazyLoad from 'react-lazyload';
+import ReactPaginate from 'react-paginate';
 import Loading from './Loading';
-import ProductCategory, { TitleCategory } from './ProductCategory';
+import ProductCategory from './ProductCategory';
 import styles from './archiveProducts.module.css';
 
 const ArchiveProducts = (props) => {
-  const { data } = props;
-  console.log('data product', data);
+  const { dataProduct } = props;
+  const params = useParams();
+  const [data, setData] = useState(dataProduct.data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(12);
+  const [totalPages, setTotalPages] = useState(+dataProduct.totalPages);
+
+  useEffect(() => {
+    fetchData();
+  }, [currentPage]);
+
+  const fetchData = async () => {
+    let res = await fetchArchiveProductId(params.id, currentPage, limit);
+    // if (res.data && res.data.length > 0) {
+
+    setData(res.data);
+    // }
+  };
+
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected + 1);
+  };
   return (
     <>
       <Container className={styles.archiveProduct}>
@@ -19,10 +42,34 @@ const ArchiveProducts = (props) => {
             <ProductCategory />
           </Col>
           <Col lg={9}>
-            <ShopAction />
+            <ShopAction data={data} />
             <LazyLoad height={100} offset={100} placeholder={<Loading />}>
               <Products data={data} />
             </LazyLoad>
+            <div className={styles.pagination}>
+              {totalPages > 0 && (
+                <ReactPaginate
+                  breakLabel="..."
+                  nextLabel="next >"
+                  onPageChange={handlePageClick}
+                  pageRangeDisplayed={5}
+                  pageCount={totalPages}
+                  previousLabel="< previous"
+                  marginPagesDisplayed={2}
+                  pageClassName="page-item"
+                  pageLinkClassName="page-link"
+                  previousClassName="page-item"
+                  previousLinkClassName="page-link"
+                  nextClassName="page-item"
+                  nextLinkClassName="page-link"
+                  breakClassName="page-item"
+                  breakLinkClassName="page-link"
+                  containerClassName="pagination"
+                  activeClassName="active"
+                  renderOnZeroPageCount={null}
+                />
+              )}
+            </div>
           </Col>
         </Row>
       </Container>
@@ -32,15 +79,19 @@ const ArchiveProducts = (props) => {
 
 export default ArchiveProducts;
 
-export const ShopAction = () => {
-  const searchParams = useParams();
-  // console.log(searchParams.id, 'searchParams ');
+export const ShopAction = (props) => {
+  const { data } = props;
+
+  const categoryName =
+    data.length > 0 && data[0].categories.length > 0
+      ? data[0].categories[0].name
+      : 'No Product';
+
   return (
     <>
       <Row className={styles.shopAction}>
         <Col lg={6} md={6} xs={6} className={styles.title}>
-          title
-          <TitleCategory />
+          <h1>{categoryName}</h1>
         </Col>
         <Col lg={6} md={6} xs={6}>
           <SelectFilter />

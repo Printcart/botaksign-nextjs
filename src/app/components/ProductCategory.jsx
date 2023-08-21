@@ -26,7 +26,6 @@ const ProductCategory = () => {
     revalidateOnReconnect: false
   });
 
-  console.log(data);
   if (error) {
     return <div>Error loading data</div>;
   }
@@ -53,7 +52,7 @@ const ProductCategory = () => {
 
 export default ProductCategory;
 
-export const TitleCategory = (props) => {
+const TitleCategory = (props) => {
   const { item } = props;
   return (
     <Link className={styles.list} href={`/product-category/${item?.id}`} passHref>
