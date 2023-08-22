@@ -2,10 +2,8 @@
 import { fetchArchiveProductId } from 'botak/api/homepage';
 import { Products } from 'botak/app/components/Products/page';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
-import LazyLoad from 'react-lazyload';
-import ReactPaginate from 'react-paginate';
 import Loading from './Loading';
 import ProductCategory from './ProductCategory';
 import styles from './archiveProducts.module.css';
@@ -15,24 +13,36 @@ const ArchiveProducts = (props) => {
   const params = useParams();
   const [data, setData] = useState(dataProduct.data);
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(12);
-  const [totalPages, setTotalPages] = useState(+dataProduct.totalPages);
+  const [limit, setLimit] = useState(3);
+
+  const [hasMore, setHasMore] = useState(true);
+  const alementRef = useRef(null);
+
+  const onIntersect = async (entries) => {
+    const firstEntry = entries[0];
+    if (firstEntry.isIntersecting && hasMore) {
+      let resData = await fetchArchiveProductId(params.id, currentPage, limit);
+      if (resData.data.length === 0) {
+        setHasMore(false);
+      } else {
+        setData((pre) => [...pre, ...resData.data]);
+        setCurrentPage((pre) => pre + 1);
+      }
+    }
+  };
+  const observer = new IntersectionObserver(onIntersect);
 
   useEffect(() => {
-    fetchData();
-  }, [currentPage]);
+    if (observer && alementRef.current) {
+      observer.observe(alementRef.current);
+    }
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, [data]);
 
-  const fetchData = async () => {
-    let res = await fetchArchiveProductId(params.id, currentPage, limit);
-    // if (res.data && res.data.length > 0) {
-
-    setData(res.data);
-    // }
-  };
-
-  const handlePageClick = (event) => {
-    setCurrentPage(event.selected + 1);
-  };
   return (
     <>
       <Container className={styles.archiveProduct}>
@@ -43,33 +53,12 @@ const ArchiveProducts = (props) => {
           </Col>
           <Col lg={9}>
             <ShopAction data={data} />
-            <LazyLoad height={100} offset={100} placeholder={<Loading />}>
-              <Products data={data} />
-            </LazyLoad>
-            <div className={styles.pagination}>
-              {totalPages > 0 && (
-                <ReactPaginate
-                  breakLabel="..."
-                  nextLabel="next >"
-                  onPageChange={handlePageClick}
-                  pageRangeDisplayed={5}
-                  pageCount={totalPages}
-                  previousLabel="< previous"
-                  marginPagesDisplayed={2}
-                  pageClassName="page-item"
-                  pageLinkClassName="page-link"
-                  previousClassName="page-item"
-                  previousLinkClassName="page-link"
-                  nextClassName="page-item"
-                  nextLinkClassName="page-link"
-                  breakClassName="page-item"
-                  breakLinkClassName="page-link"
-                  containerClassName="pagination"
-                  activeClassName="active"
-                  renderOnZeroPageCount={null}
-                />
-              )}
-            </div>
+            <Products data={data} />
+            {hasMore && (
+              <div className={styles.loading} ref={alementRef}>
+                <Loading />
+              </div>
+            )}
           </Col>
         </Row>
       </Container>

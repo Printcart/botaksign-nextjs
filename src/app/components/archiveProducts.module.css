@@ -31,19 +31,8 @@
   display: flex;
   justify-content: flex-end;
 }
-.pagination {
-  display: flex;
-  justify-content: center;
+.loading {
   margin-top: 30px;
-}
-.pagination ul li a {
-  color: rgb(40, 196, 117);
-  text-transform: capitalize;
-}
-.active a {
-  background-color: #007bff;
-  color: white;
-  border: 1px solid #007bff;
 }
 @media (max-width: 768px) {
   .title > h1 {
