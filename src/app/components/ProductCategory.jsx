@@ -25,7 +25,6 @@ const ProductCategory = () => {
     revalidateOnFocus: false,
     revalidateOnReconnect: false
   });
-
   if (error) {
     return <div>Error loading data</div>;
   }
@@ -37,8 +36,8 @@ const ProductCategory = () => {
     <div className={styles.shopSidebar}>
       <ul>
         {data.length > 0 &&
-          data.map((item) => (
-            <li key={item.id} className={styles.lists}>
+          data.map((item, index) => (
+            <li key={`index${index}`} className={styles.lists}>
               <span className={styles.name}>
                 <TitleCategory item={item} />
                 <span className={styles.count}>{item?.count || 0}</span>

@@ -8,8 +8,8 @@ export const Products = (props) => {
   return (
     <>
       <Row className={styles.product}>
-        {data?.map((item) => (
-          <ItemProduct key={item.id} item={item} />
+        {data?.map((item, index) => (
+          <ItemProduct key={`index${index}`} item={item} />
         ))}
       </Row>
     </>

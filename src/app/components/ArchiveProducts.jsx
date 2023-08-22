@@ -70,7 +70,6 @@ export default ArchiveProducts;
 
 export const ShopAction = (props) => {
   const { data } = props;
-
   const categoryName =
     data.length > 0 && data[0].categories.length > 0
       ? data[0].categories[0].name
