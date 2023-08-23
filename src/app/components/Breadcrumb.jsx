@@ -10,7 +10,10 @@ const Breadcrumb = ({ titlePage, fontWeight, color }) => {
         <Row>
           <span className={styles.spanBreadcrumb}>
             <span className={styles.spanBreadcrumb}>
-              <Link className={styles.linkBreadcrumb} href={'/'}>
+              <Link
+                className={`${styles.linkBreadcrumb} text-decoration-none`}
+                href={'/'}
+              >
                 Home
               </Link>
               <span className={styles.spanBreadcrumb}>/</span>

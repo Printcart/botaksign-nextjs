@@ -184,3 +184,91 @@
     line-height: 14px;
   }
 }
+
+.woocomerce {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+  margin-bottom: 60px;
+}
+
+.liLink {
+  padding: 10px 15px;
+}
+
+.liLink:first-child a {
+  border: 1px solid #1bcb3f
+}
+
+.navLink {
+  padding: 25px 0;
+  width: 235px;
+  height: 120px;
+  font-size: 17px;
+  line-height: 20px;
+  color: #000000;
+  font-weight: 600;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background: transparent linear-gradient(178deg, #FFFFFF 0%, #F6F8F7 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 12px #0000001F;
+  border: 1px solid #DEDEDE;
+  border-radius: 10px;
+}
+
+.wrapMyaccount {
+  position: inherit;
+  width: 60%;
+  max-width: 750px;
+  margin: 0 auto;
+  display: block;
+}
+
+.dashboard {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 550px;
+}
+
+.dashboardHeader {
+  box-shadow: 0px 0px 12px #0000001F;
+  border: 1px solid #DEDEDE;
+  border-radius: 10px;
+  padding: 10px 20px 0;
+  margin-bottom: 35px;
+}
+
+.headerTitle {
+  font-size: 45px;
+  line-height: 48px;
+  color: #000000;
+  font-weight: 700;
+  display: flex;
+  text-overflow: clip;
+  white-space: nowrap;
+  margin-bottom: 4px;
+}
+
+.headerDesc {
+  font-size: 19px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.thumbnailwrap {
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  position: relative;
+  overflow: hidden;
+}
+
+.imgLogo {
+  width: 90% !important;
+  height: auto !important;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+}

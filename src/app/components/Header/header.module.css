@@ -30,7 +30,7 @@
 }
 .linkAccount:hover {
   color: #0056b3 !important;
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 .wrappermenu {

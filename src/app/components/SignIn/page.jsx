@@ -1,11 +1,12 @@
 'use client';
 import { useFormik } from 'formik';
 import Link from 'next/link';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import * as Yup from 'yup';
 import styles from './signIn.module.css';
 import InputForm from '../InputForm';
 import Breadcrumb from '../Breadcrumb';
+import Image from 'next/image';
 
 const LoginLeft = () => {
   const formik = useFormik({
@@ -22,6 +23,7 @@ const LoginLeft = () => {
         .required('You must fill in this section')
     }),
     onSubmit: (values, { resetForm }) => {
+      console.log(values);
       resetForm();
     }
   });
@@ -87,22 +89,125 @@ const LoginRight = () => {
 };
 
 const SignIn = () => {
+  const isLogin = false;
   return (
     <div className="siteContent">
       <Breadcrumb titlePage="My Account" fontWeight="900" />
-      <Container className={`${styles.formLoginWrap} ${styles.signIn}`}>
-        <Row>
-          <Col lg={5} className={styles.loginLeft}>
-            <LoginLeft />
-          </Col>
-          <Col lg={2} className={styles.loginMiddle}>
-            <LoginMiddle />
-          </Col>
-          <Col lg={5} className={styles.loginRight}>
-            <LoginRight />
-          </Col>
-        </Row>
-      </Container>
+      {isLogin ? (
+        <Container className={`${styles.formLoginWrap} ${styles.signIn}`}>
+          <Row>
+            <Col lg={5} className={styles.loginLeft}>
+              <LoginLeft />
+            </Col>
+            <Col lg={2} className={styles.loginMiddle}>
+              <LoginMiddle />
+            </Col>
+            <Col lg={5} className={styles.loginRight}>
+              <LoginRight />
+            </Col>
+          </Row>
+        </Container>
+      ) : (
+        <Container>
+          <Row>
+            <div className="px-3">
+              <main className="siteName">
+                <article className="m-0">
+                  <div className="entryContent">
+                    <div className={styles.woocomerce}>
+                      <div className="w-100">
+                        <nav className="mb-5">
+                          <ul className="d-flex justify-content-center px-0">
+                            <li className={styles.liLink}>
+                              <Link href={'/'} className={styles.navLink}>
+                                <div className="text-center">
+                                  <Image
+                                    src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/account-icon.png"
+                                    width={40}
+                                    height={40}
+                                    alt="Icon"
+                                    style={{ marginBottom: '8px', height: '40px' }}
+                                  />
+                                </div>
+                                <p className="fw-bold">Account</p>
+                              </Link>
+                            </li>
+                            <li className={styles.liLink}>
+                              <Link href={'/'} className={styles.navLink}>
+                                <div className="text-center">
+                                  <Image
+                                    src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/orders-icon.png"
+                                    width={40}
+                                    height={40}
+                                    alt="Icon"
+                                    style={{ marginBottom: '8px', height: '40px' }}
+                                  />
+                                </div>
+                                <p className="fw-bold">Orders</p>
+                              </Link>
+                            </li>
+                            <li className={styles.liLink}>
+                              <Link href={'/'} className={styles.navLink}>
+                                <div className="text-center">
+                                  <Image
+                                    src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/quotations-icon.png"
+                                    width={40}
+                                    height={40}
+                                    alt="Icon"
+                                    style={{ marginBottom: '8px', height: '40px' }}
+                                  />
+                                </div>
+                                <p className="fw-bold">Quotions</p>
+                              </Link>
+                            </li>
+                          </ul>
+                        </nav>
+                        <div className={styles.wrapMyaccount}>
+                          <div className={styles.dashboard}>
+                            <div className={styles.dashboardHeader}>
+                              <Row>
+                                <Col
+                                  xs={6}
+                                  style={{
+                                    paddingTop: '10px',
+                                    paddingBottom: '20px'
+                                  }}
+                                >
+                                  <div className={styles.headerTitle}>
+                                    <span>Hello [user Name]</span>
+                                  </div>
+                                  <div className={styles.headerDesc}>
+                                    It’s good to see you again.
+                                  </div>
+                                </Col>
+                                <Col
+                                  xs={6}
+                                  style={{ display: 'flex', alignItems: 'end' }}
+                                >
+                                  <div className={styles.thumbnailwrap}>
+                                    <Image
+                                      src="https://botaksign.com/wp-content/plugins/custom-botaksign/assets/images/gif2.gif"
+                                      alt="Image"
+                                      width={100}
+                                      height={100}
+                                      className={styles.imgLogo}
+                                    />
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                            <div className={styles.dashboardBody}></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </main>
+            </div>
+          </Row>
+        </Container>
+      )}
     </div>
   );
 };

@@ -14,7 +14,7 @@ const HeaderTop = () => {
             <Nav.Item as="li" className={styles.borderAccount}>
               <Link
                 href="/my-account"
-                className={`${styles.linkAccount} text-dark px-1`}
+                className={`${styles.linkAccount} text-dark px-1 text-decoration-none`}
               >
                 <span className="text-dark">Register</span>
               </Link>
@@ -22,7 +22,7 @@ const HeaderTop = () => {
             <Nav.Item as="li">
               <Link
                 href="/my-account"
-                className={`${styles.linkAccount} text-dark px-1`}
+                className={`${styles.linkAccount} text-dark px-1 text-decoration-none`}
               >
                 <span className="text-dark">Login</span>
               </Link>

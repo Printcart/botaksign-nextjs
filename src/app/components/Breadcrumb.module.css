@@ -15,15 +15,7 @@
 }
 
 .linkBreadcrumb:hover {
-    text-decoration: underline;
-}
-
-.strongBreadcrumb {
-    font-weight: 900;
-}
-
-.linkBreadcrumb:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 .strongBreadcrumb {
