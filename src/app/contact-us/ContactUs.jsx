@@ -213,22 +213,12 @@ const FormContact = () => {
     </>
   );
 };
-const ContactUs = (props) => {
-  const { data } = props;
-  console.log(data);
-
-  const markupContactUsHeader = {
-    __html: data?.content?.rendered || ''
-  };
-
+const ContactUs = () => {
   return (
     <div>
       <PageCoverHeader title="CONTACT us" link="Home" titlePage="Contact Us" />
       <Container>
         <Row>
-          <div className={styles.contactUs}>
-            <div dangerouslySetInnerHTML={markupContactUsHeader}></div>
-          </div>
           <Information />
           <MessageMap />
         </Row>
