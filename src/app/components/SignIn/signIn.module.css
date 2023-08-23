@@ -99,7 +99,9 @@
 
 .buttonForm {
   width: 100%;
-  background: transparent linear-gradient(0deg, #1bcb3f 0%, #45d242 33%, #7bdb46 78%, #91df48 100%) 0% 0% no-repeat padding-box;
+  background: transparent
+    linear-gradient(0deg, #1bcb3f 0%, #45d242 33%, #7bdb46 78%, #91df48 100%) 0% 0%
+    no-repeat padding-box;
   border: none;
   padding: 10px;
   filter: drop-shadow(0px 0px 12px #0000002f);
@@ -197,7 +199,7 @@
 }
 
 .liLink:first-child a {
-  border: 1px solid #1bcb3f
+  border: 1px solid #1bcb3f;
 }
 
 .navLink {
@@ -211,9 +213,10 @@
   display: block;
   text-align: center;
   text-decoration: none;
-  background: transparent linear-gradient(178deg, #FFFFFF 0%, #F6F8F7 100%) 0% 0% no-repeat padding-box;
-  box-shadow: 0px 0px 12px #0000001F;
-  border: 1px solid #DEDEDE;
+  background: transparent linear-gradient(178deg, #ffffff 0%, #f6f8f7 100%) 0% 0%
+    no-repeat padding-box;
+  box-shadow: 0px 0px 12px #0000001f;
+  border: 1px solid #dedede;
   border-radius: 10px;
 }
 
@@ -232,8 +235,8 @@
 }
 
 .dashboardHeader {
-  box-shadow: 0px 0px 12px #0000001F;
-  border: 1px solid #DEDEDE;
+  box-shadow: 0px 0px 12px #0000001f;
+  border: 1px solid #dedede;
   border-radius: 10px;
   padding: 10px 20px 0;
   margin-bottom: 35px;

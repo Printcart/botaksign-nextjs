@@ -1,7 +1,7 @@
 'use client';
 import { useFormik } from 'formik';
 import Link from 'next/link';
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import { Accordion, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import * as Yup from 'yup';
 import styles from './signIn.module.css';
 import InputForm from '../InputForm';
@@ -174,7 +174,7 @@ const SignIn = () => {
                                   }}
                                 >
                                   <div className={styles.headerTitle}>
-                                    <span>Hello [user Name]</span>
+                                    <span>Hello David!</span>
                                   </div>
                                   <div className={styles.headerDesc}>
                                     It’s good to see you again.
@@ -196,7 +196,44 @@ const SignIn = () => {
                                 </Col>
                               </Row>
                             </div>
-                            <div className={styles.dashboardBody}></div>
+                            <div className={styles.dashboardBody}>
+                              <Accordion>
+                                <Accordion.Item eventKey="0" >
+                                  <Accordion.Header>
+                                    Accordion Item #1
+                                  </Accordion.Header>
+                                  <Accordion.Body>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit, sed do eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua. Ut enim ad
+                                    minim veniam, quis nostrud exercitation ullamco
+                                    laboris nisi ut aliquip ex ea commodo consequat.
+                                    Duis aute irure dolor in reprehenderit in
+                                    voluptate velit esse cillum dolore eu fugiat
+                                    nulla pariatur. Excepteur sint occaecat cupidatat
+                                    non proident, sunt in culpa qui officia deserunt
+                                    mollit anim id est laborum.
+                                  </Accordion.Body>
+                                </Accordion.Item>
+                                <Accordion.Item eventKey="1">
+                                  <Accordion.Header>
+                                    Accordion Item #2
+                                  </Accordion.Header>
+                                  <Accordion.Body>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit, sed do eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua. Ut enim ad
+                                    minim veniam, quis nostrud exercitation ullamco
+                                    laboris nisi ut aliquip ex ea commodo consequat.
+                                    Duis aute irure dolor in reprehenderit in
+                                    voluptate velit esse cillum dolore eu fugiat
+                                    nulla pariatur. Excepteur sint occaecat cupidatat
+                                    non proident, sunt in culpa qui officia deserunt
+                                    mollit anim id est laborum.
+                                  </Accordion.Body>
+                                </Accordion.Item>
+                              </Accordion>
+                            </div>
                           </div>
                         </div>
                       </div>
