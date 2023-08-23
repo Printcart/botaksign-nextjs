@@ -1,5 +1,5 @@
 'use client';
-import { data } from 'botak/app/data/footer';
+import { data } from 'botak/app/ContactUs.jsx/footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment } from 'react';
