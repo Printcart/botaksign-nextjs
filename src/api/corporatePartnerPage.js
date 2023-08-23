@@ -7,8 +7,8 @@ const headers = {
   )}`
 };
 
-export const fetCorporatePartner = async (params) => {
-  const fetchUrl = `${API_URL}wc/v3/products?search=${params}`;
+export const fetCorporatePartner = async () => {
+  const fetchUrl = `${API_URL}pc/v2/pages/${ID_PAGE}`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();
   if (data.errors) {

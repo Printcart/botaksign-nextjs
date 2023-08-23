@@ -10,34 +10,51 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 
 const Select = (props) => {
-  const { field, form, required } = props;
-  const error = form.touched[field.name] && form.errors[field.name];
+  const { field, form, required, onSelectChange } = props;
+  const { name, value } = field;
+
+  const error = form.touched[name] && form.errors[name];
 
   const handleChange = (event) => {
-    const { value } = event.target;
-    form.setFieldValue(field.name, value);
-    form.setFieldTouched(field.name, true);
+    const selectedValue = event.target.value;
+
+    onSelectChange(selectedValue);
+    form.setFieldValue(name, selectedValue);
+    form.setFieldTouched(name, true);
   };
+
   return (
     <>
       <label htmlFor={field.name} className={styles.titleSelect}>
         {field.name} {required && <span className={styles.required}>*</span>}
       </label>
-      <Form.Select
-        value={field.value}
-        onChange={handleChange}
-        isInvalid={!!error}
-        aria-label="Default select example"
-      >
+      <Form.Select value={value} onChange={handleChange}>
         <option value="">---</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option value="Advertising / Marketing / PR">
+          Advertising / Marketing / PR
+        </option>
+        <option value="Architecture / Interior Design">
+          Architecture / Interior Design
+        </option>
+        <option value="Arts / Design / Fashion">Arts / Design / Fashion</option>
+        <option value="Banking/Accounting/Financial Services">
+          Banking/Accounting/Financial Services
+        </option>
+        <option value="Construction & Engineering">
+          Construction & Engineering
+        </option>
+        <option value="Customer Service">Customer Service</option>
+        <option value="Education">Education</option>
+        <option value="Entertainment/Media/Publishing">
+          Entertainment/Media/Publishing
+        </option>
+        <option value="Other">Other</option>
       </Form.Select>
       {error && <p className={styles.error}>{error}</p>}
     </>
   );
 };
+
 const TermsConditions = () => {
   return (
     <div className={styles.termsConditions}>
@@ -70,7 +87,7 @@ const ApplyJoin = () => {
   const formik = useFormik({
     initialValues: {
       companyName: '',
-      industryOfCompany: 'cc',
+      industryOfCompany: '',
       companyWebsite: '',
       name: '',
       email: '',
@@ -79,9 +96,7 @@ const ApplyJoin = () => {
     },
     validationSchema: Yup.object({
       companyName: Yup.string().required('You must fill in this section'),
-      industryOfCompany: Yup.string()
-        .required('You must select an industry')
-        .oneOf(['1', '2', '3'], 'Invalid industry option'),
+      industryOfCompany: Yup.string().required('You must select an industry'),
       companyWebsite: Yup.string().required('You must fill in this section'),
       name: Yup.string().required('You must fill in this section'),
       email: Yup.string()
@@ -93,10 +108,15 @@ const ApplyJoin = () => {
       volume: Yup.string().required('You must fill in this section')
     }),
     onSubmit: (values, { resetForm }) => {
-      // console.log(values);
+      console.log(values);
       resetForm();
     }
   });
+
+  const handleSelectChange = (selectedValue) => {
+    formik.setFieldValue('selectedOption', selectedValue);
+    console.log(selectedValue);
+  };
   return (
     <div className={styles.applyJoin}>
       <h2 className={styles.titleApplyJoin}>
@@ -119,14 +139,15 @@ const ApplyJoin = () => {
               formik.errors.companyName
             }
           />
-          {/* <Select
+          <Select
             required
             field={{
               name: 'Industry of company',
               value: formik.values.industryOfCompany
             }}
+            onSelectChange={handleSelectChange}
             form={formik}
-          /> */}
+          />
           <InputForm
             label="Company website"
             required
