@@ -19,7 +19,7 @@
   font-size: 16px;
 }
 .aboutUs span {
-  margin: 0 5px;
+  margin: 0 50px;
 }
 /* .aboutUs h2 {
   font-size: 30px;
@@ -36,16 +36,17 @@
   line-height: 54px !important;
   margin-bottom: 50px !important;
 } */
-/* .aboutUs .nb-our-story {
+.aboutUs .nb-our-story {
   display: flex !important;
 }
-.aboutUs .wpb_wrapper .nb-our-story > img {
+.aboutUs .wpb_wrapper .nb-our-story img {
   width: 30px !important;
+  height: 300px !important;
   max-width: 300px !important;
-} */
+}
 
 .aboutUs .aboutus-list-header {
-  color: #28c373 !important;
+  color: red !important;
   font-size: 24px !important;
   font-family: var(--font-oduda-bold) !important;
   font-weight: 400;
