@@ -131,7 +131,6 @@ const ApplyJoin = () => {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values, { resetForm }) => {
-            // console.log(values);
             resetForm();
           }}
         >

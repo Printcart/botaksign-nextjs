@@ -13,7 +13,6 @@ const InputForm = ({
   required,
   dots
 }) => {
-  console.log(value);
   const subInput = Boolean(label);
   return (
     <Form.Group
