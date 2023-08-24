@@ -4,14 +4,14 @@ import { Container } from 'react-bootstrap';
 import styles from './Career.module.css';
 
 const Title = (props) => {
-  const { data } = props;
+  const { title } = props;
   return (
     <>
       <div className={styles.title}>
         <span>
-          <Link href="https://botaksign.com/">Home</Link>
+          <Link href="/">Home</Link>
           <span>/</span>
-          <strong>{data?.title?.rendered}</strong>
+          <strong>{title?.rendered}</strong>
         </span>
       </div>
     </>
@@ -28,7 +28,7 @@ const Career = (props) => {
   return (
     <>
       <Container className={styles.career}>
-        <Title data={data} />
+        <Title title={data?.title} />
         <div className={styles.careerContent}>
           <div dangerouslySetInnerHTML={markuPageCareer}></div>
         </div>
