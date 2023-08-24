@@ -7,6 +7,7 @@ import styles from './signIn.module.css';
 import InputForm from '../InputForm';
 import Breadcrumb from '../Breadcrumb';
 import Image from 'next/image';
+import InputFormFloat from '../InputFormFloat';
 
 const LoginLeft = () => {
   const formik = useFormik({
@@ -88,12 +89,31 @@ const LoginRight = () => {
   );
 };
 
+const NavigationMenu = (props) => {
+  const { url, src, title } = props;
+  return (
+    <Link href={url} className={styles.navLink}>
+      <div className="text-center">
+        <Image
+          src={src}
+          width={40}
+          height={40}
+          alt={title}
+          style={{ marginBottom: '8px', height: '40px' }}
+        />
+      </div>
+      <p className="fw-bold">{title}</p>
+    </Link>
+  );
+};
+
 const SignIn = () => {
   const isLogin = true;
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
+      displayName: '',
       companyName: '',
       country: '',
       streetAddress: '',
@@ -106,6 +126,7 @@ const SignIn = () => {
     validationSchema: Yup.object({
       firstName: Yup.string().required('First name is a required field.'),
       lastName: Yup.string().required('Last name is a required field.'),
+      displayName: Yup.string().required('Display name is a required field.'),
       country: Yup.string().required('Country is a required field.'),
       streetAddress: Yup.string().required('Street address is a required field.'),
       postcode: Yup.string().required('Postcode / ZIP is a required field.'),
@@ -145,46 +166,13 @@ const SignIn = () => {
                         <nav style={{ marginBottom: '70px' }}>
                           <ul className="d-flex justify-content-center px-0">
                             <li className={styles.liLink}>
-                              <Link href={'/'} className={styles.navLink}>
-                                <div className="text-center">
-                                  <Image
-                                    src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/account-icon.png"
-                                    width={40}
-                                    height={40}
-                                    alt="Icon"
-                                    style={{ marginBottom: '8px', height: '40px' }}
-                                  />
-                                </div>
-                                <p className="fw-bold">Account</p>
-                              </Link>
+                            <NavigationMenu url="/my-account/" src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/account-icon.png" title="Account" />
                             </li>
                             <li className={styles.liLink}>
-                              <Link href={'/'} className={styles.navLink}>
-                                <div className="text-center">
-                                  <Image
-                                    src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/orders-icon.png"
-                                    width={40}
-                                    height={40}
-                                    alt="Icon"
-                                    style={{ marginBottom: '8px', height: '40px' }}
-                                  />
-                                </div>
-                                <p className="fw-bold">Orders</p>
-                              </Link>
+                            <NavigationMenu url="/my-account/orders/" src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/orders-icon.png" title="Orders" />
                             </li>
                             <li className={styles.liLink}>
-                              <Link href={'/'} className={styles.navLink}>
-                                <div className="text-center">
-                                  <Image
-                                    src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/quotations-icon.png"
-                                    width={40}
-                                    height={40}
-                                    alt="Icon"
-                                    style={{ marginBottom: '8px', height: '40px' }}
-                                  />
-                                </div>
-                                <p className="fw-bold">Quotions</p>
-                              </Link>
+                            <NavigationMenu url="/my-account/quotation/" src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/quotations-icon.png" title="Quotions" />
                             </li>
                           </ul>
                         </nav>
@@ -415,7 +403,7 @@ const SignIn = () => {
                                               type="submit"
                                               className={styles.buttomUpdate}
                                             >
-                                              Update
+                                              UPDATE
                                             </Button>
                                           </div>
                                         </div>
@@ -580,7 +568,7 @@ const SignIn = () => {
                                               type="submit"
                                               className={styles.buttomUpdate}
                                             >
-                                              Update
+                                              UPDATE
                                             </Button>
                                           </div>
                                         </div>
@@ -600,12 +588,86 @@ const SignIn = () => {
                                   <Accordion.Collapse eventKey="2">
                                     <Accordion.Body>
                                       <Form>
+                                        <Row style={{ marginBottom: '1.5rem' }}>
+                                          <Col xs={6}>
+                                            <InputFormFloat
+                                              customCss
+                                              required
+                                              controlId="inputFirstName"
+                                              type="text"
+                                              name="firstName"
+                                              label="First name"
+                                              value={formik.values.firstName}
+                                              onChange={formik.handleChange}
+                                              errors={
+                                                formik.errors.firstName &&
+                                                formik.touched.firstName &&
+                                                formik.errors.firstName
+                                              }
+                                            />
+                                          </Col>
+                                          <Col xs={6}>
+                                            <InputFormFloat
+                                              customCss
+                                              required
+                                              controlId="inputLastName"
+                                              type="text"
+                                              name="lastName"
+                                              label="Last name"
+                                              value={formik.values.lastName}
+                                              onChange={formik.handleChange}
+                                              errors={
+                                                formik.errors.lastName &&
+                                                formik.touched.lastName &&
+                                                formik.errors.lastName
+                                              }
+                                            />
+                                          </Col>
+                                        </Row>
                                         <Row>
                                           <Col xs={6}>
-                                            
+                                            <InputFormFloat
+                                              customCss
+                                              required
+                                              controlId="inputDisplayName"
+                                              type="text"
+                                              name="displayName"
+                                              label="Display name"
+                                              value={formik.values.displayName}
+                                              onChange={formik.handleChange}
+                                              errors={
+                                                formik.errors.displayName &&
+                                                formik.touched.displayName &&
+                                                formik.errors.displayName
+                                              }
+                                            />
                                           </Col>
-                                          <Col xs={6}></Col>
+                                          <Col xs={6}>
+                                            <InputFormFloat
+                                              customCss
+                                              required
+                                              controlId="inputEmail"
+                                              type="text"
+                                              name="email"
+                                              label="Email address"
+                                              value={formik.values.email}
+                                              onChange={formik.handleChange}
+                                              errors={
+                                                formik.errors.email &&
+                                                formik.touched.email &&
+                                                formik.errors.email
+                                              }
+                                            />
+                                          </Col>
                                         </Row>
+                                        <div className={styles.buttomSubmit}>
+                                          <Button
+                                            type="submit"
+                                            className={styles.buttomUpdate}
+                                          >
+                                            UPDATE
+                                          </Button>
+                                        </div>
                                       </Form>
                                     </Accordion.Body>
                                   </Accordion.Collapse>
@@ -621,17 +683,71 @@ const SignIn = () => {
                                   </Accordion.Header>
                                   <Accordion.Collapse eventKey="3">
                                     <Accordion.Body>
-                                      Lorem ipsum dolor sit amet, consectetur
-                                      adipiscing elit, sed do eiusmod tempor
-                                      incididunt ut labore et dolore magna aliqua. Ut
-                                      enim ad minim veniam, quis nostrud exercitation
-                                      ullamco laboris nisi ut aliquip ex ea commodo
-                                      consequat. Duis aute irure dolor in
-                                      reprehenderit in voluptate velit esse cillum
-                                      dolore eu fugiat nulla pariatur. Excepteur sint
-                                      occaecat cupidatat non proident, sunt in culpa
-                                      qui officia deserunt mollit anim id est
-                                      laborum.
+                                      <Form>
+                                        <fieldset>
+                                          <Row style={{ marginBottom: '1.5rem' }}>
+                                            <Col xs={6}>
+                                              <InputFormFloat
+                                                customCss
+                                                controlId="inputCurrentPassword"
+                                                type="text"
+                                                name="firstName"
+                                                label="Current Password"
+                                                value={formik.values.firstName}
+                                                onChange={formik.handleChange}
+                                                errors={
+                                                  formik.errors.firstName &&
+                                                  formik.touched.firstName &&
+                                                  formik.errors.firstName
+                                                }
+                                              />
+                                            </Col>
+                                            <Col xs={6}></Col>
+                                          </Row>
+                                          <Row>
+                                            <Col xs={6}>
+                                              <InputFormFloat
+                                                customCss
+                                                controlId="inputNewPassword"
+                                                type="text"
+                                                name="displayName"
+                                                label="New password"
+                                                value={formik.values.displayName}
+                                                onChange={formik.handleChange}
+                                                errors={
+                                                  formik.errors.displayName &&
+                                                  formik.touched.displayName &&
+                                                  formik.errors.displayName
+                                                }
+                                              />
+                                            </Col>
+                                            <Col xs={6}>
+                                              <InputFormFloat
+                                                customCss
+                                                controlId="inputConfirmPass"
+                                                type="text"
+                                                name="email"
+                                                label="Confirm new password"
+                                                value={formik.values.email}
+                                                onChange={formik.handleChange}
+                                                errors={
+                                                  formik.errors.email &&
+                                                  formik.touched.email &&
+                                                  formik.errors.email
+                                                }
+                                              />
+                                            </Col>
+                                          </Row>
+                                        </fieldset>
+                                        <div className={styles.buttomSubmit}>
+                                          <Button
+                                            type="submit"
+                                            className={styles.buttomUpdate}
+                                          >
+                                            UPDATE
+                                          </Button>
+                                        </div>
+                                      </Form>
                                     </Accordion.Body>
                                   </Accordion.Collapse>
                                 </Accordion.Item>
