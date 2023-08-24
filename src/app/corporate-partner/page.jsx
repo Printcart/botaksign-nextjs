@@ -1,64 +1,77 @@
 'use client';
-import React from 'react';
-import PageCoverHeader from '../components/PageCoverHeader';
-import { Button, Container, Form } from 'react-bootstrap';
-import Link from 'next/link';
-import styles from './CorporatePartner.module.css';
+import { Form, Formik } from 'formik';
 import Image from 'next/image';
-import InputForm from '../components/InputForm';
+import Link from 'next/link';
+import { Container } from 'react-bootstrap';
 import * as Yup from 'yup';
-import { useFormik } from 'formik';
+import FormField from '../components/FormField';
+import PageCoverHeader from '../components/PageCoverHeader';
+import styles from './CorporatePartner.module.css';
 
-const Select = (props) => {
-  const { field, form, required, onSelectChange } = props;
-  const { name, value } = field;
+const industryOptions = [
+  { value: 'Advertising / Marketing / PR', label: 'Advertising / Marketing / PR' },
+  {
+    value: 'Architecture / Interior Design',
+    label: 'Architecture / Interior Design'
+  },
+  { value: 'Arts / Design / Fashion', label: 'Arts / Design / Fashion' },
+  {
+    value: 'Banking/Accounting/Financial Services',
+    label: 'Banking/Accounting/Financial Services'
+  },
+  { value: 'Construction & Engineering', label: 'Construction & Engineering' },
+  { value: 'Customer Service', label: 'Customer Service' },
+  { value: 'Education', label: 'Education' },
+  {
+    value: 'Entertainment/Media/Publishing',
+    label: 'Entertainment/Media/Publishing'
+  },
+  {
+    value: 'Other',
+    label: 'Other'
+  }
+];
 
-  const error = form.touched[name] && form.errors[name];
-
-  const handleChange = (event) => {
-    const selectedValue = event.target.value;
-
-    onSelectChange(selectedValue);
-    form.setFieldValue(name, selectedValue);
-    form.setFieldTouched(name, true);
-  };
-
+const Select = ({
+  label,
+  required,
+  dots,
+  value,
+  name,
+  onChange,
+  options,
+  errors,
+  touched
+}) => {
+  const hasError = touched[name] && errors[name];
   return (
-    <>
-      <label htmlFor={field.name} className={styles.titleSelect}>
-        {field.name} {required && <span className={styles.required}>*</span>}
+    <div className={styles.form}>
+      <label className={styles.labelSelect}>
+        {label} {required && <span className={styles.required}>*</span>}{' '}
+        {dots && <span>:</span>}
       </label>
-      <Form.Select value={value} onChange={handleChange}>
+      <select
+        name={name}
+        value={value}
+        onChange={onChange}
+        className={`${styles.selectOption} ${hasError ? styles.error : ''}`}
+      >
         <option value="">---</option>
-        <option value="Advertising / Marketing / PR">
-          Advertising / Marketing / PR
-        </option>
-        <option value="Architecture / Interior Design">
-          Architecture / Interior Design
-        </option>
-        <option value="Arts / Design / Fashion">Arts / Design / Fashion</option>
-        <option value="Banking/Accounting/Financial Services">
-          Banking/Accounting/Financial Services
-        </option>
-        <option value="Construction & Engineering">
-          Construction & Engineering
-        </option>
-        <option value="Customer Service">Customer Service</option>
-        <option value="Education">Education</option>
-        <option value="Entertainment/Media/Publishing">
-          Entertainment/Media/Publishing
-        </option>
-        <option value="Other">Other</option>
-      </Form.Select>
-      {error && <p className={styles.error}>{error}</p>}
-    </>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      {hasError && <div className={styles.errorText}>{errors[name]}</div>}
+    </div>
   );
 };
 
 const TermsConditions = () => {
   return (
     <div className={styles.termsConditions}>
-      <h2 className={styles.termsConditions}>Terms & Conditions</h2>
+      <h2 className={styles.termsConditionsTitle}>Terms & Conditions</h2>
       <ol>
         <li>
           All applications are subjected to the approval of Botak Sign Pte Ltd. We
@@ -83,140 +96,82 @@ const TermsConditions = () => {
   );
 };
 
-const ApplyJoin = () => {
-  const formik = useFormik({
-    initialValues: {
-      companyName: '',
-      industryOfCompany: '',
-      companyWebsite: '',
-      name: '',
-      email: '',
-      number: '',
-      volume: ''
-    },
-    validationSchema: Yup.object({
-      companyName: Yup.string().required('You must fill in this section'),
-      industryOfCompany: Yup.string().required('You must select an industry'),
-      companyWebsite: Yup.string().required('You must fill in this section'),
-      name: Yup.string().required('You must fill in this section'),
-      email: Yup.string()
-        .email('Invalid Email')
-        .required('You must fill in this section'),
-      number: Yup.string()
-        .matches(/^\d+$/, 'Contact number  must be a valid number')
-        .required('You must fill in this section'),
-      volume: Yup.string().required('You must fill in this section')
-    }),
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      resetForm();
-    }
-  });
+const SignupSchema = Yup.object().shape({
+  companyName: Yup.string().required('You must fill in this section'),
+  industryOfCompany: Yup.string().required('You must select an industry'),
+  companyWebsite: Yup.string().required('You must fill in this section'),
+  name: Yup.string().required('You must fill in this section'),
+  email: Yup.string()
+    .email('Invalid Email')
+    .required('You must fill in this section'),
+  number: Yup.string()
+    .matches(/^\d+$/, 'Contact number  must be a valid number')
+    .required('You must fill in this section'),
+  volume: Yup.string()
+    .matches(/^\d+$/, 'Contact number  must be a valid number')
+    .required('You must fill in this section')
+});
 
-  const handleSelectChange = (selectedValue) => {
-    formik.setFieldValue('selectedOption', selectedValue);
-    console.log(selectedValue);
-  };
+const ApplyJoin = () => {
   return (
     <div className={styles.applyJoin}>
       <h2 className={styles.titleApplyJoin}>
         Apply to join now as a Corporate Partner below
       </h2>
       <div>
-        <Form onSubmit={formik.handleSubmit}>
-          <InputForm
-            label="Company name"
-            required
-            dots
-            controlId="inputCompanyName"
-            type="text"
-            name="companyName"
-            value={formik.values.companyName}
-            onChange={formik.handleChange}
-            errors={
-              formik.errors.companyName &&
-              formik.touched.companyName &&
-              formik.errors.companyName
-            }
-          />
-          <Select
-            required
-            field={{
-              name: 'Industry of company',
-              value: formik.values.industryOfCompany
-            }}
-            onSelectChange={handleSelectChange}
-            form={formik}
-          />
-          <InputForm
-            label="Company website"
-            required
-            dots
-            controlId="inputCompanyWebsite"
-            type="text"
-            name="companyWebsite"
-            value={formik.values.companyWebsite}
-            onChange={formik.handleChange}
-            errors={
-              formik.errors.companyWebsite &&
-              formik.touched.companyWebsite &&
-              formik.errors.companyWebsite
-            }
-          />
-          <InputForm
-            label="Name of contact person"
-            required
-            dots
-            controlId="inputName "
-            type="text"
-            name="name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            errors={formik.errors.name && formik.touched.name && formik.errors.name}
-          />
-          <InputForm
-            label="Email"
-            required
-            dots
-            controlId="inputEmail"
-            type="email"
-            name="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            errors={
-              formik.errors.email && formik.touched.email && formik.errors.email
-            }
-          />
-          <InputForm
-            label="Contact number"
-            required
-            dots
-            controlId="inputNumber"
-            type="text"
-            name="number"
-            value={formik.values.number}
-            onChange={formik.handleChange}
-            errors={
-              formik.errors.number && formik.touched.number && formik.errors.number
-            }
-          />
-          <InputForm
-            label="Estimated monthly volume ($)"
-            required
-            dots
-            controlId="inputVolume"
-            type="text"
-            name="volume"
-            value={formik.values.volume}
-            onChange={formik.handleChange}
-            errors={
-              formik.errors.volume && formik.touched.volume && formik.errors.volume
-            }
-          />
-          <Button className={styles.buttonForm} type="submit">
-            Send
-          </Button>
-        </Form>
+        <Formik
+          initialValues={{
+            companyName: '',
+            industryOfCompany: '',
+            companyWebsite: '',
+            name: '',
+            email: '',
+            number: '',
+            volume: ''
+          }}
+          validationSchema={SignupSchema}
+          onSubmit={(values, { resetForm }) => {
+            // console.log(values);
+            resetForm();
+          }}
+        >
+          {({ handleChange, values, errors, touched }) => (
+            <Form>
+              <FormField
+                name="companyName"
+                label="Company name"
+                type="text"
+                required
+                dots
+              />
+              <Select
+                value={values.industryOfCompany}
+                onChange={handleChange}
+                options={industryOptions}
+                name="industryOfCompany"
+                label="Industry of company"
+                required
+                dots
+                errors={errors}
+                touched={touched}
+              />
+              <FormField
+                name="companyWebsite"
+                label="CompanyWebsite"
+                type="text"
+                required
+                dots
+              />
+              <FormField name="name" label="Name" type="text" required dots />
+              <FormField name="email" label="Email" type="email" required dots />
+              <FormField name="number" label="Number" type="text" required dots />
+              <FormField name="volume" label="Volume" type="text" required dots />
+              <button className={styles.buttonForm} type="submit">
+                Submit
+              </button>
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
   );

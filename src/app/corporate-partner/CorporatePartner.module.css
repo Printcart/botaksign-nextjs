@@ -81,7 +81,7 @@
   font-family: var(--font-oduda-bold);
   font-size: 22px;
   color: rgb(51, 51, 51);
-  margin-bottom: 15px;
+  margin-bottom: 35px;
 }
 
 .buttonForm {
@@ -96,7 +96,8 @@
   text-transform: uppercase;
   max-width: 150px;
   width: 150px;
-  margin-top: 46px;
+  margin-top: 36px;
+  border-radius: 5px;
 }
 .buttonForm:hover {
   border: 1px solid rgb(40, 196, 117) !important;
@@ -107,15 +108,18 @@
   margin-bottom: 45px;
 }
 
-.termsConditions {
+.termsConditionsTitle {
   font-family: var(--font-oduda-bold);
   font-weight: 400;
   color: rgb(51, 51, 51);
   font-size: 22px;
-  margin-bottom: 45px;
+  margin-bottom: 35px;
 }
 .benefits ol {
   margin-bottom: 35px !important;
+}
+.termsConditions{
+  margin-bottom: 71px;
 }
 .termsConditions ol li {
   color: rgb(105, 105, 105);
@@ -126,6 +130,41 @@
 .titleSelect {
   margin: 21px 0 8px 0;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+.labelSelect {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: rgb(105, 105, 105);
+  font-family: var(--font-nunito);
+  font-size: 16px;
+}
+.errorText {
+  color: #f00;
+  font-size: 14px;
+  font-weight: normal;
+  display: block;
+  font-family: var(--font-nunito);
+  margin-top: 5px;
+}
+.required {
+  color: #f00;
+}
+.selectOption {
+  width: 100%;
+  padding: 10px;
+  color: #666;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  height: 41px;
+  padding-bottom: 10px;
+}
+
 @media (max-width: 768px) {
   .image img {
     height: 132px !important;

@@ -46,7 +46,7 @@ const SignUp = () => {
       country: Yup.string().required('You must fill in this section')
     }),
     onSubmit: (values, { resetForm }) => {
-      // console.log(values);
+      console.log(values);
       resetForm();
     }
   });
