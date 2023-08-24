@@ -1,15 +1,16 @@
 'use client';
-import { data } from 'botak/app/ContactUs.jsx/footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { Col, Container, ListGroup, Row } from 'react-bootstrap';
 import FaIconExtend from '../FaIconExtend';
 import styles from './page.module.css';
+import { data } from 'botak/app/data/footer';
 
 const Footer = (props) => {
   const { dataFooter } = props;
   const footerData = data;
+
   return (
     <div className={styles.siteFooter}>
       <Top
@@ -24,6 +25,7 @@ const Footer = (props) => {
 
 const Top = (props) => {
   const { companyInfo, footerMenu, footerContact } = props;
+  
   return (
     <div className={styles.footerTop}>
       <Container>
