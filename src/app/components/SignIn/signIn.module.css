@@ -99,9 +99,7 @@
 
 .buttonForm {
   width: 100%;
-  background: transparent
-    linear-gradient(0deg, #1bcb3f 0%, #45d242 33%, #7bdb46 78%, #91df48 100%) 0% 0%
-    no-repeat padding-box;
+  background: transparent linear-gradient(0deg, #1bcb3f 0%, #45d242 33%, #7bdb46 78%, #91df48 100%) 0% 0% no-repeat padding-box;
   border: none;
   padding: 10px;
   filter: drop-shadow(0px 0px 12px #0000002f);
@@ -213,8 +211,7 @@
   display: block;
   text-align: center;
   text-decoration: none;
-  background: transparent linear-gradient(178deg, #ffffff 0%, #f6f8f7 100%) 0% 0%
-    no-repeat padding-box;
+  background: transparent linear-gradient(178deg, #ffffff 0%, #f6f8f7 100%) 0% 0% no-repeat padding-box;
   box-shadow: 0px 0px 12px #0000001f;
   border: 1px solid #dedede;
   border-radius: 10px;
@@ -274,4 +271,61 @@
   left: 50%;
   transform: translateX(-50%);
   position: absolute;
+}
+
+.inputCss {
+  display: inline-block;
+  width: calc(50% - 3px);
+  vertical-align: top;
+  padding: 0 15px;
+}
+
+.inputWide {
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+  padding: 0 15px;
+}
+
+.inputWide2 {
+  transform: translateX(5px);
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+  padding: 0 15px;
+}
+
+.buttomSubmit {
+  display: flex;
+  justify-content: end;
+  padding: 0 10px;
+  margin-bottom: 30px;
+}
+
+.buttomUpdate {
+  position: relative;
+  top: 30px;
+  background: transparent linear-gradient(0deg, #1BCB3F 0%, #45D242 33%, #7BDB46 78%, #91DF48 100%) 0% 0% no-repeat padding-box;
+  filter: drop-shadow(0px 0px 12px #0000002F);
+  border-radius: 5px;
+  padding: 5px 30px !important;
+  border: none;
+}
+
+.accordionItem {
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  margin-bottom: 30px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #DEDEDE;
+  border-radius: 10px;
+}
+
+.accordionItemAfter {
+  border-top: 1px solid #DEDEDE !important;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  margin-bottom: 30px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border-radius: 10px;
 }

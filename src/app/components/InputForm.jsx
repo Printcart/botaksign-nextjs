@@ -10,7 +10,8 @@ const InputForm = ({
   errors,
   placeholder,
   name,
-  required
+  required,
+  customCss
 }) => {
   const subInput = Boolean(label);
   return (
@@ -18,7 +19,13 @@ const InputForm = ({
       controlId={controlId}
       className={`${styles.subInput} ${subInput ? '' : styles.noLabel}`}
     >
-      <Form.Label>
+      <Form.Label
+        style={{
+          color: customCss ? '#D3D1D1' : '#212529',
+          fontSize: customCss ? '12px' : '16px',
+          lineHeight: '1.5'
+        }}
+      >
         {label} {required && <span className={styles.required}>*</span>}
       </Form.Label>
       <Form.Control
