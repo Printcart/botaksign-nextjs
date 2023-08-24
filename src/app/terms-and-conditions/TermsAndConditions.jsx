@@ -5,14 +5,14 @@ import styles from './TermsAndConditions.module.css';
 import Link from 'next/link';
 
 const Title = (props) => {
-  const { data } = props;
+  const { title } = props;
 
   return (
     <div className={styles.title}>
       <span>
         <Link href="/">Home</Link>
         <span className={styles.slashLine}>/</span>
-        <strong dangerouslySetInnerHTML={{ __html: data?.title?.rendered }}></strong>
+        <strong dangerouslySetInnerHTML={{ __html: title?.rendered }}></strong>
       </span>
     </div>
   );
@@ -27,7 +27,7 @@ const TermsAndConditions = (props) => {
 
   return (
     <Container>
-      <Title data={data} />
+      <Title title={data?.title} />
       <div className={styles.termsAndConditons}>
         <div dangerouslySetInnerHTML={markupHomePageHeader}></div>
       </div>
