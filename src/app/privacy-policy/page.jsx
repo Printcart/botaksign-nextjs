@@ -1,6 +1,6 @@
 import React from 'react';
 import PrivacyPolicy from './PrivacyPolicy';
-import { fetchPrivacyPolicy } from 'botak/api/privacyPolicyPage';
+import { fetchPrivacyPolicy } from 'botak/api/pages';
 
 const PrivacyPolicyServer = async () => {
   const data = await fetchPrivacyPolicy();
