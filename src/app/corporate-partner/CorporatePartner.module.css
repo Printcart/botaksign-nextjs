@@ -60,9 +60,10 @@
   font-weight: 400;
   font-size: 16px;
   color: rgb(105, 105, 105);
+  padding-top: 10px;
 }
 .lists li ul {
-  list-style-type: circle;
+  list-style-type: circle !important;
   margin-block-start: 0px;
   margin-block-end: 0px;
 }
@@ -118,7 +119,7 @@
 .benefits ol {
   margin-bottom: 35px !important;
 }
-.termsConditions{
+.termsConditions {
   margin-bottom: 71px;
 }
 .termsConditions ol li {

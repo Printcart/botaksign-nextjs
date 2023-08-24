@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import PageCoverHeader from '../components/PageCoverHeader';
 import styles from './CorporatePartner.module.css';
 import FormField from '../components/Footer/FormField';
+import { Fragment } from 'react';
 
 const industryOptions = [
   { value: 'Advertising / Marketing / PR', label: 'Advertising / Marketing / PR' },
@@ -31,6 +32,100 @@ const industryOptions = [
     label: 'Other'
   }
 ];
+
+const data = [
+  {
+    specialProject: [
+      {
+        description:
+          'In this Covid-19 period, we understand it has been a hard time for our partners and so, we want to lend our support by giving out reduced pricing rate that may be lower than the market pricing in an attempt to help with the competitive pricing in the market.'
+      },
+      {
+        description:
+          'We hope that this will help our customers who have been loyal to us to secure their businesses.'
+      },
+      {
+        description: 'Contact your dedicated Sales / Graphic Specialist today!'
+      },
+      {
+        description:
+          '*Terms and conditions of the special pricing will be subjected to the criteria as mentioned below'
+      }
+    ]
+  },
+  {
+    benefits: [
+      {
+        list: 'Exclusive corporate rates for products'
+      },
+      {
+        list: 'Dedicated sales person (graphic specialist) to process orders and provide strategic marketing or printing advice'
+      },
+      {
+        list: 'Complimentary minor artwork amendment services'
+      },
+      {
+        list: 'Gain mutual news sharing, information, and access to the latest printing product discounts and market knowledge'
+      },
+      {
+        list: 'Priority printing without express/urgent surcharge (applicable on a case-by-case basis)'
+      },
+      {
+        list: 'Opportunities to collaborate on projects'
+      }
+    ]
+  },
+  {
+    criteria: [
+      {
+        name: 'To be able to provide print-ready files to our graphic specialists',
+        lists: [
+          { list: 'PDF format' },
+          { list: 'CMYK color mode' },
+          {
+            list: 'Text converted to outlines and images embedded into artwork file (if applicable)'
+          },
+          { list: 'Artwork provided in actual size in adequate resolution' },
+          {
+            list: 'Outlines/Cut lines files must be provided in PDF vector format for any cutting services'
+          }
+        ]
+      },
+      {
+        name: 'Clear order details sent to dedicated graphic specialist via email only',
+        lists: [
+          { list: 'Size' },
+          { list: 'CMYK color mode' },
+          {
+            list: 'Materials and finishings (Kindly refer to our website for list of available materials and finishings)'
+          },
+          { list: 'Quantity' }
+        ]
+      },
+      {
+        name: 'Punctual payment and good credit terms'
+      }
+    ]
+  },
+  {
+    conditions: [
+      {
+        list: 'All applications are subjected to the approval of Botak Sign Pte Ltd. We will monitor the account activity for the next 6 to 8 months to determine the approval of the application.'
+      },
+      {
+        list: 'By applying to become a corporate partner, you agree to grant us permission to have access to your data (which includes, but not limited to, personal information, contact information, payment information) in accordance with the Personal Data Protection Act 2012 to be able to execute your requests smoothly.'
+      },
+      {
+        list: 'Botak Sign Pte Ltd reserves the right to reject or void the status of a corporate partner if the criteria are not met. This will be assessed at our discretion on a case-by-case basis and will be done with the utmost care of our partners.'
+      }
+    ]
+  }
+];
+
+const Title = (props) => {
+  const { title, className } = props;
+  return <h2 className={styles[className]}>{title}</h2>;
+};
 
 const Select = ({
   label,
@@ -71,26 +166,11 @@ const Select = ({
 const TermsConditions = () => {
   return (
     <div className={styles.termsConditions}>
-      <h2 className={styles.termsConditionsTitle}>Terms & Conditions</h2>
+      <Title title="Terms & Conditions" className="termsConditionsTitle" />
       <ol>
-        <li>
-          All applications are subjected to the approval of Botak Sign Pte Ltd. We
-          will monitor the account activity for the next 6 to 8 months to determine
-          the approval of the application.
-        </li>
-        <li>
-          By applying to become a corporate partner, you agree to grant us permission
-          to have access to your data (which includes, but not limited to, personal
-          information, contact information, payment information) in accordance with
-          the Personal Data Protection Act 2012 to be able to execute your requests
-          smoothly.
-        </li>
-        <li>
-          Botak Sign Pte Ltd reserves the right to reject or void the status of a
-          corporate partner if the criteria are not met. This will be assessed at our
-          discretion on a case-by-case basis and will be done with the utmost care of
-          our partners.
-        </li>
+        {data?.[3]?.conditions.map((item, index) => (
+          <li key={`index${index}`}>{item.list}</li>
+        ))}
       </ol>
     </div>
   );
@@ -115,9 +195,10 @@ const SignupSchema = Yup.object().shape({
 const ApplyJoin = () => {
   return (
     <div className={styles.applyJoin}>
-      <h2 className={styles.titleApplyJoin}>
-        Apply to join now as a Corporate Partner below
-      </h2>
+      <Title
+        title="Apply to join now as a Corporate Partner below"
+        className="titleApplyJoin"
+      />
       <div>
         <Formik
           initialValues={{
@@ -179,38 +260,23 @@ const ApplyJoin = () => {
 const Criteria = () => {
   return (
     <div className={styles.criteria}>
-      <h2 className={styles.titleCriteria}>
-        What are the criteria for being a Corporate Partner?
-      </h2>
+      <Title
+        title="What are the criteria for being a Corporate Partner?"
+        className="titleCriteria"
+      />
       <ol className={styles.lists}>
-        <li>
-          To be able to provide print-ready files to our graphic specialists:
-          <ul>
-            <li>PDF format</li>
-            <li>CMYK color mode</li>
+        {data?.[2]?.criteria?.map((section, index) => (
+          <Fragment key={`indexcriteria${index}`}>
             <li>
-              Text converted to outlines and images embedded into artwork file (if
-              applicable)
+              {section.name}
+              <ul>
+                {section.lists?.map((listItem, listItemIndex) => (
+                  <li key={`listItemIndex${listItemIndex}`}>{listItem.list}</li>
+                ))}
+              </ul>
             </li>
-            <li>Artwork provided in actual size in adequate resolution</li>
-            <li>
-              Outlines/Cut lines files must be provided in PDF vector format for any
-              cutting services
-            </li>
-          </ul>
-        </li>
-        <li>
-          Clear order details sent to dedicated graphic specialist via email only
-          <ul>
-            <li>Size</li>
-            <li>
-              Materials and finishings (Kindly refer to our website for list of
-              available materials and finishings)
-            </li>
-            <li>Quantity</li>
-          </ul>
-        </li>
-        <li>Punctual payment and good credit terms</li>
+          </Fragment>
+        ))}
       </ol>
     </div>
   );
@@ -219,25 +285,14 @@ const Criteria = () => {
 const Benefits = () => {
   return (
     <div className={styles.benefits}>
-      <h2 className={styles.nbtitle}>
-        What are the benefits that I can look forward to being a Corporate Parner?
-      </h2>
+      <Title
+        title=" What are the benefits that I can look forward to being a Corporate Parner?"
+        className="nbtitle"
+      />
       <ol>
-        <li>Exclusive corporate rates for products</li>
-        <li>
-          Dedicated sales person (graphic specialist) to process orders and provide
-          strategic marketing or printing advice
-        </li>
-        <li>Complimentary minor artwork amendment services</li>
-        <li>
-          Gain mutual news sharing, information, and access to the latest printing
-          product discounts and market knowledge
-        </li>
-        <li>
-          Priority printing without express/urgent surcharge (applicable on a
-          case-by-case basis)
-        </li>
-        <li> Opportunities to collaborate on projects </li>
+        {data?.[1]?.benefits.map((item, index) => (
+          <li key={`index${index}`}>{item.list}</li>
+        ))}
       </ol>
       <div className={styles.imageBenefits}>
         <Image
@@ -264,30 +319,13 @@ const SpecialProject = () => {
           />
         </div>
         <div className={styles.wrapperContent}>
-          <h2 className={styles.nbTitle}>
-            Special Project Price Available for Corporate Partners!
-          </h2>
-          <span>
-            In this Covid-19 period, we understand it has been a hard time for our
-            partners and so, we want to lend our support by giving out reduced
-            pricing rate that may be lower than the market pricing in an attempt to
-            help with the competitive pricing in the market.
-          </span>
-          <span>
-            We hope that this will help our customers who have been loyal to us to
-            secure their businesses.
-          </span>
-          <span>
-            Contact your dedicated{' '}
-            <Link href="https://botaksign.com/contact-us/" target="_blank">
-              Sales / Graphic Specialist
-            </Link>{' '}
-            today!
-          </span>
-          <span>
-            *Terms and conditions of the special pricing will be subjected to the
-            criteria as mentioned below
-          </span>
+          <Title
+            title="Special Project Price Available for Corporate Partners!"
+            className="nbTitle"
+          />
+          {data?.[0]?.specialProject?.map((item, index) => (
+            <span key={`$index{index}`}>{item.description}</span>
+          ))}
         </div>
       </div>
     </>
