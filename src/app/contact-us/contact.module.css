@@ -57,10 +57,16 @@
 .infoBoxPhone {
   margin: 10px 0 35px 0;
 }
+.infoBoxPhone a {
+  display: flex;
+  flex-direction: column;
+}
 .infoBoxPhone span {
   color: #696969;
   font-size: 16px;
   line-height: 25px;
+  display: flex;
+  flex-direction: column;
 }
 .buttonForm {
   margin-top: 31px;

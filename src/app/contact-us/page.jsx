@@ -1,97 +1,109 @@
 'use client';
-import Link from 'next/link';
-import React from 'react';
-import styles from './contact.module.css';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import Image from 'next/image';
 import { useFormik } from 'formik';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Fragment } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import * as Yup from 'yup';
 import InputForm from '../components/InputForm';
 import PageCoverHeader from '../components/PageCoverHeader';
+import styles from './contact.module.css';
+
+const dataInformation = [
+  {
+    id: 1,
+    image:
+      'https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/call__whatsapp_us.jpg',
+    title: 'Call / WhatsApp Us',
+    Links: [
+      {
+        href: 'tel:91907688',
+        link: '+(65) 9190 7688'
+      },
+      {
+        href: 'tel:62862298',
+        link: '+(65) 6286 2298'
+      },
+      {
+        href: 'tel:62862298',
+        link: '+(65) 9731 6551 (WhatsApp Only)'
+      }
+    ]
+  },
+  {
+    id: 2,
+    image:
+      'https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/drop_us_an_email.jpg',
+    title: 'DROP US AN EMAIL',
+    Links: [
+      {
+        href: 'mailto: info@botaksign.com.sg',
+        link: 'info@botaksign.com.sg'
+      }
+    ]
+  },
+  {
+    id: 3,
+    image:
+      'https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/chat_with_us.jpg',
+    title: 'Chat with us',
+    Links: [
+      {
+        link: 'Monday-Friday: 9am-6pm'
+      },
+      {
+        link: 'Saturday: 9am-1pm'
+      },
+      {
+        link: 'Offline: Sundays & Public Holidays'
+      }
+    ]
+  },
+  {
+    id: 4,
+    image:
+      'https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/locate_us.jpg',
+    title: 'Locate Us',
+    Links: [
+      {
+        link: '22 Yio Chu Kang Road #01-19'
+      },
+      {
+        link: 'Highland Centre Singapore'
+      },
+      {
+        link: 'Singapore 545535'
+      }
+    ]
+  }
+];
 
 const Information = () => {
   return (
     <div className={styles.information}>
       <Row>
-        <Col lg={3} xs={6} className={styles.infoBox}>
-          <div className={styles.infoBoxImage}>
-            <Image
-              width={120}
-              height={120}
-              alt="image"
-              src="https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/call__whatsapp_us.jpg"
-            />
-          </div>
-          <div className={styles.infoBoxTitle}>
-            <h3>Call / WhatsApp Us</h3>
-          </div>
-          <div className={styles.infoBoxPhone}>
-            <Link href="tel:91907688">+(65) 9190 7688</Link>
-            <br />
-            <Link href="tel:62862298">+(65) 6286 2298 </Link>
-            <br />
-            <Link href="http://wa.me/message/PFRE2EMUCA4DP1" target="_blank">
-              +(65) 9731 6551 (WhatsApp Only){' '}
-            </Link>
-          </div>
-        </Col>
-        <Col lg={3} xs={6} className={styles.infoBox}>
-          <div className={styles.infoBoxImage}>
-            <Image
-              width={120}
-              height={120}
-              alt="image"
-              src="https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/drop_us_an_email.jpg"
-            />
-          </div>
-          <div className={styles.infoBoxTitle}>
-            <h3>DROP US AN EMAIL</h3>
-          </div>
-          <div className={styles.infoBoxPhone}>
-            <Link href="mailto: info@botaksign.com.sg">info@botaksign.com.sg</Link>
-            <br />
-          </div>
-        </Col>
-        <Col lg={3} xs={6} className={styles.infoBox}>
-          <div className={styles.infoBoxImage}>
-            <Image
-              width={120}
-              height={120}
-              alt="image"
-              src="https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/chat_with_us.jpg"
-            />
-          </div>
-          <div className={styles.infoBoxTitle}>
-            <h3>Chat with us</h3>
-          </div>
-          <div className={styles.infoBoxPhone}>
-            <span>Monday-Friday: 9am-6pm</span>
-            <br />
-            <span>Saturday: 9am-1pm </span>
-            <br />
-            <span>Offline: Sundays & Public Holidays</span>
-          </div>
-        </Col>
-        <Col lg={3} xs={6} className={styles.infoBox}>
-          <div className={styles.infoBoxImage}>
-            <Image
-              width={120}
-              height={120}
-              alt="image"
-              src="https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/locate_us.jpg"
-            />
-          </div>
-          <div className={styles.infoBoxTitle}>
-            <h3>Locate Us</h3>
-          </div>
-          <div className={styles.infoBoxPhone}>
-            <span>22 Yio Chu Kang Road #01-19</span>
-            <br />
-            <span>Highland Centre Singapore </span>
-            <br />
-            <span>Singapore 545535</span>
-          </div>
-        </Col>
+        {dataInformation &&
+          dataInformation.map((item) => (
+            <Fragment key={item.id}>
+              <Col lg={3} xs={6} className={styles.infoBox}>
+                <div className={styles.infoBoxImage}>
+                  <Image width={120} height={120} alt="image" src={item.image} />
+                </div>
+                <div className={styles.infoBoxTitle}>
+                  <h3>{item?.title}</h3>
+                </div>
+                <div className={styles.infoBoxPhone}>
+                  {item?.Links &&
+                    item?.Links?.map((link, index) => (
+                      <Fragment key={`index${index}`}>
+                        {!link?.href && <span>{link.link}</span>}
+                        {link?.href && <Link href={link?.href}>{link?.link}</Link>}
+                      </Fragment>
+                    ))}
+                </div>
+              </Col>
+            </Fragment>
+          ))}
       </Row>
     </div>
   );
@@ -107,10 +119,8 @@ const MessageMap = () => {
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1994.3509831917543!2d103.87723541960939!3d1.3554145880821693!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da17af99b6e069%3A0xcf921095bc0aa73a!2sBotak%20Sign%20Pte%20Ltd!5e0!3m2!1sen!2ssg!4v1692260783558!5m2!1sen!2ssg"
           width="600"
           height="450"
-          // style="border:0;"
-          allowFullScreen="" // Corrected attribute name
+          allowFullScreen=""
           loading="lazy"
-          // referrerpolicy="no-referrer-when-downgrade"
         ></iframe>
       </Col>
       <Col lg={6} className={styles.messageMap}>
