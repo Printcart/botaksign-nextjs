@@ -1,7 +1,5 @@
 import { ErrorMessage, Field } from 'formik';
-import React from 'react';
-import { Form } from 'react-bootstrap';
-import styles from '../components/FormField.module.css';
+import styles from './FormField.module.css';
 
 const FormField = ({ name, type, label, required, dots }) => {
   return (

@@ -4,9 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Container } from 'react-bootstrap';
 import * as Yup from 'yup';
-import FormField from '../components/FormField';
 import PageCoverHeader from '../components/PageCoverHeader';
 import styles from './CorporatePartner.module.css';
+import FormField from '../components/Footer/FormField';
 
 const industryOptions = [
   { value: 'Advertising / Marketing / PR', label: 'Advertising / Marketing / PR' },
