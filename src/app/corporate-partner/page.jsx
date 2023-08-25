@@ -127,8 +127,6 @@ const data = [
   }
 ];
 
-console.log(data[0]?.specialProject);
-
 const Title = (props) => {
   const { title, className } = props;
   return <h2 className={styles[className]}>{title}</h2>;
