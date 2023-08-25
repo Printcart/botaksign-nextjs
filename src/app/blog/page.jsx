@@ -1,10 +1,11 @@
 import React from 'react';
 import Blog from './Blog';
-import { fetchBlog } from 'botak/api/pages';
+import { fetchBlog, fetchCategories } from 'botak/api/pages';
 
 const BlogServer = async () => {
-  const data = await fetchBlog();
-  return <Blog data={data} />;
+  const dataBlog = await fetchBlog();
+  const dataCategories = await fetchCategories();
+  return <Blog dataBlog={dataBlog} dataCategories={dataCategories} />;
 };
 
 export default BlogServer;

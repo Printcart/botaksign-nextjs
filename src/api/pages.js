@@ -15,3 +15,21 @@ export const fetchBlog = async () => {
   }
   return data;
 };
+export const fetchComments = async () => {
+  const fetchUrl = `https://botakdev.printcart.com/wp-json/wp/v2/comments`;
+  const res = await fetch(fetchUrl, { headers, method: 'GET' });
+  const data = await res.json();
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
+  return data;
+};
+export const fetchCategories = async () => {
+  const fetchUrl = `https://botakdev.printcart.com/wp-json/wp/v2/categories`;
+  const res = await fetch(fetchUrl, { headers, method: 'GET' });
+  const data = await res.json();
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
+  return data;
+};
