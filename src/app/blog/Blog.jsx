@@ -160,8 +160,8 @@ const Blog = (props) => {
       <PageCoverHeader title="BLOG" link="Home" titlePage="Blog" />
       <Container>
         <Title />
-        <Search />
         <Row>
+          <Search />
           <Col lg={3}>
             <SidebarBlog dataCategories={dataCategories} dataBlog={dataBlog} />
           </Col>
