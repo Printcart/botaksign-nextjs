@@ -147,7 +147,7 @@ const BillingAddressForm = ({ data }) => {
       lastName: '',
       companyName: '',
       country: '',
-      streetAddress: '' || data?.streetAddress,
+      streetAddress: '',
       apartment: '',
       townCity: '',
       postcode: '',
@@ -704,7 +704,7 @@ const DashboardBody = ({ data }) => {
           <AccountDetailsForm data={data} />
         </AccordionCustom>
         <AccordionCustom eventKey="3" header="Change password">
-          <ChangePasswordForm />
+          <ChangePasswordForm  />
         </AccordionCustom>
       </Accordion>
     </div>
