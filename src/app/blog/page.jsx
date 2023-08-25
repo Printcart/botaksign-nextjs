@@ -1,4 +1,4 @@
-import { fetchBlog, fetchBlogId, fetchCategories } from 'botak/api/pages';
+import { fetchBlog, fetchCategories } from 'botak/api/pages';
 import Blog from './Blog';
 
 const BlogServer = async () => {

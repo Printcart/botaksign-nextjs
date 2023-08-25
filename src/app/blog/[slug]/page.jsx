@@ -21,9 +21,10 @@ const fetcherWithAuthorization = (url) =>
   });
 
 const SlugBlog = ({ params }) => {
-  const { id } = params;
+  const { slug } = params;
+  console.log(slug);
 
-  const fetUrl = `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}wp/v2/posts/${id}`;
+  const fetUrl = `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}wp/v2/posts?slug=${slug}`;
 
   const { data, error, isLoading } = useSWR(fetUrl, fetcherWithAuthorization, {
     revalidateIfStale: false,

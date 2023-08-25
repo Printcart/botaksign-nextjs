@@ -59,7 +59,9 @@ const ContentArticle = (props) => {
                   </Link>
 
                   <h3 className={styles.entryTitle}>
-                    <Link href={`/blog/${item?.id}`}>{item?.title?.rendered}</Link>
+                    <Link href={`/posts/${item?.slug}`}>
+                      {item?.title?.rendered}
+                    </Link>
                   </h3>
                   <div className={styles.entryWrap}>
                     <span className={styles.date}>{formatDate(item?.date)}</span>
