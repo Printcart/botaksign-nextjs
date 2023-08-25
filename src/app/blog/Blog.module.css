@@ -30,6 +30,9 @@
 .title span {
   margin: 0 5px;
 }
+
+.comments .titleComments,
+.archives .titleArchives,
 .categories .titleCategories,
 .blogs .titleBlog {
   text-transform: uppercase;
@@ -68,4 +71,80 @@
   margin-bottom: 40px;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
+}
+.listCategories {
+  margin: 16px 0;
+}
+.categories .listCategories li {
+  margin-top: 8px;
+}
+.categories .listCategories li a {
+  font-size: 14px !important;
+}
+.entryTitle {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  font-family: var(--font-oduda-bold);
+  color: rgb(51, 51, 51);
+}
+.entryTitle a:hover {
+  color: rgb(40, 196, 117);;
+}
+.entryText {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  line-height: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-height: 24px;
+  max-height: 76px;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  font-family: var(--font-nunito);
+  font-weight: 400;
+}
+.readMoreLink a {
+  font-size: 14px;
+  border-radius: 5px;
+  text-transform: capitalize;
+  line-height: 20px;
+  height: auto;
+  border: 1px solid;
+  text-decoration: none;
+  padding: 6px 17px;
+  color: rgb(40, 196, 117);
+  background-color: rgb(255, 255, 255);
+}
+.entryFooter {
+  margin-top: 20px;
+}
+
+.entryFooter span {
+  text-transform: uppercase;
+  color: rgb(105, 105, 105);
+  font-family: var(--font-nunito);
+  font-weight: 400;
+  font-size: 16px;
+}
+.entryWrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.entryWrap > span {
+  text-transform: uppercase;
+  color: rgb(105, 105, 105);
+  font-weight: 400;
+  font-size: 16px;
+}
+.entryCat {
+  display: flex;
+  flex-direction: column;
+  color: rgb(66, 133, 244);
+  text-transform: uppercase;
+  font-size: 12.63px;
+  line-height: 20px;
+  margin-bottom: 6px;
 }
