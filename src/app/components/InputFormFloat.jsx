@@ -13,18 +13,20 @@ const InputFormFloat = ({
   required,
   customCss
 }) => {
-  const subInput = Boolean(label);
   return (
     <Form.Floating
-    style={{
+      style={{
         color: customCss ? '#D3D1D1' : '#212529',
         fontSize: customCss ? '14px' : '16px',
         lineHeight: '1.5'
       }}
     >
       <Form.Control
+        style={{
+          color: customCss ? '#666' : '#B5B5B5',
+          fontSize: customCss && '14px'
+        }}
         id={controlId}
-        style={{ color: '#B5B5B5' }}
         type={type}
         name={name}
         value={value}
@@ -32,8 +34,10 @@ const InputFormFloat = ({
         onChange={onChange}
         isInvalid={errors}
       />
-      <label htmlFor={controlId}> {label}{required && <span className={styles.required}>*</span>}</label>
-  
+      <label htmlFor={controlId}>
+        {label}
+        {required && <span className={styles.required}>*</span>}
+      </label>
 
       {errors && (
         <Form.Control.Feedback type="invalid">{errors}</Form.Control.Feedback>

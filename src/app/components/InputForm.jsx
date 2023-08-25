@@ -29,7 +29,10 @@ const InputForm = ({
         {label} {required && <span className={styles.required}>*</span>}
       </Form.Label>
       <Form.Control
-        style={{ color: '#B5B5B5' }}
+        style={{
+          color: customCss ? '#666' : '#B5B5B5',
+          fontSize: customCss && '14px'
+        }}
         type={type}
         name={name}
         value={value}

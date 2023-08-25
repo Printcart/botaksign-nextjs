@@ -1,13 +1,14 @@
 'use client';
 import { useFormik } from 'formik';
-import Link from 'next/link';
-import { Accordion, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
-import * as Yup from 'yup';
-import styles from './signIn.module.css';
-import InputForm from '../InputForm';
-import Breadcrumb from '../Breadcrumb';
 import Image from 'next/image';
+import Link from 'next/link';
+import { Accordion, Button, Col, Container, Form, Row } from 'react-bootstrap';
+import * as Yup from 'yup';
+import AccordionCustom from '../AccordionCustom';
+import Breadcrumb from '../Breadcrumb';
+import InputForm from '../InputForm';
 import InputFormFloat from '../InputFormFloat';
+import styles from './signIn.module.css';
 
 const LoginLeft = () => {
   const formik = useFormik({
@@ -107,8 +108,39 @@ const NavigationMenu = (props) => {
   );
 };
 
-const SignIn = () => {
-  const isLogin = true;
+const DashboardHeader = () => {
+  return (
+    <div className={styles.dashboardHeader}>
+      <Row>
+        <Col
+          xs={6}
+          style={{
+            paddingTop: '10px',
+            paddingBottom: '20px'
+          }}
+        >
+          <div className={styles.headerTitle}>
+            <span>Hello David!</span>
+          </div>
+          <div className={styles.headerDesc}>It’s good to see you again.</div>
+        </Col>
+        <Col xs={6} style={{ display: 'flex', alignItems: 'end' }}>
+          <div className={styles.thumbnailwrap}>
+            <Image
+              src="https://botaksign.com/wp-content/plugins/custom-botaksign/assets/images/gif2.gif"
+              alt="Image"
+              width={100}
+              height={100}
+              className={styles.imgLogo}
+            />
+          </div>
+        </Col>
+      </Row>
+    </div>
+  );
+};
+const DashboardBody = ({ data }) => {
+  console.log(data);
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -138,9 +170,568 @@ const SignIn = () => {
     }
   });
   return (
+    <div className={styles.dashboardBody}>
+      <Accordion>
+        <AccordionCustom eventKey="0" header="Billing address">
+          <Form>
+            <div className="addressFields">
+              <div className="fieldsWrapper">
+                <div className={styles.inputCss}>
+                  <InputForm
+                    required
+                    customCss
+                    controlId="inputFirstName"
+                    type="text"
+                    name="firstName"
+                    label="First Name"
+                    value={formik.values.firstName}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.firstName &&
+                      formik.touched.firstName &&
+                      formik.errors.firstName
+                    }
+                  />
+                </div>
+                <div className={styles.inputCss}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputLastName"
+                    type="text"
+                    name="lastName"
+                    label="Last Name"
+                    value={formik.values.lastName}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.lastName &&
+                      formik.touched.lastName &&
+                      formik.errors.lastName
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide}>
+                  <InputForm
+                    customCss
+                    controlId="inputCompanyName"
+                    type="text"
+                    name="companyName"
+                    label="Company name (optional)"
+                    value={formik.values.companyName}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.companyName &&
+                      formik.touched.companyName &&
+                      formik.errors.companyName
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputCountry"
+                    type="hidden"
+                    name="country"
+                    label="Country"
+                    value={formik.values.country}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.country &&
+                      formik.touched.country &&
+                      formik.errors.country
+                    }
+                  />
+                  <strong>Viet Nam</strong>
+                </div>
+                <div className={styles.inputWide}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputStreetAddress"
+                    type="text"
+                    name="streetAddress"
+                    label="Street address"
+                    placeholder="House number and street name"
+                    value={formik.values.streetAddress || data?.address1}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.streetAddress &&
+                      formik.touched.streetAddress &&
+                      formik.errors.streetAddress
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide2}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputStreetAddress2"
+                    type="text"
+                    placeholder="Apartment, suite, unit etc. (optinal)"
+                    name="apartment"
+                    value={formik.values.apartment}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.apartment &&
+                      formik.touched.apartment &&
+                      formik.errors.apartment
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide2}>
+                  <InputForm
+                    customCss
+                    controlId="inputTownCity"
+                    type="text"
+                    name="townCity"
+                    label="Town / City(optional)"
+                    value={formik.values.townCity}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.townCity &&
+                      formik.touched.townCity &&
+                      formik.errors.townCity
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide2}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputPostcode"
+                    type="text"
+                    name="postcode"
+                    label="Postcode / ZIP"
+                    value={formik.values.postcode || data?.postcode}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.postcode &&
+                      formik.touched.postcode &&
+                      formik.errors.postcode
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide2}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputPhone"
+                    type="text"
+                    name="phone"
+                    label="Phone"
+                    value={formik.values.phone || data?.phone}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.phone &&
+                      formik.touched.phone &&
+                      formik.errors.phone
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide2}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputEmail"
+                    type="text"
+                    name="email"
+                    label="Email address"
+                    value={formik.values.email || data?.email}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.email &&
+                      formik.touched.email &&
+                      formik.errors.email
+                    }
+                  />
+                </div>
+              </div>
+              <div className={styles.buttomSubmit}>
+                <Button type="submit" className={styles.buttomUpdate}>
+                  UPDATE
+                </Button>
+              </div>
+            </div>
+          </Form>
+        </AccordionCustom>
+        <AccordionCustom eventKey="1" header="Shipping address">
+          <Form>
+            <div className="addressFields">
+              <div className="fieldsWrapper">
+                <div className={styles.inputCss}>
+                  <InputForm
+                    required
+                    customCss
+                    controlId="inputFirstName"
+                    type="text"
+                    name="firstName"
+                    label="First Name"
+                    value={formik.values.firstName}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.firstName &&
+                      formik.touched.firstName &&
+                      formik.errors.firstName
+                    }
+                  />
+                </div>
+                <div className={styles.inputCss}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputLastName"
+                    type="text"
+                    name="lastName"
+                    label="Last Name"
+                    value={formik.values.lastName}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.lastName &&
+                      formik.touched.lastName &&
+                      formik.errors.lastName
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide}>
+                  <InputForm
+                    customCss
+                    controlId="inputCompanyName"
+                    type="text"
+                    name="companyName"
+                    label="Company name (optional)"
+                    value={formik.values.companyName}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.companyName &&
+                      formik.touched.companyName &&
+                      formik.errors.companyName
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputCountry"
+                    type="hidden"
+                    name="country"
+                    label="Country"
+                    readonly="readonly"
+                    value={formik.values.country}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.country &&
+                      formik.touched.country &&
+                      formik.errors.country
+                    }
+                  />
+                  <strong>Viet Nam</strong>
+                </div>
+                <div className={styles.inputWide}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputStreetAddress"
+                    type="text"
+                    name="streetAddress"
+                    label="Street address"
+                    placeholder="House number and street name"
+                    value={formik.values.streetAddress}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.streetAddress &&
+                      formik.touched.streetAddress &&
+                      formik.errors.streetAddress
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide2}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputStreetAddress"
+                    type="text"
+                    placeholder="Apartment, suite, unit etc. (optinal)"
+                    name="apartment"
+                    value={formik.values.apartment}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.apartment &&
+                      formik.touched.apartment &&
+                      formik.errors.apartment
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide2}>
+                  <InputForm
+                    customCss
+                    controlId="inputTownCity"
+                    type="text"
+                    name="townCity"
+                    label="Town / City(optional)"
+                    value={formik.values.townCity}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.townCity &&
+                      formik.touched.townCity &&
+                      formik.errors.townCity
+                    }
+                  />
+                </div>
+                <div className={styles.inputWide2}>
+                  <InputForm
+                    customCss
+                    required
+                    controlId="inputPostcode"
+                    type="text"
+                    name="postcode"
+                    label="Postcode / ZIP"
+                    value={formik.values.postcode || data?.postcode}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.postcode &&
+                      formik.touched.postcode &&
+                      formik.errors.postcode
+                    }
+                  />
+                </div>
+              </div>
+              <div className={styles.buttomSubmit}>
+                <Button type="submit" className={styles.buttomUpdate}>
+                  UPDATE
+                </Button>
+              </div>
+            </div>
+          </Form>
+        </AccordionCustom>
+        <AccordionCustom eventKey="2" header="Account details">
+          <Form>
+            <Row style={{ marginBottom: '1.5rem' }}>
+              <Col xs={6}>
+                <InputFormFloat
+                  customCss
+                  required
+                  controlId="inputFirstName"
+                  type="text"
+                  name="firstName"
+                  label="First name"
+                  value={formik.values.firstName}
+                  onChange={formik.handleChange}
+                  errors={
+                    formik.errors.firstName &&
+                    formik.touched.firstName &&
+                    formik.errors.firstName
+                  }
+                />
+              </Col>
+              <Col xs={6}>
+                <InputFormFloat
+                  customCss
+                  required
+                  controlId="inputLastName"
+                  type="text"
+                  name="lastName"
+                  label="Last name"
+                  value={formik.values.lastName || data?.lastName}
+                  onChange={formik.handleChange}
+                  errors={
+                    formik.errors.lastName &&
+                    formik.touched.lastName &&
+                    formik.errors.lastName
+                  }
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={6}>
+                <InputFormFloat
+                  customCss
+                  required
+                  controlId="inputDisplayName"
+                  type="text"
+                  name="displayName"
+                  label="Display name"
+                  value={formik.values.displayName || data?.firstName}
+                  onChange={formik.handleChange}
+                  errors={
+                    formik.errors.displayName &&
+                    formik.touched.displayName &&
+                    formik.errors.displayName
+                  }
+                />
+              </Col>
+              <Col xs={6}>
+                <InputFormFloat
+                  customCss
+                  required
+                  controlId="inputEmail"
+                  type="text"
+                  name="email"
+                  label="Email address"
+                  value={formik.values.email || data?.email}
+                  onChange={formik.handleChange}
+                  errors={
+                    formik.errors.email &&
+                    formik.touched.email &&
+                    formik.errors.email
+                  }
+                />
+              </Col>
+            </Row>
+            <div className={styles.buttomSubmit}>
+              <Button type="submit" className={styles.buttomUpdate}>
+                UPDATE
+              </Button>
+            </div>
+          </Form>
+        </AccordionCustom>
+        <AccordionCustom eventKey="3" header="Change password">
+          <Form>
+            <fieldset>
+              <Row style={{ marginBottom: '1.5rem' }}>
+                <Col xs={6}>
+                  <InputFormFloat
+                    customCss
+                    controlId="inputCurrentPassword"
+                    type="text"
+                    name="firstName"
+                    label="Current Password"
+                    value={formik.values.firstName}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.firstName &&
+                      formik.touched.firstName &&
+                      formik.errors.firstName
+                    }
+                  />
+                </Col>
+                <Col xs={6}></Col>
+              </Row>
+              <Row>
+                <Col xs={6}>
+                  <InputFormFloat
+                    customCss
+                    controlId="inputNewPassword"
+                    type="text"
+                    name="displayName"
+                    label="New password"
+                    value={formik.values.displayName}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.displayName &&
+                      formik.touched.displayName &&
+                      formik.errors.displayName
+                    }
+                  />
+                </Col>
+                <Col xs={6}>
+                  <InputFormFloat
+                    customCss
+                    controlId="inputConfirmPass"
+                    type="text"
+                    name="email"
+                    label="Confirm new password"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    errors={
+                      formik.errors.email &&
+                      formik.touched.email &&
+                      formik.errors.email
+                    }
+                  />
+                </Col>
+              </Row>
+            </fieldset>
+            <div className={styles.buttomSubmit}>
+              <Button type="submit" className={styles.buttomUpdate}>
+                UPDATE
+              </Button>
+            </div>
+          </Form>
+        </AccordionCustom>
+      </Accordion>
+    </div>
+  );
+};
+
+const PageContent = ({ data }) => {
+  return (
+    <div className="px-3">
+      <main className="siteMain">
+        <article className="m-0">
+          <div className="entryContent">
+            <div className={styles.woocomerce}>
+              <div className="w-100">
+                <nav style={{ marginBottom: '70px' }}>
+                  <ul className="d-flex justify-content-center px-0">
+                    <li className={styles.liLink}>
+                      <NavigationMenu
+                        url="/my-account/"
+                        src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/account-icon.png"
+                        title="Account"
+                      />
+                    </li>
+                    <li className={styles.liLink}>
+                      <NavigationMenu
+                        url="/my-account/orders/"
+                        src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/orders-icon.png"
+                        title="Orders"
+                      />
+                    </li>
+                    <li className={styles.liLink}>
+                      <NavigationMenu
+                        url="/my-account/quotation/"
+                        src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/quotations-icon.png"
+                        title="Quotions"
+                      />
+                    </li>
+                  </ul>
+                </nav>
+                <div className={styles.wrapMyaccount}>
+                  <div className={styles.dashboard}>
+                    <DashboardHeader />
+                    <DashboardBody data={data} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </main>
+    </div>
+  );
+};
+
+const dataUser = {
+  firstName: 'Quang',
+  lastName: 'Thiet',
+  phone: '0376196299',
+  email: 'quangthietdev@gmail.com',
+  userName: 'quangthietdev',
+  passWord: 'quangthietdev',
+  confirmPassword: 'quangthietdev',
+  company: 'Botaksign',
+  address1: 'No1 Washington DC',
+  address2: 'suite 17',
+  city: 'New York',
+  postcode: '8386',
+  country: 'USA',
+  tokenUser:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoicXVhbmd0aGlldCIsInBhc3N3b3JkIjoicXVhbmd0aGlldGRldiJ9.Aexo3fmnzB15B8VAmklKz8vd9X3w4JZOMdJCbbsG2fg'
+};
+
+const SignIn = () => {
+  const data = dataUser;
+  if (data.tokenUser) {
+    localStorage.setItem('tokenUser', data.tokenUser);
+  }
+  const getToken = localStorage.getItem('tokenUser');
+
+  return (
     <div className="siteContent">
       <Breadcrumb titlePage="My Account" fontWeight="900" />
-      {!isLogin ? (
+      {!getToken ? (
         <Container className={`${styles.formLoginWrap} ${styles.signIn}`}>
           <Row>
             <Col lg={5} className={styles.loginLeft}>
@@ -157,610 +748,7 @@ const SignIn = () => {
       ) : (
         <Container>
           <Row>
-            <div className="px-3">
-              <main className="siteName">
-                <article className="m-0">
-                  <div className="entryContent">
-                    <div className={styles.woocomerce}>
-                      <div className="w-100">
-                        <nav style={{ marginBottom: '70px' }}>
-                          <ul className="d-flex justify-content-center px-0">
-                            <li className={styles.liLink}>
-                            <NavigationMenu url="/my-account/" src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/account-icon.png" title="Account" />
-                            </li>
-                            <li className={styles.liLink}>
-                            <NavigationMenu url="/my-account/orders/" src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/orders-icon.png" title="Orders" />
-                            </li>
-                            <li className={styles.liLink}>
-                            <NavigationMenu url="/my-account/quotation/" src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/quotations-icon.png" title="Quotions" />
-                            </li>
-                          </ul>
-                        </nav>
-                        <div className={styles.wrapMyaccount}>
-                          <div className={styles.dashboard}>
-                            <div className={styles.dashboardHeader}>
-                              <Row>
-                                <Col
-                                  xs={6}
-                                  style={{
-                                    paddingTop: '10px',
-                                    paddingBottom: '20px'
-                                  }}
-                                >
-                                  <div className={styles.headerTitle}>
-                                    <span>Hello David!</span>
-                                  </div>
-                                  <div className={styles.headerDesc}>
-                                    It’s good to see you again.
-                                  </div>
-                                </Col>
-                                <Col
-                                  xs={6}
-                                  style={{ display: 'flex', alignItems: 'end' }}
-                                >
-                                  <div className={styles.thumbnailwrap}>
-                                    <Image
-                                      src="https://botaksign.com/wp-content/plugins/custom-botaksign/assets/images/gif2.gif"
-                                      alt="Image"
-                                      width={100}
-                                      height={100}
-                                      className={styles.imgLogo}
-                                    />
-                                  </div>
-                                </Col>
-                              </Row>
-                            </div>
-                            <div className={styles.dashboardBody}>
-                              <Accordion>
-                                <Accordion.Item
-                                  eventKey="0"
-                                  className={styles.accordionItem}
-                                >
-                                  <Accordion.Header
-                                    style={{ fontFamily: 'inherit' }}
-                                  >
-                                    Billing address
-                                  </Accordion.Header>
-                                  <Accordion.Collapse eventKey="0">
-                                    <Accordion.Body>
-                                      <Form>
-                                        <div className="addressFields">
-                                          <div className="fieldsWrapper">
-                                            <div className={styles.inputCss}>
-                                              <InputForm
-                                                required
-                                                customCss
-                                                controlId="inputFirstName"
-                                                type="text"
-                                                name="firstName"
-                                                label="First Name"
-                                                value={formik.values.firstName}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.firstName &&
-                                                  formik.touched.firstName &&
-                                                  formik.errors.firstName
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputCss}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputLastName"
-                                                type="text"
-                                                name="lastName"
-                                                label="Last Name"
-                                                value={formik.values.lastName}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.lastName &&
-                                                  formik.touched.lastName &&
-                                                  formik.errors.lastName
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide}>
-                                              <InputForm
-                                                customCss
-                                                controlId="inputCompanyName"
-                                                type="text"
-                                                name="companyName"
-                                                label="Company name (optional)"
-                                                value={formik.values.companyName}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.companyName &&
-                                                  formik.touched.companyName &&
-                                                  formik.errors.companyName
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputCountry"
-                                                type="hidden"
-                                                name="country"
-                                                label="Country"
-                                                readonly="readonly"
-                                                value={formik.values.country}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.country &&
-                                                  formik.touched.country &&
-                                                  formik.errors.country
-                                                }
-                                              />
-                                              <strong>Viet Nam</strong>
-                                            </div>
-                                            <div className={styles.inputWide}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputStreetAddress"
-                                                type="text"
-                                                name="streetAddress"
-                                                label="Street address"
-                                                placeholder="House number and street name"
-                                                value={formik.values.streetAddress}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.streetAddress &&
-                                                  formik.touched.streetAddress &&
-                                                  formik.errors.streetAddress
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide2}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputStreetAddress"
-                                                type="text"
-                                                placeholder="Apartment, suite, unit etc. (optinal)"
-                                                name="apartment"
-                                                value={formik.values.apartment}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.apartment &&
-                                                  formik.touched.apartment &&
-                                                  formik.errors.apartment
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide2}>
-                                              <InputForm
-                                                customCss
-                                                controlId="inputTownCity"
-                                                type="text"
-                                                name="townCity"
-                                                label="Town / City(optional)"
-                                                value={formik.values.townCity}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.townCity &&
-                                                  formik.touched.townCity &&
-                                                  formik.errors.townCity
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide2}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputPostcode"
-                                                type="text"
-                                                name="postcode"
-                                                label="Postcode / ZIP"
-                                                value={formik.values.postcode}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.postcode &&
-                                                  formik.touched.postcode &&
-                                                  formik.errors.postcode
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide2}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputPhone"
-                                                type="text"
-                                                name="phone"
-                                                label="Phone"
-                                                value={formik.values.phone}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.phone &&
-                                                  formik.touched.phone &&
-                                                  formik.errors.phone
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide2}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputEmail"
-                                                type="text"
-                                                name="email"
-                                                label="Email address"
-                                                value={formik.values.email}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.email &&
-                                                  formik.touched.email &&
-                                                  formik.errors.email
-                                                }
-                                              />
-                                            </div>
-                                          </div>
-                                          <div className={styles.buttomSubmit}>
-                                            <Button
-                                              type="submit"
-                                              className={styles.buttomUpdate}
-                                            >
-                                              UPDATE
-                                            </Button>
-                                          </div>
-                                        </div>
-                                      </Form>
-                                    </Accordion.Body>
-                                  </Accordion.Collapse>
-                                </Accordion.Item>
-                                <Accordion.Item
-                                  eventKey="1"
-                                  className={styles.accordionItemAfter}
-                                >
-                                  <Accordion.Header
-                                    style={{ fontFamily: 'inherit' }}
-                                  >
-                                    Shipping address
-                                  </Accordion.Header>
-                                  <Accordion.Collapse eventKey="1">
-                                    <Accordion.Body>
-                                      <Form>
-                                        <div className="addressFields">
-                                          <div className="fieldsWrapper">
-                                            <div className={styles.inputCss}>
-                                              <InputForm
-                                                required
-                                                customCss
-                                                controlId="inputFirstName"
-                                                type="text"
-                                                name="firstName"
-                                                label="First Name"
-                                                value={formik.values.firstName}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.firstName &&
-                                                  formik.touched.firstName &&
-                                                  formik.errors.firstName
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputCss}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputLastName"
-                                                type="text"
-                                                name="lastName"
-                                                label="Last Name"
-                                                value={formik.values.lastName}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.lastName &&
-                                                  formik.touched.lastName &&
-                                                  formik.errors.lastName
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide}>
-                                              <InputForm
-                                                customCss
-                                                controlId="inputCompanyName"
-                                                type="text"
-                                                name="companyName"
-                                                label="Company name (optional)"
-                                                value={formik.values.companyName}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.companyName &&
-                                                  formik.touched.companyName &&
-                                                  formik.errors.companyName
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputCountry"
-                                                type="hidden"
-                                                name="country"
-                                                label="Country"
-                                                readonly="readonly"
-                                                value={formik.values.country}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.country &&
-                                                  formik.touched.country &&
-                                                  formik.errors.country
-                                                }
-                                              />
-                                              <strong>Viet Nam</strong>
-                                            </div>
-                                            <div className={styles.inputWide}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputStreetAddress"
-                                                type="text"
-                                                name="streetAddress"
-                                                label="Street address"
-                                                placeholder="House number and street name"
-                                                value={formik.values.streetAddress}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.streetAddress &&
-                                                  formik.touched.streetAddress &&
-                                                  formik.errors.streetAddress
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide2}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputStreetAddress"
-                                                type="text"
-                                                placeholder="Apartment, suite, unit etc. (optinal)"
-                                                name="apartment"
-                                                value={formik.values.apartment}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.apartment &&
-                                                  formik.touched.apartment &&
-                                                  formik.errors.apartment
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide2}>
-                                              <InputForm
-                                                customCss
-                                                controlId="inputTownCity"
-                                                type="text"
-                                                name="townCity"
-                                                label="Town / City(optional)"
-                                                value={formik.values.townCity}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.townCity &&
-                                                  formik.touched.townCity &&
-                                                  formik.errors.townCity
-                                                }
-                                              />
-                                            </div>
-                                            <div className={styles.inputWide2}>
-                                              <InputForm
-                                                customCss
-                                                required
-                                                controlId="inputPostcode"
-                                                type="text"
-                                                name="postcode"
-                                                label="Postcode / ZIP"
-                                                value={formik.values.postcode}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.postcode &&
-                                                  formik.touched.postcode &&
-                                                  formik.errors.postcode
-                                                }
-                                              />
-                                            </div>
-                                          </div>
-                                          <div className={styles.buttomSubmit}>
-                                            <Button
-                                              type="submit"
-                                              className={styles.buttomUpdate}
-                                            >
-                                              UPDATE
-                                            </Button>
-                                          </div>
-                                        </div>
-                                      </Form>
-                                    </Accordion.Body>
-                                  </Accordion.Collapse>
-                                </Accordion.Item>
-                                <Accordion.Item
-                                  eventKey="2"
-                                  className={styles.accordionItemAfter}
-                                >
-                                  <Accordion.Header
-                                    style={{ fontFamily: 'inherit' }}
-                                  >
-                                    Account details
-                                  </Accordion.Header>
-                                  <Accordion.Collapse eventKey="2">
-                                    <Accordion.Body>
-                                      <Form>
-                                        <Row style={{ marginBottom: '1.5rem' }}>
-                                          <Col xs={6}>
-                                            <InputFormFloat
-                                              customCss
-                                              required
-                                              controlId="inputFirstName"
-                                              type="text"
-                                              name="firstName"
-                                              label="First name"
-                                              value={formik.values.firstName}
-                                              onChange={formik.handleChange}
-                                              errors={
-                                                formik.errors.firstName &&
-                                                formik.touched.firstName &&
-                                                formik.errors.firstName
-                                              }
-                                            />
-                                          </Col>
-                                          <Col xs={6}>
-                                            <InputFormFloat
-                                              customCss
-                                              required
-                                              controlId="inputLastName"
-                                              type="text"
-                                              name="lastName"
-                                              label="Last name"
-                                              value={formik.values.lastName}
-                                              onChange={formik.handleChange}
-                                              errors={
-                                                formik.errors.lastName &&
-                                                formik.touched.lastName &&
-                                                formik.errors.lastName
-                                              }
-                                            />
-                                          </Col>
-                                        </Row>
-                                        <Row>
-                                          <Col xs={6}>
-                                            <InputFormFloat
-                                              customCss
-                                              required
-                                              controlId="inputDisplayName"
-                                              type="text"
-                                              name="displayName"
-                                              label="Display name"
-                                              value={formik.values.displayName}
-                                              onChange={formik.handleChange}
-                                              errors={
-                                                formik.errors.displayName &&
-                                                formik.touched.displayName &&
-                                                formik.errors.displayName
-                                              }
-                                            />
-                                          </Col>
-                                          <Col xs={6}>
-                                            <InputFormFloat
-                                              customCss
-                                              required
-                                              controlId="inputEmail"
-                                              type="text"
-                                              name="email"
-                                              label="Email address"
-                                              value={formik.values.email}
-                                              onChange={formik.handleChange}
-                                              errors={
-                                                formik.errors.email &&
-                                                formik.touched.email &&
-                                                formik.errors.email
-                                              }
-                                            />
-                                          </Col>
-                                        </Row>
-                                        <div className={styles.buttomSubmit}>
-                                          <Button
-                                            type="submit"
-                                            className={styles.buttomUpdate}
-                                          >
-                                            UPDATE
-                                          </Button>
-                                        </div>
-                                      </Form>
-                                    </Accordion.Body>
-                                  </Accordion.Collapse>
-                                </Accordion.Item>
-                                <Accordion.Item
-                                  eventKey="3"
-                                  className={styles.accordionItemAfter}
-                                >
-                                  <Accordion.Header
-                                    style={{ fontFamily: 'inherit' }}
-                                  >
-                                    Change Password
-                                  </Accordion.Header>
-                                  <Accordion.Collapse eventKey="3">
-                                    <Accordion.Body>
-                                      <Form>
-                                        <fieldset>
-                                          <Row style={{ marginBottom: '1.5rem' }}>
-                                            <Col xs={6}>
-                                              <InputFormFloat
-                                                customCss
-                                                controlId="inputCurrentPassword"
-                                                type="text"
-                                                name="firstName"
-                                                label="Current Password"
-                                                value={formik.values.firstName}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.firstName &&
-                                                  formik.touched.firstName &&
-                                                  formik.errors.firstName
-                                                }
-                                              />
-                                            </Col>
-                                            <Col xs={6}></Col>
-                                          </Row>
-                                          <Row>
-                                            <Col xs={6}>
-                                              <InputFormFloat
-                                                customCss
-                                                controlId="inputNewPassword"
-                                                type="text"
-                                                name="displayName"
-                                                label="New password"
-                                                value={formik.values.displayName}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.displayName &&
-                                                  formik.touched.displayName &&
-                                                  formik.errors.displayName
-                                                }
-                                              />
-                                            </Col>
-                                            <Col xs={6}>
-                                              <InputFormFloat
-                                                customCss
-                                                controlId="inputConfirmPass"
-                                                type="text"
-                                                name="email"
-                                                label="Confirm new password"
-                                                value={formik.values.email}
-                                                onChange={formik.handleChange}
-                                                errors={
-                                                  formik.errors.email &&
-                                                  formik.touched.email &&
-                                                  formik.errors.email
-                                                }
-                                              />
-                                            </Col>
-                                          </Row>
-                                        </fieldset>
-                                        <div className={styles.buttomSubmit}>
-                                          <Button
-                                            type="submit"
-                                            className={styles.buttomUpdate}
-                                          >
-                                            UPDATE
-                                          </Button>
-                                        </div>
-                                      </Form>
-                                    </Accordion.Body>
-                                  </Accordion.Collapse>
-                                </Accordion.Item>
-                              </Accordion>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </main>
-            </div>
+            <PageContent data={data} />
           </Row>
         </Container>
       )}
