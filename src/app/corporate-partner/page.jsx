@@ -45,7 +45,12 @@ const data = [
           'We hope that this will help our customers who have been loyal to us to secure their businesses.'
       },
       {
-        description: 'Contact your dedicated Sales / Graphic Specialist today!'
+        description: 'Contact your dedicated  ',
+        link: {
+          name: 'Sales / Graphic Specialist',
+          href: '/contact-us/'
+        },
+        behindDescription: 'today!'
       },
       {
         description:
@@ -121,6 +126,8 @@ const data = [
     ]
   }
 ];
+
+console.log(data[0]?.specialProject);
 
 const Title = (props) => {
   const { title, className } = props;
@@ -342,7 +349,21 @@ const SpecialProject = () => {
             className="nbTitle"
           />
           {data?.[0]?.specialProject?.map((item, indexSpecialProject) => (
-            <span key={`index${indexSpecialProject}`}>{item.description}</span>
+            <span key={`index${indexSpecialProject}`}>
+              {item.description}
+              {item.link ? (
+                <>
+                  <Link
+                    target="_blank"
+                    className={styles.link}
+                    href={item.link.href}
+                  >
+                    {item.link.name}
+                  </Link>{' '}
+                </>
+              ) : null}
+              {item.behindDescription}
+            </span>
           ))}
         </div>
       </div>

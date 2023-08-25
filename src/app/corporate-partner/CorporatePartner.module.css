@@ -165,7 +165,9 @@
   height: 41px;
   padding-bottom: 10px;
 }
-
+.link:hover {
+  color: rgb(40, 196, 117);
+}
 @media (max-width: 768px) {
   .image img {
     height: 132px !important;
