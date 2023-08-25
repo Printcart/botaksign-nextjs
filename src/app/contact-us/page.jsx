@@ -15,7 +15,7 @@ const dataInformation = [
     image:
       'https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/call__whatsapp_us.jpg',
     title: 'Call / WhatsApp Us',
-    Links: [
+    links: [
       {
         href: 'tel:91907688',
         link: '+(65) 9190 7688'
@@ -35,7 +35,7 @@ const dataInformation = [
     image:
       'https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/drop_us_an_email.jpg',
     title: 'DROP US AN EMAIL',
-    Links: [
+    links: [
       {
         href: 'mailto: info@botaksign.com.sg',
         link: 'info@botaksign.com.sg'
@@ -47,7 +47,7 @@ const dataInformation = [
     image:
       'https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/chat_with_us.jpg',
     title: 'Chat with us',
-    Links: [
+    links: [
       {
         link: 'Monday-Friday: 9am-6pm'
       },
@@ -64,7 +64,7 @@ const dataInformation = [
     image:
       'https://botaksign-library.s3.ap-southeast-1.amazonaws.com/thumbnails/homepage/icon/locate_us.jpg',
     title: 'Locate Us',
-    Links: [
+    links: [
       {
         link: '22 Yio Chu Kang Road #01-19'
       },
@@ -93,8 +93,8 @@ const Information = () => {
                   <h3>{item?.title}</h3>
                 </div>
                 <div className={styles.infoBoxPhone}>
-                  {item?.Links &&
-                    item?.Links?.map((link, index) => (
+                  {item?.links &&
+                    item?.links?.map((link, index) => (
                       <Fragment key={`index${index}`}>
                         {!link?.href && <span>{link.link}</span>}
                         {link?.href && <Link href={link?.href}>{link?.link}</Link>}
