@@ -7,7 +7,7 @@ const headers = {
   )}`
 };
 export const fetchBlog = async () => {
-  const fetchUrl = `https://botakdev.printcart.com/wp-json/wp/v2/posts/11357`;
+  const fetchUrl = `https://botakdev.printcart.com/wp-json/wp/v2/posts/`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();
   if (data.errors) {
