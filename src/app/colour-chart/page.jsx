@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 const PrintingColour = () => {
   return (
-    <div id="nav_SA" className={styles.nav_content}>
+    <div id="navSa" className={styles.nav_content}>
       <div className={styles.contentTitle}>
         <p>Printing Colour Chart</p>
       </div>
@@ -27,8 +27,8 @@ const PrintingColour = () => {
 
 const StickerColour = () => {
   return (
-    <div id="nav_CO" className={styles.nav_content}>
-      <div id="nav_COWOB">
+    <div id="navCo" className={styles.nav_content}>
+      <div id="navCowob">
         <div className={styles.contentTitle}>
           <div>
             <p className={styles.contentTitle}>Sticker Colour Chart</p>
@@ -57,7 +57,7 @@ const StickerColour = () => {
             />
           </Link>
         </div>
-        <div id="nav_COWB">
+        <div id="navCowb">
           <p className={styles.contentSubtitle}>Special Effects Sticker</p>
           <div className={styles.conditionsBlock}>
             <Link href="https://botaksign-library.s3.ap-southeast-1.amazonaws.com/material spec and photos/colour chart/specialsticker_stickerchart_1-2.jpg">
@@ -91,18 +91,18 @@ const NavigationBlock = () => {
   return (
     <>
       <div className={styles.navSeparator}>
-        <Link className={styles.clickAble} href="#nav_SA">
+        <Link className={styles.clickAble} href="#navSa">
           Printing Colour Chart
         </Link>
       </div>
       <div className={styles.navSeparator}>
-        <Link className={styles.clickAble} href="#nav_CO">
+        <Link className={styles.clickAble} href="#navCo">
           Sticker Colour Chart
         </Link>
-        <Link className={`${styles.sub_nav} ${styles.clickAble}`} href="#nav_COWOB">
+        <Link className={`${styles.sub_nav} ${styles.clickAble}`} href="#navCowob">
           Vinyl Sticker
         </Link>
-        <Link className={`${styles.sub_nav} ${styles.clickAble}`} href="#nav_COWB">
+        <Link className={`${styles.sub_nav} ${styles.clickAble}`} href="#navCowb">
           Special Effects Sticker
         </Link>
       </div>
@@ -118,7 +118,6 @@ const ContentBlock = () => {
     </div>
   );
 };
-
 
 const ColourChart = () => {
   return (
