@@ -140,7 +140,6 @@ const DashboardHeader = () => {
   );
 };
 const DashboardBody = ({ data }) => {
-  console.log(data);
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -165,15 +164,16 @@ const DashboardBody = ({ data }) => {
       phone: Yup.string().required('Phone Number is a required field.'),
       email: Yup.string().required('Email is a required field.')
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       console.log(values);
+      resetForm();
     }
   });
   return (
     <div className={styles.dashboardBody}>
       <Accordion>
         <AccordionCustom eventKey="0" header="Billing address">
-          <Form>
+          <Form onSubmit={formik.handleSubmit}>
             <div className="addressFields">
               <div className="fieldsWrapper">
                 <div className={styles.inputCss}>
@@ -234,7 +234,7 @@ const DashboardBody = ({ data }) => {
                     type="hidden"
                     name="country"
                     label="Country"
-                    value={formik.values.country}
+                    value={formik.values.country || data?.country}
                     onChange={formik.handleChange}
                     errors={
                       formik.errors.country &&
@@ -356,7 +356,7 @@ const DashboardBody = ({ data }) => {
           </Form>
         </AccordionCustom>
         <AccordionCustom eventKey="1" header="Shipping address">
-          <Form>
+          <Form onSubmit={formik.handleSubmit}>
             <div className="addressFields">
               <div className="fieldsWrapper">
                 <div className={styles.inputCss}>
@@ -418,7 +418,7 @@ const DashboardBody = ({ data }) => {
                     name="country"
                     label="Country"
                     readonly="readonly"
-                    value={formik.values.country}
+                    value={formik.values.country || data.country}
                     onChange={formik.handleChange}
                     errors={
                       formik.errors.country &&
@@ -506,7 +506,7 @@ const DashboardBody = ({ data }) => {
           </Form>
         </AccordionCustom>
         <AccordionCustom eventKey="2" header="Account details">
-          <Form>
+          <Form onSubmit={formik.handleSubmit}>
             <Row style={{ marginBottom: '1.5rem' }}>
               <Col xs={6}>
                 <InputFormFloat
@@ -587,7 +587,7 @@ const DashboardBody = ({ data }) => {
           </Form>
         </AccordionCustom>
         <AccordionCustom eventKey="3" header="Change password">
-          <Form>
+          <Form onSubmit={formik.handleSubmit}>
             <fieldset>
               <Row style={{ marginBottom: '1.5rem' }}>
                 <Col xs={6}>
@@ -716,22 +716,17 @@ const dataUser = {
   address2: 'suite 17',
   city: 'New York',
   postcode: '8386',
-  country: 'USA',
-  tokenUser:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoicXVhbmd0aGlldCIsInBhc3N3b3JkIjoicXVhbmd0aGlldGRldiJ9.Aexo3fmnzB15B8VAmklKz8vd9X3w4JZOMdJCbbsG2fg'
+  country: 'USA'
 };
 
 const SignIn = () => {
   const data = dataUser;
-  if (data.tokenUser) {
-    localStorage.setItem('tokenUser', data.tokenUser);
-  }
-  const getToken = localStorage.getItem('tokenUser');
+  const isLogin = true;
 
   return (
     <div className="siteContent">
       <Breadcrumb titlePage="My Account" fontWeight="900" />
-      {!getToken ? (
+      {!isLogin ? (
         <Container className={`${styles.formLoginWrap} ${styles.signIn}`}>
           <Row>
             <Col lg={5} className={styles.loginLeft}>
