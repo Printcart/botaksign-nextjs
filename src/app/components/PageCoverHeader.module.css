@@ -19,6 +19,7 @@
   text-align: center;
   line-height: 24px;
   margin-bottom: 14px;
+  letter-spacing: 0.06em !important;
 }
 .contactLink {
   display: flex;
