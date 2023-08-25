@@ -141,6 +141,18 @@ const Categories = (props) => {
   );
 };
 
+export const SidebarBlog = (props) => {
+  const { dataBlog, dataCategories } = props;
+  return (
+    <>
+      <Blogs title={dataBlog} />
+      <Comments />
+      <Archives />
+      <Categories dataCategories={dataCategories} />
+    </>
+  );
+};
+
 const Blog = (props) => {
   const { dataBlog, dataCategories } = props;
   return (
@@ -151,10 +163,7 @@ const Blog = (props) => {
         <Search />
         <Row>
           <Col lg={3}>
-            <Blogs title={dataBlog} />
-            <Comments />
-            <Archives />
-            <Categories dataCategories={dataCategories} />
+            <SidebarBlog dataCategories={dataCategories} dataBlog={dataBlog} />
           </Col>
           <Col lg={9}>
             <Row>
