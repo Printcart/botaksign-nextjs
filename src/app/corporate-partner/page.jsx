@@ -168,8 +168,8 @@ const TermsConditions = () => {
     <div className={styles.termsConditions}>
       <Title title="Terms & Conditions" className="termsConditionsTitle" />
       <ol>
-        {data?.[3]?.conditions.map((item, index) => (
-          <li key={`index${index}`}>{item.list}</li>
+        {data?.[3]?.conditions.map((item, indexConditions) => (
+          <li key={`index${indexConditions}`}>{item.list}</li>
         ))}
       </ol>
     </div>
@@ -237,17 +237,35 @@ const ApplyJoin = () => {
               />
               <FormField
                 name="companyWebsite"
-                label="CompanyWebsite"
+                label="Company website "
                 type="text"
                 required
                 dots
               />
-              <FormField name="name" label="Name" type="text" required dots />
+              <FormField
+                name="name"
+                label="Name of contact person"
+                type="text"
+                required
+                dots
+              />
               <FormField name="email" label="Email" type="email" required dots />
-              <FormField name="number" label="Number" type="text" required dots />
-              <FormField name="volume" label="Volume" type="text" required dots />
+              <FormField
+                name="number"
+                label="Contact number "
+                type="text"
+                required
+                dots
+              />
+              <FormField
+                name="volume"
+                label="Estimated monthly volume ($)"
+                type="text"
+                required
+                dots
+              />
               <button className={styles.buttonForm} type="submit">
-                Submit
+                Send
               </button>
             </Form>
           )}
@@ -265,8 +283,8 @@ const Criteria = () => {
         className="titleCriteria"
       />
       <ol className={styles.lists}>
-        {data?.[2]?.criteria?.map((section, index) => (
-          <Fragment key={`indexcriteria${index}`}>
+        {data?.[2]?.criteria?.map((section, indexCriteria) => (
+          <Fragment key={`indexcriteria${indexCriteria}`}>
             <li>
               {section.name}
               <ul>
@@ -290,8 +308,8 @@ const Benefits = () => {
         className="nbtitle"
       />
       <ol>
-        {data?.[1]?.benefits.map((item, index) => (
-          <li key={`index${index}`}>{item.list}</li>
+        {data?.[1]?.benefits.map((item, indexBenefits) => (
+          <li key={`indexBenefits${indexBenefits}`}>{item.list}</li>
         ))}
       </ol>
       <div className={styles.imageBenefits}>
@@ -323,8 +341,8 @@ const SpecialProject = () => {
             title="Special Project Price Available for Corporate Partners!"
             className="nbTitle"
           />
-          {data?.[0]?.specialProject?.map((item, index) => (
-            <span key={`$index{index}`}>{item.description}</span>
+          {data?.[0]?.specialProject?.map((item, indexSpecialProject) => (
+            <span key={`index${indexSpecialProject}`}>{item.description}</span>
           ))}
         </div>
       </div>
