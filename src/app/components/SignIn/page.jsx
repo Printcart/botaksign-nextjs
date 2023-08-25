@@ -1,5 +1,5 @@
 'use client';
-import { useFormik } from 'formik';
+import { useFormik, validateYupSchema } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Accordion, Button, Col, Container, Form, Row } from 'react-bootstrap';
@@ -108,7 +108,7 @@ const NavigationMenu = (props) => {
   );
 };
 
-const DashboardHeader = () => {
+const DashboardHeader = ({ data }) => {
   return (
     <div className={styles.dashboardHeader}>
       <Row>
@@ -120,7 +120,7 @@ const DashboardHeader = () => {
           }}
         >
           <div className={styles.headerTitle}>
-            <span>Hello David!</span>
+            <span>Hello {data?.firstName}!</span>
           </div>
           <div className={styles.headerDesc}>It’s good to see you again.</div>
         </Col>
@@ -139,20 +139,20 @@ const DashboardHeader = () => {
     </div>
   );
 };
-const DashboardBody = ({ data }) => {
+
+const BillingAddressForm = ({ data }) => {
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
-      displayName: '',
       companyName: '',
       country: '',
-      streetAddress: '',
+      streetAddress: '' || data?.streetAddress,
       apartment: '',
       townCity: '',
       postcode: '',
       phone: '',
-      email: ''
+      emai: ''
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required('First name is a required field.'),
@@ -170,485 +170,541 @@ const DashboardBody = ({ data }) => {
     }
   });
   return (
+    <Form onSubmit={formik.handleSubmit}>
+      <div className="addressFields">
+        <div className="fieldsWrapper">
+          <div className={styles.inputCss}>
+            <InputForm
+              required
+              customCss
+              controlId="inputFirstName"
+              type="text"
+              name="firstName"
+              label="First Name"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.firstName &&
+                formik.touched.firstName &&
+                formik.errors.firstName
+              }
+            />
+          </div>
+          <div className={styles.inputCss}>
+            <InputForm
+              customCss
+              required
+              controlId="inputLastName"
+              type="text"
+              name="lastName"
+              label="Last Name"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.lastName &&
+                formik.touched.lastName &&
+                formik.errors.lastName
+              }
+            />
+          </div>
+          <div className={styles.inputWide}>
+            <InputForm
+              customCss
+              controlId="inputCompanyName"
+              type="text"
+              name="companyName"
+              label="Company name (optional)"
+              value={formik.values.companyName}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.companyName &&
+                formik.touched.companyName &&
+                formik.errors.companyName
+              }
+            />
+          </div>
+          <div className={styles.inputWide}>
+            <InputForm
+              customCss
+              required
+              controlId="inputCountry"
+              type="hidden"
+              name="country"
+              label="Country"
+              value={formik.values.country || data?.country}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.country &&
+                formik.touched.country &&
+                formik.errors.country
+              }
+            />
+            <strong>Viet Nam</strong>
+          </div>
+          <div className={styles.inputWide}>
+            <InputForm
+              customCss
+              required
+              controlId="inputStreetAddress"
+              type="text"
+              name="streetAddress"
+              label="Street address"
+              placeholder="House number and street name"
+              value={formik.values.streetAddress || data?.address1}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.streetAddress &&
+                formik.touched.streetAddress &&
+                formik.errors.streetAddress
+              }
+            />
+          </div>
+          <div className={styles.inputWide2}>
+            <InputForm
+              customCss
+              required
+              controlId="inputStreetAddress2"
+              type="text"
+              placeholder="Apartment, suite, unit etc. (optinal)"
+              name="apartment"
+              value={formik.values.apartment}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.apartment &&
+                formik.touched.apartment &&
+                formik.errors.apartment
+              }
+            />
+          </div>
+          <div className={styles.inputWide2}>
+            <InputForm
+              customCss
+              controlId="inputTownCity"
+              type="text"
+              name="townCity"
+              label="Town / City(optional)"
+              value={formik.values.townCity}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.townCity &&
+                formik.touched.townCity &&
+                formik.errors.townCity
+              }
+            />
+          </div>
+          <div className={styles.inputWide2}>
+            <InputForm
+              customCss
+              required
+              controlId="inputPostcode"
+              type="text"
+              name="postcode"
+              label="Postcode / ZIP"
+              value={formik.values.postcode || data?.postcode}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.postcode &&
+                formik.touched.postcode &&
+                formik.errors.postcode
+              }
+            />
+          </div>
+          <div className={styles.inputWide2}>
+            <InputForm
+              customCss
+              required
+              controlId="inputPhone"
+              type="text"
+              name="phone"
+              label="Phone"
+              value={formik.values.phone || data?.phone}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.phone && formik.touched.phone && formik.errors.phone
+              }
+            />
+          </div>
+          <div className={styles.inputWide2}>
+            <InputForm
+              customCss
+              required
+              controlId="inputEmail"
+              type="text"
+              name="email"
+              label="Email address"
+              value={formik.values.email || data?.email}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.email && formik.touched.email && formik.errors.email
+              }
+            />
+          </div>
+        </div>
+        <div className={styles.buttomSubmit}>
+          <Button type="submit" className={styles.buttomUpdate}>
+            UPDATE
+          </Button>
+        </div>
+      </div>
+    </Form>
+  );
+};
+
+const ShippingAddressForm = ({ data }) => {
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      companyName: '',
+      country: '',
+      streetAddress: '',
+      apartment: '',
+      townCity: '',
+      postcode: ''
+    },
+    validationSchema: Yup.object({
+      firstName: Yup.string().required('First name is a required field.'),
+      lastName: Yup.string().required('Last name is a required field.'),
+      country: Yup.string().required('Country is a required field.'),
+      streetAddress: Yup.string().required('Street address is a required field.'),
+      postcode: Yup.string().required('Postcode / ZIP is a required field.')
+    }),
+    onSubmit: (values, { resetForm }) => {
+      console.log(values);
+      resetForm();
+    }
+  });
+
+  return (
+    <Form onSubmit={formik.handleSubmit}>
+      <div className="addressFields">
+        <div className="fieldsWrapper">
+          <div className={styles.inputCss}>
+            <InputForm
+              required
+              customCss
+              controlId="inputFirstName"
+              type="text"
+              name="firstName"
+              label="First Name"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.firstName &&
+                formik.touched.firstName &&
+                formik.errors.firstName
+              }
+            />
+          </div>
+          <div className={styles.inputCss}>
+            <InputForm
+              customCss
+              required
+              controlId="inputLastName"
+              type="text"
+              name="lastName"
+              label="Last Name"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.lastName &&
+                formik.touched.lastName &&
+                formik.errors.lastName
+              }
+            />
+          </div>
+          <div className={styles.inputWide}>
+            <InputForm
+              customCss
+              controlId="inputCompanyName"
+              type="text"
+              name="companyName"
+              label="Company name (optional)"
+              value={formik.values.companyName}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.companyName &&
+                formik.touched.companyName &&
+                formik.errors.companyName
+              }
+            />
+          </div>
+          <div className={styles.inputWide}>
+            <InputForm
+              customCss
+              required
+              controlId="inputCountry"
+              type="hidden"
+              name="country"
+              label="Country"
+              readonly="readonly"
+              value={formik.values.country || data.country}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.country &&
+                formik.touched.country &&
+                formik.errors.country
+              }
+            />
+            <strong>Viet Nam</strong>
+          </div>
+          <div className={styles.inputWide}>
+            <InputForm
+              customCss
+              required
+              controlId="inputStreetAddress"
+              type="text"
+              name="streetAddress"
+              label="Street address"
+              placeholder="House number and street name"
+              value={formik.values.streetAddress}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.streetAddress &&
+                formik.touched.streetAddress &&
+                formik.errors.streetAddress
+              }
+            />
+          </div>
+          <div className={styles.inputWide2}>
+            <InputForm
+              customCss
+              required
+              controlId="inputStreetAddress"
+              type="text"
+              placeholder="Apartment, suite, unit etc. (optinal)"
+              name="apartment"
+              value={formik.values.apartment}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.apartment &&
+                formik.touched.apartment &&
+                formik.errors.apartment
+              }
+            />
+          </div>
+          <div className={styles.inputWide2}>
+            <InputForm
+              customCss
+              controlId="inputTownCity"
+              type="text"
+              name="townCity"
+              label="Town / City(optional)"
+              value={formik.values.townCity}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.townCity &&
+                formik.touched.townCity &&
+                formik.errors.townCity
+              }
+            />
+          </div>
+          <div className={styles.inputWide2}>
+            <InputForm
+              customCss
+              required
+              controlId="inputPostcode"
+              type="text"
+              name="postcode"
+              label="Postcode / ZIP"
+              value={formik.values.postcode || data?.postcode}
+              onChange={formik.handleChange}
+              errors={
+                formik.errors.postcode &&
+                formik.touched.postcode &&
+                formik.errors.postcode
+              }
+            />
+          </div>
+        </div>
+        <div className={styles.buttomSubmit}>
+          <Button type="submit" className={styles.buttomUpdate}>
+            UPDATE
+          </Button>
+        </div>
+      </div>
+    </Form>
+  );
+};
+
+const AccountDetailsForm = ({ data }) => {
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      displayName: '',
+      email: ''
+    },
+    validationSchema: Yup.object({
+      firstName: Yup.string().required('First name is a required field.'),
+      lastName: Yup.string().required('Last name is a required field.'),
+      displayName: Yup.string().required('Display name is a required field.'),
+      email: Yup.string().required('Email is a required field.')
+    }),
+    onSubmit: (values, { resetForm }) => {
+      console.log(values);
+      resetForm();
+    }
+  });
+  return (
+    <Form onSubmit={formik.handleSubmit}>
+      <Row style={{ marginBottom: '1.5rem' }}>
+        <Col xs={6}>
+          <InputFormFloat
+            customCss
+            required
+            controlId="inputFirstName"
+            type="text"
+            name="firstName"
+            label="First name"
+            value={formik.values.firstName}
+            onChange={formik.handleChange}
+            errors={
+              formik.errors.firstName &&
+              formik.touched.firstName &&
+              formik.errors.firstName
+            }
+          />
+        </Col>
+        <Col xs={6}>
+          <InputFormFloat
+            customCss
+            required
+            controlId="inputLastName"
+            type="text"
+            name="lastName"
+            label="Last name"
+            value={formik.values.lastName || data?.lastName}
+            onChange={formik.handleChange}
+            errors={
+              formik.errors.lastName &&
+              formik.touched.lastName &&
+              formik.errors.lastName
+            }
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={6}>
+          <InputFormFloat
+            customCss
+            required
+            controlId="inputDisplayName"
+            type="text"
+            name="displayName"
+            label="Display name"
+            value={formik.values.displayName || data?.firstName}
+            onChange={formik.handleChange}
+            errors={
+              formik.errors.displayName &&
+              formik.touched.displayName &&
+              formik.errors.displayName
+            }
+          />
+        </Col>
+        <Col xs={6}>
+          <InputFormFloat
+            customCss
+            required
+            controlId="inputEmail"
+            type="text"
+            name="email"
+            label="Email address"
+            value={formik.values.email || data?.email}
+            onChange={formik.handleChange}
+            errors={
+              formik.errors.email && formik.touched.email && formik.errors.email
+            }
+          />
+        </Col>
+      </Row>
+      <div className={styles.buttomSubmit}>
+        <Button type="submit" className={styles.buttomUpdate}>
+          UPDATE
+        </Button>
+      </div>
+    </Form>
+  );
+};
+
+const ChangePasswordForm = () => {
+  const formik = useFormik({
+    initialValues: {
+      currentPassword: '',
+      newPassword: '',
+      confirmNewPassword: ''
+    },
+    onSubmit: (values, { resetForm }) => {
+      console.log(values);
+      resetForm();
+    }
+  });
+  return (
+    <Form onSubmit={formik.handleSubmit}>
+      <fieldset>
+        <Row style={{ marginBottom: '1.5rem' }}>
+          <Col xs={6}>
+            <InputFormFloat
+              customCss
+              controlId="inputCurrentPassword"
+              type="text"
+              name="currentPassword"
+              label="Current Password"
+              value={formik.values.currentPassword}
+              onChange={formik.handleChange}
+            />
+          </Col>
+          <Col xs={6}></Col>
+        </Row>
+        <Row>
+          <Col xs={6}>
+            <InputFormFloat
+              customCss
+              controlId="inputNewPassword"
+              type="text"
+              name="newPassword"
+              label="New password"
+              value={formik.values.newPassword}
+              onChange={formik.handleChange}
+            />
+          </Col>
+          <Col xs={6}>
+            <InputFormFloat
+              customCss
+              controlId="inputConfirmPass"
+              type="text"
+              name="confirmNewPassword"
+              label="Confirm new password"
+              value={formik.values.confirmNewPassword}
+              onChange={formik.handleChange}
+            />
+          </Col>
+        </Row>
+      </fieldset>
+      <div className={styles.buttomSubmit}>
+        <Button type="submit" className={styles.buttomUpdate}>
+          UPDATE
+        </Button>
+      </div>
+    </Form>
+  );
+};
+
+const DashboardBody = ({ data }) => {
+  return (
     <div className={styles.dashboardBody}>
       <Accordion>
         <AccordionCustom eventKey="0" header="Billing address">
-          <Form onSubmit={formik.handleSubmit}>
-            <div className="addressFields">
-              <div className="fieldsWrapper">
-                <div className={styles.inputCss}>
-                  <InputForm
-                    required
-                    customCss
-                    controlId="inputFirstName"
-                    type="text"
-                    name="firstName"
-                    label="First Name"
-                    value={formik.values.firstName}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.firstName &&
-                      formik.touched.firstName &&
-                      formik.errors.firstName
-                    }
-                  />
-                </div>
-                <div className={styles.inputCss}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputLastName"
-                    type="text"
-                    name="lastName"
-                    label="Last Name"
-                    value={formik.values.lastName}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.lastName &&
-                      formik.touched.lastName &&
-                      formik.errors.lastName
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide}>
-                  <InputForm
-                    customCss
-                    controlId="inputCompanyName"
-                    type="text"
-                    name="companyName"
-                    label="Company name (optional)"
-                    value={formik.values.companyName}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.companyName &&
-                      formik.touched.companyName &&
-                      formik.errors.companyName
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputCountry"
-                    type="hidden"
-                    name="country"
-                    label="Country"
-                    value={formik.values.country || data?.country}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.country &&
-                      formik.touched.country &&
-                      formik.errors.country
-                    }
-                  />
-                  <strong>Viet Nam</strong>
-                </div>
-                <div className={styles.inputWide}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputStreetAddress"
-                    type="text"
-                    name="streetAddress"
-                    label="Street address"
-                    placeholder="House number and street name"
-                    value={formik.values.streetAddress || data?.address1}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.streetAddress &&
-                      formik.touched.streetAddress &&
-                      formik.errors.streetAddress
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide2}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputStreetAddress2"
-                    type="text"
-                    placeholder="Apartment, suite, unit etc. (optinal)"
-                    name="apartment"
-                    value={formik.values.apartment}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.apartment &&
-                      formik.touched.apartment &&
-                      formik.errors.apartment
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide2}>
-                  <InputForm
-                    customCss
-                    controlId="inputTownCity"
-                    type="text"
-                    name="townCity"
-                    label="Town / City(optional)"
-                    value={formik.values.townCity}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.townCity &&
-                      formik.touched.townCity &&
-                      formik.errors.townCity
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide2}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputPostcode"
-                    type="text"
-                    name="postcode"
-                    label="Postcode / ZIP"
-                    value={formik.values.postcode || data?.postcode}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.postcode &&
-                      formik.touched.postcode &&
-                      formik.errors.postcode
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide2}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputPhone"
-                    type="text"
-                    name="phone"
-                    label="Phone"
-                    value={formik.values.phone || data?.phone}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.phone &&
-                      formik.touched.phone &&
-                      formik.errors.phone
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide2}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputEmail"
-                    type="text"
-                    name="email"
-                    label="Email address"
-                    value={formik.values.email || data?.email}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.email &&
-                      formik.touched.email &&
-                      formik.errors.email
-                    }
-                  />
-                </div>
-              </div>
-              <div className={styles.buttomSubmit}>
-                <Button type="submit" className={styles.buttomUpdate}>
-                  UPDATE
-                </Button>
-              </div>
-            </div>
-          </Form>
+          <BillingAddressForm data={data} />
         </AccordionCustom>
         <AccordionCustom eventKey="1" header="Shipping address">
-          <Form onSubmit={formik.handleSubmit}>
-            <div className="addressFields">
-              <div className="fieldsWrapper">
-                <div className={styles.inputCss}>
-                  <InputForm
-                    required
-                    customCss
-                    controlId="inputFirstName"
-                    type="text"
-                    name="firstName"
-                    label="First Name"
-                    value={formik.values.firstName}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.firstName &&
-                      formik.touched.firstName &&
-                      formik.errors.firstName
-                    }
-                  />
-                </div>
-                <div className={styles.inputCss}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputLastName"
-                    type="text"
-                    name="lastName"
-                    label="Last Name"
-                    value={formik.values.lastName}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.lastName &&
-                      formik.touched.lastName &&
-                      formik.errors.lastName
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide}>
-                  <InputForm
-                    customCss
-                    controlId="inputCompanyName"
-                    type="text"
-                    name="companyName"
-                    label="Company name (optional)"
-                    value={formik.values.companyName}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.companyName &&
-                      formik.touched.companyName &&
-                      formik.errors.companyName
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputCountry"
-                    type="hidden"
-                    name="country"
-                    label="Country"
-                    readonly="readonly"
-                    value={formik.values.country || data.country}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.country &&
-                      formik.touched.country &&
-                      formik.errors.country
-                    }
-                  />
-                  <strong>Viet Nam</strong>
-                </div>
-                <div className={styles.inputWide}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputStreetAddress"
-                    type="text"
-                    name="streetAddress"
-                    label="Street address"
-                    placeholder="House number and street name"
-                    value={formik.values.streetAddress}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.streetAddress &&
-                      formik.touched.streetAddress &&
-                      formik.errors.streetAddress
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide2}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputStreetAddress"
-                    type="text"
-                    placeholder="Apartment, suite, unit etc. (optinal)"
-                    name="apartment"
-                    value={formik.values.apartment}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.apartment &&
-                      formik.touched.apartment &&
-                      formik.errors.apartment
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide2}>
-                  <InputForm
-                    customCss
-                    controlId="inputTownCity"
-                    type="text"
-                    name="townCity"
-                    label="Town / City(optional)"
-                    value={formik.values.townCity}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.townCity &&
-                      formik.touched.townCity &&
-                      formik.errors.townCity
-                    }
-                  />
-                </div>
-                <div className={styles.inputWide2}>
-                  <InputForm
-                    customCss
-                    required
-                    controlId="inputPostcode"
-                    type="text"
-                    name="postcode"
-                    label="Postcode / ZIP"
-                    value={formik.values.postcode || data?.postcode}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.postcode &&
-                      formik.touched.postcode &&
-                      formik.errors.postcode
-                    }
-                  />
-                </div>
-              </div>
-              <div className={styles.buttomSubmit}>
-                <Button type="submit" className={styles.buttomUpdate}>
-                  UPDATE
-                </Button>
-              </div>
-            </div>
-          </Form>
+          <ShippingAddressForm data={data} />
         </AccordionCustom>
         <AccordionCustom eventKey="2" header="Account details">
-          <Form onSubmit={formik.handleSubmit}>
-            <Row style={{ marginBottom: '1.5rem' }}>
-              <Col xs={6}>
-                <InputFormFloat
-                  customCss
-                  required
-                  controlId="inputFirstName"
-                  type="text"
-                  name="firstName"
-                  label="First name"
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange}
-                  errors={
-                    formik.errors.firstName &&
-                    formik.touched.firstName &&
-                    formik.errors.firstName
-                  }
-                />
-              </Col>
-              <Col xs={6}>
-                <InputFormFloat
-                  customCss
-                  required
-                  controlId="inputLastName"
-                  type="text"
-                  name="lastName"
-                  label="Last name"
-                  value={formik.values.lastName || data?.lastName}
-                  onChange={formik.handleChange}
-                  errors={
-                    formik.errors.lastName &&
-                    formik.touched.lastName &&
-                    formik.errors.lastName
-                  }
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={6}>
-                <InputFormFloat
-                  customCss
-                  required
-                  controlId="inputDisplayName"
-                  type="text"
-                  name="displayName"
-                  label="Display name"
-                  value={formik.values.displayName || data?.firstName}
-                  onChange={formik.handleChange}
-                  errors={
-                    formik.errors.displayName &&
-                    formik.touched.displayName &&
-                    formik.errors.displayName
-                  }
-                />
-              </Col>
-              <Col xs={6}>
-                <InputFormFloat
-                  customCss
-                  required
-                  controlId="inputEmail"
-                  type="text"
-                  name="email"
-                  label="Email address"
-                  value={formik.values.email || data?.email}
-                  onChange={formik.handleChange}
-                  errors={
-                    formik.errors.email &&
-                    formik.touched.email &&
-                    formik.errors.email
-                  }
-                />
-              </Col>
-            </Row>
-            <div className={styles.buttomSubmit}>
-              <Button type="submit" className={styles.buttomUpdate}>
-                UPDATE
-              </Button>
-            </div>
-          </Form>
+          <AccountDetailsForm data={data} />
         </AccordionCustom>
         <AccordionCustom eventKey="3" header="Change password">
-          <Form onSubmit={formik.handleSubmit}>
-            <fieldset>
-              <Row style={{ marginBottom: '1.5rem' }}>
-                <Col xs={6}>
-                  <InputFormFloat
-                    customCss
-                    controlId="inputCurrentPassword"
-                    type="text"
-                    name="firstName"
-                    label="Current Password"
-                    value={formik.values.firstName}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.firstName &&
-                      formik.touched.firstName &&
-                      formik.errors.firstName
-                    }
-                  />
-                </Col>
-                <Col xs={6}></Col>
-              </Row>
-              <Row>
-                <Col xs={6}>
-                  <InputFormFloat
-                    customCss
-                    controlId="inputNewPassword"
-                    type="text"
-                    name="displayName"
-                    label="New password"
-                    value={formik.values.displayName}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.displayName &&
-                      formik.touched.displayName &&
-                      formik.errors.displayName
-                    }
-                  />
-                </Col>
-                <Col xs={6}>
-                  <InputFormFloat
-                    customCss
-                    controlId="inputConfirmPass"
-                    type="text"
-                    name="email"
-                    label="Confirm new password"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    errors={
-                      formik.errors.email &&
-                      formik.touched.email &&
-                      formik.errors.email
-                    }
-                  />
-                </Col>
-              </Row>
-            </fieldset>
-            <div className={styles.buttomSubmit}>
-              <Button type="submit" className={styles.buttomUpdate}>
-                UPDATE
-              </Button>
-            </div>
-          </Form>
+          <ChangePasswordForm />
         </AccordionCustom>
       </Accordion>
     </div>
@@ -690,7 +746,7 @@ const PageContent = ({ data }) => {
                 </nav>
                 <div className={styles.wrapMyaccount}>
                   <div className={styles.dashboard}>
-                    <DashboardHeader />
+                    <DashboardHeader data={data} />
                     <DashboardBody data={data} />
                   </div>
                 </div>
