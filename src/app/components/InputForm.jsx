@@ -11,7 +11,10 @@ const InputForm = ({
   placeholder,
   name,
   required,
-  dots
+  dots,
+  textarea,
+  rows,
+  applyLabelForm
 }) => {
   const subInput = Boolean(label);
   return (
@@ -20,10 +23,12 @@ const InputForm = ({
       className={`${styles.subInput} ${subInput ? '' : styles.noLabel}`}
     >
       <Form.Label>
-        {label} {required && <span className={styles.required}>*</span>}{' '}
+        {label} {required && <span className={styles.required}>*</span>}
         {dots && <span>:</span>}
       </Form.Label>
       <Form.Control
+        as={textarea ? 'textarea' : 'input'}
+        rows={rows}
         type={type}
         name={name}
         value={value}
