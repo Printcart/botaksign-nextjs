@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+.lable {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: rgb(105, 105, 105);
+  font-family: var(--font-nunito);
+  font-size: 16px;
+}
+.field {
+  width: 100%;
+  padding: 10px;
+  color: #666;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  height: 41px;
+  padding-bottom: 10px;
+}
+.error {
+  color: #f00;
+  font-size: 14px;
+  font-weight: normal;
+  display: block;
+  font-family: var(--font-nunito);
+  margin-top: 5px;
+}
+.required {
+  color: #f00;
+}

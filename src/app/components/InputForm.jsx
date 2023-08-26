@@ -11,6 +11,7 @@ const InputForm = ({
   placeholder,
   name,
   required,
+  dots,
   textarea,
   rows,
   applyLabelForm
@@ -21,8 +22,9 @@ const InputForm = ({
       controlId={controlId}
       className={`${styles.subInput} ${subInput ? '' : styles.noLabel}`}
     >
-      <Form.Label className={applyLabelForm ? 'lableForm' : ''}>
+      <Form.Label>
         {label} {required && <span className={styles.required}>*</span>}
+        {dots && <span>:</span>}
       </Form.Label>
       <Form.Control
         as={textarea ? 'textarea' : 'input'}
