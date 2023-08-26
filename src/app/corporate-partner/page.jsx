@@ -33,99 +33,94 @@ const industryOptions = [
   }
 ];
 
-const data = [
-  {
-    specialProject: [
-      {
-        description:
-          'In this Covid-19 period, we understand it has been a hard time for our partners and so, we want to lend our support by giving out reduced pricing rate that may be lower than the market pricing in an attempt to help with the competitive pricing in the market.'
+const data = {
+  specialProject: [
+    {
+      description:
+        'In this Covid-19 period, we understand it has been a hard time for our partners and so, we want to lend our support by giving out reduced pricing rate that may be lower than the market pricing in an attempt to help with the competitive pricing in the market.'
+    },
+    {
+      description:
+        'We hope that this will help our customers who have been loyal to us to secure their businesses.'
+    },
+    {
+      description: 'Contact your dedicated  ',
+      link: {
+        name: 'Sales / Graphic Specialist',
+        href: '/contact-us/'
       },
-      {
-        description:
-          'We hope that this will help our customers who have been loyal to us to secure their businesses.'
-      },
-      {
-        description: 'Contact your dedicated  ',
-        link: {
-          name: 'Sales / Graphic Specialist',
-          href: '/contact-us/'
+      behindDescription: 'today!'
+    },
+    {
+      description:
+        '*Terms and conditions of the special pricing will be subjected to the criteria as mentioned below'
+    }
+  ],
+
+  benefits: [
+    {
+      list: 'Exclusive corporate rates for products'
+    },
+    {
+      list: 'Dedicated sales person (graphic specialist) to process orders and provide strategic marketing or printing advice'
+    },
+    {
+      list: 'Complimentary minor artwork amendment services'
+    },
+    {
+      list: 'Gain mutual news sharing, information, and access to the latest printing product discounts and market knowledge'
+    },
+    {
+      list: 'Priority printing without express/urgent surcharge (applicable on a case-by-case basis)'
+    },
+    {
+      list: 'Opportunities to collaborate on projects'
+    }
+  ],
+
+  criteria: [
+    {
+      name: 'To be able to provide print-ready files to our graphic specialists',
+      lists: [
+        { list: 'PDF format' },
+        { list: 'CMYK color mode' },
+        {
+          list: 'Text converted to outlines and images embedded into artwork file (if applicable)'
         },
-        behindDescription: 'today!'
-      },
-      {
-        description:
-          '*Terms and conditions of the special pricing will be subjected to the criteria as mentioned below'
-      }
-    ]
-  },
-  {
-    benefits: [
-      {
-        list: 'Exclusive corporate rates for products'
-      },
-      {
-        list: 'Dedicated sales person (graphic specialist) to process orders and provide strategic marketing or printing advice'
-      },
-      {
-        list: 'Complimentary minor artwork amendment services'
-      },
-      {
-        list: 'Gain mutual news sharing, information, and access to the latest printing product discounts and market knowledge'
-      },
-      {
-        list: 'Priority printing without express/urgent surcharge (applicable on a case-by-case basis)'
-      },
-      {
-        list: 'Opportunities to collaborate on projects'
-      }
-    ]
-  },
-  {
-    criteria: [
-      {
-        name: 'To be able to provide print-ready files to our graphic specialists',
-        lists: [
-          { list: 'PDF format' },
-          { list: 'CMYK color mode' },
-          {
-            list: 'Text converted to outlines and images embedded into artwork file (if applicable)'
-          },
-          { list: 'Artwork provided in actual size in adequate resolution' },
-          {
-            list: 'Outlines/Cut lines files must be provided in PDF vector format for any cutting services'
-          }
-        ]
-      },
-      {
-        name: 'Clear order details sent to dedicated graphic specialist via email only',
-        lists: [
-          { list: 'Size' },
-          { list: 'CMYK color mode' },
-          {
-            list: 'Materials and finishings (Kindly refer to our website for list of available materials and finishings)'
-          },
-          { list: 'Quantity' }
-        ]
-      },
-      {
-        name: 'Punctual payment and good credit terms'
-      }
-    ]
-  },
-  {
-    conditions: [
-      {
-        list: 'All applications are subjected to the approval of Botak Sign Pte Ltd. We will monitor the account activity for the next 6 to 8 months to determine the approval of the application.'
-      },
-      {
-        list: 'By applying to become a corporate partner, you agree to grant us permission to have access to your data (which includes, but not limited to, personal information, contact information, payment information) in accordance with the Personal Data Protection Act 2012 to be able to execute your requests smoothly.'
-      },
-      {
-        list: 'Botak Sign Pte Ltd reserves the right to reject or void the status of a corporate partner if the criteria are not met. This will be assessed at our discretion on a case-by-case basis and will be done with the utmost care of our partners.'
-      }
-    ]
-  }
-];
+        { list: 'Artwork provided in actual size in adequate resolution' },
+        {
+          list: 'Outlines/Cut lines files must be provided in PDF vector format for any cutting services'
+        }
+      ]
+    },
+    {
+      name: 'Clear order details sent to dedicated graphic specialist via email only',
+      lists: [
+        { list: 'Size' },
+        { list: 'CMYK color mode' },
+        {
+          list: 'Materials and finishings (Kindly refer to our website for list of available materials and finishings)'
+        },
+        { list: 'Quantity' }
+      ]
+    },
+    {
+      name: 'Punctual payment and good credit terms'
+    }
+  ],
+
+  conditions: [
+    {
+      list: 'All applications are subjected to the approval of Botak Sign Pte Ltd. We will monitor the account activity for the next 6 to 8 months to determine the approval of the application.'
+    },
+    {
+      list: 'By applying to become a corporate partner, you agree to grant us permission to have access to your data (which includes, but not limited to, personal information, contact information, payment information) in accordance with the Personal Data Protection Act 2012 to be able to execute your requests smoothly.'
+    },
+    {
+      list: 'Botak Sign Pte Ltd reserves the right to reject or void the status of a corporate partner if the criteria are not met. This will be assessed at our discretion on a case-by-case basis and will be done with the utmost care of our partners.'
+    }
+  ]
+};
 
 const Title = (props) => {
   const { title, className } = props;
@@ -173,7 +168,7 @@ const TermsConditions = () => {
     <div className={styles.termsConditions}>
       <Title title="Terms & Conditions" className="termsConditionsTitle" />
       <ol>
-        {data?.[3]?.conditions.map((item, indexConditions) => (
+        {data?.conditions.map((item, indexConditions) => (
           <li key={`index${indexConditions}`}>{item.list}</li>
         ))}
       </ol>
@@ -288,7 +283,7 @@ const Criteria = () => {
         className="titleCriteria"
       />
       <ol className={styles.lists}>
-        {data?.[2]?.criteria?.map((section, indexCriteria) => (
+        {data?.criteria?.map((section, indexCriteria) => (
           <Fragment key={`indexcriteria${indexCriteria}`}>
             <li>
               {section.name}
@@ -313,7 +308,7 @@ const Benefits = () => {
         className="nbtitle"
       />
       <ol>
-        {data?.[1]?.benefits.map((item, indexBenefits) => (
+        {data?.benefits.map((item, indexBenefits) => (
           <li key={`indexBenefits${indexBenefits}`}>{item.list}</li>
         ))}
       </ol>
@@ -346,7 +341,7 @@ const SpecialProject = () => {
             title="Special Project Price Available for Corporate Partners!"
             className="nbTitle"
           />
-          {data?.[0]?.specialProject?.map((item, indexSpecialProject) => (
+          {data?.specialProject?.map((item, indexSpecialProject) => (
             <span key={`index${indexSpecialProject}`}>
               {item.description}
               {item.link ? (
