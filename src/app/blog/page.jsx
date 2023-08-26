@@ -1,7 +1,7 @@
 import { fetchBlog, fetchCategories } from 'botak/api/pages';
 import Blog from './Blog';
 
-const BlogServer = async ({ params }) => {
+const BlogServer = async () => {
   const dataBlog = await fetchBlog();
   const dataCategories = await fetchCategories();
 

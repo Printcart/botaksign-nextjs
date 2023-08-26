@@ -10,18 +10,19 @@ const headers = {
 export const fetchBlog = async (page = 1, perPage = 4) => {
   const fetchUrl = `https://botakdev.printcart.com/wp-json/wp/v2/posts?page=${page}&perPage=${perPage}`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
-  const dataPosts  = await res.json();
-  if (dataPosts .errors) {
+  const dataPosts = await res.json();
+  if (dataPosts.errors) {
     throw new Error('Failed to fetch API');
   }
   const totalPosts = res.headers.get('X-WP-Total');
   const totalPages = res.headers.get('X-WP-TotalPages');
+  console.log(data, 'dataaaaa');
 
   return { dataPosts, totalPosts, totalPages };
 };
 
-export const fetchBlogId = async (id) => {
-  const fetchUrl = `https://botakdev.printcart.com/wp-json/wp/v2/posts/${id}`;
+export const fetchBlogId = async (slug) => {
+  const fetchUrl = `https://botakdev.printcart.com/wp-json/wp/v2/posts?slug=${slug}`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();
   if (data.errors) {
