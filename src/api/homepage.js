@@ -145,4 +145,3 @@ export const fetchSearch = async (params) => {
   return data;
 };
 
-
