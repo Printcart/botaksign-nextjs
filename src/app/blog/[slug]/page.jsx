@@ -34,7 +34,7 @@ const SlugBlog = ({ params }) => {
 
   if (error) return 'An error has occurred.';
   if (isLoading) return 'Loading...';
-  console.log(data);
+
   return (
     <Container>
       <Row>

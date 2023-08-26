@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { Col, Container, Row } from 'react-bootstrap';
 import PageCoverHeader from '../components/PageCoverHeader';
 import styles from './Blog.module.css';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useSWR from 'swr';
 
 const Search = () => {
   return (
@@ -51,9 +52,8 @@ const ContentSider = (props) => {
   return (
     <div className={styles[className]}>
       <ul>
-        {items.map((item) => (
-          <li key={item.id}>{renderItem(item)}</li>
-        ))}
+        {items.length > 0 &&
+          items.map((item) => <li key={item.id}>{renderItem(item)}</li>)}
       </ul>
     </div>
   );
@@ -194,8 +194,41 @@ export const SidebarBlog = ({ dataBlog, dataCategories }) => (
   </>
 );
 
+const fetcherWithAuthorization = (url) =>
+  fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${btoa(
+        `${process.env.NEXT_PUBLIC_WORDPRESS_API_USER}:${process.env.NEXT_PUBLIC_WORDPRESS_API_PASS}`
+      )}`
+    }
+  }).then((res) => {
+    if (!res.ok) {
+      throw new Error('Unauthorized');
+    }
+    return res.json();
+  });
+
 const Blog = (props) => {
   const { dataBlog, dataCategories } = props;
+  const { totalPosts, totalPages, dataPosts } = dataBlog;
+  const [posts, setPosts] = useState(dataPosts);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 2;
+
+  const fetUrl = `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}wp/v2/posts?page=${currentPage}&perPage=${postsPerPage}`;
+
+  const { data, error, isLoading } = useSWR(fetUrl, fetcherWithAuthorization, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false
+  });
+
+  console.log(data);
+
+  if (error) return 'An error has occurred.';
+  if (isLoading) return 'Loading...';
+
   return (
     <>
       <PageCoverHeader title="BLOG" link="Home" titlePage="Blog" />
@@ -204,23 +237,21 @@ const Blog = (props) => {
         <Row>
           <Col lg={3}>
             <Search />
-            <SidebarBlog dataCategories={dataCategories} dataBlog={dataBlog} />
+            <SidebarBlog dataCategories={dataCategories} dataBlog={posts} />
           </Col>
           <Col lg={9}>
             <Row>
               <Col lg={6}>1</Col>
               <Col lg={6}>
-                <ContentArticle
-                  dataBlog={dataBlog}
-                  dataCategories={dataCategories}
-                />
+                <ContentArticle dataBlog={posts} dataCategories={dataCategories} />
               </Col>
               <nav className={styles.pagination}>
                 <Link href="#">
                   <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
                   Newer Articles
                 </Link>
-                <Link href="#">
+                <Link href="">
+                  {/* <Link href={`/posts/${href}`}>{title}</Link> */}
                   Older Articles
                   <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
                 </Link>
