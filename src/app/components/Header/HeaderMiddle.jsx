@@ -4,8 +4,8 @@ import { headerData } from 'botak/app/data/menus';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { Col, Container, Nav, Row, Spinner } from 'react-bootstrap';
-import FontIcon from '../FontIcon';
+import { Col, Container, Nav, Row } from 'react-bootstrap';
+import BagIcon from './BagIcon';
 import Search from './Search';
 import styles from './header.module.css';
 
@@ -30,11 +30,8 @@ const Cart = () => {
   return (
     <div className="cartheadwrapper d-inline-block position-relative">
       <div className="cartwrapper d-flex align-items-center">
-        <div className="iconcart text-success px-1 fs-2">
-          <FontIcon
-            prefix={headerData?.icon?.prefix}
-            iconName={headerData?.icon?.iconName}
-          />
+        <div className={`${styles.wrapImage} px-1 fs-2`}>
+          <BagIcon />
         </div>
         <div className="showcat position-relative text-start px-1">
           <span
