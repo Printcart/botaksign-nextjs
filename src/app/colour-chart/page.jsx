@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 const PrintingColour = () => {
   return (
-    <div id="navSa" className={styles.nav_content}>
+    <div id="navSa" className={styles.navContent}>
       <div className={styles.contentTitle}>
         <p>Printing Colour Chart</p>
       </div>
@@ -27,7 +27,7 @@ const PrintingColour = () => {
 
 const StickerColour = () => {
   return (
-    <div id="navCo" className={styles.nav_content}>
+    <div id="navCo" className={styles.navContent}>
       <div id="navCowob">
         <div className={styles.contentTitle}>
           <div>

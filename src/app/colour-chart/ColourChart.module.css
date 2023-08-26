@@ -34,7 +34,10 @@
   font-weight: bold;
   margin: 0 0 25px;
 }
-.nav_content {
+.navContent:first-child {
+  padding-top: 0;
+}
+.navContent {
   padding: 50px 0;
   border-bottom: 2px #e3e3e3 solid;
 }
@@ -45,7 +48,7 @@
   color: #28c473;
 }
 .contentBlock {
-  margin: 0 50px;
+  margin: 0 38px;
 }
 .image {
   width: 100%;
