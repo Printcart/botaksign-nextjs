@@ -1,8 +1,13 @@
+'use client';
 import Link from 'next/link';
 import React from 'react';
 import styles from './PageCoverHeader.module.css';
+import { useSearchParams } from 'next/navigation';
 
 const PageCoverHeader = (props) => {
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page');
+
   const { title, link, titlePage } = props;
   return (
     <>
@@ -13,6 +18,7 @@ const PageCoverHeader = (props) => {
             <Link href="/">{link}</Link>
             <span>/</span>
             <span className={styles.breadcrumbLast}>{titlePage}</span>
+            <span className={styles.breadcrumbLast}>/ Page {page}</span>
           </span>
         </div>
       </div>

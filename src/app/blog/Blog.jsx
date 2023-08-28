@@ -1,16 +1,46 @@
 'use client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fetchBlog } from 'botak/api/pages';
+import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Fragment, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import PageCoverHeader from '../components/PageCoverHeader';
 import styles from './Blog.module.css';
 
-const Search = () => {
+export const SearchBlog = (props) => {
+  const { className } = props;
+  const router = useRouter();
+  const [resultSearch, setResultSearch] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (resultSearch === '') {
+      return alert('Please fill in the search...');
+    }
+    updateSearchParams(resultSearch.toLowerCase());
+  };
+
+  const updateSearchParams = (resultSearch) => {
+    const searchParams = new URLSearchParams(router.query);
+    if (resultSearch) {
+      searchParams.set('search', resultSearch);
+    } else {
+      searchParams.delete('search');
+    }
+    const newPathname = `${searchParams.toString()}`;
+    router.push(`/resultSearchBlog?${newPathname}`);
+  };
+
   return (
-    <form>
-      <input className={styles.input} type="text" placeholder="Search" />
-      <span className={styles.button}>
+    <form onSubmit={handleSearch} className={styles[className]}>
+      <input
+        type="text"
+        placeholder="Search"
+        onChange={(e) => setResultSearch(e.target.value)}
+      />
+      <span>
         <button type="submit">
           <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
         </button>
@@ -19,7 +49,7 @@ const Search = () => {
   );
 };
 
-const BreadCrumb = () => {
+export const BreadCrumb = () => {
   return (
     <nav className={styles.titleBreadCrumb}>
       <Link href="/">Home</Link>
@@ -29,7 +59,7 @@ const BreadCrumb = () => {
   );
 };
 
-const Title = (props) => {
+export const Title = (props) => {
   const { title, className, href } = props;
   return (
     <>
@@ -46,19 +76,19 @@ const Title = (props) => {
   );
 };
 
-const ContentSider = (props) => {
+export const ContentSider = (props) => {
   const { className, items, renderItem } = props;
   return (
     <div className={styles[className]}>
       <ul>
-        {items.length > 0 &&
-          items.map((item) => <li key={item.id}>{renderItem(item)}</li>)}
+        {items?.length > 0 &&
+          items?.map((item) => <li key={item.id}>{renderItem(item)}</li>)}
       </ul>
     </div>
   );
 };
 
-const Categories = (props) => {
+export const Categories = (props) => {
   const { dataCategories } = props;
   return (
     <>
@@ -74,7 +104,7 @@ const Categories = (props) => {
   );
 };
 
-const Archives = (props) => {
+export const Archives = (props) => {
   const { date } = props;
 
   const formatDateArchives = (dateString) => {
@@ -96,7 +126,7 @@ const Archives = (props) => {
   );
 };
 
-const Blogs = (props) => {
+export const Blogs = (props) => {
   const { title } = props;
   return (
     <>
@@ -112,7 +142,7 @@ const Blogs = (props) => {
   );
 };
 
-const Information = (props) => {
+export const Information = (props) => {
   const { item } = props;
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -129,14 +159,14 @@ const Information = (props) => {
   );
 };
 
-const ReadMore = (props) => {
-  const { item } = props;
+export const ReadMore = (props) => {
+  const { excerpt } = props;
   return (
     <Fragment>
       <div>
         <div
           className={styles.entryText}
-          dangerouslySetInnerHTML={{ __html: item?.excerpt?.rendered }}
+          dangerouslySetInnerHTML={{ __html: excerpt }}
         ></div>
         <div className={styles.readMoreLink}>
           <Link href="#">Read more</Link>
@@ -149,66 +179,102 @@ const ReadMore = (props) => {
   );
 };
 
-const ContentArticle = (props) => {
+export const SidebarBlog = (props) => {
   const { dataBlog, dataCategories } = props;
+  return (
+    <>
+      {dataBlog && <Blogs title={dataBlog} />}
+      {dataBlog && <Archives date={dataBlog} />}
+      {dataCategories && <Categories dataCategories={dataCategories} />}
+    </>
+  );
+};
 
+export const ArticlePost = (props) => {
+  const { id, link, title, slug, date, excerpt, categoryName } = props;
+
+  return (
+    <article key={id} className={styles.entryContent}>
+      <div className={styles.subContent}>
+        <div className={styles.entryThumb}>
+          <div className={styles.entryImage}>
+            <Image
+              width={300}
+              height={300}
+              alt="Image"
+              src={
+                '' ||
+                'https://botaksign-library.s3.ap-southeast-1.amazonaws.com/2020/08/stickerprintonly_detail_ink.jpg'
+              }
+            />
+          </div>
+          <div className={styles.entryNumber}>
+            <span>113</span>
+          </div>
+        </div>
+        <div className={styles.entry}>
+          <Link href={link} className={styles.entryCat}>
+            {categoryName}
+          </Link>
+          <Title className="entryTitle" title={title} href={slug} />
+          <Information date={date} />
+          <ReadMore excerpt={excerpt} />
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export const ContentArticle = (props) => {
+  const { dataBlog, dataCategories } = props;
   const categoryNamesMap = {};
   dataCategories.forEach((category) => {
     categoryNamesMap[category.id] = category.name;
   });
 
   return (
-    <article className={styles.entryContent}>
-      <div className={styles.entryImage}>
-        {dataBlog.length > 0 &&
-          dataBlog.map((item, index) => {
-            const categoryName =
-              categoryNamesMap[item?.categories[0]] || 'Uncategorized';
-            return (
-              <Fragment key={index}>
-                <Link href={item?.link} className={styles.entryCat}>
-                  {categoryName}
-                </Link>
-                <Title
-                  className="entryTitle"
-                  title={item?.title?.rendered}
-                  href={item?.slug}
-                />
-                <Information item={item} />
-                <ReadMore item={item} />
-              </Fragment>
-            );
-          })}
-      </div>
-      <div className={styles.entry}></div>
-    </article>
+    <>
+      {dataBlog?.dataPosts?.length > 0 &&
+        dataBlog.dataPosts?.map((item) => {
+          const categoryName =
+            categoryNamesMap[item?.categories[0]] || 'Uncategorized';
+          return (
+            <ArticlePost
+              categoryName={categoryName}
+              key={item?.id}
+              link={item?.link}
+              slug={item?.slug}
+              title={item?.title?.rendered}
+              date={item?.date}
+              excerpt={item?.excerpt?.rendered}
+            />
+          );
+        })}
+    </>
   );
 };
 
-export const SidebarBlog = ({ dataBlog, dataCategories }) => (
-  <>
-    {dataBlog && <Blogs title={dataBlog} />}
-    {dataBlog && <Archives date={dataBlog} />}
-    {dataCategories && <Categories dataCategories={dataCategories} />}
-  </>
-);
-
 const Blog = (props) => {
+  const router = useRouter();
   const { dataBlog, dataCategories } = props;
   const { totalPosts, totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const postsPerPage = 2;
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 1;
 
-  // const fetUrl = `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}wp/v2/posts?page=${currentPage}&perPage=${postsPerPage}`;
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetchBlog(currentPage, perPage);
+      setPosts(result);
+    };
 
-  // const { data, error, isLoading } = useSWR(fetUrl, fetcherWithAuthorization, {
-  //   revalidateIfStale: false,
-  //   revalidateOnFocus: false,
-  //   revalidateOnReconnect: false
-  // });
+    fetchData();
+  }, [currentPage]);
 
-  // console.log(data);
+  const goToPage = (page) => {
+    setCurrentPage(page);
+    router.push(`/blog?page=${page}`, undefined, { scroll: false });
+  };
 
   return (
     <>
@@ -216,28 +282,26 @@ const Blog = (props) => {
       <Container>
         <BreadCrumb />
         <Row>
-          <Col lg={3}>
-            <Search />
-            <SidebarBlog dataCategories={dataCategories} dataBlog={posts} />
+          <Col lg={3} className="p-2">
+            <SearchBlog className="lightSearch" />
+            <SidebarBlog dataCategories={dataCategories} dataBlog={dataPosts} />
           </Col>
-          <Col lg={9}>
-            <Row>
-              <Col lg={6}>1</Col>
-              <Col lg={6}>
-                <ContentArticle dataBlog={posts} dataCategories={dataCategories} />
-              </Col>
-              <nav className={styles.pagination}>
-                <Link href="#">
+          <Col lg={9} className="px-3">
+            <ContentArticle dataBlog={posts} dataCategories={dataCategories} />
+            <nav className={styles.pagination}>
+              {currentPage > 1 && (
+                <button onClick={() => goToPage(currentPage - 1)}>
                   <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
                   Newer Articles
-                </Link>
-                <Link href="">
-                  {/* <Link href={`/posts/${href}`}>{title}</Link> */}
+                </button>
+              )}
+              {currentPage < totalPages && (
+                <button onClick={() => goToPage(currentPage + 1)}>
                   Older Articles
                   <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
-                </Link>
-              </nav>
-            </Row>
+                </button>
+              )}
+            </nav>
           </Col>
         </Row>
       </Container>

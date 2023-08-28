@@ -1,5 +1,4 @@
 import { fetchBlogId } from 'botak/api/pages';
-import React from 'react';
 import SlugBlog from './SlugBlog';
 
 const SlugServer = async ({ params }) => {
