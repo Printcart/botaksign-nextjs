@@ -3,31 +3,27 @@ import Homepage from "botak/app/components/Homepage";
 import MainList from "../../../../components/ProductCategory/MainList";
 import NotFound from "botak/app/not-found";
 
-export default async function ProductCategory({ params }) {
-  const data = await getProductCategory(params);
-
-  if (!data) {
-    return <Homepage><NotFound /></Homepage>
-  }
-
-  return (
-    <Homepage>
-      <MainList dataRefine={data.dataRefine} dataListing={data.dataListing} />
-    </Homepage>
-  )
-};
-
 // Set
 const headers = {
   method: 'GET',
   headers: author,
 };
 
+export async function generateStaticParams() {
+  const res = await fetch(`${API_URL}wc/v3/products/categories?slug=printing-products`, headers);
+  const path = await res.json();
+
+  if (path.length > 0) {
+    return path.map(_item => ({ slug: [_item.slug] }));
+  }
+};
+
 async function getProductCategory(params) {
   let slug = '';
   let refine = '';
   const dataRefine = [];
-  const dataListing = [];
+  const dataCategory = [];
+  const dataProduct = [];
   const count = params.slug.length;
 
   // Set
@@ -74,14 +70,14 @@ async function getProductCategory(params) {
     if (display === 'subcategories') {
       const data = await fetch(`${API_URL}wc/v3/products/categories?parent=${id}`, headers);
       const categoryRes = await data.json();
-      dataListing.push(...categoryRes);
+      dataCategory.push(...categoryRes);
     }
     if ((display === 'products' || display === 'default')) {
       const data = await fetch(`${API_URL}wc/v3/products?category=${id}`, headers);
       const productRes = await data.json();
-      dataListing.push(...productRes);
+      dataProduct.push(...productRes);
     }
-    if (display === 'bold') {
+    if (display === 'both') {
       const apiUrls = [
         `${API_URL}wc/v3/products/categories?parent=${id}`,
         `${API_URL}wc/v3/products?category=${id}`,
@@ -92,25 +88,37 @@ async function getProductCategory(params) {
 
       const [categories, products] = await Promise.all([categoryRes.json(), productRes.json()]);
 
-      dataListing.push(...categories, ...products);
+      dataCategory.push(...categories);
+      dataProduct.push(...products);
     }
 
     // Return
     return {
       dataRefine,
-      dataListing,
+      dataCategory,
+      dataProduct,
     }
   };
 
   return undefined;
 };
 
+const ProductCategory = async ({ params }) => {
+  const data = await getProductCategory(params);
 
-export async function generateStaticParams() {
-  const res = await fetch(`${API_URL}wc/v3/products/categories?slug=printing-products`, headers);
-  const path = await res.json();
-
-  if (path.length > 0) {
-    return path.map(_item => ({ slug: [_item.slug] }));
+  if (!data) {
+    return <NotFound />
   }
+
+  return (
+    <Homepage>
+      <MainList
+        dataRefine={data.dataRefine}
+        dataCategory={data.dataCategory}
+        dataProduct={data.dataProduct}
+      />
+    </Homepage>
+  )
 };
+
+export default ProductCategory;
