@@ -5,13 +5,13 @@ const InputForm = ({
   controlId,
   label,
   type,
-  value,
   onChange,
   errors,
   placeholder,
   name,
   required,
-  customCss
+  customCss,
+  readonly
 }) => {
   const subInput = Boolean(label);
   return (
@@ -35,10 +35,10 @@ const InputForm = ({
         }}
         type={type}
         name={name}
-        value={value}
         placeholder={placeholder}
         onChange={onChange}
         isInvalid={errors}
+        readOnly={readonly}
       />
       {errors && (
         <Form.Control.Feedback type="invalid">{errors}</Form.Control.Feedback>

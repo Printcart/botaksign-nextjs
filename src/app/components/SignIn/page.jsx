@@ -437,7 +437,7 @@ const ShippingAddressForm = ({ data }) => {
               type="hidden"
               name="country"
               label="Country"
-              readonly="readonly"
+              readonly
               value={formik.values.country || data.country}
               onChange={formik.handleChange}
               errors={
@@ -704,7 +704,7 @@ const DashboardBody = ({ data }) => {
           <AccountDetailsForm data={data} />
         </AccordionCustom>
         <AccordionCustom eventKey="3" header="Change password">
-          <ChangePasswordForm  />
+          <ChangePasswordForm />
         </AccordionCustom>
       </Accordion>
     </div>
@@ -739,7 +739,7 @@ const PageContent = ({ data }) => {
                       <NavigationMenu
                         url="/my-account/quotation/"
                         src="https://botaksign.com/wp-content/plugins/custom-botaksign//assets/images/quotations-icon.png"
-                        title="Quotions"
+                        title="Quotations"
                       />
                     </li>
                   </ul>
