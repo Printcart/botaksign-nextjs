@@ -66,7 +66,7 @@ export const Title = (props) => {
       {href && href ? (
         href && (
           <h3 className={styles[className]}>
-            <Link href={`/blog/${href}`}>{title}</Link>
+            <Link href={`/posts/${href}`}>{title}</Link>
           </h3>
         )
       ) : (
@@ -88,6 +88,14 @@ export const ContentSider = (props) => {
   );
 };
 
+export const Comments = () => {
+  return (
+    <>
+      <Title title="RECENT COMMENTS" className="title" />
+    </>
+  );
+};
+
 export const Categories = (props) => {
   const { dataCategories } = props;
   return (
@@ -96,9 +104,9 @@ export const Categories = (props) => {
       <ContentSider
         className="titleCate"
         items={dataCategories}
-        renderItem={(category) => (
-          <Link href={category?.slug}>{category?.name}</Link>
-        )}
+        renderItem={(category) => {
+          return <Link href={`/posts/${category?.slug}`}>{category?.name}</Link>;
+        }}
       />
     </>
   );
@@ -134,16 +142,14 @@ export const Blogs = (props) => {
       <ContentSider
         className="titleSider"
         items={title}
-        renderItem={(post) => (
-          <Link href={post?.guid?.rendered}>{post?.title?.rendered}</Link>
-        )}
+        renderItem={(post) => <Link href={post?.slug}>{post?.title?.rendered}</Link>}
       />
     </>
   );
 };
 
 export const Information = (props) => {
-  const { item } = props;
+  const { date, author } = props;
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options).toUpperCase();
@@ -151,8 +157,8 @@ export const Information = (props) => {
 
   return (
     <div className={styles.entryWrap}>
-      <span className={styles.date}>{formatDate(item?.date)}</span>
-      <span>ss</span>
+      <span className={styles.date}>{formatDate(date)}</span>
+      <span>{author || ''}</span>
       <span>csd</span>
       <span>No Comments</span>
     </div>
@@ -160,7 +166,7 @@ export const Information = (props) => {
 };
 
 export const ReadMore = (props) => {
-  const { excerpt } = props;
+  const { excerpt, slug } = props;
   return (
     <Fragment>
       <div>
@@ -169,7 +175,7 @@ export const ReadMore = (props) => {
           dangerouslySetInnerHTML={{ __html: excerpt }}
         ></div>
         <div className={styles.readMoreLink}>
-          <Link href="#">Read more</Link>
+          <Link href={`/posts/${slug}`}>Read more</Link>
         </div>
       </div>
       <div className={styles.entryFooter}>
@@ -184,6 +190,7 @@ export const SidebarBlog = (props) => {
   return (
     <>
       {dataBlog && <Blogs title={dataBlog} />}
+      {<Comments />}
       {dataBlog && <Archives date={dataBlog} />}
       {dataCategories && <Categories dataCategories={dataCategories} />}
     </>
@@ -191,7 +198,18 @@ export const SidebarBlog = (props) => {
 };
 
 export const ArticlePost = (props) => {
-  const { id, link, title, slug, date, excerpt, categoryName } = props;
+  const {
+    id,
+    link,
+    title,
+    slug,
+    date,
+    excerpt,
+    categoryName,
+    featuredMediaUrl,
+    idItem,
+    author
+  } = props;
 
   return (
     <article key={id} className={styles.entryContent}>
@@ -203,13 +221,13 @@ export const ArticlePost = (props) => {
               height={300}
               alt="Image"
               src={
-                '' ||
+                featuredMediaUrl ||
                 'https://botaksign-library.s3.ap-southeast-1.amazonaws.com/2020/08/stickerprintonly_detail_ink.jpg'
               }
             />
           </div>
           <div className={styles.entryNumber}>
-            <span>113</span>
+            <span>{idItem || ''}</span>
           </div>
         </div>
         <div className={styles.entry}>
@@ -217,8 +235,8 @@ export const ArticlePost = (props) => {
             {categoryName}
           </Link>
           <Title className="entryTitle" title={title} href={slug} />
-          <Information date={date} />
-          <ReadMore excerpt={excerpt} />
+          <Information date={date} author={author} />
+          <ReadMore excerpt={excerpt} slug={slug} />
         </div>
       </div>
     </article>
@@ -231,11 +249,10 @@ export const ContentArticle = (props) => {
   dataCategories.forEach((category) => {
     categoryNamesMap[category.id] = category.name;
   });
-
   return (
     <>
       {dataBlog?.dataPosts?.length > 0 &&
-        dataBlog.dataPosts?.map((item) => {
+        dataBlog?.dataPosts?.map((item) => {
           const categoryName =
             categoryNamesMap[item?.categories[0]] || 'Uncategorized';
           return (
@@ -247,6 +264,9 @@ export const ContentArticle = (props) => {
               title={item?.title?.rendered}
               date={item?.date}
               excerpt={item?.excerpt?.rendered}
+              featuredMediaUrl={item?.featured_media_url}
+              idItem={item?.id}
+              author={item?.author_data?.name}
             />
           );
         })}
@@ -260,20 +280,20 @@ const Blog = (props) => {
   const { totalPosts, totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 1;
+  const perPage = 4;
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchBlog(currentPage, perPage);
+      const result = await fetchBlog('', currentPage, perPage);
       setPosts(result);
     };
 
     fetchData();
-  }, [currentPage]);
+  }, []);
 
   const goToPage = (page) => {
     setCurrentPage(page);
-    router.push(`/blog?page=${page}`, undefined, { scroll: false });
+    router.push(`/posts?page=${page}`);
   };
 
   return (
@@ -281,7 +301,7 @@ const Blog = (props) => {
       <PageCoverHeader title="BLOG" link="Home" titlePage="Blog" />
       <Container>
         <BreadCrumb />
-        <Row>
+        <Row className="mt-5">
           <Col lg={3} className="p-2">
             <SearchBlog className="lightSearch" />
             <SidebarBlog dataCategories={dataCategories} dataBlog={dataPosts} />

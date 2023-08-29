@@ -3,7 +3,7 @@
   font-family: var(--font-nunito);
   font-weight: 400;
   font-size: 16px;
-  margin: 21px 0 76px 0;
+  margin-top: 21px;
 }
 .titleBreadCrumb span {
   margin: 0 5px;

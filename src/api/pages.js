@@ -7,9 +7,8 @@ const headers = {
   )}`
 };
 
-export const fetchBlog = async (search = '', page = 1, perPage = 4) => {
-  
-  let fetchUrl = `${API_URL}wp/v2/posts?page=${page}&per_page=${perPage}`;
+export const fetchBlog = async (search, page = 1, perPage = 4) => {
+  let fetchUrl = `${API_URL}pc/v2/posts?page=${page}&per_page=${perPage}`;
   if (search) {
     fetchUrl += `&search=${search}`;
   }
@@ -26,7 +25,7 @@ export const fetchBlog = async (search = '', page = 1, perPage = 4) => {
 };
 
 export const fetchBlogRelated = async (id) => {
-  const fetchUrl = `${API_URL}wp/v2/posts?categories=${id}`;
+  const fetchUrl = `${API_URL}pc/v2/posts?categories=${id}`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();
   if (data.errors) {
@@ -36,7 +35,7 @@ export const fetchBlogRelated = async (id) => {
 };
 
 export const fetchBlogId = async (slug) => {
-  const fetchUrl = `${API_URL}wp/v2/posts?slug=${slug}`;
+  const fetchUrl = `${API_URL}pc/v2/posts?slug=${slug}`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();
   if (data.errors) {

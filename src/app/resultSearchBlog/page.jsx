@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { ArticlePost, SearchBlog } from '../blog/Blog';
 import styles from './SearchBlog.module.css';
+import { ArticlePost, SearchBlog } from '../posts/Blog';
 
 const Title = (props) => {
   const { params } = props;
@@ -21,11 +21,11 @@ const Title = (props) => {
 const ResultSearchBlog = () => {
   const searchParams = useSearchParams();
   const search = searchParams.get('search');
-
   const [listPosts, setListPosts] = useState([]);
   useEffect(() => {
     const fectchdata = async () => {
       const res = await fetchBlog(search);
+      console.log(res);
       setListPosts(res);
     };
 

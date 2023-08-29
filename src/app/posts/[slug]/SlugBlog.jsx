@@ -1,22 +1,24 @@
 'use client';
 import Link from 'next/link';
 import { Col, Container, Row } from 'react-bootstrap';
-import { SidebarBlog } from '../Blog';
+import { SearchBlog, SidebarBlog } from '../Blog';
 import styles from './SlugBlog.module.css';
 
 const SlugBlog = (props) => {
-  const { dataBlogDetails } = props;
-
+  const { dataBlogDetails, dataCategories, dataBlog } = props;
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options).toUpperCase();
   };
   return (
     <Container>
-      <Row>
+      <Row className="mt-5">
         <Col lg={3}>
-          <SidebarBlog />
-          ccccc
+          <SearchBlog className="lightSearch" />
+          <SidebarBlog
+            dataBlog={dataBlog?.dataPosts}
+            dataCategories={dataCategories}
+          />
         </Col>
         <Col lg={9}>
           {dataBlogDetails.length > 0 &&
@@ -34,7 +36,7 @@ const SlugBlog = (props) => {
                 <div className={styles.entryMeta}>
                   <span>{formatDate(item?.date)}</span>
                   <span>
-                    By:<Link href="#">author</Link>
+                    By:<Link href="#">{item?.author_data?.name || ''}</Link>
                   </span>
                   <span></span>
                   <span></span>
