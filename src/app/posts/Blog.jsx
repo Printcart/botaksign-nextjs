@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchBlog } from 'botak/api/pages';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import PageCoverHeader from '../components/PageCoverHeader';
@@ -114,7 +114,6 @@ export const Categories = (props) => {
 
 export const Archives = (props) => {
   const { date } = props;
-
   const formatDateArchives = (dateString) => {
     const options = { year: 'numeric', month: 'long' };
     return new Date(dateString).toLocaleDateString('en-US', options).toUpperCase();
@@ -126,9 +125,13 @@ export const Archives = (props) => {
       <ContentSider
         className="titleSider"
         items={date}
-        renderItem={(dateItem) => (
-          <Link href={dateItem?.slug}>{formatDateArchives(dateItem?.date)}</Link>
-        )}
+        renderItem={(dateItem) => {
+          return (
+            <Link href={`/posts/${dateItem?.id}`}>
+              {formatDateArchives(dateItem?.date)}
+            </Link>
+          );
+        }}
       />
     </>
   );
@@ -158,9 +161,11 @@ export const Information = (props) => {
   return (
     <div className={styles.entryWrap}>
       <span className={styles.date}>{formatDate(date)}</span>
-      <span>{author || ''}</span>
+      <span>
+        BY: <Link href="">{author || ''}</Link>
+      </span>
       <span>csd</span>
-      <span>No Comments</span>
+      <span>{'' || 'No Comments'}</span>
     </div>
   );
 };
@@ -289,7 +294,7 @@ const Blog = (props) => {
     };
 
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   const goToPage = (page) => {
     setCurrentPage(page);
@@ -301,8 +306,10 @@ const Blog = (props) => {
       <PageCoverHeader title="BLOG" link="Home" titlePage="Blog" />
       <Container>
         <BreadCrumb />
-        <Row className="mt-5">
-          <Col lg={3} className="p-2">
+        <Row
+          className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
+        >
+          <Col lg={3} className="p-3">
             <SearchBlog className="lightSearch" />
             <SidebarBlog dataCategories={dataCategories} dataBlog={dataPosts} />
           </Col>

@@ -22,10 +22,10 @@ const ResultSearchBlog = () => {
   const searchParams = useSearchParams();
   const search = searchParams.get('search');
   const [listPosts, setListPosts] = useState([]);
+
   useEffect(() => {
     const fectchdata = async () => {
       const res = await fetchBlog(search);
-      console.log(res);
       setListPosts(res);
     };
 
@@ -35,7 +35,7 @@ const ResultSearchBlog = () => {
   return (
     <Container>
       <Title params={search} />
-      <div>
+      <div className={styles.resultPost}>
         {listPosts?.dataPosts?.length > 0 ? (
           listPosts?.dataPosts.map((item) => (
             <ArticlePost

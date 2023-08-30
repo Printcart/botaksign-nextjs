@@ -112,7 +112,8 @@
 .entryContent:first-child {
   margin-bottom: 120px;
 }
-.subContent:first-child::after {
+
+.entryContent:first-child::after {
   content: 'Articles / Posts';
   text-transform: uppercase;
   position: absolute;
@@ -120,7 +121,6 @@
   display: inline-block;
   border-bottom: 1px solid #333;
   font-size: 32px;
-  bottom: -150px;
   width: auto;
   color: rgb(105, 105, 105);
 }
@@ -161,6 +161,11 @@
   color: rgb(40, 196, 117);
   background-color: rgb(255, 255, 255);
 }
+.readMoreLink a:hover {
+  background: rgb(40, 196, 117);
+  color: rgb(255, 255, 255);
+}
+
 .entryFooter {
   margin-top: 20px;
 }
@@ -194,7 +199,7 @@
 .entryContent:first-child .entryImage img {
   width: 100%;
   max-width: 100%;
-  height: 100%;
+  height: 400px;
   object-fit: cover;
 }
 
@@ -248,4 +253,14 @@
 }
 .pagination button:hover {
   color: rgb(40, 196, 117);
+}
+
+@media (max-width: 768px) {
+  .subContent {
+    display: flex;
+    flex-direction: column;
+  }
+  .lightSearch input {
+    width: 100%;
+  }
 }
