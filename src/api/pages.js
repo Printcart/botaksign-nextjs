@@ -63,3 +63,13 @@ export const fetchCategories = async () => {
   }
   return data;
 };
+
+export const fetchCategoriesId = async (slug) => {
+  const fetchUrl = `${API_URL}wp/v2/categories?slug=${slug}`;
+  const res = await fetch(fetchUrl, { headers, method: 'GET' });
+  const data = await res.json();
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
+  return data;
+};

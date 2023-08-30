@@ -3,51 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchBlog } from 'botak/api/pages';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import PageCoverHeader from '../components/PageCoverHeader';
 import styles from './Blog.module.css';
-
-export const SearchBlog = (props) => {
-  const { className } = props;
-  const router = useRouter();
-  const [resultSearch, setResultSearch] = useState('');
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (resultSearch === '') {
-      return alert('Please fill in the search...');
-    }
-    updateSearchParams(resultSearch.toLowerCase());
-  };
-
-  const updateSearchParams = (resultSearch) => {
-    const searchParams = new URLSearchParams(router.query);
-    if (resultSearch) {
-      searchParams.set('search', resultSearch);
-    } else {
-      searchParams.delete('search');
-    }
-    const newPathname = `${searchParams.toString()}`;
-    router.push(`/resultSearchBlog?${newPathname}`);
-  };
-
-  return (
-    <form onSubmit={handleSearch} className={styles[className]}>
-      <input
-        type="text"
-        placeholder="Search"
-        onChange={(e) => setResultSearch(e.target.value)}
-      />
-      <span>
-        <button type="submit">
-          <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
-        </button>
-      </span>
-    </form>
-  );
-};
+import Sider from '../components/SiderPost/page';
 
 export const BreadCrumb = () => {
   return (
@@ -61,6 +22,7 @@ export const BreadCrumb = () => {
 
 export const Title = (props) => {
   const { title, className, href } = props;
+  console.log(href);
   return (
     <>
       {href && href ? (
@@ -85,69 +47,6 @@ export const ContentSider = (props) => {
           items?.map((item) => <li key={item.id}>{renderItem(item)}</li>)}
       </ul>
     </div>
-  );
-};
-
-export const Comments = () => {
-  return (
-    <>
-      <Title title="RECENT COMMENTS" className="title" />
-    </>
-  );
-};
-
-export const Categories = (props) => {
-  const { dataCategories } = props;
-  return (
-    <>
-      <Title title="CATEGORIES" className="title" />
-      <ContentSider
-        className="titleCate"
-        items={dataCategories}
-        renderItem={(category) => {
-          return <Link href={`/posts/${category?.slug}`}>{category?.name}</Link>;
-        }}
-      />
-    </>
-  );
-};
-
-export const Archives = (props) => {
-  const { date } = props;
-  const formatDateArchives = (dateString) => {
-    const options = { year: 'numeric', month: 'long' };
-    return new Date(dateString).toLocaleDateString('en-US', options).toUpperCase();
-  };
-
-  return (
-    <>
-      <Title title="ARCHIVES" className="title" />
-      <ContentSider
-        className="titleSider"
-        items={date}
-        renderItem={(dateItem) => {
-          return (
-            <Link href={`/posts/${dateItem?.id}`}>
-              {formatDateArchives(dateItem?.date)}
-            </Link>
-          );
-        }}
-      />
-    </>
-  );
-};
-
-export const Blogs = (props) => {
-  const { title } = props;
-  return (
-    <>
-      <Title title="RECENT POSTS" className="title" />
-      <ContentSider
-        className="titleSider"
-        items={title}
-        renderItem={(post) => <Link href={post?.slug}>{post?.title?.rendered}</Link>}
-      />
-    </>
   );
 };
 
@@ -187,18 +86,6 @@ export const ReadMore = (props) => {
         <span>share: </span>
       </div>
     </Fragment>
-  );
-};
-
-export const SidebarBlog = (props) => {
-  const { dataBlog, dataCategories } = props;
-  return (
-    <>
-      {dataBlog && <Blogs title={dataBlog} />}
-      {<Comments />}
-      {dataBlog && <Archives date={dataBlog} />}
-      {dataCategories && <Categories dataCategories={dataCategories} />}
-    </>
   );
 };
 
@@ -310,25 +197,26 @@ const Blog = (props) => {
           className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
         >
           <Col lg={3} className="p-3">
-            <SearchBlog className="lightSearch" />
-            <SidebarBlog dataCategories={dataCategories} dataBlog={dataPosts} />
+            <Sider dataCategories={dataCategories} dataBlog={dataPosts} />
           </Col>
           <Col lg={9} className="px-3">
             <ContentArticle dataBlog={posts} dataCategories={dataCategories} />
-            <nav className={styles.pagination}>
-              {currentPage > 1 && (
-                <button onClick={() => goToPage(currentPage - 1)}>
-                  <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
-                  Newer Articles
-                </button>
-              )}
-              {currentPage < totalPages && (
-                <button onClick={() => goToPage(currentPage + 1)}>
-                  Older Articles
-                  <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
-                </button>
-              )}
-            </nav>
+            {totalPages > 0 && (
+              <nav className={styles.pagination}>
+                {currentPage > 1 && (
+                  <button onClick={() => goToPage(currentPage - 1)}>
+                    <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
+                    Newer Articles
+                  </button>
+                )}
+                {currentPage < totalPages && (
+                  <button onClick={() => goToPage(currentPage + 1)}>
+                    Older Articles
+                    <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+                  </button>
+                )}
+              </nav>
+            )}
           </Col>
         </Row>
       </Container>

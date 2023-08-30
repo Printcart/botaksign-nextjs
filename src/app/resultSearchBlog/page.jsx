@@ -5,7 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import styles from './SearchBlog.module.css';
-import { ArticlePost, SearchBlog } from '../posts/Blog';
+import { ArticlePost } from '../posts/Blog';
+import { SearchBlog } from '../components/SiderPost/page';
 
 const Title = (props) => {
   const { params } = props;

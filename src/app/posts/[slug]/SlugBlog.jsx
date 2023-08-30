@@ -4,13 +4,13 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { SearchBlog, SidebarBlog } from '../Blog';
 import styles from './SlugBlog.module.css';
 
-const DetailsBlog = (props) => {
+const DetailBlog = (props) => {
   const { content, author, date, title } = props;
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options).toUpperCase();
   };
-  
+
   return (
     <div className={styles.siteContent}>
       <h3 className={styles.entryTitle}>
@@ -42,10 +42,12 @@ const DetailsBlog = (props) => {
 
 const SlugBlog = (props) => {
   const { dataBlogDetails, dataCategories, dataBlog } = props;
-
+  console.log(dataBlogDetails);
   return (
     <Container>
-      <Row className="mt-5">
+      <Row
+        className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
+      >
         <Col lg={3}>
           <SearchBlog className="lightSearch" />
           <SidebarBlog
@@ -56,7 +58,7 @@ const SlugBlog = (props) => {
         <Col lg={9}>
           {dataBlogDetails.length > 0 &&
             dataBlogDetails.map((item) => (
-              <DetailsBlog
+              <DetailBlog
                 key={item.id}
                 title={item?.title?.rendered}
                 date={item?.date}
