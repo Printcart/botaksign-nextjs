@@ -1,8 +1,8 @@
 'use client';
-import Sider from 'botak/app/components/SiderPost/page';
+import Sider from 'botak/app/components/Sidebar/page';
 import Link from 'next/link';
 import { Col, Container, Row } from 'react-bootstrap';
-import styles from './Posts.module.css';
+import styles from './Post.module.css';
 import Image from 'next/image';
 
 const DetailBlog = (props) => {
@@ -53,7 +53,7 @@ const EntryRecent = (props) => {
   );
 };
 
-const Posts = (props) => {
+const Post = (props) => {
   const { dataBlogDetails, dataCategories, dataBlog, dataRelated } = props;
   return (
     <Container>
@@ -97,4 +97,4 @@ const Posts = (props) => {
   );
 };
 
-export default Posts;
+export default Post;

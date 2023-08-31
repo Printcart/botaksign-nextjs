@@ -1,5 +1,5 @@
 'use client';
-import Sider from 'botak/app/components/SiderPost/page';
+import Sider from 'botak/app/components/Sidebar/page';
 import { ArticlePost } from 'botak/app/posts/Posts';
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';

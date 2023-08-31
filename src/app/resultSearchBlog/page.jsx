@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import styles from './SearchBlog.module.css';
 import { ArticlePost } from '../posts/Posts';
-import { SearchBlog } from '../components/SiderPost/page';
+import { SearchBlog } from '../components/Sidebar/page';
 
 const Title = (props) => {
   const { params } = props;

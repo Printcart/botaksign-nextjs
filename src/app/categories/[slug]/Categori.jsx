@@ -1,10 +1,10 @@
 'use client';
-import Sider from 'botak/app/components/SiderPost/page';
+import Sider from 'botak/app/components/Sidebar/page';
 import { ArticlePost } from 'botak/app/posts/Posts';
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
-const Post = (props) => {
+const Categori = (props) => {
   const { dataCate, dataBlog, dataCategories } = props;
 
   return (
@@ -36,4 +36,4 @@ const Post = (props) => {
   );
 };
 
-export default Post;
+export default Categori;

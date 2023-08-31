@@ -5,7 +5,6 @@ const Page = async ({ params }) => {
   const { year, month } = params;
 
   const dataBlog = await fetchBlog();
-
   const date = await fetchBlog(year, month);
   const dataCategories = await fetchCategories();
 

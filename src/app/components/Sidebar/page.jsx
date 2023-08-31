@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './Sider.module.css';
+import styles from './Sidebar.module.css';
 
 export const SearchBlog = (props) => {
   const { className } = props;
@@ -132,7 +132,7 @@ export const Comments = () => {
   );
 };
 
-const Sider = (props) => {
+const Sidebar = (props) => {
   const { dataBlog, dataCategories } = props;
   return (
     <>
@@ -145,4 +145,4 @@ const Sider = (props) => {
   );
 };
 
-export default Sider;
+export default Sidebar;

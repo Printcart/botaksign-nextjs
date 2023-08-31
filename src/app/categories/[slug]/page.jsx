@@ -1,11 +1,11 @@
 import React from 'react';
-import Post from './Post';
 import {
   fetchBlog,
   fetchBlogRelated,
   fetchCategories,
   fetchCategoriesId
 } from 'botak/api/pages';
+import Categori from './Categori';
 
 const Page = async ({ params }) => {
   const { slug } = params;
@@ -16,7 +16,11 @@ const Page = async ({ params }) => {
   const dataCate = await fetchBlogRelated(id);
 
   return (
-    <Post dataCate={dataCate} dataBlog={dataBlog} dataCategories={dataCategories} />
+    <Categori
+      dataCate={dataCate}
+      dataBlog={dataBlog}
+      dataCategories={dataCategories}
+    />
   );
 };
 

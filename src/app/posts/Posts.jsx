@@ -8,7 +8,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import PageCoverHeader from '../components/PageCoverHeader';
 import styles from './Posts.module.css';
-import Sider from '../components/SiderPost/page';
+import Sider from '../components/Sidebar/page';
 
 export const BreadCrumb = () => {
   return (
