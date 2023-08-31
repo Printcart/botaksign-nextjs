@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import PageCoverHeader from '../components/PageCoverHeader';
-import styles from './Blog.module.css';
+import styles from './Posts.module.css';
 import Sider from '../components/SiderPost/page';
 
 export const BreadCrumb = () => {
@@ -22,19 +22,10 @@ export const BreadCrumb = () => {
 
 export const Title = (props) => {
   const { title, className, href } = props;
-  console.log(href);
   return (
-    <>
-      {href && href ? (
-        href && (
-          <h3 className={styles[className]}>
-            <Link href={`/posts/${href}`}>{title}</Link>
-          </h3>
-        )
-      ) : (
-        <h3 className={styles[className]}>{title}</h3>
-      )}
-    </>
+    <h3 className={styles[className]}>
+      <Link href={`/posts/${href}`}>{title}</Link>
+    </h3>
   );
 };
 
@@ -166,7 +157,7 @@ export const ContentArticle = (props) => {
   );
 };
 
-const Blog = (props) => {
+const Posts = (props) => {
   const router = useRouter();
   const { dataBlog, dataCategories } = props;
   const { totalPosts, totalPages, dataPosts } = dataBlog;
@@ -176,7 +167,7 @@ const Blog = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchBlog('', currentPage, perPage);
+      const result = await fetchBlog('', '', '', currentPage, perPage);
       setPosts(result);
     };
 
@@ -193,9 +184,7 @@ const Blog = (props) => {
       <PageCoverHeader title="BLOG" link="Home" titlePage="Blog" />
       <Container>
         <BreadCrumb />
-        <Row
-          className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
-        >
+        <Row className={styles.contents}>
           <Col lg={3} className="p-3">
             <Sider dataCategories={dataCategories} dataBlog={dataPosts} />
           </Col>
@@ -224,4 +213,4 @@ const Blog = (props) => {
   );
 };
 
-export default Blog;
+export default Posts;

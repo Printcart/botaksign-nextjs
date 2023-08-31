@@ -1,8 +1,9 @@
 'use client';
+import Sider from 'botak/app/components/SiderPost/page';
 import Link from 'next/link';
 import { Col, Container, Row } from 'react-bootstrap';
-import { SearchBlog, SidebarBlog } from '../Blog';
-import styles from './SlugBlog.module.css';
+import styles from './Posts.module.css';
+import Image from 'next/image';
 
 const DetailBlog = (props) => {
   const { content, author, date, title } = props;
@@ -40,20 +41,25 @@ const DetailBlog = (props) => {
   );
 };
 
-const SlugBlog = (props) => {
-  const { dataBlogDetails, dataCategories, dataBlog } = props;
-  console.log(dataBlogDetails);
+const EntryRecent = (props) => {
+  const { featured, slug, title } = props;
+  return (
+    <div className={styles.related}>
+      <Image alt="image" height={200} width={200} src={featured || ''} />
+      <h5>
+        <Link href={slug}>{title}</Link>
+      </h5>
+    </div>
+  );
+};
+
+const Posts = (props) => {
+  const { dataBlogDetails, dataCategories, dataBlog, dataRelated } = props;
   return (
     <Container>
-      <Row
-        className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
-      >
+      <Row className={styles.contents}>
         <Col lg={3}>
-          <SearchBlog className="lightSearch" />
-          <SidebarBlog
-            dataBlog={dataBlog?.dataPosts}
-            dataCategories={dataCategories}
-          />
+          <Sider dataBlog={dataBlog?.dataPosts} dataCategories={dataCategories} />
         </Col>
         <Col lg={9}>
           {dataBlogDetails.length > 0 &&
@@ -71,6 +77,19 @@ const SlugBlog = (props) => {
             <div className={styles.relatedTitle}>
               <h2>RELATED ARTICLEs</h2>
             </div>
+
+            <Row className={styles.contentRelated}>
+              {dataRelated.length > 0 &&
+                dataRelated.map((item) => (
+                  <div key={item.id} className={styles.subCon}>
+                    <EntryRecent
+                      title={item?.title?.rendered}
+                      slug={item?.slug}
+                      featured={item?.featured_media_url}
+                    />
+                  </div>
+                ))}
+            </Row>
           </div>
         </Col>
       </Row>
@@ -78,4 +97,4 @@ const SlugBlog = (props) => {
   );
 };
 
-export default SlugBlog;
+export default Posts;

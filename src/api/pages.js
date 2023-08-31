@@ -7,11 +7,14 @@ const headers = {
   )}`
 };
 
-export const fetchBlog = async (search, page = 1, perPage = 4) => {
+export const fetchBlog = async (search, year, month, page = 1, perPage = 4) => {
   let fetchUrl = `${API_URL}pc/v2/posts?page=${page}&per_page=${perPage}`;
   if (search) {
     fetchUrl += `&search=${search}`;
+  } else if (year && month) {
+    fetchUrl += `&before=${year}-${month}-01T00:00:00`;
   }
+
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const dataPosts = await res.json();
 

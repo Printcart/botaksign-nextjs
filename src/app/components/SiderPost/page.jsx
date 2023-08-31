@@ -10,14 +10,6 @@ export const SearchBlog = (props) => {
   const router = useRouter();
   const [resultSearch, setResultSearch] = useState('');
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (resultSearch === '') {
-      return alert('Please fill in the search...');
-    }
-    updateSearchParams(resultSearch.toLowerCase());
-  };
-
   const updateSearchParams = (resultSearch) => {
     const searchParams = new URLSearchParams(router.query);
     if (resultSearch) {
@@ -27,6 +19,14 @@ export const SearchBlog = (props) => {
     }
     const newPathname = `${searchParams.toString()}`;
     router.push(`/resultSearchBlog?${newPathname}`);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (resultSearch === '') {
+      return alert('Please fill in the search...');
+    }
+    updateSearchParams(resultSearch.toLowerCase());
   };
 
   return (
@@ -46,20 +46,8 @@ export const SearchBlog = (props) => {
 };
 
 export const Title = (props) => {
-  const { title, className, href } = props;
-  return (
-    <>
-      {href && href ? (
-        href && (
-          <h3 className={styles[className]}>
-            <Link href={`/posts/${href}`}>{title}</Link>
-          </h3>
-        )
-      ) : (
-        <h3 className={styles[className]}>{title}</h3>
-      )}
-    </>
-  );
+  const { title, className } = props;
+  return <h3 className={styles[className]}>{title}</h3>;
 };
 
 export const ContentSider = (props) => {
@@ -102,8 +90,13 @@ export const Archives = (props) => {
         className="titleSider"
         items={date}
         renderItem={(dateItem) => {
+          const data = new Date(dateItem.date);
           return (
-            <Link href={`/posts/${dateItem?.id}`}>
+            <Link
+              href={`/${data.getFullYear()}/${
+                data.getMonth() < 10 ? '0' + data.getMonth() : data.getMonth()
+              }`}
+            >
               {formatDateArchives(dateItem?.date)}
             </Link>
           );
@@ -115,7 +108,6 @@ export const Archives = (props) => {
 
 export const Categories = (props) => {
   const { dataCategories } = props;
-  console.log(dataCategories);
   return (
     <>
       <Title title="CATEGORIES" className="title" />

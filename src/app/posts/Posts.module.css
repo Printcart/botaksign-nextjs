@@ -162,10 +162,16 @@
 .pagination button:hover {
   color: rgb(40, 196, 117);
 }
-
+.contents {
+  margin-top: 50px;
+}
 @media (max-width: 768px) {
   .subContent {
     display: flex;
     flex-direction: column;
+  }
+  .contents {
+    display: flex;
+    flex-direction: column-reverse;
   }
 }

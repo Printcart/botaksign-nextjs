@@ -89,6 +89,7 @@
 .resultBlog {
   display: flex;
 }
+.lightSearch input,
 .resultBlog input {
   width: 100%;
 }

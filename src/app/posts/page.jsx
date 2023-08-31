@@ -1,5 +1,5 @@
 import { fetchBlog, fetchCategories } from 'botak/api/pages';
-import Blog from './Blog';
+import Blog from './Posts';
 
 const BlogServer = async () => {
   const dataBlog = await fetchBlog();

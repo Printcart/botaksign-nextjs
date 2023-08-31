@@ -4,20 +4,20 @@ import { ArticlePost } from 'botak/app/posts/Posts';
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
-const Post = (props) => {
-  const { dataCate, dataBlog, dataCategories } = props;
-
+const Archives = (props) => {
+  const { date, dataCategories, dataBlog } = props;
+  console.log(date);
   return (
     <Container>
       <Row
         className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
       >
         <Col lg={3}>
-          <Sider dataCategories={dataCategories} dataBlog={dataBlog.dataPosts} />
+          <Sider dataCategories={dataCategories} dataBlog={dataBlog?.dataPosts} />
         </Col>
         <Col lg={9}>
-          {dataCate.length > 0 &&
-            dataCate.map((item) => (
+          {date?.dataPosts.length > 0 &&
+            date?.dataPosts.map((item) => (
               <ArticlePost
                 key={item?.id}
                 link={item?.link}
@@ -36,4 +36,4 @@ const Post = (props) => {
   );
 };
 
-export default Post;
+export default Archives;
