@@ -1,11 +1,11 @@
-import { fetchBlog, fetchCategories } from 'botak/api/pages';
+import { fetchBlog, fetchBlogYearMonth, fetchCategories } from 'botak/api/pages';
 import Archives from './Archives';
 
 const Page = async ({ params }) => {
   const { year, month } = params;
 
   const dataBlog = await fetchBlog();
-  const date = await fetchBlog(year, month);
+  const date = await fetchBlog('', year, month);
   const dataCategories = await fetchCategories();
 
   return (

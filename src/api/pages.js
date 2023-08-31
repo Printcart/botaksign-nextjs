@@ -12,7 +12,11 @@ export const fetchBlog = async (search, year, month, page = 1, perPage = 4) => {
   if (search) {
     fetchUrl += `&search=${search}`;
   } else if (year && month) {
-    fetchUrl += `&before=${year}-${month}-01T00:00:00`;
+    fetchUrl += `&before=${year}-${month
+      .toString()
+      .padStart(2, '0')}-01T00:00:00&after=${year}-${(month - 1)
+      .toString()
+      .padStart(2, '0')}-01T00:00:00`;
   }
 
   const res = await fetch(fetchUrl, { headers, method: 'GET' });

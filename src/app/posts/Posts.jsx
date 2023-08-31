@@ -7,8 +7,8 @@ import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import PageCoverHeader from '../components/PageCoverHeader';
+import Sidebar from '../components/Sidebar/page';
 import styles from './Posts.module.css';
-import Sider from '../components/Sidebar/page';
 
 export const BreadCrumb = () => {
   return (
@@ -157,11 +157,41 @@ export const ContentArticle = (props) => {
   );
 };
 
-const Posts = (props) => {
+const Pagination = (props) => {
+  const { totalPages, currentPage, setCurrentPage } = props;
   const router = useRouter();
+
+  const goToPage = (page) => {
+    setCurrentPage(page);
+    router.push(`/posts?page=${page}`);
+  };
+
+  return (
+    <>
+      {totalPages > 0 && (
+        <nav className={styles.pagination}>
+          {currentPage > 1 && (
+            <button onClick={() => goToPage(currentPage - 1)}>
+              <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
+              Newer Articles
+            </button>
+          )}
+          {currentPage < totalPages && (
+            <button onClick={() => goToPage(currentPage + 1)}>
+              Older Articles
+              <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+            </button>
+          )}
+        </nav>
+      )}
+    </>
+  );
+};
+const Posts = (props) => {
   const { dataBlog, dataCategories } = props;
   const { totalPosts, totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
+
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 4;
 
@@ -174,11 +204,6 @@ const Posts = (props) => {
     fetchData();
   }, [currentPage]);
 
-  const goToPage = (page) => {
-    setCurrentPage(page);
-    router.push(`/posts?page=${page}`);
-  };
-
   return (
     <>
       <PageCoverHeader title="BLOG" link="Home" titlePage="Blog" />
@@ -186,26 +211,15 @@ const Posts = (props) => {
         <BreadCrumb />
         <Row className={styles.contents}>
           <Col lg={3} className="p-3">
-            <Sider dataCategories={dataCategories} dataBlog={dataPosts} />
+            <Sidebar dataCategories={dataCategories} dataBlog={dataPosts} />
           </Col>
           <Col lg={9} className="px-3">
             <ContentArticle dataBlog={posts} dataCategories={dataCategories} />
-            {totalPages > 0 && (
-              <nav className={styles.pagination}>
-                {currentPage > 1 && (
-                  <button onClick={() => goToPage(currentPage - 1)}>
-                    <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
-                    Newer Articles
-                  </button>
-                )}
-                {currentPage < totalPages && (
-                  <button onClick={() => goToPage(currentPage + 1)}>
-                    Older Articles
-                    <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
-                  </button>
-                )}
-              </nav>
-            )}
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
           </Col>
         </Row>
       </Container>
