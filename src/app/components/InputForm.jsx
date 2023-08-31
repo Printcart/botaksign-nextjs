@@ -5,6 +5,7 @@ const InputForm = ({
   controlId,
   label,
   type,
+  value,
   onChange,
   errors,
   placeholder,
@@ -35,6 +36,7 @@ const InputForm = ({
         }}
         type={type}
         name={name}
+        value={value}
         placeholder={placeholder}
         onChange={onChange}
         isInvalid={errors}

@@ -145,19 +145,18 @@ const BillingAddressForm = ({ data }) => {
     initialValues: {
       firstName: '',
       lastName: '',
-      companyName: '',
-      country: '',
-      streetAddress: '',
-      apartment: '',
-      townCity: '',
-      postcode: '',
-      phone: '',
-      emai: ''
+      companyName: data.company || '',
+      country: data.country || '',
+      streetAddress: data.streetAddress || '',
+      apartment: data.apartment || '',
+      townCity: data.townCity || '',
+      postcode: data.postcode || '',
+      phone: data.phone || '',
+      email: data.email || ''
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required('First name is a required field.'),
       lastName: Yup.string().required('Last name is a required field.'),
-      displayName: Yup.string().required('Display name is a required field.'),
       country: Yup.string().required('Country is a required field.'),
       streetAddress: Yup.string().required('Street address is a required field.'),
       postcode: Yup.string().required('Postcode / ZIP is a required field.'),
@@ -231,7 +230,7 @@ const BillingAddressForm = ({ data }) => {
               type="hidden"
               name="country"
               label="Country"
-              value={formik.values.country || data?.country}
+              value={formik.values.country}
               onChange={formik.handleChange}
               errors={
                 formik.errors.country &&
@@ -239,7 +238,7 @@ const BillingAddressForm = ({ data }) => {
                 formik.errors.country
               }
             />
-            <strong>Viet Nam</strong>
+            <strong>{data.country || ''}</strong>
           </div>
           <div className={styles.inputWide}>
             <InputForm
@@ -250,7 +249,7 @@ const BillingAddressForm = ({ data }) => {
               name="streetAddress"
               label="Street address"
               placeholder="House number and street name"
-              value={formik.values.streetAddress || data?.address1}
+              value={formik.values.streetAddress}
               onChange={formik.handleChange}
               errors={
                 formik.errors.streetAddress &&
@@ -300,7 +299,7 @@ const BillingAddressForm = ({ data }) => {
               type="text"
               name="postcode"
               label="Postcode / ZIP"
-              value={formik.values.postcode || data?.postcode}
+              value={formik.values.postcode}
               onChange={formik.handleChange}
               errors={
                 formik.errors.postcode &&
@@ -317,7 +316,7 @@ const BillingAddressForm = ({ data }) => {
               type="text"
               name="phone"
               label="Phone"
-              value={formik.values.phone || data?.phone}
+              value={formik.values.phone}
               onChange={formik.handleChange}
               errors={
                 formik.errors.phone && formik.touched.phone && formik.errors.phone
@@ -332,7 +331,7 @@ const BillingAddressForm = ({ data }) => {
               type="text"
               name="email"
               label="Email address"
-              value={formik.values.email || data?.email}
+              value={formik.values.email}
               onChange={formik.handleChange}
               errors={
                 formik.errors.email && formik.touched.email && formik.errors.email
@@ -355,12 +354,12 @@ const ShippingAddressForm = ({ data }) => {
     initialValues: {
       firstName: '',
       lastName: '',
-      companyName: '',
-      country: '',
-      streetAddress: '',
-      apartment: '',
-      townCity: '',
-      postcode: ''
+      companyName: data.company || '',
+      country: data.country || '',
+      streetAddress: data.streetAddress || '',
+      apartment: data.apartment || '',
+      townCity: data.townCity || '',
+      postcode: data.postcode || ''
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required('First name is a required field.'),
@@ -438,7 +437,7 @@ const ShippingAddressForm = ({ data }) => {
               name="country"
               label="Country"
               readonly
-              value={formik.values.country || data.country}
+              value={formik.values.country}
               onChange={formik.handleChange}
               errors={
                 formik.errors.country &&
@@ -507,7 +506,7 @@ const ShippingAddressForm = ({ data }) => {
               type="text"
               name="postcode"
               label="Postcode / ZIP"
-              value={formik.values.postcode || data?.postcode}
+              value={formik.values.postcode}
               onChange={formik.handleChange}
               errors={
                 formik.errors.postcode &&
@@ -531,9 +530,9 @@ const AccountDetailsForm = ({ data }) => {
   const formik = useFormik({
     initialValues: {
       firstName: '',
-      lastName: '',
-      displayName: '',
-      email: ''
+      lastName: data.lastName || '',
+      displayName: data.firstName || '',
+      email: data.email || ''
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required('First name is a required field.'),
@@ -574,7 +573,7 @@ const AccountDetailsForm = ({ data }) => {
             type="text"
             name="lastName"
             label="Last name"
-            value={formik.values.lastName || data?.lastName}
+            value={formik.values.lastName}
             onChange={formik.handleChange}
             errors={
               formik.errors.lastName &&
@@ -593,7 +592,7 @@ const AccountDetailsForm = ({ data }) => {
             type="text"
             name="displayName"
             label="Display name"
-            value={formik.values.displayName || data?.firstName}
+            value={formik.values.displayName}
             onChange={formik.handleChange}
             errors={
               formik.errors.displayName &&
@@ -610,7 +609,7 @@ const AccountDetailsForm = ({ data }) => {
             type="text"
             name="email"
             label="Email address"
-            value={formik.values.email || data?.email}
+            value={formik.values.email}
             onChange={formik.handleChange}
             errors={
               formik.errors.email && formik.touched.email && formik.errors.email
@@ -768,7 +767,7 @@ const dataUser = {
   passWord: 'quangthietdev',
   confirmPassword: 'quangthietdev',
   company: 'Botaksign',
-  address1: 'No1 Washington DC',
+  streetAddress: 'No1 Washington DC',
   address2: 'suite 17',
   city: 'New York',
   postcode: '8386',
