@@ -43,6 +43,7 @@ const ResultSearchBlog = () => {
               key={item?.id}
               link={item?.link}
               slug={item?.slug}
+              idItem={item?.id}
               title={item?.title?.rendered}
               date={item?.date}
               excerpt={item?.excerpt?.rendered}

@@ -144,7 +144,7 @@
 .pagination {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0 70px;
+  margin: 20px 0 60px;
 }
 .pagination button {
   border: none;
@@ -164,6 +164,9 @@
 }
 .contents {
   margin-top: 50px;
+}
+.author {
+  color: rgb(66, 133, 244);
 }
 @media (max-width: 768px) {
   .subContent {

@@ -1,21 +1,20 @@
 'use client';
 import Sider from 'botak/app/components/Sidebar/page';
 import { ArticlePost } from 'botak/app/posts/Posts';
-import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 const Categori = (props) => {
   const { dataCate, dataBlog, dataCategories } = props;
-
+  console.log(props);
   return (
     <Container>
       <Row
         className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
       >
-        <Col lg={3}>
+        <Col lg={3} className="p-3">
           <Sider dataCategories={dataCategories} dataBlog={dataBlog.dataPosts} />
         </Col>
-        <Col lg={9}>
+        <Col lg={9} className="p-3">
           {dataCate.length > 0 &&
             dataCate.map((item) => (
               <ArticlePost

@@ -30,18 +30,19 @@ export const SearchBlog = (props) => {
   };
 
   return (
-    <form onSubmit={handleSearch} className={styles[className]}>
+    <div className={styles[className]}>
       <input
         type="text"
         placeholder="Search"
         onChange={(e) => setResultSearch(e.target.value)}
+        value={resultSearch}
       />
       <span>
-        <button type="submit">
+        <button type="submit" onClick={handleSearch}>
           <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
         </button>
       </span>
-    </form>
+    </div>
   );
 };
 
@@ -70,7 +71,9 @@ export const Blogs = (props) => {
       <ContentSider
         className="titleSider"
         items={title}
-        renderItem={(post) => <Link href={post?.slug}>{post?.title?.rendered}</Link>}
+        renderItem={(dataItem) => (
+          <Link href={`/posts/${dataItem?.slug}`}>{dataItem?.title?.rendered}</Link>
+        )}
       />
     </>
   );
@@ -89,15 +92,15 @@ export const Archives = (props) => {
       <ContentSider
         className="titleSider"
         items={date}
-        renderItem={(dateItem) => {
-          const data = new Date(dateItem.date);
+        renderItem={(dataItem) => {
+          const data = new Date(dataItem.date);
           return (
             <Link
               href={`/${data.getFullYear()}/${
                 data.getMonth() < 10 ? '0' + data.getMonth() : data.getMonth()
               }`}
             >
-              {formatDateArchives(dateItem?.date)}
+              {formatDateArchives(dataItem?.date)}
             </Link>
           );
         }}
@@ -114,9 +117,9 @@ export const Categories = (props) => {
       <ContentSider
         className="titleCate"
         items={dataCategories}
-        renderItem={(category) => {
+        renderItem={(dataItem) => {
           return (
-            <Link href={`/categories/${category?.slug}`}>{category?.name}</Link>
+            <Link href={`/categories/${dataItem?.slug}`}>{dataItem?.name}</Link>
           );
         }}
       />
@@ -134,7 +137,7 @@ export const Comments = () => {
 
 const Sidebar = (props) => {
   const { dataBlog, dataCategories } = props;
-  
+
   return (
     <>
       <SearchBlog className="lightSearch" />

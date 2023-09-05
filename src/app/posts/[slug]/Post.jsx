@@ -6,7 +6,7 @@ import styles from './Post.module.css';
 import Image from 'next/image';
 
 const DetailBlog = (props) => {
-  const { content, author, date, title } = props;
+  const { content, author, date, title, categoriesData } = props;
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options).toUpperCase();
@@ -14,6 +14,11 @@ const DetailBlog = (props) => {
 
   return (
     <div className={styles.siteContent}>
+      <div className={styles.entryCat}>
+        <Link href={`/categories/${categoriesData[0]?.slug}`}>
+          {categoriesData[0]?.name}
+        </Link>
+      </div>
       <h3 className={styles.entryTitle}>
         <Link
           href="#"
@@ -26,10 +31,15 @@ const DetailBlog = (props) => {
       <div className={styles.entryMeta}>
         <span>{formatDate(date)}</span>
         <span>
-          By:<Link href="#">{author || ''}</Link>
+          BY:{' '}
+          <Link href="" className={styles.author}>
+            {author || ''}
+          </Link>
         </span>
-        <span></span>
-        <span></span>
+        <span>
+          2 <span>MINUTE READ</span>
+        </span>
+        <span>{'' || 'No Comments'}</span>
       </div>
       <div
         className={styles.content}
@@ -55,17 +65,19 @@ const EntryRecent = (props) => {
 
 const Post = (props) => {
   const { dataBlogDetails, dataCategories, dataBlog, dataRelated } = props;
+  
   return (
     <Container>
       <Row className={styles.contents}>
-        <Col lg={3}>
+        <Col lg={3} className="p-3">
           <Sider dataBlog={dataBlog?.dataPosts} dataCategories={dataCategories} />
         </Col>
-        <Col lg={9}>
+        <Col lg={9} className="p-3">
           {dataBlogDetails.length > 0 &&
             dataBlogDetails.map((item) => (
               <DetailBlog
                 key={item.id}
+                categoriesData={item?.categories_data}
                 title={item?.title?.rendered}
                 date={item?.date}
                 author={item?.author_data?.name}
@@ -77,7 +89,6 @@ const Post = (props) => {
             <div className={styles.relatedTitle}>
               <h2>RELATED ARTICLEs</h2>
             </div>
-
             <Row className={styles.contentRelated}>
               {dataRelated.length > 0 &&
                 dataRelated.map((item) => (

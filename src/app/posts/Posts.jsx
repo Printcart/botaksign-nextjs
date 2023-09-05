@@ -52,9 +52,14 @@ export const Information = (props) => {
     <div className={styles.entryWrap}>
       <span className={styles.date}>{formatDate(date)}</span>
       <span>
-        BY: <Link href="">{author || ''}</Link>
+        BY:{' '}
+        <Link href="" className={styles.author}>
+          {author || ''}
+        </Link>
       </span>
-      <span>csd</span>
+      <span>
+        2{' '}<span>MINUTE READ</span>
+      </span>
       <span>{'' || 'No Comments'}</span>
     </div>
   );
@@ -193,6 +198,7 @@ const Posts = (props) => {
   const { dataBlog, dataCategories } = props;
   const { totalPosts, totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
+  const [hasPostsData, setHasPostsData] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 4;
@@ -201,6 +207,7 @@ const Posts = (props) => {
     const fetchData = async () => {
       const result = await fetchBlog('', '', '', currentPage, perPage);
       setPosts(result);
+      result?.dataPosts.length > 0 && setHasPostsData(true);
     };
 
     fetchData();
@@ -216,12 +223,18 @@ const Posts = (props) => {
             <Sidebar dataCategories={dataCategories} dataBlog={dataPosts} />
           </Col>
           <Col lg={9} className="px-3">
-            <ContentArticle dataBlog={posts} dataCategories={dataCategories} />
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
+            {hasPostsData ? (
+              <>
+                <ContentArticle dataBlog={posts} dataCategories={dataCategories} />
+                <Pagination
+                  totalPages={totalPages}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </>
+            ) : (
+              <p>Loading...</p>
+            )}
           </Col>
         </Row>
       </Container>

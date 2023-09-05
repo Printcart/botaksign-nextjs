@@ -28,10 +28,10 @@ const Archives = (props) => {
       <Row
         className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
       >
-        <Col lg={3}>
+        <Col lg={3} className="p-3">
           <Sider dataCategories={dataCategories} dataBlog={dataBlog?.dataPosts} />
         </Col>
-        <Col lg={9}>
+        <Col lg={9} className="p-3">
           {date?.dataPosts.length > 0 &&
             date?.dataPosts.map((item) => (
               <ArticlePost
