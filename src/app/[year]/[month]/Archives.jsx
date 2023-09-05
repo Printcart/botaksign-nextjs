@@ -1,12 +1,28 @@
 'use client';
+import { fetchBlog } from 'botak/api/pages';
 import Sider from 'botak/app/components/Sidebar/page';
-import { ArticlePost } from 'botak/app/posts/Posts';
-import React from 'react';
+import { ArticlePost, Pagination } from 'botak/app/posts/Posts';
+import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 const Archives = (props) => {
   const { date, dataCategories, dataBlog } = props;
-  console.log(date);
+  const { totalPosts, totalPages, dataPosts } = date;
+
+  const [posts, setPosts] = useState(dataPosts);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 4;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetchBlog('', '', '', currentPage, perPage);
+      setPosts(result);
+    };
+
+    fetchData();
+  }, [currentPage]);
+
   return (
     <Container>
       <Row
@@ -30,6 +46,11 @@ const Archives = (props) => {
                 author={item?.author_data?.name}
               />
             ))}
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </Col>
       </Row>
     </Container>

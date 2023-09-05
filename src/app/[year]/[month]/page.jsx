@@ -1,4 +1,4 @@
-import { fetchBlog, fetchBlogYearMonth, fetchCategories } from 'botak/api/pages';
+import { fetchBlog, fetchCategories } from 'botak/api/pages';
 import Archives from './Archives';
 
 const Page = async ({ params }) => {

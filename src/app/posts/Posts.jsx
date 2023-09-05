@@ -132,6 +132,7 @@ export const ContentArticle = (props) => {
   dataCategories.forEach((category) => {
     categoryNamesMap[category.id] = category.name;
   });
+
   return (
     <>
       {dataBlog?.dataPosts?.length > 0 &&
@@ -157,7 +158,7 @@ export const ContentArticle = (props) => {
   );
 };
 
-const Pagination = (props) => {
+export const Pagination = (props) => {
   const { totalPages, currentPage, setCurrentPage } = props;
   const router = useRouter();
 
@@ -187,6 +188,7 @@ const Pagination = (props) => {
     </>
   );
 };
+
 const Posts = (props) => {
   const { dataBlog, dataCategories } = props;
   const { totalPosts, totalPages, dataPosts } = dataBlog;

@@ -134,6 +134,7 @@ export const Comments = () => {
 
 const Sidebar = (props) => {
   const { dataBlog, dataCategories } = props;
+  
   return (
     <>
       <SearchBlog className="lightSearch" />
