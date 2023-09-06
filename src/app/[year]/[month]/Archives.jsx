@@ -7,8 +7,7 @@ import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 const Archives = (props) => {
-  
-  const { date, dataCategories, dataBlog } = props;
+  const { date, dataCategories, dataBlog, params } = props;
   const { dataPosts, totalPages, totalPosts } = date;
   const [posts, setPosts] = useState(dataPosts);
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,12 +15,18 @@ const Archives = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchBlog('', currentPage, perPage);
+      const result = await fetchBlog(
+        '',
+        params?.year,
+        params?.month,
+        currentPage,
+        perPage
+      );
       setPosts(result);
     };
 
     fetchData();
-  }, [currentPage]);
+  }, [params?.year, params?.month, currentPage]);
 
   return (
     <Container>
@@ -32,8 +37,8 @@ const Archives = (props) => {
           <Sider dataCategories={dataCategories} dataBlog={dataBlog?.dataPosts} />
         </Col>
         <Col lg={9} className="p-3">
-          {date?.dataPosts?.length > 0 &&
-            date?.dataPosts?.map((item) => (
+          {posts?.dataPosts?.length > 0 &&
+            posts?.dataPosts?.map((item) => (
               <ArticlePost
                 key={item?.id}
                 link={item?.link}

@@ -9,7 +9,12 @@ const Page = async ({ params }) => {
   const date = await fetchBlog('', year, month);
 
   return (
-    <Archives dataCategories={dataCategories} date={date} dataBlog={dataBlog} />
+    <Archives
+      dataCategories={dataCategories}
+      params={params}
+      date={date}
+      dataBlog={dataBlog}
+    />
   );
 };
 
