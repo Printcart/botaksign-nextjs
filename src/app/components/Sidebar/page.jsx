@@ -29,6 +29,11 @@ export const SearchBlog = (props) => {
     updateSearchParams(resultSearch.toLowerCase());
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch(e);
+    }
+  };
   return (
     <div className={styles[className]}>
       <input
@@ -36,6 +41,7 @@ export const SearchBlog = (props) => {
         placeholder="Search"
         onChange={(e) => setResultSearch(e.target.value)}
         value={resultSearch}
+        onKeyDown={handleKeyDown}
       />
       <span>
         <button type="submit" onClick={handleSearch}>

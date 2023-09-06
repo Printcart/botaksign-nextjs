@@ -65,7 +65,7 @@ const EntryRecent = (props) => {
 
 const Post = (props) => {
   const { dataBlogDetails, dataCategories, dataBlog, dataRelated } = props;
-  
+
   return (
     <Container>
       <Row className={styles.contents}>
@@ -90,8 +90,8 @@ const Post = (props) => {
               <h2>RELATED ARTICLEs</h2>
             </div>
             <Row className={styles.contentRelated}>
-              {dataRelated.length > 0 &&
-                dataRelated.map((item) => (
+              {dataRelated?.data?.length > 0 &&
+                dataRelated?.data?.map((item) => (
                   <div key={item.id} className={styles.subCon}>
                     <EntryRecent
                       title={item?.title?.rendered}

@@ -1,16 +1,15 @@
 'use client';
 import { fetchBlog } from 'botak/api/pages';
+import Pagination from 'botak/app/components/Pagination';
 import Sider from 'botak/app/components/Sidebar/page';
-import { ArticlePost, Pagination } from 'botak/app/posts/Posts';
+import { ArticlePost } from 'botak/app/posts/Posts';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 const Archives = (props) => {
   const { date, dataCategories, dataBlog } = props;
-  const { totalPosts, totalPages, dataPosts } = date;
-
+  const { dataPosts, totalPages, totalPosts } = date;
   const [posts, setPosts] = useState(dataPosts);
-
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 4;
 
@@ -32,8 +31,8 @@ const Archives = (props) => {
           <Sider dataCategories={dataCategories} dataBlog={dataBlog?.dataPosts} />
         </Col>
         <Col lg={9} className="p-3">
-          {date?.dataPosts.length > 0 &&
-            date?.dataPosts.map((item) => (
+          {posts?.dataPosts?.length > 0 &&
+            posts?.dataPosts?.map((item) => (
               <ArticlePost
                 key={item?.id}
                 link={item?.link}

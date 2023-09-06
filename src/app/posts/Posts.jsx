@@ -9,6 +9,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import PageCoverHeader from '../components/PageCoverHeader';
 import Sidebar from '../components/Sidebar/page';
 import styles from './Posts.module.css';
+import Pagination from '../components/Pagination';
 
 export const BreadCrumb = () => {
   return (
@@ -58,7 +59,7 @@ export const Information = (props) => {
         </Link>
       </span>
       <span>
-        2{' '}<span>MINUTE READ</span>
+        2 <span>MINUTE READ</span>
       </span>
       <span>{'' || 'No Comments'}</span>
     </div>
@@ -159,37 +160,6 @@ export const ContentArticle = (props) => {
             />
           );
         })}
-    </>
-  );
-};
-
-export const Pagination = (props) => {
-  const { totalPages, currentPage, setCurrentPage } = props;
-  const router = useRouter();
-
-  const goToPage = (page) => {
-    setCurrentPage(page);
-    router.push(`/posts?page=${page}`);
-  };
-
-  return (
-    <>
-      {totalPages > 0 && (
-        <nav className={styles.pagination}>
-          {currentPage > 1 && (
-            <button onClick={() => goToPage(currentPage - 1)}>
-              <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
-              Newer Articles
-            </button>
-          )}
-          {currentPage < totalPages && (
-            <button onClick={() => goToPage(currentPage + 1)}>
-              Older Articles
-              <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
-            </button>
-          )}
-        </nav>
-      )}
     </>
   );
 };

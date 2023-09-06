@@ -11,12 +11,14 @@ const Page = async ({ params }) => {
   const { slug } = params;
   const dataBlog = await fetchBlog();
   const dataCategories = await fetchCategories();
-  const data = await fetchCategoriesId(slug);
-  const id = data.map((item) => item.id);
+
+  const dataId = await fetchCategoriesId(slug);
+  const id = dataId.map((item) => item.id);
   const dataCate = await fetchBlogRelated(id);
 
   return (
     <Categori
+      id={id}
       dataCate={dataCate}
       dataBlog={dataBlog}
       dataCategories={dataCategories}
