@@ -5,8 +5,8 @@ const Page = async ({ params }) => {
   const { year, month } = params;
 
   const dataBlog = await fetchBlog();
-  const date = await fetchBlog('', year, month);
   const dataCategories = await fetchCategories();
+  const date = await fetchBlog('', year, month);
 
   return (
     <Archives dataCategories={dataCategories} date={date} dataBlog={dataBlog} />

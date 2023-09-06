@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 const Archives = (props) => {
+  
   const { date, dataCategories, dataBlog } = props;
   const { dataPosts, totalPages, totalPosts } = date;
   const [posts, setPosts] = useState(dataPosts);
@@ -15,7 +16,7 @@ const Archives = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchBlog('', '', '', currentPage, perPage);
+      const result = await fetchBlog('', currentPage, perPage);
       setPosts(result);
     };
 
@@ -31,8 +32,8 @@ const Archives = (props) => {
           <Sider dataCategories={dataCategories} dataBlog={dataBlog?.dataPosts} />
         </Col>
         <Col lg={9} className="p-3">
-          {posts?.dataPosts?.length > 0 &&
-            posts?.dataPosts?.map((item) => (
+          {date?.dataPosts?.length > 0 &&
+            date?.dataPosts?.map((item) => (
               <ArticlePost
                 key={item?.id}
                 link={item?.link}
