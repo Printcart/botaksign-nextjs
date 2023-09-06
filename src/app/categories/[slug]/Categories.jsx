@@ -1,12 +1,12 @@
 'use client';
 import { fetchBlogRelated } from 'botak/api/pages';
+import ArticlePost from 'botak/app/components/ArticlePost';
 import Pagination from 'botak/app/components/Pagination';
 import Sider from 'botak/app/components/Sidebar/page';
-import { ArticlePost } from 'botak/app/posts/Posts';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
-const Categori = (props) => {
+const Categories = (props) => {
   const { dataCate, dataBlog, id, dataCategories } = props;
   const { data, totalPages } = dataCate;
   const [posts, setPosts] = useState(data);
@@ -64,4 +64,4 @@ const Categori = (props) => {
   );
 };
 
-export default Categori;
+export default Categories;

@@ -5,7 +5,7 @@ import {
   fetchCategories,
   fetchCategoriesId
 } from 'botak/api/pages';
-import Categori from './Categori';
+import Categories from './Categories';
 
 const Page = async ({ params }) => {
   const { slug } = params;
@@ -17,7 +17,7 @@ const Page = async ({ params }) => {
   const dataCate = await fetchBlogRelated(id);
 
   return (
-    <Categori
+    <Categories
       id={id}
       dataCate={dataCate}
       dataBlog={dataBlog}

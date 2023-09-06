@@ -1,8 +1,8 @@
 'use client';
 import { fetchBlog } from 'botak/api/pages';
+import ArticlePost from 'botak/app/components/ArticlePost';
 import Pagination from 'botak/app/components/Pagination';
 import Sider from 'botak/app/components/Sidebar/page';
-import { ArticlePost } from 'botak/app/posts/Posts';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 

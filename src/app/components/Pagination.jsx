@@ -8,10 +8,10 @@ const Pagination = (props) => {
   const router = useRouter();
 
   const goToPage = (page) => {
-    const searchParams = new URLSearchParams(window.location.search);
+    // const searchParams = new URLSearchParams(window.location.search);
     setCurrentPage(page);
-    searchParams.set('page', page);
-    const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+    // searchParams.set('page', page);
+    const newPathname = `${window.location.pathname}?page=${page}`;
     router.push(newPathname);
   };
 
@@ -21,14 +21,14 @@ const Pagination = (props) => {
         <nav className={styles.pagination}>
           {currentPage > 1 && (
             <button onClick={() => goToPage(currentPage - 1)}>
-              <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
+              <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
               Newer Articles
             </button>
           )}
           {currentPage < totalPages && (
             <button onClick={() => goToPage(currentPage + 1)}>
               Older Articles
-              <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+              <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
             </button>
           )}
         </nav>

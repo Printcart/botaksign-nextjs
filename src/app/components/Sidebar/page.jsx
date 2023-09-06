@@ -52,7 +52,7 @@ export const SearchBlog = (props) => {
   );
 };
 
-export const Title = (props) => {
+const Title = (props) => {
   const { title, className } = props;
   return <h3 className={styles[className]}>{title}</h3>;
 };
@@ -69,7 +69,7 @@ export const ContentSider = (props) => {
   );
 };
 
-export const Blogs = (props) => {
+const Blogs = (props) => {
   const { title } = props;
   return (
     <>
@@ -78,14 +78,14 @@ export const Blogs = (props) => {
         className="titleSider"
         items={title}
         renderItem={(dataItem) => (
-          <Link href={`/posts/${dataItem?.slug}`}>{dataItem?.title?.rendered}</Link>
+          <Link href={`/blog/${dataItem?.slug}`}>{dataItem?.title?.rendered}</Link>
         )}
       />
     </>
   );
 };
 
-export const Archives = (props) => {
+const Archives = (props) => {
   const { date } = props;
   const formatDateArchives = (dateString) => {
     const options = { year: 'numeric', month: 'long' };
@@ -115,7 +115,7 @@ export const Archives = (props) => {
   );
 };
 
-export const Categories = (props) => {
+const Categories = (props) => {
   const { dataCategories } = props;
   return (
     <>
@@ -133,7 +133,7 @@ export const Categories = (props) => {
   );
 };
 
-export const Comments = () => {
+const Comments = () => {
   return (
     <>
       <Title title="RECENT COMMENTS" className="title" />
