@@ -59,7 +59,7 @@ export const Information = (props) => {
         </Link>
       </span>
       <span>
-        2 <span>MINUTE READ</span>
+        2{' '}<span>MINUTE READ</span>
       </span>
       <span>{'' || 'No Comments'}</span>
     </div>
@@ -163,6 +163,8 @@ export const ContentArticle = (props) => {
     </>
   );
 };
+
+
 
 const Posts = (props) => {
   const { dataBlog, dataCategories } = props;
