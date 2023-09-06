@@ -31,3 +31,11 @@
 .noLabel input {
   margin-top: 24px;
 }
+.lableForm {
+  font-weight: 600 !important;
+  margin-bottom: 5px !important;
+  font-weight: 600 !important;
+  margin-bottom: 5px;
+  font-family: var(--font-nunito) !important;
+  color: red;
+}
