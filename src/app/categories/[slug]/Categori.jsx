@@ -1,11 +1,40 @@
 'use client';
+import { fetchBlogRelated } from 'botak/api/pages';
 import Sider from 'botak/app/components/Sidebar/page';
-import { ArticlePost } from 'botak/app/posts/Posts';
+import { ArticlePost, Pagination } from 'botak/app/posts/Posts';
+import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import useSWR from 'swr';
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Categori = (props) => {
   const { dataCate, dataBlog, dataCategories } = props;
-  console.log(props);
+  // const { data, totalPages } = dataCate;
+  // const [posts, setPosts] = useState(data);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 4;
+
+  const { data, error, isLoading } = useSWR(
+    fetchBlogRelated('', '', '', currentPage, perPage),
+    fetcher
+  );
+  console.log(data);
+
+  if (error) return 'An error has occurred.';
+  if (isLoading) return 'Loading...';
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await fetchBlogRelated('', '', '', currentPage, perPage);
+  //     setPosts(result);
+  //     result?.dataPosts.length > 0 && setHasPostsData(true);
+  //   };
+
+  //   fetchData();
+  // }, [currentPage]);
+
   return (
     <Container>
       <Row
@@ -15,8 +44,8 @@ const Categori = (props) => {
           <Sider dataCategories={dataCategories} dataBlog={dataBlog.dataPosts} />
         </Col>
         <Col lg={9} className="p-3">
-          {dataCate.length > 0 &&
-            dataCate.map((item) => (
+          {/* {posts.length > 0 &&
+            posts.map((item) => (
               <ArticlePost
                 key={item?.id}
                 link={item?.link}
@@ -28,7 +57,12 @@ const Categori = (props) => {
                 idItem={item?.id}
                 author={item?.author_data?.name}
               />
-            ))}
+            ))} */}
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </Col>
       </Row>
     </Container>

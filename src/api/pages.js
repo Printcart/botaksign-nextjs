@@ -31,14 +31,17 @@ export const fetchBlog = async (search, year, month, page = 1, perPage = 4) => {
   return { dataPosts, totalPosts, totalPages };
 };
 
-export const fetchBlogRelated = async (id) => {
-  const fetchUrl = `${API_URL}pc/v2/posts?categories=${id}`;
+export const fetchBlogRelated = async (id, page = 1, perPage = 4) => {
+  const fetchUrl = `${API_URL}pc/v2/posts?categories=${id}&page=${page}&per_page=${perPage}`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();
   if (data.errors) {
     throw new Error('Failed to fetch API');
   }
-  return data;
+  const totalPosts = res.headers.get('X-WP-Total');
+  const totalPages = res.headers.get('X-WP-TotalPages');
+
+  return { data, totalPosts, totalPages };
 };
 
 export const fetchBlogId = async (slug) => {
