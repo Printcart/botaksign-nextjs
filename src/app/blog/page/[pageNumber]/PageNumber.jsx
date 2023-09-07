@@ -3,11 +3,12 @@ import { fetchBlog } from 'botak/api/pages';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import ArticlePost from '../components/ArticlePost';
-import PageCoverHeader from '../components/PageCoverHeader';
-import Pagination from '../components/Pagination';
-import Sidebar from '../components/Sidebar/page';
 import styles from './Posts.module.css';
+import ArticlePost from 'botak/app/components/ArticlePost';
+import PageCoverHeader from 'botak/app/components/PageCoverHeader';
+import Sidebar from 'botak/app/components/Sidebar/page';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useRouter } from 'next/navigation';
 
 const BreadCrumb = () => {
   return (
@@ -16,6 +17,41 @@ const BreadCrumb = () => {
       <span>/</span>
       <strong>Blog</strong>
     </nav>
+  );
+};
+
+const Pagination = (props) => {
+  const { totalPages, currentPage, setCurrentPage } = props;
+
+  const router = useRouter();
+
+  const goToPage = (page) => {
+    setCurrentPage(page);
+    const newPathname = `${window.location.pathname}/${page}`;
+    router.push(newPathname);
+  };
+
+  return (
+    <>
+      {totalPages > 0 && (
+        <nav className={styles.pagination}>
+          {currentPage > 1 && (
+            <button onClick={() => goToPage(currentPage - 1)}>
+              <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
+              Newer Articles
+            </button>
+          )}
+          {currentPage < totalPages && (
+            <button onClick={() => currentPage + 1}>
+              <Link href={`/blog/page/${currentPage}`}>
+                Older Articles
+                <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
+              </Link>
+            </button>
+          )}
+        </nav>
+      )}
+    </>
   );
 };
 
@@ -51,13 +87,14 @@ const ContentArticle = (props) => {
   );
 };
 
-const Posts = (props) => {
-  const { dataBlog, dataCategories } = props;
+const PageNumber = (props) => {
+  const { dataBlog, dataCategories, pageNumber } = props;
+  console.log(pageNumber);
   const { totalPosts, totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
   const [hasPostsData, setHasPostsData] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(pageNumber);
   const perPage = 4;
 
   useEffect(() => {
@@ -80,18 +117,14 @@ const Posts = (props) => {
             <Sidebar dataCategories={dataCategories} dataBlog={dataPosts} />
           </Col>
           <Col lg={9} className="px-3">
-            {hasPostsData ? (
-              <>
-                <ContentArticle dataBlog={posts} dataCategories={dataCategories} />
-                <Pagination
-                  totalPages={totalPages}
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                />
-              </>
-            ) : (
-              <p>Loading...</p>
-            )}
+            <>
+              <ContentArticle dataBlog={dataBlog} dataCategories={dataCategories} />
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+            </>
           </Col>
         </Row>
       </Container>
@@ -99,4 +132,4 @@ const Posts = (props) => {
   );
 };
 
-export default Posts;
+export default PageNumber;

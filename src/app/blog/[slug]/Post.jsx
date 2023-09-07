@@ -1,9 +1,9 @@
 'use client';
-import Sider from 'botak/app/components/Sidebar/page';
 import Link from 'next/link';
 import { Col, Container, Row } from 'react-bootstrap';
 import styles from './Post.module.css';
 import Image from 'next/image';
+import Sidebar from 'botak/app/components/Sidebar/page';
 
 const DetailBlog = (props) => {
   const { content, author, date, title, categoriesData } = props;
@@ -70,7 +70,7 @@ const Post = (props) => {
     <Container>
       <Row className={styles.contents}>
         <Col lg={3} className="p-3">
-          <Sider dataBlog={dataBlog?.dataPosts} dataCategories={dataCategories} />
+          <Sidebar dataBlog={dataBlog?.dataPosts} dataCategories={dataCategories} />
         </Col>
         <Col lg={9} className="p-3">
           {dataBlogDetails.length > 0 &&

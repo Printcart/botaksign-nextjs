@@ -1,14 +1,14 @@
 'use client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useRef } from 'react';
 import styles from './Sidebar.module.css';
 
 export const SearchBlog = (props) => {
   const { className } = props;
   const router = useRouter();
-  const [resultSearch, setResultSearch] = useState('');
+  const inputRef = useRef(null);
 
   const updateSearchParams = (resultSearch) => {
     const searchParams = new URLSearchParams(router.query);
@@ -23,6 +23,7 @@ export const SearchBlog = (props) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    const resultSearch = inputRef.current.value.trim();
     if (resultSearch === '') {
       return alert('Please fill in the search...');
     }
@@ -31,16 +32,17 @@ export const SearchBlog = (props) => {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       handleSearch(e);
     }
   };
+
   return (
     <div className={styles[className]}>
       <input
         type="text"
         placeholder="Search"
-        onChange={(e) => setResultSearch(e.target.value)}
-        value={resultSearch}
+        ref={inputRef}
         onKeyDown={handleKeyDown}
       />
       <span>

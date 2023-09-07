@@ -11,7 +11,7 @@ const Pagination = (props) => {
     // const searchParams = new URLSearchParams(window.location.search);
     setCurrentPage(page);
     // searchParams.set('page', page);
-    const newPathname = `${window.location.pathname}?page=${page}`;
+    const newPathname = `${window.location.pathname}/page/${page}`;
     router.push(newPathname);
   };
 

@@ -2,7 +2,7 @@
 import { fetchBlogRelated } from 'botak/api/pages';
 import ArticlePost from 'botak/app/components/ArticlePost';
 import Pagination from 'botak/app/components/Pagination';
-import Sider from 'botak/app/components/Sidebar/page';
+import Sidebar from 'botak/app/components/Sidebar/page';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
@@ -30,7 +30,7 @@ const Categories = (props) => {
         className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
       >
         <Col lg={3} className="p-3">
-          <Sider dataCategories={dataCategories} dataBlog={dataBlog.dataPosts} />
+          <Sidebar dataCategories={dataCategories} dataBlog={dataBlog.dataPosts} />
         </Col>
         <Col lg={9} className="p-3">
           {hasPostsData ? (
