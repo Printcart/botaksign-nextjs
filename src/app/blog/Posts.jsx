@@ -3,9 +3,9 @@ import { fetchBlog } from 'botak/api/pages';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import ArticlePost from '../components/ArticlePost';
 import PageCoverHeader from '../components/PageCoverHeader';
 import Pagination from '../components/Pagination';
+import Post from '../components/Post';
 import Sidebar from '../components/Sidebar/page';
 import styles from './Posts.module.css';
 
@@ -19,40 +19,9 @@ const BreadCrumb = () => {
   );
 };
 
-const ContentArticle = (props) => {
-  const { dataBlog, dataCategories } = props;
-  const categoryNamesMap = {};
-  dataCategories.forEach((category) => {
-    categoryNamesMap[category.id] = category.name;
-  });
-
-  return (
-    <>
-      {dataBlog?.dataPosts?.length > 0 &&
-        dataBlog?.dataPosts?.map((item) => {
-          const categoryName =
-            categoryNamesMap[item?.categories[0]] || 'Uncategorized';
-          return (
-            <ArticlePost
-              categoryName={categoryName}
-              key={item?.id}
-              link={item?.link}
-              slug={item?.slug}
-              title={item?.title?.rendered}
-              date={item?.date}
-              excerpt={item?.excerpt?.rendered}
-              featuredMediaUrl={item?.featured_media_url}
-              idItem={item?.id}
-              author={item?.author_data?.name}
-            />
-          );
-        })}
-    </>
-  );
-};
 
 const Posts = (props) => {
-  const { dataBlog, dataCategories } = props;
+  const { dataBlog, dataCategories, dataTitleBlogSidebar } = props;
   const { totalPosts, totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
   const [hasPostsData, setHasPostsData] = useState(false);
@@ -77,12 +46,15 @@ const Posts = (props) => {
         <BreadCrumb />
         <Row className={styles.contents}>
           <Col lg={3} className="p-3">
-            <Sidebar dataCategories={dataCategories} dataBlog={dataPosts} />
+            <Sidebar
+              dataCategories={dataCategories}
+              dataTitleBlogSidebar={dataTitleBlogSidebar}
+            />
           </Col>
           <Col lg={9} className="px-3">
             {hasPostsData ? (
               <>
-                <ContentArticle dataBlog={posts} dataCategories={dataCategories} />
+                <Post data={posts?.dataPosts} dataCategories={dataCategories} />
                 <Pagination
                   totalPages={totalPages}
                   currentPage={currentPage}

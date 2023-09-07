@@ -1,32 +1,60 @@
 'use client';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchBlog } from 'botak/api/pages';
 import ArticlePost from 'botak/app/components/ArticlePost';
-import Pagination from 'botak/app/components/Pagination';
+import Post from 'botak/app/components/Post';
 import Sidebar from 'botak/app/components/Sidebar/page';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import styles from './Archives.module.css';
+
+export const Pagination = (props) => {
+  const { totalPages, currentPage, year, month } = props;
+  return (
+    <nav className={styles.pagination}>
+      {currentPage > 1 && (
+        <Link
+          className={styles.newerArticles}
+          href={
+            currentPage === 1
+              ? `${window.location.pathname}`
+              : `${window.location.pathname}/${+currentPage - 1}`
+          }
+        >
+          <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
+          Newer Articles
+        </Link>
+      )}
+      {currentPage < totalPages && (
+        <Link
+          className={styles.olderArticles}
+          href={`${window.location.pathname}/page/${+currentPage + 1}`}
+        >
+          Older Articles
+          <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
+        </Link>
+      )}
+    </nav>
+  );
+};
 
 const Archives = (props) => {
-  const { date, dataCategories, dataBlog, params } = props;
+  const { date, dataCategories, month, year, dataTitleBlogSidebar } = props;
   const { dataPosts, totalPages, totalPosts } = date;
   const [posts, setPosts] = useState(dataPosts);
+  console.log(posts);
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 4;
+  const perPage = 2;
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchBlog(
-        '',
-        params?.year,
-        params?.month,
-        currentPage,
-        perPage
-      );
+      const result = await fetchBlog('', year, month, currentPage, perPage);
       setPosts(result);
     };
 
     fetchData();
-  }, [params?.year, params?.month, currentPage]);
+  }, [year, month, currentPage]);
 
   return (
     <Container>
@@ -34,24 +62,16 @@ const Archives = (props) => {
         className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
       >
         <Col lg={3} className="p-3">
-          <Sidebar dataCategories={dataCategories} dataBlog={dataBlog?.dataPosts} />
+          <Sidebar
+            dataCategories={dataCategories}
+            dataTitleBlogSidebar={dataTitleBlogSidebar}
+          />
         </Col>
         <Col lg={9} className="p-3">
-          {posts?.dataPosts?.length > 0 &&
-            posts?.dataPosts?.map((item) => (
-              <ArticlePost
-                key={item?.id}
-                link={item?.link}
-                slug={item?.slug}
-                title={item?.title?.rendered}
-                date={item?.date}
-                excerpt={item?.excerpt?.rendered}
-                featuredMediaUrl={item?.featured_media_url}
-                idItem={item?.id}
-                author={item?.author_data?.name}
-              />
-            ))}
+          <Post data={posts?.dataPosts} dataCategories={dataCategories} />
           <Pagination
+            year={year}
+            month={month}
             totalPages={totalPages}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}

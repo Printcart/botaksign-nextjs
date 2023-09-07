@@ -1,39 +1,31 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import styles from './Pagination.module.css';
 
 const Pagination = (props) => {
-  const { totalPages, currentPage, setCurrentPage } = props;
-
-  const router = useRouter();
-
-  const goToPage = (page) => {
-    // const searchParams = new URLSearchParams(window.location.search);
-    setCurrentPage(page);
-    // searchParams.set('page', page);
-    const newPathname = `${window.location.pathname}/page/${page}`;
-    router.push(newPathname);
-  };
+  const { totalPages, currentPage } = props;
 
   return (
-    <>
-      {totalPages > 0 && (
-        <nav className={styles.pagination}>
-          {currentPage > 1 && (
-            <button onClick={() => goToPage(currentPage - 1)}>
-              <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
-              Newer Articles
-            </button>
-          )}
-          {currentPage < totalPages && (
-            <button onClick={() => goToPage(currentPage + 1)}>
-              Older Articles
-              <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
-            </button>
-          )}
-        </nav>
+    <nav className={styles.pagination}>
+      {currentPage > 1 && (
+        <Link
+          className={styles.newerArticles}
+          href={currentPage === 1 ? `/blog` : `/blog/page/${currentPage - 1}`}
+        >
+          <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
+          Newer Articles
+        </Link>
       )}
-    </>
+      {currentPage < totalPages && (
+        <Link
+          className={styles.olderArticles}
+          href={`/blog/page/${+currentPage + 1}`}
+        >
+          Older Articles
+          <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
+        </Link>
+      )}
+    </nav>
   );
 };
 

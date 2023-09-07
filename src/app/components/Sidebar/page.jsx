@@ -73,12 +73,13 @@ export const ContentSider = (props) => {
 
 const Blogs = (props) => {
   const { title } = props;
+  const dataTitle = title.slice(0, 5);
   return (
     <>
       <Title title="RECENT POSTS" className="title" />
       <ContentSider
         className="titleSider"
-        items={title}
+        items={dataTitle}
         renderItem={(dataItem) => (
           <Link href={`/blog/${dataItem?.slug}`}>{dataItem?.title?.rendered}</Link>
         )}
@@ -89,6 +90,7 @@ const Blogs = (props) => {
 
 const Archives = (props) => {
   const { date } = props;
+  const dataDate = date.slice(0, 4);
   const formatDateArchives = (dateString) => {
     const options = { year: 'numeric', month: 'long' };
     return new Date(dateString).toLocaleDateString('en-US', options).toUpperCase();
@@ -99,7 +101,7 @@ const Archives = (props) => {
       <Title title="ARCHIVES" className="title" />
       <ContentSider
         className="titleSider"
-        items={date}
+        items={dataDate}
         renderItem={(dataItem) => {
           const data = new Date(dataItem.date);
           return (
@@ -144,14 +146,14 @@ const Comments = () => {
 };
 
 const Sidebar = (props) => {
-  const { dataBlog, dataCategories } = props;
+  const { dataTitleBlogSidebar, dataCategories } = props;
 
   return (
     <>
       <SearchBlog className="lightSearch" />
-      {dataBlog && <Blogs title={dataBlog} />}
+      {dataTitleBlogSidebar && <Blogs title={dataTitleBlogSidebar} />}
       {<Comments />}
-      {dataBlog && <Archives date={dataBlog} />}
+      {dataTitleBlogSidebar && <Archives date={dataTitleBlogSidebar} />}
       {dataCategories && <Categories dataCategories={dataCategories} />}
     </>
   );

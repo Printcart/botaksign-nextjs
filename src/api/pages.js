@@ -7,7 +7,19 @@ const headers = {
   )}`
 };
 
-export const fetchBlog = async (search, year, month, page = 1, perPage = 4) => {
+export const fetchBlogSidebar = async () => {
+  let fetchUrl = `${API_URL}pc/v2/posts`;
+  const res = await fetch(fetchUrl, { headers, method: 'GET' });
+  const data = await res.json();
+
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
+
+  return data;
+};
+
+export const fetchBlog = async (search, year, month, page = 1, perPage = 2) => {
   let fetchUrl = `${API_URL}pc/v2/posts?page=${page}&per_page=${perPage}`;
   if (search) {
     fetchUrl += `&search=${search}`;

@@ -1,13 +1,58 @@
 'use client';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchBlogRelated } from 'botak/api/pages';
-import ArticlePost from 'botak/app/components/ArticlePost';
-import Pagination from 'botak/app/components/Pagination';
+import Post from 'botak/app/components/Post';
 import Sidebar from 'botak/app/components/Sidebar/page';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import styles from './Categories.module.css';
+
+const BreadCrumb = (props) => {
+  const { slug } = props;
+  return (
+    <nav className={styles.titleBreadCrumb}>
+      <Link href="/">Home</Link>
+      <span>/</span>
+      <strong>{slug}</strong>
+    </nav>
+  );
+};
+
+export const Pagination = (props) => {
+  const { totalPages, currentPage, slug } = props;
+  return (
+    <>
+      <nav className={styles.pagination}>
+        {currentPage > 1 && (
+          <Link
+            className={styles.newerArticles}
+            href={
+              currentPage === 1
+                ? `/categories/${slug}`
+                : `/categories/${slug}/page/${currentPage - 1}`
+            }
+          >
+            <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
+            Newer Articles
+          </Link>
+        )}
+        {currentPage < totalPages && (
+          <Link
+            className={styles.olderArticles}
+            href={`/categories/${slug}/page/${+currentPage + 1}`}
+          >
+            Older Articles
+            <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
+          </Link>
+        )}
+      </nav>
+    </>
+  );
+};
 
 const Categories = (props) => {
-  const { dataCate, dataBlog, id, dataCategories } = props;
+  const { dataCate, id, dataCategories, slug, dataTitleBlogSidebar } = props;
   const { data, totalPages } = dataCate;
   const [posts, setPosts] = useState(data);
   const [hasPostsData, setHasPostsData] = useState(false);
@@ -26,30 +71,22 @@ const Categories = (props) => {
 
   return (
     <Container>
+      <BreadCrumb slug={slug} />
       <Row
         className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
       >
         <Col lg={3} className="p-3">
-          <Sidebar dataCategories={dataCategories} dataBlog={dataBlog.dataPosts} />
+          <Sidebar
+            dataTitleBlogSidebar={dataTitleBlogSidebar}
+            dataCategories={dataCategories}
+          />
         </Col>
         <Col lg={9} className="p-3">
           {hasPostsData ? (
             <>
-              {posts?.data?.length > 0 &&
-                posts?.data?.map((item) => (
-                  <ArticlePost
-                    key={item?.id}
-                    link={item?.link}
-                    slug={item?.slug}
-                    title={item?.title?.rendered}
-                    date={item?.date}
-                    excerpt={item?.excerpt?.rendered}
-                    featuredMediaUrl={item?.featured_media_url}
-                    idItem={item?.id}
-                    author={item?.author_data?.name}
-                  />
-                ))}
+              <Post data={posts?.data} dataCategories={dataCategories} />
               <Pagination
+                slug={slug}
                 totalPages={totalPages}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
