@@ -46,7 +46,7 @@ const ReadMore = (props) => {
           dangerouslySetInnerHTML={{ __html: excerpt }}
         ></div>
         <div className={styles.readMoreLink}>
-          <Link href={`/posts/${slug}`}>Read more</Link>
+          <Link href={`/blog/${slug}`}>Read more</Link>
         </div>
       </div>
       <div className={styles.entryFooter}>

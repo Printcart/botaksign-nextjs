@@ -19,7 +19,7 @@ export const fetchBlogSidebar = async () => {
   return data;
 };
 
-export const fetchBlog = async (search, year, month, page = 1, perPage = 2) => {
+export const fetchBlog = async (search, year, month, page = 1, perPage = 4) => {
   let fetchUrl = `${API_URL}pc/v2/posts?page=${page}&per_page=${perPage}`;
   if (search) {
     fetchUrl += `&search=${search}`;

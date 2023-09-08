@@ -19,7 +19,6 @@ const BreadCrumb = () => {
   );
 };
 
-
 const Posts = (props) => {
   const { dataBlog, dataCategories, dataTitleBlogSidebar } = props;
   const { totalPosts, totalPages, dataPosts } = dataBlog;

@@ -64,13 +64,17 @@ const EntryRecent = (props) => {
 };
 
 const Post = (props) => {
-  const { dataBlogDetails, dataCategories, dataBlog, dataRelated } = props;
+  const { dataBlogDetails, dataCategories, dataRelated, dataTitleBlogSidebar } =
+    props;
 
   return (
     <Container>
       <Row className={styles.contents}>
         <Col lg={3} className="p-3">
-          <Sidebar dataBlog={dataBlog?.dataPosts} dataCategories={dataCategories} />
+          <Sidebar
+            dataTitleBlogSidebar={dataTitleBlogSidebar}
+            dataCategories={dataCategories}
+          />
         </Col>
         <Col lg={9} className="p-3">
           {dataBlogDetails.length > 0 &&

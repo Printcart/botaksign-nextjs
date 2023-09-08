@@ -1,1 +1,12 @@
-::-webkit-slider-runnable-track
+.titleBreadCrumb {
+  color: rgb(105, 105, 105);
+  font-family: var(--font-nunito);
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 21px;
+  text-transform: capitalize;
+  margin-bottom: 33px;
+}
+.titleBreadCrumb > span {
+  margin: 0 5px;
+}

@@ -14,7 +14,7 @@ const BreadCrumb = (props) => {
     <nav className={styles.titleBreadCrumb}>
       <Link href="/">Home</Link>
       <span>/</span>
-      <Link href="/categorie">{slug}</Link>
+      <Link href={`/categories/${slug}`}>{slug}</Link>
       <span>/</span>
       <strong>Page {pageNumber}</strong>
     </nav>

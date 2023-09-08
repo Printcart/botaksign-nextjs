@@ -1,7 +1,6 @@
 'use client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchBlog } from 'botak/api/pages';
-import ArticlePost from 'botak/app/components/ArticlePost';
 import Post from 'botak/app/components/Post';
 import Sidebar from 'botak/app/components/Sidebar/page';
 import Link from 'next/link';
@@ -9,8 +8,24 @@ import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import styles from './Archives.module.css';
 
+const BreadCrumb = (props) => {
+  const { month, year } = props;
+  return (
+    <nav className={styles.titleBreadCrumb}>
+      <Link href="/">Home</Link>
+      <span>/</span>
+      <strong>
+        <span>{year}</span>
+        <span>/</span>
+        <span>{month}</span>
+      </strong>
+    </nav>
+  );
+};
+
 export const Pagination = (props) => {
   const { totalPages, currentPage, year, month } = props;
+
   return (
     <nav className={styles.pagination}>
       {currentPage > 1 && (
@@ -19,7 +34,7 @@ export const Pagination = (props) => {
           href={
             currentPage === 1
               ? `${window.location.pathname}`
-              : `${window.location.pathname}/${+currentPage - 1}`
+              : `/${year}/${month}/page/${+currentPage - 1}`
           }
         >
           <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
@@ -29,7 +44,7 @@ export const Pagination = (props) => {
       {currentPage < totalPages && (
         <Link
           className={styles.olderArticles}
-          href={`${window.location.pathname}/page/${+currentPage + 1}`}
+          href={`/${year}/${month}/page/${+currentPage + 1}`}
         >
           Older Articles
           <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
@@ -40,17 +55,18 @@ export const Pagination = (props) => {
 };
 
 const Archives = (props) => {
-  const { date, dataCategories, month, year, dataTitleBlogSidebar } = props;
-  const { dataPosts, totalPages, totalPosts } = date;
+  const { dataDate, dataCategories, month, year, dataTitleBlogSidebar } = props;
+  const { dataPosts, totalPages, totalPosts } = dataDate;
   const [posts, setPosts] = useState(dataPosts);
-  console.log(posts);
+  const [hasPostsData, setHasPostsData] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 2;
+  const perPage = 4;
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetchBlog('', year, month, currentPage, perPage);
       setPosts(result);
+      setHasPostsData(true);
     };
 
     fetchData();
@@ -58,6 +74,7 @@ const Archives = (props) => {
 
   return (
     <Container>
+      <BreadCrumb month={month} year={year} />
       <Row
         className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
       >
@@ -68,14 +85,20 @@ const Archives = (props) => {
           />
         </Col>
         <Col lg={9} className="p-3">
-          <Post data={posts?.dataPosts} dataCategories={dataCategories} />
-          <Pagination
-            year={year}
-            month={month}
-            totalPages={totalPages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
+          {hasPostsData ? (
+            <>
+              <Post data={posts?.dataPosts} dataCategories={dataCategories} />
+              <Pagination
+                year={year}
+                month={month}
+                totalPages={totalPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+            </>
+          ) : (
+            <p>Loading...</p>
+          )}
         </Col>
       </Row>
     </Container>
