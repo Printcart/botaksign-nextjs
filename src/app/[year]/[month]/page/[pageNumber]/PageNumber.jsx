@@ -8,7 +8,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { Pagination } from '../../Archives';
 import styles from './PageNumber.module.css';
 
-const BreadCrumb = (props) => {
+const TitleWrap = (props) => {
   const { month, year, pageNumber } = props;
   return (
     <nav className={styles.titleBreadCrumb}>
@@ -44,7 +44,7 @@ const PageNumber = (props) => {
 
   return (
     <Container>
-      <BreadCrumb month={month} year={year} pageNumber={pageNumber} />
+      <TitleWrap month={month} year={year} pageNumber={pageNumber} />
       <Row className="">
         <Col lg={3} className="p-3">
           <Sidebar

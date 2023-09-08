@@ -59,7 +59,7 @@ const Title = (props) => {
   return <h3 className={styles[className]}>{title}</h3>;
 };
 
-export const ContentSider = (props) => {
+const Content = (props) => {
   const { className, items, renderItem } = props;
   return (
     <div className={styles[className]}>
@@ -77,7 +77,7 @@ const Blogs = (props) => {
   return (
     <>
       <Title title="RECENT POSTS" className="title" />
-      <ContentSider
+      <Content
         className="titleSider"
         items={dataTitle}
         renderItem={(dataItem) => (
@@ -99,7 +99,7 @@ const Archives = (props) => {
   return (
     <>
       <Title title="ARCHIVES" className="title" />
-      <ContentSider
+      <Content
         className="titleSider"
         items={dataDate}
         renderItem={(dataItem) => {
@@ -124,7 +124,7 @@ const Categories = (props) => {
   return (
     <>
       <Title title="CATEGORIES" className="title" />
-      <ContentSider
+      <Content
         className="titleCate"
         items={dataCategories}
         renderItem={(dataItem) => {

@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import styles from './Archives.module.css';
 
-const BreadCrumb = (props) => {
+const TitleWrap = (props) => {
   const { month, year } = props;
   return (
     <nav className={styles.titleBreadCrumb}>
@@ -74,7 +74,7 @@ const Archives = (props) => {
 
   return (
     <Container>
-      <BreadCrumb month={month} year={year} />
+      <TitleWrap month={month} year={year} />
       <Row
         className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
       >

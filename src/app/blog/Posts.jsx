@@ -4,12 +4,12 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import PageCoverHeader from '../components/PageCoverHeader';
-import Pagination from '../components/Pagination';
 import Post from '../components/Post';
 import Sidebar from '../components/Sidebar/page';
 import styles from './Posts.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const BreadCrumb = () => {
+const TitleWrap = () => {
   return (
     <nav className={styles.titleBreadCrumb}>
       <Link href="/">Home</Link>
@@ -19,12 +19,39 @@ const BreadCrumb = () => {
   );
 };
 
+export const Pagination = (props) => {
+  const { totalPages, currentPage } = props;
+
+  return (
+    <nav className={styles.pagination}>
+      {currentPage > 1 && (
+        <Link
+          className={styles.newerArticles}
+          href={currentPage === 1 ? `/blog` : `/blog/page/${currentPage - 1}`}
+        >
+          <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
+          Newer Articles
+        </Link>
+      )}
+      {currentPage < totalPages && (
+        <Link
+          className={styles.olderArticles}
+          href={`/blog/page/${+currentPage + 1}`}
+        >
+          Older Articles
+          <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
+        </Link>
+      )}
+    </nav>
+  );
+};
+
 const Posts = (props) => {
+  
   const { dataBlog, dataCategories, dataTitleBlogSidebar } = props;
-  const { totalPosts, totalPages, dataPosts } = dataBlog;
+  const { totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
   const [hasPostsData, setHasPostsData] = useState(false);
-
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 4;
 
@@ -42,7 +69,7 @@ const Posts = (props) => {
     <>
       <PageCoverHeader title="BLOG" link="Home" titlePage="Blog" />
       <Container>
-        <BreadCrumb />
+        <TitleWrap />
         <Row className={styles.contents}>
           <Col lg={3} className="p-3">
             <Sidebar

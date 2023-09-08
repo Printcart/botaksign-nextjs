@@ -5,10 +5,10 @@ import Sidebar from 'botak/app/components/Sidebar/page';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import styles from './PageNumber.module.css';
 import { Pagination } from '../../Categories';
+import styles from './PageNumber.module.css';
 
-const BreadCrumb = (props) => {
+const TitleWrap = (props) => {
   const { slug, pageNumber } = props;
   return (
     <nav className={styles.titleBreadCrumb}>
@@ -24,7 +24,7 @@ const BreadCrumb = (props) => {
 const PageNumber = (props) => {
   const { pageNumber, slug, dataCate, id, dataCategories, dataTitleBlogSidebar } =
     props;
-  const { data, totalPages, totalPosts } = dataCate;
+  const { totalPages } = dataCate;
   const [dataCa, setDataCate] = useState([]);
   const [hasPostsData, setHasPostsData] = useState(false);
 
@@ -40,7 +40,7 @@ const PageNumber = (props) => {
 
   return (
     <Container>
-      <BreadCrumb slug={slug} pageNumber={pageNumber} />
+      <TitleWrap slug={slug} pageNumber={pageNumber} />
       <Row className="">
         <Col lg={3} className="p-3">
           <Sidebar

@@ -1,15 +1,15 @@
 'use client';
 import { fetchBlog } from 'botak/api/pages';
 import PageCoverHeader from 'botak/app/components/PageCoverHeader';
-import Pagination from 'botak/app/components/Pagination';
 import Post from 'botak/app/components/Post';
 import Sidebar from 'botak/app/components/Sidebar/page';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import styles from './PageNumber.module.css';
+import { Pagination } from '../../Posts';
 
-const BreadCrumb = () => {
+const TitleWrap = () => {
   return (
     <nav className={styles.titleBreadCrumb}>
       <Link href="/">Home</Link>
@@ -20,8 +20,9 @@ const BreadCrumb = () => {
 };
 
 const PageNumber = (props) => {
+  
   const { dataBlog, dataCategories, pageNumber, dataTitleBlogSidebar } = props;
-  const { totalPosts, totalPages, dataPosts } = dataBlog;
+  const { totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
   const [hasPostsData, setHasPostsData] = useState(false);
 
@@ -39,7 +40,7 @@ const PageNumber = (props) => {
     <>
       <PageCoverHeader title="BLOG" link="Home" titlePage="Blog" />
       <Container>
-        <BreadCrumb />
+        <TitleWrap />
         <Row className={styles.contents}>
           <Col lg={3} className="p-3">
             <Sidebar

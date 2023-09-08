@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import styles from './Categories.module.css';
 
-const BreadCrumb = (props) => {
+const TitleWrap = (props) => {
   const { slug } = props;
   return (
     <nav className={styles.titleBreadCrumb}>
@@ -63,7 +63,7 @@ const Categories = (props) => {
     const fetchData = async () => {
       const result = await fetchBlogRelated(id, currentPage, perPage);
       setPosts(result);
-      result?.data?.length > 0 && setHasPostsData(true);
+      setHasPostsData(true);
     };
 
     fetchData();
@@ -71,7 +71,7 @@ const Categories = (props) => {
 
   return (
     <Container>
-      <BreadCrumb slug={slug} />
+      <TitleWrap slug={slug} />
       <Row
         className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
       >

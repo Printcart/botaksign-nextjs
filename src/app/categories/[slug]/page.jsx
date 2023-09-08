@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  fetchBlog,
   fetchBlogRelated,
   fetchBlogSidebar,
   fetchCategories,
@@ -10,19 +9,21 @@ import Categories from './Categories';
 
 const Page = async ({ params }) => {
   const { slug } = params;
-  const dataBlog = await fetchBlog();
+
   const dataCategories = await fetchCategories();
+
   const dataId = await fetchCategoriesId(slug);
   const id = dataId.map((item) => item.id);
-  const dataCate = await fetchBlogRelated(id);
+  const converId = +id;
+  const dataCate = await fetchBlogRelated(converId);
+
   const dataTitleBlogSidebar = await fetchBlogSidebar();
 
   return (
     <Categories
-      id={id}
+      id={converId}
       slug={slug}
       dataCate={dataCate}
-      dataBlog={dataBlog}
       dataCategories={dataCategories}
       dataTitleBlogSidebar={dataTitleBlogSidebar}
     />
