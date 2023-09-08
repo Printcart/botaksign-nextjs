@@ -9,10 +9,6 @@
   margin: 0 5px;
 }
 
-.contents {
-  margin-top: 50px;
-}
-
 .pagination {
   margin: 20px 0 100px;
   position: relative;
@@ -40,11 +36,4 @@
 .pagination .olderArticles {
   position: absolute;
   right: 0;
-}
-
-@media (max-width: 768px) {
-  .contents {
-    display: flex;
-    flex-direction: column-reverse;
-  }
 }

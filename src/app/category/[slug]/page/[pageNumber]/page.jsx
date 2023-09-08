@@ -1,5 +1,5 @@
 import {
-  fetchBlogRelated,
+  fetchBlogById,
   fetchBlogSidebar,
   fetchCategories,
   fetchCategoriesId
@@ -12,15 +12,14 @@ const page = async ({ params }) => {
   const dataCategories = await fetchCategories();
 
   const dataId = await fetchCategoriesId(slug);
-  const id = dataId.map((item) => item.id);
-  const converId = +id;
-  const dataCate = await fetchBlogRelated(converId);
+  const id = dataId[0].id;
+  const dataCate = await fetchBlogById(id);
 
   const dataTitleBlogSidebar = await fetchBlogSidebar();
 
   return (
     <PageNumber
-      id={converId}
+      id={id}
       pageNumber={pageNumber}
       slug={slug}
       dataCategories={dataCategories}

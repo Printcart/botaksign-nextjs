@@ -92,7 +92,7 @@ const ArticlePost = (props) => {
           <div className={styles.entryCat}>
             {category?.length > 0 &&
               category?.map((item) => (
-                <Link key={item?.id} href={`/categories/${item?.slug}`}>
+                <Link key={item?.id} href={`/category/${item?.slug}`}>
                   {item?.name || ''}
                 </Link>
               ))}

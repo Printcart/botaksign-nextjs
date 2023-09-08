@@ -128,9 +128,7 @@ const Categories = (props) => {
         className="titleCate"
         items={dataCategories}
         renderItem={(dataItem) => {
-          return (
-            <Link href={`/categories/${dataItem?.slug}`}>{dataItem?.name}</Link>
-          );
+          return <Link href={`/category/${dataItem?.slug}`}>{dataItem?.name}</Link>;
         }}
       />
     </>

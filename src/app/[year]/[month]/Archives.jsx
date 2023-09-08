@@ -7,8 +7,9 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import styles from './Archives.module.css';
+import CrumbsArchives from 'botak/app/components/CrumbsArchives';
 
-const TitleWrap = (props) => {
+export const TitleWrap = (props) => {
   const { month, year } = props;
   return (
     <nav className={styles.titleBreadCrumb}>
@@ -56,10 +57,10 @@ export const Pagination = (props) => {
 
 const Archives = (props) => {
   const { dataDate, dataCategories, month, year, dataTitleBlogSidebar } = props;
-  const { dataPosts, totalPages, totalPosts } = dataDate;
+  const { dataPosts, totalPages } = dataDate;
   const [posts, setPosts] = useState(dataPosts);
   const [hasPostsData, setHasPostsData] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = 1;
   const perPage = 4;
 
   useEffect(() => {
@@ -73,35 +74,16 @@ const Archives = (props) => {
   }, [year, month, currentPage]);
 
   return (
-    <Container>
-      <TitleWrap month={month} year={year} />
-      <Row
-        className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
-      >
-        <Col lg={3} className="p-3">
-          <Sidebar
-            dataCategories={dataCategories}
-            dataTitleBlogSidebar={dataTitleBlogSidebar}
-          />
-        </Col>
-        <Col lg={9} className="p-3">
-          {hasPostsData ? (
-            <>
-              <Post data={posts?.dataPosts} dataCategories={dataCategories} />
-              <Pagination
-                year={year}
-                month={month}
-                totalPages={totalPages}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-              />
-            </>
-          ) : (
-            <p>Loading...</p>
-          )}
-        </Col>
-      </Row>
-    </Container>
+    <CrumbsArchives
+      month={month}
+      year={year}
+      posts={posts}
+      dataCategories={dataCategories}
+      dataTitleBlogSidebar={dataTitleBlogSidebar}
+      totalPages={totalPages}
+      currentPage={currentPage}
+      hasPostsData={hasPostsData}
+    />
   );
 };
 

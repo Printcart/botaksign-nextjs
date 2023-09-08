@@ -1,15 +1,12 @@
 'use client';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchBlog } from 'botak/api/pages';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import PageCoverHeader from '../components/PageCoverHeader';
-import Post from '../components/Post';
-import Sidebar from '../components/Sidebar/page';
 import styles from './Posts.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CrumbsPosts from '../components/CrumbsPosts';
 
-const TitleWrap = () => {
+export const TitleWrap = () => {
   return (
     <nav className={styles.titleBreadCrumb}>
       <Link href="/">Home</Link>
@@ -51,7 +48,7 @@ const Posts = (props) => {
   const { totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
   const [hasPostsData, setHasPostsData] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = 1;
   const perPage = 4;
 
   useEffect(() => {
@@ -65,34 +62,14 @@ const Posts = (props) => {
   }, [currentPage]);
 
   return (
-    <>
-      <PageCoverHeader title="BLOG" link="Home" titlePage="Blog" />
-      <Container>
-        <TitleWrap />
-        <Row className={styles.contents}>
-          <Col lg={3} className="p-3">
-            <Sidebar
-              dataCategories={dataCategories}
-              dataTitleBlogSidebar={dataTitleBlogSidebar}
-            />
-          </Col>
-          <Col lg={9} className="px-3">
-            {hasPostsData ? (
-              <>
-                <Post data={posts?.dataPosts} />
-                <Pagination
-                  totalPages={totalPages}
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                />
-              </>
-            ) : (
-              <p>Loading...</p>
-            )}
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <CrumbsPosts
+      dataCategories={dataCategories}
+      dataTitleBlogSidebar={dataTitleBlogSidebar}
+      hasPostsData={hasPostsData}
+      posts={posts}
+      totalPages={totalPages}
+      currentPage={currentPage}
+    />
   );
 };
 

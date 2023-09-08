@@ -1,20 +1,20 @@
 'use client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fetchBlogRelated } from 'botak/api/pages';
-import Post from 'botak/app/components/Post';
-import Sidebar from 'botak/app/components/Sidebar/page';
+import { fetchBlogById } from 'botak/api/pages';
+import CrumbsCategories from 'botak/app/components/CrumbsCategories';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
 import styles from './Categories.module.css';
 
-const TitleWrap = (props) => {
-  const { slug } = props;
+export const TitleWrap = (props) => {
+  const { slug, currentPage } = props;
   return (
     <nav className={styles.titleBreadCrumb}>
       <Link href="/">Home</Link>
       <span>/</span>
-      <strong>{slug}</strong>
+      <span>{slug}</span>
+      <span>/</span>
+      <span>Page {currentPage}</span>
     </nav>
   );
 };
@@ -29,8 +29,8 @@ export const Pagination = (props) => {
             className={styles.newerArticles}
             href={
               currentPage === 1
-                ? `/categories/${slug}`
-                : `/categories/${slug}/page/${currentPage - 1}`
+                ? `/category/${slug}`
+                : `/category/${slug}/page/${currentPage - 1}`
             }
           >
             <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
@@ -40,7 +40,7 @@ export const Pagination = (props) => {
         {currentPage < totalPages && (
           <Link
             className={styles.olderArticles}
-            href={`/categories/${slug}/page/${+currentPage + 1}`}
+            href={`/category/${slug}/page/${+currentPage + 1}`}
           >
             Older Articles
             <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
@@ -56,12 +56,12 @@ const Categories = (props) => {
   const { data, totalPages } = dataCate;
   const [posts, setPosts] = useState(data);
   const [hasPostsData, setHasPostsData] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = 1;
   const perPage = 4;
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchBlogRelated(id, currentPage, perPage);
+      const result = await fetchBlogById(id, currentPage, perPage);
       setPosts(result);
       setHasPostsData(true);
     };
@@ -70,34 +70,15 @@ const Categories = (props) => {
   }, [id, currentPage]);
 
   return (
-    <Container>
-      <TitleWrap slug={slug} />
-      <Row
-        className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
-      >
-        <Col lg={3} className="p-3">
-          <Sidebar
-            dataTitleBlogSidebar={dataTitleBlogSidebar}
-            dataCategories={dataCategories}
-          />
-        </Col>
-        <Col lg={9} className="p-3">
-          {hasPostsData ? (
-            <>
-              <Post data={posts?.data} />
-              <Pagination
-                slug={slug}
-                totalPages={totalPages}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-              />
-            </>
-          ) : (
-            <p>Loading...</p>
-          )}
-        </Col>
-      </Row>
-    </Container>
+    <CrumbsCategories
+      slug={slug}
+      dataTitleBlogSidebar={dataTitleBlogSidebar}
+      dataCategories={dataCategories}
+      posts={posts}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      hasPostsData={hasPostsData}
+    />
   );
 };
 

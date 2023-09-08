@@ -43,7 +43,7 @@ export const fetchBlog = async (search, year, month, page = 1, perPage = 4) => {
   return { dataPosts, totalPosts, totalPages };
 };
 
-export const fetchBlogRelated = async (id, page = 1, perPage = 4) => {
+export const fetchBlogById = async (id, page = 1, perPage = 4) => {
   const fetchUrl = `${API_URL}pc/v2/posts?categories=${id}&page=${page}&per_page=${perPage}`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();

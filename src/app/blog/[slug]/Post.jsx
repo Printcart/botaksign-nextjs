@@ -15,7 +15,7 @@ const DetailBlog = (props) => {
   return (
     <div className={styles.siteContent}>
       <div className={styles.entryCat}>
-        <Link href={`/categories/${categoriesData[0]?.slug}`}>
+        <Link href={`/category/${categoriesData[0]?.slug}`}>
           {categoriesData[0]?.name}
         </Link>
       </div>

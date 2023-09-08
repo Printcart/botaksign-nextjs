@@ -1,11 +1,8 @@
 'use client';
 import { fetchBlog } from 'botak/api/pages';
-import Post from 'botak/app/components/Post';
-import Sidebar from 'botak/app/components/Sidebar/page';
+import CrumbsArchives from 'botak/app/components/CrumbsArchives';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import { Pagination } from '../../Archives';
 import styles from './PageNumber.module.css';
 
 const TitleWrap = (props) => {
@@ -28,7 +25,7 @@ const TitleWrap = (props) => {
 const PageNumber = (props) => {
   const { dataTitleBlogSidebar, dataCategories, month, year, dataDate, pageNumber } =
     props;
-  const { dataPosts, totalPages, totalPosts } = dataDate;
+  const { totalPages } = dataDate;
   const [archives, setArchives] = useState([]);
   const [hasPostsData, setHasPostsData] = useState(false);
 
@@ -43,32 +40,16 @@ const PageNumber = (props) => {
   }, [year, month, pageNumber]);
 
   return (
-    <Container>
-      <TitleWrap month={month} year={year} pageNumber={pageNumber} />
-      <Row className="">
-        <Col lg={3} className="p-3">
-          <Sidebar
-            dataTitleBlogSidebar={dataTitleBlogSidebar}
-            dataCategories={dataCategories}
-          />
-        </Col>
-        <Col lg={9} className="px-3">
-          {hasPostsData ? (
-            <>
-              <Post data={archives?.dataPosts} />
-              <Pagination
-                year={year}
-                month={month}
-                totalPages={totalPages}
-                currentPage={pageNumber}
-              />
-            </>
-          ) : (
-            <p>Loading...</p>
-          )}
-        </Col>
-      </Row>
-    </Container>
+    <CrumbsArchives
+      month={month}
+      year={year}
+      posts={archives}
+      dataCategories={dataCategories}
+      dataTitleBlogSidebar={dataTitleBlogSidebar}
+      totalPages={totalPages}
+      currentPage={pageNumber}
+      hasPostsData={hasPostsData}
+    />
   );
 };
 
