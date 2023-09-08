@@ -11,7 +11,6 @@ const Page = async ({ params }) => {
   return (
     <Archives
       dataCategories={dataCategories}
-      params={params}
       dataDate={dataDate}
       year={year}
       month={month}
