@@ -51,7 +51,7 @@ const PageNumber = (props) => {
         <Col lg={9} className="px-3">
           {hasPostsData ? (
             <>
-              <Post data={dataCa?.data} dataCategories={dataCategories} />
+              <Post data={dataCa?.data} />
               <Pagination
                 totalPages={totalPages}
                 slug={slug}

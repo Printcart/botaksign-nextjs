@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import styles from './ArticlePost.module.css';
 
 const Title = (props) => {
@@ -59,16 +59,16 @@ const ReadMore = (props) => {
 const ArticlePost = (props) => {
   const {
     id,
-    link,
     title,
     slug,
     date,
     excerpt,
-    categoryName,
+    category,
     featuredMediaUrl,
     idItem,
     author
   } = props;
+
   return (
     <article key={id} className={styles.entryContent}>
       <div className={styles.subContent}>
@@ -89,9 +89,14 @@ const ArticlePost = (props) => {
           </div>
         </div>
         <div className={styles.entry}>
-          <Link href={link} className={styles.entryCat}>
-            {categoryName}
-          </Link>
+          <div className={styles.entryCat}>
+            {category?.length > 0 &&
+              category?.map((item) => (
+                <Link key={item?.id} href={`/categories/${item?.slug}`}>
+                  {item?.name || ''}
+                </Link>
+              ))}
+          </div>
           <Title className="entryTitle" title={title} href={slug} />
           <Information date={date} author={author} />
           <ReadMore excerpt={excerpt} slug={slug} />

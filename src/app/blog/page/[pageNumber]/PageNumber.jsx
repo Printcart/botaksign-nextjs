@@ -20,7 +20,6 @@ const TitleWrap = () => {
 };
 
 const PageNumber = (props) => {
-  
   const { dataBlog, dataCategories, pageNumber, dataTitleBlogSidebar } = props;
   const { totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
@@ -51,7 +50,7 @@ const PageNumber = (props) => {
           <Col lg={9} className="px-3">
             {hasPostsData ? (
               <>
-                <Post data={posts?.dataPosts} dataCategories={dataCategories} />
+                <Post data={posts?.dataPosts} />
                 <Pagination totalPages={totalPages} currentPage={pageNumber} />
               </>
             ) : (

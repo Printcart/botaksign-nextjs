@@ -84,7 +84,7 @@ const Categories = (props) => {
         <Col lg={9} className="p-3">
           {hasPostsData ? (
             <>
-              <Post data={posts?.data} dataCategories={dataCategories} />
+              <Post data={posts?.data} />
               <Pagination
                 slug={slug}
                 totalPages={totalPages}

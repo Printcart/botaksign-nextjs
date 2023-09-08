@@ -47,7 +47,6 @@ export const Pagination = (props) => {
 };
 
 const Posts = (props) => {
-  
   const { dataBlog, dataCategories, dataTitleBlogSidebar } = props;
   const { totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
@@ -80,7 +79,7 @@ const Posts = (props) => {
           <Col lg={9} className="px-3">
             {hasPostsData ? (
               <>
-                <Post data={posts?.dataPosts} dataCategories={dataCategories} />
+                <Post data={posts?.dataPosts} />
                 <Pagination
                   totalPages={totalPages}
                   currentPage={currentPage}

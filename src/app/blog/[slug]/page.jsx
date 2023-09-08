@@ -1,5 +1,4 @@
 import {
-  fetchBlog,
   fetchBlogId,
   fetchBlogRelated,
   fetchBlogSidebar,

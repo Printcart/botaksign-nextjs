@@ -2,22 +2,15 @@ import React from 'react';
 import ArticlePost from './ArticlePost';
 
 const Post = (props) => {
-  const { data, dataCategories } = props;
-  const categoryNamesMap = {};
-  dataCategories.forEach((category) => {
-    categoryNamesMap[category.id] = category.name;
-  });
+  const { data } = props;
   return (
     <>
       {data?.length > 0 &&
         data?.map((item) => {
-          const categoryName =
-            categoryNamesMap[item?.categories[0]] || 'Uncategorized';
           return (
             <ArticlePost
-              categoryName={categoryName}
+              category={item?.categories_data}
               key={item?.id}
-              link={item?.link}
               slug={item?.slug}
               title={item?.title?.rendered}
               date={item?.date}

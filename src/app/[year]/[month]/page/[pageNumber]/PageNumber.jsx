@@ -55,7 +55,7 @@ const PageNumber = (props) => {
         <Col lg={9} className="px-3">
           {hasPostsData ? (
             <>
-              <Post data={archives?.dataPosts} dataCategories={dataCategories} />
+              <Post data={archives?.dataPosts} />
               <Pagination
                 year={year}
                 month={month}
