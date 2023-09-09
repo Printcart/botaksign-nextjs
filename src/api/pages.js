@@ -20,17 +20,23 @@ export const fetchBlogSidebar = async () => {
 };
 
 export const fetchBlog = async (queryParams) => {
-  const { page = 1, perPage = 4 } = queryParams;
+  
+  const search = queryParams?.search || '';
+  const year = queryParams?.year || '';
+  const month = queryParams?.month || '';
+  const page = queryParams?.page || 1;
+  const perPage = queryParams?.perPage || 4;
+
   let fetchUrl = `${API_URL}pc/v2/posts?page=${page}&per_page=${perPage}`;
-  // if (search) {
-  //   fetchUrl += `&search=${search}`;
-  // } else if (year && month) {
-  //   fetchUrl += `&before=${year}-${month
-  //     .toString()
-  //     .padStart(2, '0')}-01T00:00:00&after=${year}-${(month - 1)
-  //     .toString()
-  //     .padStart(2, '0')}-01T00:00:00`;
-  // }
+  if (search) {
+    fetchUrl += `&search=${search}`;
+  } else if (year && month) {
+    fetchUrl += `&before=${year}-${month
+      .toString()
+      .padStart(2, '0')}-01T00:00:00&after=${year}-${(month - 1)
+      .toString()
+      .padStart(2, '0')}-01T00:00:00`;
+  }
 
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const dataPosts = await res.json();
@@ -44,7 +50,12 @@ export const fetchBlog = async (queryParams) => {
   return { dataPosts, totalPosts, totalPages };
 };
 
-export const fetchBlogById = async (id, page = 1, perPage = 4) => {
+export const fetchBlogById = async (queryParams) => {
+
+  const id = queryParams?.id || '';
+  const page = queryParams?.page || 1;
+  const perPage = queryParams?.perPage || 4;
+
   const fetchUrl = `${API_URL}pc/v2/posts?categories=${id}&page=${page}&per_page=${perPage}`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();
@@ -57,7 +68,9 @@ export const fetchBlogById = async (id, page = 1, perPage = 4) => {
   return { data, totalPosts, totalPages };
 };
 
-export const fetchBlogId = async (slug) => {
+export const fetchBlogId = async (queryParams) => {
+  const slug = queryParams?.slug || '';
+
   const fetchUrl = `${API_URL}pc/v2/posts?slug=${slug}`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();
@@ -78,6 +91,7 @@ export const fetchComments = async () => {
 };
 
 export const fetchCategories = async () => {
+
   const fetchUrl = `${API_URL}wp/v2/categories`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();
@@ -87,7 +101,9 @@ export const fetchCategories = async () => {
   return data;
 };
 
-export const fetchCategoriesId = async (slug) => {
+export const fetchCategoriesId = async (queryParamsId) => {
+  const slug = queryParamsId?.slug || '';
+
   const fetchUrl = `${API_URL}wp/v2/categories?slug=${slug}`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();

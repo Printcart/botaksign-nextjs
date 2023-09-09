@@ -91,8 +91,8 @@ const ArticlePost = (props) => {
         <div className={styles.entry}>
           <div className={styles.entryCat}>
             {category?.length > 0 &&
-              category?.map((item) => (
-                <Link key={item?.id} href={`/category/${item?.slug}`}>
+              category?.map((item, index) => (
+                <Link key={`index${index}`} href={`/category/${item?.slug}`}>
                   {item?.name || ''}
                 </Link>
               ))}

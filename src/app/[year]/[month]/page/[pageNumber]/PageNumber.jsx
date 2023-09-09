@@ -1,34 +1,31 @@
 'use client';
 import { fetchBlog } from 'botak/api/pages';
-import CrumbsPosts from 'botak/app/components/CrumbsPosts';
+import CrumbsArchives from 'botak/app/components/CrumbsArchives';
 import { useEffect, useState } from 'react';
 
 const PageNumber = (props) => {
-  const { dataBlog, dataCategories, pageNumber, dataTitleBlogSidebar } = props;
-  const { totalPages, dataPosts } = dataBlog;
-  const [posts, setPosts] = useState(dataPosts);
+  const { dataTitleBlogSidebar, dataCategories, month, year, dataDate, pageNumber } =
+    props;
+  const { totalPages } = dataDate;
+  const [archives, setArchives] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const queryParams = {
-        search: '',
-        year: '',
-        month: '',
-        page: pageNumber,
-        perPage: 4
-      };
+      const queryParams = { year, month, page: pageNumber, perPage: 4 };
       const result = await fetchBlog(queryParams);
-      setPosts(result);
+      setArchives(result);
     };
 
     fetchData();
-  }, [pageNumber]);
+  }, [year, month, pageNumber]);
 
   return (
-    <CrumbsPosts
+    <CrumbsArchives
+      month={month}
+      year={year}
+      posts={archives}
       dataCategories={dataCategories}
       dataTitleBlogSidebar={dataTitleBlogSidebar}
-      posts={posts}
       totalPages={totalPages}
       currentPage={pageNumber}
     />

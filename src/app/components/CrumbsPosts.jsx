@@ -1,9 +1,47 @@
 import { Col, Container, Row } from 'react-bootstrap';
-import { Pagination, Breadcrumb } from '../blog/Posts';
 import PageCoverHeader from './PageCoverHeader';
 import Post from './Post';
 import styles from './CrumbsPosts.module.css';
 import Sidebar from './Sidebar/page';
+import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const Breadcrumb = () => {
+  return (
+    <nav className={styles.titleBreadCrumb}>
+      <Link href="/">Home</Link>
+      <span>/</span>
+      <strong>Blog</strong>
+    </nav>
+  );
+};
+
+const Pagination = (props) => {
+  const { totalPages, currentPage } = props;
+
+  return (
+    <nav className={styles.pagination}>
+      {currentPage > 1 && (
+        <Link
+          className={styles.newerArticles}
+          href={currentPage === 1 ? `/blog` : `/blog/page/${currentPage - 1}`}
+        >
+          <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
+          Newer Articles
+        </Link>
+      )}
+      {currentPage < totalPages && (
+        <Link
+          className={styles.olderArticles}
+          href={`/blog/page/${+currentPage + 1}`}
+        >
+          Older Articles
+          <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
+        </Link>
+      )}
+    </nav>
+  );
+};
 
 const CrumbsPosts = (props) => {
   const { dataTitleBlogSidebar, dataCategories, posts, totalPages, currentPage } =

@@ -1,25 +1,20 @@
 import { fetchBlog, fetchBlogSidebar, fetchCategories } from 'botak/api/pages';
-import PageNumber from './PageNumber';
+import Archives from './Archives';
 
 const Page = async ({ params }) => {
-  const { pageNumber } = params;
-  
-  const queryParams = {
-    search: '',
-    year: '',
-    month: '',
-    page: pageNumber,
-    perPage: 4
-  };
-  const dataBlog = await fetchBlog(queryParams);
+  const { year, month } = params;
+
   const dataCategories = await fetchCategories();
+  const queryParams = { year, month };
+  const dataDate = await fetchBlog(queryParams);
   const dataTitleBlogSidebar = await fetchBlogSidebar();
 
   return (
-    <PageNumber
-      pageNumber={pageNumber}
-      dataBlog={dataBlog}
+    <Archives
       dataCategories={dataCategories}
+      dataDate={dataDate}
+      year={year}
+      month={month}
       dataTitleBlogSidebar={dataTitleBlogSidebar}
     />
   );

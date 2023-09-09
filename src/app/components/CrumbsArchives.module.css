@@ -1,17 +1,3 @@
-.contents {
-  margin-top: 50px;
-}
-.titleBreadCrumb {
-  color: rgb(105, 105, 105);
-  font-family: var(--font-nunito);
-  font-weight: 400;
-  font-size: 16px;
-  margin-top: 21px;
-}
-.titleBreadCrumb span {
-  margin: 0 5px;
-}
-
 .pagination {
   margin: 20px 0 100px;
   position: relative;
@@ -41,9 +27,14 @@
   right: 0;
 }
 
-@media (max-width: 768px) {
-  .contents {
-    display: flex;
-    flex-direction: column-reverse;
-  }
+.titleBreadCrumb {
+  color: rgb(105, 105, 105);
+  font-family: var(--font-nunito);
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 21px;
+  text-transform: capitalize;
+}
+.titleBreadCrumb > span {
+  margin: 0 5px;
 }

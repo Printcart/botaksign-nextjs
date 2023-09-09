@@ -20,22 +20,23 @@ const Title = (props) => {
 };
 
 const ResultSearchBlog = () => {
-  // const searchParams = useSearchParams();
-  // const search = searchParams.get('search');
-  // const [listPosts, setListPosts] = useState([]);
+  const searchParams = useSearchParams();
+  const search = searchParams.get('search');
+  const [listPosts, setListPosts] = useState([]);
 
-  // useEffect(() => {
-  //   const fectchdata = async () => {
-  //     const res = await fetchBlog(search);
-  //     setListPosts(res);
-  //   };
+  useEffect(() => {
+    const fectchdata = async () => {
+      const queryParams = { search };
+      const res = await fetchBlog(queryParams);
+      setListPosts(res);
+    };
 
-  //   fectchdata();
-  // }, [search]);
+    fectchdata();
+  }, [search]);
 
   return (
     <Container>
-      {/* <Title params={search} />
+      <Title params={search} />
       <div className={styles.resultPost}>
         {listPosts?.dataPosts?.length > 0 ? (
           listPosts?.dataPosts.map((item) => (
@@ -61,7 +62,7 @@ const ResultSearchBlog = () => {
             </div>
           </section>
         )}
-      </div> */}
+      </div>
     </Container>
   );
 };
