@@ -1,6 +1,6 @@
 import {
-  fetchBlogId,
-  fetchBlogById,
+  fetchBlogSlug,
+  fetchCategoriesId,
   fetchBlogSidebar,
   fetchCategories
 } from 'botak/api/pages';
@@ -8,13 +8,16 @@ import Post from './Post';
 
 const Page = async ({ params }) => {
   const { slug } = params;
-  
+
   const dataCategories = await fetchCategories();
 
   const queryParams = { slug };
-  const dataBlogDetails = await fetchBlogId(queryParams);
+  const dataBlogDetails = await fetchBlogSlug(queryParams);
+
   const id = dataBlogDetails[0].id;
-  const dataRelated = await fetchBlogById(id);
+
+  const queryParamsId = { id };
+  const categoriesId = await fetchCategoriesId(queryParamsId);
 
   const dataTitleBlogSidebar = await fetchBlogSidebar();
 
@@ -22,7 +25,7 @@ const Page = async ({ params }) => {
     <Post
       dataCategories={dataCategories}
       dataBlogDetails={dataBlogDetails}
-      dataRelated={dataRelated}
+      categoriesId={categoriesId}
       dataTitleBlogSidebar={dataTitleBlogSidebar}
     />
   );

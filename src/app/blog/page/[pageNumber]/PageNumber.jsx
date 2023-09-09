@@ -11,9 +11,6 @@ const PageNumber = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const queryParams = {
-        search: '',
-        year: '',
-        month: '',
         page: pageNumber,
         perPage: 4
       };

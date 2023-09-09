@@ -13,9 +13,6 @@ const Posts = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const queryParams = {
-        search: '',
-        year: '',
-        month: '',
         page: currentPage,
         perPage
       };

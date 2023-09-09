@@ -20,7 +20,6 @@ export const fetchBlogSidebar = async () => {
 };
 
 export const fetchBlog = async (queryParams) => {
-  
   const search = queryParams?.search || '';
   const year = queryParams?.year || '';
   const month = queryParams?.month || '';
@@ -50,25 +49,7 @@ export const fetchBlog = async (queryParams) => {
   return { dataPosts, totalPosts, totalPages };
 };
 
-export const fetchBlogById = async (queryParams) => {
-
-  const id = queryParams?.id || '';
-  const page = queryParams?.page || 1;
-  const perPage = queryParams?.perPage || 4;
-
-  const fetchUrl = `${API_URL}pc/v2/posts?categories=${id}&page=${page}&per_page=${perPage}`;
-  const res = await fetch(fetchUrl, { headers, method: 'GET' });
-  const data = await res.json();
-  if (data.errors) {
-    throw new Error('Failed to fetch API');
-  }
-  const totalPosts = res.headers.get('X-WP-Total');
-  const totalPages = res.headers.get('X-WP-TotalPages');
-
-  return { data, totalPosts, totalPages };
-};
-
-export const fetchBlogId = async (queryParams) => {
+export const fetchBlogSlug = async (queryParams) => {
   const slug = queryParams?.slug || '';
 
   const fetchUrl = `${API_URL}pc/v2/posts?slug=${slug}`;
@@ -91,7 +72,6 @@ export const fetchComments = async () => {
 };
 
 export const fetchCategories = async () => {
-
   const fetchUrl = `${API_URL}wp/v2/categories`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const data = await res.json();
@@ -102,7 +82,24 @@ export const fetchCategories = async () => {
 };
 
 export const fetchCategoriesId = async (queryParamsId) => {
-  const slug = queryParamsId?.slug || '';
+  const id = queryParamsId?.id || '';
+  const page = queryParamsId?.page || 1;
+  const perPage = queryParamsId?.perPage || 4;
+
+  const fetchUrl = `${API_URL}pc/v2/posts?categories=${id}&page=${page}&per_page=${perPage}`;
+  const res = await fetch(fetchUrl, { headers, method: 'GET' });
+  const data = await res.json();
+  if (data.errors) {
+    throw new Error('Failed to fetch API');
+  }
+  const totalPosts = res.headers.get('X-WP-Total');
+  const totalPages = res.headers.get('X-WP-TotalPages');
+
+  return { data, totalPosts, totalPages };
+};
+
+export const fetchCategoriesSlug = async (queryParamsSlug) => {
+  const slug = queryParamsSlug?.slug || '';
 
   const fetchUrl = `${API_URL}wp/v2/categories?slug=${slug}`;
   const res = await fetch(fetchUrl, { headers, method: 'GET' });

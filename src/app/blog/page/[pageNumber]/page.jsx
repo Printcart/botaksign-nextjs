@@ -3,11 +3,8 @@ import PageNumber from './PageNumber';
 
 const Page = async ({ params }) => {
   const { pageNumber } = params;
-  
+
   const queryParams = {
-    search: '',
-    year: '',
-    month: '',
     page: pageNumber,
     perPage: 4
   };

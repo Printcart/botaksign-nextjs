@@ -1,5 +1,5 @@
 'use client';
-import { fetchBlogById } from 'botak/api/pages';
+import { fetchCategoriesId } from 'botak/api/pages';
 import CrumbsCategories from 'botak/app/components/CrumbsCategories';
 import { useEffect, useState } from 'react';
 
@@ -11,12 +11,12 @@ const PageNumber = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const queryParams = {
+      const queryParamsId = {
         id,
         page: pageNumber,
         perPage: 4
       };
-      const result = await fetchBlogById(queryParams);
+      const result = await fetchCategoriesId(queryParamsId);
       setDataCate(result);
     };
 
