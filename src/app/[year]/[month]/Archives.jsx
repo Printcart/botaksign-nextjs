@@ -1,15 +1,12 @@
 'use client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchBlog } from 'botak/api/pages';
-import Post from 'botak/app/components/Post';
-import Sidebar from 'botak/app/components/Sidebar/page';
+import CrumbsArchives from 'botak/app/components/CrumbsArchives';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
 import styles from './Archives.module.css';
-import CrumbsArchives from 'botak/app/components/CrumbsArchives';
 
-export const TitleWrap = (props) => {
+export const Breadcrumb = (props) => {
   const { month, year } = props;
   return (
     <nav className={styles.titleBreadCrumb}>
@@ -59,7 +56,6 @@ const Archives = (props) => {
   const { dataDate, dataCategories, month, year, dataTitleBlogSidebar } = props;
   const { dataPosts, totalPages } = dataDate;
   const [posts, setPosts] = useState(dataPosts);
-  const [hasPostsData, setHasPostsData] = useState(false);
   const currentPage = 1;
   const perPage = 4;
 
@@ -67,7 +63,6 @@ const Archives = (props) => {
     const fetchData = async () => {
       const result = await fetchBlog('', year, month, currentPage, perPage);
       setPosts(result);
-      setHasPostsData(true);
     };
 
     fetchData();
@@ -82,7 +77,6 @@ const Archives = (props) => {
       dataTitleBlogSidebar={dataTitleBlogSidebar}
       totalPages={totalPages}
       currentPage={currentPage}
-      hasPostsData={hasPostsData}
     />
   );
 };

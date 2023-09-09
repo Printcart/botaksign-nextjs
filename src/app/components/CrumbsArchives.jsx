@@ -1,5 +1,5 @@
 import { Col, Container, Row } from 'react-bootstrap';
-import { Pagination, TitleWrap } from '../[year]/[month]/Archives';
+import { Breadcrumb, Pagination } from '../[year]/[month]/Archives';
 import Post from './Post';
 import Sidebar from './Sidebar/page';
 
@@ -11,13 +11,12 @@ const CrumbsArchives = (props) => {
     dataTitleBlogSidebar,
     totalPages,
     currentPage,
-    posts,
-    hasPostsData
+    posts
   } = props;
-  
+
   return (
     <Container>
-      <TitleWrap month={month} year={year} />
+      <Breadcrumb month={month} year={year} />
       <Row
         className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
       >
@@ -28,7 +27,7 @@ const CrumbsArchives = (props) => {
           />
         </Col>
         <Col lg={9} className="p-3">
-          {hasPostsData ? (
+          {posts?.dataPosts ? (
             <>
               <Post data={posts?.dataPosts} dataCategories={dataCategories} />
               <Pagination

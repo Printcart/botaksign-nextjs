@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import styles from './Posts.module.css';
 import CrumbsPosts from '../components/CrumbsPosts';
 
-export const TitleWrap = () => {
+export const Breadcrumb = () => {
   return (
     <nav className={styles.titleBreadCrumb}>
       <Link href="/">Home</Link>
@@ -47,7 +47,6 @@ const Posts = (props) => {
   const { dataBlog, dataCategories, dataTitleBlogSidebar } = props;
   const { totalPages, dataPosts } = dataBlog;
   const [posts, setPosts] = useState(dataPosts);
-  const [hasPostsData, setHasPostsData] = useState(false);
   const currentPage = 1;
   const perPage = 4;
 
@@ -55,7 +54,6 @@ const Posts = (props) => {
     const fetchData = async () => {
       const result = await fetchBlog('', '', '', currentPage, perPage);
       setPosts(result);
-      result?.dataPosts.length > 0 && setHasPostsData(true);
     };
 
     fetchData();
@@ -65,7 +63,6 @@ const Posts = (props) => {
     <CrumbsPosts
       dataCategories={dataCategories}
       dataTitleBlogSidebar={dataTitleBlogSidebar}
-      hasPostsData={hasPostsData}
       posts={posts}
       totalPages={totalPages}
       currentPage={currentPage}

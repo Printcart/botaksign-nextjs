@@ -8,13 +8,12 @@ const PageNumber = (props) => {
     props;
   const { totalPages } = dataCate;
   const [dataCa, setDataCate] = useState([]);
-  const [hasPostsData, setHasPostsData] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      
       const result = await fetchBlogById(id, pageNumber, 4);
       setDataCate(result);
-      result?.data?.length > 0 && setHasPostsData(true);
     };
 
     fetchData();
@@ -28,7 +27,6 @@ const PageNumber = (props) => {
       posts={dataCa}
       currentPage={pageNumber}
       totalPages={totalPages}
-      hasPostsData={hasPostsData}
     />
   );
 };

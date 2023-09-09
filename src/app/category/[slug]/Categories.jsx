@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from './Categories.module.css';
 
-export const TitleWrap = (props) => {
+export const Breadcrumb = (props) => {
   const { slug, currentPage } = props;
   return (
     <nav className={styles.titleBreadCrumb}>
@@ -55,7 +55,6 @@ const Categories = (props) => {
   const { dataCate, id, dataCategories, slug, dataTitleBlogSidebar } = props;
   const { data, totalPages } = dataCate;
   const [posts, setPosts] = useState(data);
-  const [hasPostsData, setHasPostsData] = useState(false);
   const currentPage = 1;
   const perPage = 4;
 
@@ -63,7 +62,6 @@ const Categories = (props) => {
     const fetchData = async () => {
       const result = await fetchBlogById(id, currentPage, perPage);
       setPosts(result);
-      setHasPostsData(true);
     };
 
     fetchData();
@@ -77,7 +75,6 @@ const Categories = (props) => {
       posts={posts}
       currentPage={currentPage}
       totalPages={totalPages}
-      hasPostsData={hasPostsData}
     />
   );
 };
