@@ -19,17 +19,18 @@ export const fetchBlogSidebar = async () => {
   return data;
 };
 
-export const fetchBlog = async (search, year, month, page = 1, perPage = 4) => {
+export const fetchBlog = async (queryParams) => {
+  const { page = 1, perPage = 4 } = queryParams;
   let fetchUrl = `${API_URL}pc/v2/posts?page=${page}&per_page=${perPage}`;
-  if (search) {
-    fetchUrl += `&search=${search}`;
-  } else if (year && month) {
-    fetchUrl += `&before=${year}-${month
-      .toString()
-      .padStart(2, '0')}-01T00:00:00&after=${year}-${(month - 1)
-      .toString()
-      .padStart(2, '0')}-01T00:00:00`;
-  }
+  // if (search) {
+  //   fetchUrl += `&search=${search}`;
+  // } else if (year && month) {
+  //   fetchUrl += `&before=${year}-${month
+  //     .toString()
+  //     .padStart(2, '0')}-01T00:00:00&after=${year}-${(month - 1)
+  //     .toString()
+  //     .padStart(2, '0')}-01T00:00:00`;
+  // }
 
   const res = await fetch(fetchUrl, { headers, method: 'GET' });
   const dataPosts = await res.json();

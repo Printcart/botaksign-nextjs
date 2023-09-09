@@ -52,7 +52,9 @@ const Posts = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchBlog('', '', '', currentPage, perPage);
+      const queryParams = { currentPage, perPage };
+      console.log('queryParams', queryParams);
+      const result = await fetchBlog(queryParams);
       setPosts(result);
     };
 

@@ -3,8 +3,9 @@ import PageNumber from './PageNumber';
 
 const Page = async ({ params }) => {
   const { pageNumber } = params;
-  
-  const dataBlog = await fetchBlog('', '', '', pageNumber, 4);
+
+  const queryParams = { currentPage, perPage };
+  const dataBlog = await fetchBlog(queryParams);
   const dataCategories = await fetchCategories();
   const dataTitleBlogSidebar = await fetchBlogSidebar();
 

@@ -10,7 +10,8 @@ const PageNumber = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchBlog('', '', '', pageNumber, 4);
+      const queryParams = { currentPage, perPage };
+      const result = await fetchBlog(queryParams);
       setPosts(result);
     };
 
