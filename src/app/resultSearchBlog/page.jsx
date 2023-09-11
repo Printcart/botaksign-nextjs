@@ -8,7 +8,7 @@ import styles from './SearchBlog.module.css';
 import { SearchBlog } from '../components/Sidebar/page';
 import ArticlePost from '../components/ArticlePost';
 
-const Title = (props) => {
+const BreadcrumbLast = (props) => {
   const { params } = props;
   return (
     <div className={styles.title}>
@@ -36,7 +36,7 @@ const ResultSearchBlog = () => {
 
   return (
     <Container>
-      <Title params={search} />
+      <BreadcrumbLast params={search} />
       <div className={styles.resultPost}>
         {listPosts?.dataPosts?.length > 0 ? (
           listPosts?.dataPosts.map((item) => (

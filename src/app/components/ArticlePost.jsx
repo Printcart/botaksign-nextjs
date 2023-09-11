@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import styles from './ArticlePost.module.css';
 
-const Title = (props) => {
+const EntryCat = (props) => {
   const { title, className, href } = props;
   return (
     <h3 className={styles[className]}>
@@ -97,7 +97,7 @@ const ArticlePost = (props) => {
                 </Link>
               ))}
           </div>
-          <Title className="entryTitle" title={title} href={slug} />
+          <EntryCat className="entryTitle" title={title} href={slug} />
           <Information date={date} author={author} />
           <ReadMore excerpt={excerpt} slug={slug} />
         </div>
