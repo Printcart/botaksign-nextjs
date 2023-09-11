@@ -16,7 +16,7 @@ const PageCoverHeader = (props) => {
             <span className={styles.breadcrumbLast}>
               {currentPage > 1 ? (
                 <>
-                  <Link href="/blog" className={styles.breadcrumbLast}>
+                  <Link href="/blog" className={styles.breadcrumbLink}>
                     {titlePage}
                   </Link>{' '}
                   <span>/</span> <span>Page {currentPage}</span>
