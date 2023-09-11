@@ -1,0 +1,136 @@
+.entryTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 400;
+  color: rgb(51, 51, 51);
+  font-family: var(--font-oduda-bold);
+}
+.entryTitle:hover {
+  color: rgb(40, 196, 117);
+}
+.entryCat {
+  text-align: center;
+  height: 40px;
+}
+.entryCat a {
+  text-transform: uppercase;
+  padding: 8px;
+  color: rgb(66, 133, 244);
+}
+.line {
+  max-width: 50px;
+  height: 2px;
+  background: rgb(51, 51, 51);
+  text-align: center;
+  margin-top: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.content {
+  margin-bottom: 90px;
+}
+
+.relatedTitle {
+  text-align: center;
+  border-bottom: 1px solid #f2f2f2;
+  margin-bottom: 45px;
+  color: rgb(105, 105, 105);
+}
+.relatedArticle {
+  margin-bottom: 90px;
+}
+.relatedTitle h2 {
+  margin-bottom: 0;
+  padding-bottom: 25px;
+  position: relative;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgb(51, 51, 51);
+  font-family: var(--font-oduda-bold);
+  position: relative;
+  max-width: 150px;
+  margin: auto;
+}
+
+.relatedTitle h2::after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: #555555;
+  bottom: 0;
+  left: 0;
+}
+.entryMeta {
+  text-transform: uppercase;
+  text-align: center;
+  color: rgb(105, 105, 105);
+  font-family: var(--font-nunito);
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.entryMeta span:not(:last-child)::after {
+  content: '-';
+  margin-left: 15px;
+  margin-right: 15px;
+  color: rgb(105, 105, 105);
+}
+
+.sider {
+  padding: 0 15px;
+}
+.contents {
+  margin-top: 50px;
+}
+.related {
+  margin-bottom: 65px;
+}
+
+.related h5 {
+  text-align: right;
+}
+
+.related img {
+  margin-bottom: 24px;
+  max-width: 100%;
+  width: 100%;
+  height: 256px;
+  object-fit: cover;
+}
+.related h5 a {
+  color: #444444;
+  line-height: 26px;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: var(--font-oduda-bold);
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+.related h5 a:hover {
+  color: rgb(40, 196, 117);
+}
+.contentRelated {
+  display: grid;
+  grid-template-columns: unset;
+  grid-auto-flow: column;
+  grid-auto-columns: 33.33333%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-snap-stop: always;
+}
+.author {
+  color: rgb(66, 133, 244);
+}
+
+@media (max-width: 768px) {
+  .contents {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .contentRelated {
+    grid-auto-columns: 50%;
+  }
+}

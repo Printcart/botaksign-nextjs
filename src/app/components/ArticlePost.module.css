@@ -1,0 +1,146 @@
+.entryTitle {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  font-family: var(--font-oduda-bold);
+  color: rgb(51, 51, 51);
+}
+.entryTitle a:hover {
+  color: rgb(40, 196, 117);
+}
+.subContent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 25px;
+  gap: 30px;
+}
+
+.entryContent:first-child {
+  margin-bottom: 120px;
+}
+.entryThumb {
+  position: relative;
+}
+.entryThumb:hover .entryNumber {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.65);
+  height: 100%;
+  width: 100%;
+  transition: 0.5s;
+}
+.entryThumb:hover .entryNumber span {
+  display: block;
+  transition: 0.5s;
+}
+.entryContent:first-child .entryImage img {
+  width: 100%;
+  max-width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+.entryNumber span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-family: var(--font-nunito);
+  font-weight: 400;
+  font-size: 16px;
+  display: none;
+}
+.entryCat {
+  display: flex !important;
+  gap: 5px;
+  color: rgb(66, 133, 244);
+  text-transform: uppercase;
+  font-size: 12.63px;
+  line-height: 20px;
+  margin-bottom: 6px;
+}
+.entryCat a::after {
+  content: ',';
+}
+
+.entryCat a:last-child::after {
+  content: '';
+}
+
+.entryContent:first-child::after {
+  content: 'Articles / Posts';
+  text-transform: uppercase;
+  position: absolute;
+  font-weight: bold;
+  display: inline-block;
+  border-bottom: 1px solid #333;
+  font-size: 32px;
+  width: auto;
+  color: rgb(105, 105, 105);
+}
+
+.entryText {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  line-height: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-height: 24px;
+  max-height: 76px;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  font-family: var(--font-nunito);
+  font-weight: 400;
+}
+.readMoreLink a {
+  font-size: 14px;
+  border-radius: 5px;
+  text-transform: capitalize;
+  line-height: 20px;
+  height: auto;
+  border: 1px solid;
+  text-decoration: none;
+  padding: 6px 17px;
+  color: rgb(40, 196, 117);
+  background-color: rgb(255, 255, 255);
+}
+.readMoreLink a:hover {
+  background: rgb(40, 196, 117);
+  color: rgb(255, 255, 255);
+}
+.entryFooter {
+  margin-top: 20px;
+}
+
+.entryFooter span {
+  text-transform: uppercase;
+  color: rgb(105, 105, 105);
+  font-family: var(--font-nunito);
+  font-weight: 400;
+  font-size: 16px;
+}
+.entryWrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.entryWrap > span {
+  text-transform: uppercase;
+  color: rgb(105, 105, 105);
+  font-weight: 400;
+  font-size: 16px;
+}
+.author {
+  color: rgb(66, 133, 244);
+}
+
+@media (max-width: 768px) {
+  .subContent {
+    display: flex;
+    flex-direction: column;
+  }
+}

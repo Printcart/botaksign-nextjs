@@ -1,0 +1,100 @@
+.title {
+  font-size: 16px;
+  text-transform: uppercase;
+  line-height: 28px;
+  font-weight: 600;
+  border-bottom: 1px solid;
+  padding-bottom: 5px;
+  margin-bottom: 30px;
+  font-family: var(--font-oduda-bold);
+  color: rgb(51, 51, 51);
+  border-color: #d7d7d7;
+}
+
+.titleCate,
+.content {
+  margin-bottom: 30px;
+}
+
+.titleCate ul,
+.content ul {
+  margin: 16px 0;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.content ul li:not(:last-of-type) {
+  border-bottom: 1px solid;
+  border-color: #d7d7d7;
+}
+
+.content ul li {
+  margin-bottom: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.content ul li a:hover {
+  color: rgb(66, 133, 244);
+}
+
+.titleCate ul li a:hover {
+  color: rgb(66, 133, 244);
+}
+
+.titleCate ul li a,
+.content ul li a {
+  color: rgb(105, 105, 105);
+}
+
+.titleCate ul li {
+  padding-top: 8px;
+  font-size: 14px;
+  color: rgb(105, 105, 105);
+}
+
+/* -------------------------------- */
+.resultBlog input,
+.lightSearch input:focus {
+  outline: none;
+}
+.resultBlog input,
+.lightSearch input {
+  height: 40px;
+  padding: 0 15px;
+  color: #666;
+  border: 1px solid rgb(40, 196, 117);
+  margin-bottom: 40px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.resultBlog button,
+.lightSearch button {
+  width: 40px;
+  border: 0;
+  color: #fff;
+  background-color: rgb(40, 196, 117);
+  height: 40px;
+  line-height: 35px;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.lightSearch,
+.resultBlog {
+  display: flex;
+}
+.lightSearch input,
+.resultBlog input {
+  width: 100%;
+}
+
+/* ------------------------------------------ */
+@media (max-width: 768px) {
+  .lightSearch input {
+    width: 100%;
+  }
+}
