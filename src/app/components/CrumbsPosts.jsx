@@ -54,7 +54,12 @@ const CrumbsPosts = (props) => {
 
   return (
     <>
-      <PageCoverHeader title="BLOG" link="Home" titlePage="Blog" />
+      <PageCoverHeader
+        title="BLOG"
+        link="Home"
+        titlePage="Blog"
+        currentPage={currentPage}
+      />
       <Container>
         <Breadcrumb />
         <Row className={styles.contents}>
