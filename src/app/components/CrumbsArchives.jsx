@@ -6,42 +6,55 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './CrumbsArchives.module.css';
 
 const Breadcrumb = (props) => {
-  const { month, year } = props;
+  const { month, year, currentPage } = props;
   return (
     <nav className={styles.titleBreadCrumb}>
       <Link href="/">Home</Link>
       <span>/</span>
-      <strong>
-        <span>{year}</span>
-        <span>/</span>
-        <span>{month}</span>
-      </strong>
+      {currentPage > 1 ? (
+        <>
+          <span>
+            <span>{year}</span>
+            <span>/</span>
+            <span>{month}</span>
+          </span>
+          <span>/</span>
+          <strong>Page {currentPage}</strong>
+        </>
+      ) : (
+        <strong>
+          <span>{year}</span>
+          <span>/</span>
+          <span>{month}</span>
+        </strong>
+      )}
     </nav>
   );
 };
 
 const Pagination = (props) => {
   const { totalPages, currentPage, year, month } = props;
+  const currentPageNumber = parseInt(currentPage);
 
   return (
     <nav className={styles.pagination}>
-      {currentPage > 1 && (
+      {currentPageNumber > 1 && (
         <Link
           className={styles.newerArticles}
           href={
-            currentPage === 1
+            currentPageNumber - 1 === 1
               ? `${window.location.pathname}`
-              : `/${year}/${month}/page/${+currentPage - 1}`
+              : `/${year}/${month}/page/${currentPageNumber - 1}`
           }
         >
           <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
           Newer Articles
         </Link>
       )}
-      {currentPage < totalPages && (
+      {currentPageNumber < totalPages && (
         <Link
           className={styles.olderArticles}
-          href={`/${year}/${month}/page/${+currentPage + 1}`}
+          href={`/${year}/${month}/page/${currentPageNumber + 1}`}
         >
           Older Articles
           <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
@@ -64,7 +77,7 @@ const CrumbsArchives = (props) => {
 
   return (
     <Container>
-      <Breadcrumb month={month} year={year} />
+      <Breadcrumb month={month} year={year} currentPage={currentPage} />
       <Row
         className={`mt-5 ${window.innerWidth <= 768 ? 'flex-column-reverse' : ''}`}
       >

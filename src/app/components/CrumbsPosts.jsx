@@ -18,22 +18,27 @@ const Breadcrumb = () => {
 
 const Pagination = (props) => {
   const { totalPages, currentPage } = props;
+  const currentPageNumber = parseInt(currentPage);
 
   return (
     <nav className={styles.pagination}>
-      {currentPage > 1 && (
+      {currentPageNumber > 1 && (
         <Link
           className={styles.newerArticles}
-          href={currentPage === 1 ? `/blog` : `/blog/page/${currentPage - 1}`}
+          href={
+            currentPageNumber - 1 === 1
+              ? `/blog`
+              : `/blog/page/${currentPageNumber - 1}`
+          }
         >
           <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
           Newer Articles
         </Link>
       )}
-      {currentPage < totalPages && (
+      {currentPageNumber < totalPages && (
         <Link
           className={styles.olderArticles}
-          href={`/blog/page/${+currentPage + 1}`}
+          href={`/blog/page/${currentPageNumber + 1}`}
         >
           Older Articles
           <FontAwesomeIcon icon="fa-solid fa-chevron-right" />

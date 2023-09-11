@@ -11,35 +11,44 @@ const Breadcrumb = (props) => {
     <nav className={styles.titleBreadCrumb}>
       <Link href="/">Home</Link>
       <span>/</span>
-      <span>{slug}</span>
-      <span>/</span>
-      <span>Page {currentPage}</span>
+      <span>
+        {currentPage > 1 ? (
+          <>
+            <span>{slug}</span>
+            <span>/</span>
+            <strong>Page {currentPage}</strong>
+          </>
+        ) : (
+          <strong>{slug}</strong>
+        )}
+      </span>
     </nav>
   );
 };
 
 const Pagination = (props) => {
   const { totalPages, currentPage, slug } = props;
+  const currentPageNumber = parseInt(currentPage);
   return (
     <>
       <nav className={styles.pagination}>
-        {currentPage > 1 && (
+        {currentPageNumber > 1 && (
           <Link
             className={styles.newerArticles}
             href={
-              currentPage === 1
+              currentPageNumber - 1 === 1
                 ? `/category/${slug}`
-                : `/category/${slug}/page/${currentPage - 1}`
+                : `/category/${slug}/page/${currentPageNumber - 1}`
             }
           >
             <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
             Newer Articles
           </Link>
         )}
-        {currentPage < totalPages && (
+        {currentPageNumber < totalPages && (
           <Link
             className={styles.olderArticles}
-            href={`/category/${slug}/page/${+currentPage + 1}`}
+            href={`/category/${slug}/page/${currentPageNumber + 1}`}
           >
             Older Articles
             <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
