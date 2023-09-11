@@ -12,29 +12,29 @@
 }
 
 .titleCate,
-.titleSider {
+.content {
   margin-bottom: 30px;
 }
 
 .titleCate ul,
-.titleSider ul {
+.content ul {
   margin: 16px 0;
   list-style-type: none;
   padding-left: 0;
 }
 
-.titleSider ul li:not(:last-of-type) {
+.content ul li:not(:last-of-type) {
   border-bottom: 1px solid;
   border-color: #d7d7d7;
 }
 
-.titleSider ul li {
+.content ul li {
   margin-bottom: 10px;
   padding-top: 8px;
   padding-bottom: 8px;
 }
 
-.titleSider ul li a:hover {
+.content ul li a:hover {
   color: rgb(66, 133, 244);
 }
 
@@ -43,7 +43,7 @@
 }
 
 .titleCate ul li a,
-.titleSider ul li a {
+.content ul li a {
   color: rgb(105, 105, 105);
 }
 

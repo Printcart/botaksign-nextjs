@@ -78,7 +78,7 @@ const Blogs = (props) => {
     <>
       <Title title="RECENT POSTS" className="title" />
       <Content
-        className="titleSider"
+        className="content"
         items={dataTitle}
         renderItem={(dataItem) => (
           <Link href={`/blog/${dataItem?.slug}`}>{dataItem?.title?.rendered}</Link>
@@ -100,7 +100,7 @@ const Archives = (props) => {
     <>
       <Title title="ARCHIVES" className="title" />
       <Content
-        className="titleSider"
+        className="content"
         items={dataDate}
         renderItem={(dataItem) => {
           const data = new Date(dataItem.date);
