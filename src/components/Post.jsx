@@ -1,5 +1,5 @@
 import React from 'react';
-import ArticlePost from './ArticlePost/page';
+import ArticlePost from './ArticlePost';
 
 const Post = (props) => {
   const { data } = props;

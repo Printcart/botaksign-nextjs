@@ -1,11 +1,11 @@
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from 'botak/components/Header/page';
+import Header from 'botak/components/Header';
 import { nunito, oduda, roboto, robotoRegular } from './fonts';
 import './globals.css';
 import EmbedScripts from 'botak/components/EmbedScripts';
-import FooterServer from 'botak/components/Footer/FooterServer';
+import Footer from 'botak/components/Footer';
 config.autoAddCss = false;
 
 export const metadata = {
@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       >
         <Header />
         {children}
-        <FooterServer />
+        <Footer />
       </body>
     </html>
   );

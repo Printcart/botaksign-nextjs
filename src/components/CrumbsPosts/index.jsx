@@ -1,8 +1,8 @@
 import { Col, Container, Row } from 'react-bootstrap';
-import PageCoverHeader from './PageCoverHeader';
-import Post from './Post';
+import PageCoverHeader from 'botak/components/PageCoverHeader';
+import Post from 'botak/components/Post';
 import styles from './CrumbsPosts.module.css';
-import Sidebar from './Sidebar/page';
+import Sidebar from 'botak/components/Sidebar';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
