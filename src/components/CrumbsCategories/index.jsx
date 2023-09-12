@@ -1,6 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap';
-import Post from './Post';
-import Sidebar from './Sidebar';
+import Post from 'botak/components/Post';
+import Sidebar from 'botak/components/Sidebar';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './CrumbsCategories.module.css';
