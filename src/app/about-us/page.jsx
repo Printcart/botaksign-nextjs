@@ -1,6 +1,6 @@
 'use client';
 import { Container } from 'react-bootstrap';
-import PageCoverHeader from '../components/PageCoverHeader';
+import PageCoverHeader from 'botak/components/PageCoverHeader';
 import styles from './AboutUs.module.css';
 import Link from 'next/link';
 import Image from 'next/image';

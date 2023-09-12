@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import PageCoverHeader from '../components/PageCoverHeader';
+import PageCoverHeader from 'botak/components/PageCoverHeader';
 import { Col, Container, Row } from 'react-bootstrap';
 import styles from './ColourChart.module.css';
 import Link from 'next/link';

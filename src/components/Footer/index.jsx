@@ -1,14 +1,14 @@
 import { fetchDataFooterTitle } from 'botak/api/homepage';
 import React from 'react';
-import Footer from './page';
+import FooterContainer from './FooterContainer';
 
-const FooterServer = async () => {
+const Footer = async () => {
   const dataFooter = await fetchDataFooterTitle();
   return (
     <div>
-      <Footer dataFooter={dataFooter} />
+      <FooterContainer dataFooter={dataFooter} />
     </div>
   );
 };
 
-export default FooterServer;
+export default Footer;

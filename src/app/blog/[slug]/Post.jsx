@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Col, Container, Row } from 'react-bootstrap';
 import styles from './Post.module.css';
 import Image from 'next/image';
-import Sidebar from 'botak/app/components/Sidebar/page';
+import Sidebar from 'botak/components/Sidebar';
 
 const DetailBlog = (props) => {
   const { content, author, date, title, categoriesData } = props;

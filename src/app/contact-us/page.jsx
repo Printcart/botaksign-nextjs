@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import * as Yup from 'yup';
-import InputForm from '../components/InputForm';
-import PageCoverHeader from '../components/PageCoverHeader';
+import InputForm from 'botak/components/InputForm';
+import PageCoverHeader from 'botak/components/PageCoverHeader';
 import styles from './contact.module.css';
 
 const dataInformation = [

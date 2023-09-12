@@ -7,58 +7,6 @@ import FaIconExtend from '../FaIconExtend';
 import styles from './page.module.css';
 import { data } from 'botak/app/data/footer';
 
-const Footer = (props) => {
-  const { dataFooter } = props;
-  const footerData = data;
-
-  return (
-    <div className={styles.siteFooter}>
-      <Top
-        companyInfo={footerData.companyInfo}
-        footerMenu={dataFooter}
-        footerContact={footerData.footerContact}
-      />
-      <Bottom copyright={footerData.copyright} />
-    </div>
-  );
-};
-
-const Top = (props) => {
-  const { companyInfo, footerMenu, footerContact } = props;
-  
-  return (
-    <div className={styles.footerTop}>
-      <Container>
-        <Row>
-          <Col lg={4}>
-            <CompanyInfo
-              logoSrc={companyInfo?.logoSrc}
-              introduce={companyInfo?.introduce}
-              descripton={companyInfo?.descripton}
-            />
-          </Col>
-          <Col lg={8}>
-            <Row className={styles.footerTopRight}>
-              {footerMenu?.length > 0 &&
-                footerMenu?.map((menu, index) => (
-                  <Col lg={4} key={`footerMenu-${index}`}>
-                    <FooterMenu childrenMenu={menu.children} title={menu.name} />
-                  </Col>
-                ))}
-              <Col lg={4}>
-                <MenuContact
-                  contacts={footerContact.menuItems}
-                  title={footerContact.title}
-                />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  );
-};
-
 const FooterMenu = (props) => {
   const { childrenMenu, title } = props;
 
@@ -170,6 +118,42 @@ const MenuContact = (props) => {
   );
 };
 
+const Top = (props) => {
+  const { companyInfo, footerMenu, footerContact } = props;
+
+  return (
+    <div className={styles.footerTop}>
+      <Container>
+        <Row>
+          <Col lg={4}>
+            <CompanyInfo
+              logoSrc={companyInfo?.logoSrc}
+              introduce={companyInfo?.introduce}
+              descripton={companyInfo?.descripton}
+            />
+          </Col>
+          <Col lg={8}>
+            <Row className={styles.footerTopRight}>
+              {footerMenu?.length > 0 &&
+                footerMenu?.map((menu, index) => (
+                  <Col lg={4} key={`footerMenu-${index}`}>
+                    <FooterMenu childrenMenu={menu.children} title={menu.name} />
+                  </Col>
+                ))}
+              <Col lg={4}>
+                <MenuContact
+                  contacts={footerContact.menuItems}
+                  title={footerContact.title}
+                />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
+};
+
 const Bottom = (props) => {
   const { copyright = '' } = props;
   if (!copyright) return <></>;
@@ -186,4 +170,20 @@ const Bottom = (props) => {
   );
 };
 
-export default Footer;
+const FooterContainer = (props) => {
+  const { dataFooter } = props;
+  const footerData = data;
+
+  return (
+    <div className={styles.siteFooter}>
+      <Top
+        companyInfo={footerData.companyInfo}
+        footerMenu={dataFooter}
+        footerContact={footerData.footerContact}
+      />
+      <Bottom copyright={footerData.copyright} />
+    </div>
+  );
+};
+
+export default FooterContainer;

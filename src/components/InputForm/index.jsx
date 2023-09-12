@@ -1,5 +1,5 @@
 import { Form } from 'react-bootstrap';
-import styles from '../components/InputForm.module.css';
+import styles from 'botak/components/InputForm.module.css';
 
 const InputForm = ({
   controlId,
@@ -13,8 +13,7 @@ const InputForm = ({
   required,
   dots,
   textarea,
-  rows,
-  applyLabelForm
+  rows
 }) => {
   const subInput = Boolean(label);
   return (

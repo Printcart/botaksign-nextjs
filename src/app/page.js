@@ -1,5 +1,5 @@
-import Homepage from './components/Homepage';
-import HomepageServer from './components/HomepageServer';
+import Homepage from 'botak/components/Homepage';
+import HomepageServer from 'botak/components/HomepageServer';
 
 export default function Home() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import SignIn from '../components/SignIn/page';
+import SignIn from 'botak/components/SignIn/page';
 
 const AccountSignIn = () => {
   return <SignIn />;

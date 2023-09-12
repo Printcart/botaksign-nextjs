@@ -1,4 +1,4 @@
-import SignUp from '../components/SignUp/page';
+import SignUp from 'botak/components/SignUp';
 
 const AccountSignUp = () => {
   return <SignUp />;

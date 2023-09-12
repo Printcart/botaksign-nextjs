@@ -1,6 +1,6 @@
 'use client';
 import { fetchBlog } from 'botak/api/pages';
-import CrumbsArchives from 'botak/app/components/CrumbsArchives';
+import CrumbsArchives from 'botak/components/CrumbsArchives';
 import { useEffect, useState } from 'react';
 
 const Archives = (props) => {
