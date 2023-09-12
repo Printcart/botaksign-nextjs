@@ -6,7 +6,7 @@ export const arrHierarchy = (arr) => {
     map[item.id] = {
       id: item.id,
       title: item.title,
-      url: item.url,
+      url: item.slug,
       children: []
     };
   });

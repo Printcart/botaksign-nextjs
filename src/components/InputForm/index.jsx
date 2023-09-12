@@ -1,5 +1,5 @@
 import { Form } from 'react-bootstrap';
-import styles from 'botak/components/InputForm.module.css';
+import styles from './InputForm.module.css';
 
 const InputForm = ({
   controlId,

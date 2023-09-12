@@ -75,10 +75,10 @@ export const fetcAssets = async () => {
 
   return json;
 };
-export const fetcPrimaryMenu = async () => {
+export const fetchPrimaryMenu = async () => {
   const fetUrl = [
-    `${API_URL}wp/v2/menu-items?menus=478&page=1`,
-    `${API_URL}wp/v2/menu-items?menus=478&page=2`
+    `${API_URL}pc/v2/menu-items?menus=478&page=1`,
+    `${API_URL}pc/v2/menu-items?menus=478&page=2`
   ];
 
   const [resOne, resTwo] = await Promise.all(
@@ -123,7 +123,7 @@ export const fetchDataFooterTitle = async () => {
 };
 
 export const fetchMenuFooterById = async (id) => {
-  const fetUrl = `${API_URL}wp/v2/menu-items?menus=${id}`;
+  const fetUrl = `${API_URL}pc/v2/menu-items?menus=${id}`;
   const res = await fetch(fetUrl, {
     headers,
     method: 'GET'

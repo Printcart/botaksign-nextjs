@@ -28,7 +28,7 @@ const FooterMenuItem = (props) => {
           <MenuItem
             key={`MenuItem-${index}`}
             label={item?.title?.rendered}
-            url={item?.url}
+            url={item?.slug}
           />
         ))}
     </>
@@ -40,9 +40,11 @@ const MenuItem = (props) => {
 
   return (
     <ListGroup.Item className={styles.listItems}>
-      <Link href={url} className={styles.footerList}>
-        {label}
-      </Link>
+      <Link
+        href={url}
+        className={styles.footerList}
+        dangerouslySetInnerHTML={{ __html: label }}
+      />
     </ListGroup.Item>
   );
 };
