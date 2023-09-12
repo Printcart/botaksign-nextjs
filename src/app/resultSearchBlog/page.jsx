@@ -5,8 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import styles from './SearchBlog.module.css';
-import { SearchBlog } from '../components/Sidebar/page';
-import ArticlePost from '../components/ArticlePost';
+import { SearchBlog } from 'botak/components/Sidebar/page';
+import ArticlePost from 'botak/components/ArticlePost/page';
 
 const BreadcrumbLast = (props) => {
   const { params } = props;

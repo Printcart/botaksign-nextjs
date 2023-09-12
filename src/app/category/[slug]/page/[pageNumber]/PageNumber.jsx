@@ -1,6 +1,6 @@
 'use client';
 import { fetchCategoriesId } from 'botak/api/pages';
-import CrumbsCategories from 'botak/app/components/CrumbsCategories';
+import CrumbsCategories from 'botak/components/CrumbsCategories';
 import { useEffect, useState } from 'react';
 
 const PageNumber = (props) => {

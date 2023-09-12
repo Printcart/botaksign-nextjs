@@ -4,9 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Container } from 'react-bootstrap';
 import * as Yup from 'yup';
-import PageCoverHeader from '../components/PageCoverHeader';
+import PageCoverHeader from 'botak/components/PageCoverHeader';
 import styles from './CorporatePartner.module.css';
-import FormField from '../components/Footer/FormField';
+import FormField from 'botak/components/Footer/FormField';
 import { Fragment } from 'react';
 
 const industryOptions = [

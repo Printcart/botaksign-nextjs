@@ -1,6 +1,6 @@
 'use client';
 import { fetchBlog } from 'botak/api/pages';
-import CrumbsPosts from 'botak/app/components/CrumbsPosts';
+import CrumbsPosts from 'botak/components/CrumbsPosts';
 import { useEffect, useState } from 'react';
 
 const PageNumber = (props) => {

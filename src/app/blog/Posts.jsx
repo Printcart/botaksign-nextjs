@@ -1,7 +1,7 @@
 'use client';
 import { fetchBlog } from 'botak/api/pages';
 import { useEffect, useState } from 'react';
-import CrumbsPosts from '../components/CrumbsPosts';
+import CrumbsPosts from 'botak/components/CrumbsPosts';
 
 const Posts = (props) => {
   const { dataBlog, dataCategories, dataTitleBlogSidebar } = props;

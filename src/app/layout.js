@@ -1,11 +1,11 @@
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/Header/page';
+import Header from 'botak/components/Header/page';
 import { nunito, oduda, roboto, robotoRegular } from './fonts';
 import './globals.css';
-import EmbedScripts from './components/EmbedScripts';
-import FooterServer from './components/Footer/FooterServer';
+import EmbedScripts from 'botak/components/EmbedScripts';
+import FooterServer from 'botak/components/Footer/FooterServer';
 config.autoAddCss = false;
 
 export const metadata = {
