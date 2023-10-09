@@ -1,0 +1,37 @@
+.wrapRefine {
+  flex: 0 0 23%;
+  padding: 0 15px;
+  margin-right: 15px;
+}
+
+.wrapRefine h3 {
+  font-size: 16px;
+  color: #444;
+  text-transform: uppercase;
+  line-height: 24px;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid;
+  border-color: #d7d7d7;
+}
+
+.wrapRefine ul {
+  padding: unset;
+}
+
+.wrapRefine ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #696969;
+  font-size: 14px;
+  padding: 8px 0 8px 15px;
+}
+
+.wrapRefine ul li a:hover {
+  color: rgb(40, 196, 117);
+}
+
+.select {
+  font-weight: 700;
+}
