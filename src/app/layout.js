@@ -1,11 +1,12 @@
-import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header/page';
-import { nunito, oduda, roboto, robotoRegular } from './fonts';
-import './globals.css';
 import EmbedScripts from './components/EmbedScripts';
 import FooterServer from './components/Footer/FooterServer';
+import { nunito, oduda, roboto, robotoRegular } from './fonts';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import './globals.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Providers from 'botak/utils/provider';
 config.autoAddCss = false;
 
 export const metadata = {
@@ -20,12 +21,12 @@ export default function RootLayout({ children }) {
         <EmbedScripts />
         <base href="/"></base>
       </head>
-      <body
-        className={`${nunito.variable} ${oduda.variable}  ${roboto.variable} ${robotoRegular.variable}`}
-      >
-        <Header />
-        {children}
-        <FooterServer />
+      <body className={`${nunito.variable} ${oduda.variable}  ${roboto.variable} ${robotoRegular.variable}`}>
+        <Providers>
+          <Header />
+          {children}
+          <FooterServer />
+        </Providers>
       </body>
     </html>
   );
