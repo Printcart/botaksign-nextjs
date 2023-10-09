@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+}
+
+.loading {
+  width: 100%;
+  text-align: center;
+}
+
+.error {
+  color: #696969;
+  margin-left: 15px;
+}
