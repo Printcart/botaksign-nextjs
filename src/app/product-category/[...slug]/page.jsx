@@ -1,7 +1,8 @@
 import { API_URL, author } from "botak/api/auth";
 import Homepage from "botak/app/components/Homepage";
-import MainList from "../../../../components/ProductCategory/MainList";
 import NotFound from "botak/app/not-found";
+import TopBar from "botak/components/ProductCategory/TopBar";
+import MainList from "botak/components/ProductCategory/MainList";
 
 // Set
 const headers = {
@@ -9,7 +10,7 @@ const headers = {
   headers: author,
 };
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   const res = await fetch(`${API_URL}wc/v3/products/categories?slug=printing-products`, headers);
   const path = await res.json();
 
@@ -18,13 +19,13 @@ export async function generateStaticParams() {
   }
 };
 
-async function getProductCategory(params) {
+const getProductCategory = async (params) => {
   let slug = '';
   let refine = '';
+  const count = params.slug.length;
+  const dataTopBar = [];
   const dataRefine = [];
   const dataCategory = [];
-  const dataProduct = [];
-  const count = params.slug.length;
 
   // Set
   slug = params.slug[0];
@@ -37,6 +38,15 @@ async function getProductCategory(params) {
     slug = params.slug[2];
     refine = `slug=${params.slug[1]}`;
   }
+
+  try {
+    for (const _i of params.slug) {
+      const url = `${API_URL}wc/v3/products/categories?slug=${_i}`;
+      const res = await fetch(url, headers)
+      const data = await res.json();
+      dataTopBar.push(...data)
+    }
+  } catch (error) { }
 
   // Find
   const apiCheck = [
@@ -53,50 +63,32 @@ async function getProductCategory(params) {
   // Check
   if (jsonOne.length > 0) {
     const id = jsonOne[0].id;
-    const display = jsonOne[0].display;
+    const display = jsonOne[0]?.display;
     const idRefine = jsonTwo[0].id;
 
-    // Get
+    // Get Refine
     if (params.slug.length === 1) {
       dataRefine.push(...jsonTwo)
     }
     else {
-      const data = await fetch(`${API_URL}wc/v3/products/categories?parent=${idRefine}`, headers);
+      const data = await fetch(`${API_URL}wc/v3/products/categories?parent=${idRefine}&per_page=100`, headers);
       const refineRes = await data.json();
       dataRefine.push(...refineRes);
     }
 
-    // Get
-    if (display === 'subcategories') {
-      const data = await fetch(`${API_URL}wc/v3/products/categories?parent=${id}`, headers);
+    // Get Category
+    if (display === 'subcategories' || display === 'both') {
+      const data = await fetch(`${API_URL}wc/v3/products/categories?parent=${id}&per_page=100`, headers);
       const categoryRes = await data.json();
       dataCategory.push(...categoryRes);
     }
-    if ((display === 'products' || display === 'default')) {
-      const data = await fetch(`${API_URL}wc/v3/products?category=${id}`, headers);
-      const productRes = await data.json();
-      dataProduct.push(...productRes);
-    }
-    if (display === 'both') {
-      const apiUrls = [
-        `${API_URL}wc/v3/products/categories?parent=${id}`,
-        `${API_URL}wc/v3/products?category=${id}`,
-      ]
-      const [categoryRes, productRes] = await Promise.all(
-        apiUrls.map((url) => fetch(url, headers))
-      );
 
-      const [categories, products] = await Promise.all([categoryRes.json(), productRes.json()]);
-
-      dataCategory.push(...categories);
-      dataProduct.push(...products);
-    }
-
-    // Return
     return {
+      currentId: id,
+      display,
+      dataTopBar,
       dataRefine,
       dataCategory,
-      dataProduct,
     }
   };
 
@@ -104,18 +96,21 @@ async function getProductCategory(params) {
 };
 
 const ProductCategory = async ({ params }) => {
-  const data = await getProductCategory(params);
+  const result = await getProductCategory(params);
 
-  if (!data) {
+  if (!result) {
     return <NotFound />
   }
 
   return (
     <Homepage>
+      <TopBar dataTopBar={result.dataTopBar} />
       <MainList
-        dataRefine={data.dataRefine}
-        dataCategory={data.dataCategory}
-        dataProduct={data.dataProduct}
+        currentId={result.currentId}
+        display={result.display}
+        dataTopBar={result.dataTopBar}
+        dataRefine={result.dataRefine}
+        dataCategory={result.dataCategory}
       />
     </Homepage>
   )
