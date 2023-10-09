@@ -1,0 +1,70 @@
+.wrapList {
+  flex: 0 0 77%;
+  padding: 0 15px;
+  margin-bottom: 75px;
+}
+
+.wrapList h1 {
+  font-weight: 500;
+  color: #444;
+  line-height: 18px;
+  font-size: 25px;
+  letter-spacing: 0.06em;
+  margin-bottom: 30px;
+}
+
+.listing {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.item {
+  flex: 0 0 33.33%;
+  padding: 0 15px;
+  margin-bottom: 30px;
+}
+
+.child {
+  padding-bottom: 40px;
+  height: 100%;
+}
+
+.child:hover {
+  box-shadow: 0px 0px 15px hsla(0, 0%, 60%, .3);
+}
+
+.child:hover h4,
+.child:hover .price {
+  padding-left: 15px;
+  transition: all .2s;
+}
+
+.child img {
+  width: 100%;
+  height: auto;
+  border-bottom: 3px solid #27c475 !important;
+}
+
+.child h4 {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #333;
+}
+
+.child h4:hover {
+  color: rgb(40, 196, 117);
+}
+
+.price {
+  font-weight: 400;
+  font-size: 16px;
+  color: rgb(105, 105, 105);
+  line-height: 1.5;
+}
+
+.currentPrice {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(40, 196, 117);
+}
