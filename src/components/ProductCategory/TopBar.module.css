@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  align-items: center;
+  padding: 18px 0px;
+  margin-bottom: 20px;
+  color: #888;
+  font-size: 15px;
+}
+
+.main span,
+.main strong {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
