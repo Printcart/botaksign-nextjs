@@ -6,8 +6,6 @@ const Providers = ({ children }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 1000 * 60 * 30, // Cache is considered stale after 30 minutes
-        cacheTime: 1000 * 60 * 60, // Cache expires after 1 hours
         refetchOnWindowFocus: false,
       },
     },
