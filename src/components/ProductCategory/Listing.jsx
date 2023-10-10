@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useInfiniteQuery } from 'react-query';
 import { usePathname } from 'next/navigation';
 import { Loading, LoadingError } from "./MainList";
-import { fetchProduct } from "botak/api/product";
+import { fetchProduct } from "botak/api/product-category";
 import Toastify from "botak/utils/toastify";
 import styles from "./Listing.module.css";
 
