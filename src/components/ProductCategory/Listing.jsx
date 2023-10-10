@@ -1,12 +1,12 @@
-'use client'
-import React, { useEffect, useRef } from "react";
-import Link from "next/link";
-import { useInfiniteQuery } from 'react-query';
+'use client';
+import { fetchProduct } from 'botak/api/product-category';
+import Toastify from 'botak/utils/toastify';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Loading, LoadingError } from "./MainList";
-import { fetchProduct } from "botak/api/product-category";
-import Toastify from "botak/utils/toastify";
-import styles from "./Listing.module.css";
+import { useEffect, useRef } from 'react';
+import { useInfiniteQuery } from 'react-query';
+import styles from './Listing.module.css';
+import { Loading, LoadingError } from './Loading';
 
 const Item = (props) => {
   const { item, image, url, price } = props;
@@ -20,17 +20,19 @@ const Item = (props) => {
             <span dangerouslySetInnerHTML={{ __html: item?.name }}></span>
           </h4>
         </Link>
-        {price &&
+        {price && (
           <span className={styles.price}>
-            {price > 0 &&
-              <span>From <span className={styles.currentPrice}>SGD {price}</span></span>
-            }
+            {price > 0 && (
+              <span>
+                From <span className={styles.currentPrice}>SGD {price}</span>
+              </span>
+            )}
           </span>
-        }
+        )}
       </div>
     </div>
   );
-}
+};
 
 const Listing = (props) => {
   const { currentId, display, dataTopBar, dataCategory } = props;
@@ -38,7 +40,6 @@ const Listing = (props) => {
   const lengthTopBar = dataTopBar.length;
   const currentSelect = dataTopBar[lengthTopBar - 1];
   const nextRef = useRef(null);
-  const queryKey = `product${currentId}`;
 
   const {
     data,
@@ -46,20 +47,22 @@ const Listing = (props) => {
     isLoading,
     isError,
     isFetchingNextPage,
-    hasNextPage,
-  } = useInfiniteQuery([queryKey], ({ pageParam = 1 }) => fetchProduct(currentId, pageParam),
+    hasNextPage
+  } = useInfiniteQuery(
+    ['product-category', currentId],
+    ({ pageParam = 1 }) => fetchProduct(currentId, pageParam),
     {
-      getNextPageParam: (lastPage) => lastPage.nextPage,
+      getNextPageParam: (lastPage) => lastPage.nextPage
     }
   );
 
   useEffect(() => {
-    if (typeof window !== "undefined" && nextRef) {
+    if (typeof window !== 'undefined' && nextRef) {
       const handleScroll = () => {
         const bottom = nextRef?.current?.getBoundingClientRect()?.bottom;
         const isBottomVisible = bottom <= window?.innerHeight;
         if (isBottomVisible) {
-          fetchNextPage()
+          fetchNextPage();
         }
       };
 
@@ -81,36 +84,33 @@ const Listing = (props) => {
         <span dangerouslySetInnerHTML={{ __html: currentSelect?.name }}></span>
       </h1>
       <div className={styles.listing}>
-        {dataCategory?.length > 0 && dataCategory.map((item) =>
-          <Item
-            key={item.id}
-            item={item}
-            image={item?.image}
-            url={pathname}
-          />
-        )}
+        {dataCategory?.length > 0 &&
+          dataCategory.map((item) => (
+            <Item key={item.id} item={item} image={item?.image} url={pathname} />
+          ))}
 
-        {display !== "subcategories" &&
+        {display !== 'subcategories' && (
           <>
             {isError && <LoadingError />}
             {isError && <Toastify text="No products available on this page." />}
             {isLoading && <Loading />}
-            {dataProduct?.length > 0 && dataProduct.map((item) =>
-              <Item
-                key={item.id}
-                item={item}
-                image={item?.images?.[0]}
-                url={"/product"}
-                price={item?.price}
-              />
-            )}
+            {dataProduct?.length > 0 &&
+              dataProduct.map((item) => (
+                <Item
+                  key={item.id}
+                  item={item}
+                  image={item?.images?.[0]}
+                  url={'/product'}
+                  price={item?.price}
+                />
+              ))}
             {hasNextPage && <div ref={nextRef} style={{ width: '100%' }} />}
             {isFetchingNextPage && <Loading />}
           </>
-        }
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default Listing;

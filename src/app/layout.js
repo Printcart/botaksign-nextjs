@@ -21,7 +21,9 @@ export default function RootLayout({ children }) {
         <EmbedScripts />
         <base href="/"></base>
       </head>
-      <body className={`${nunito.variable} ${oduda.variable}  ${roboto.variable} ${robotoRegular.variable}`}>
+      <body
+        className={`${nunito.variable} ${oduda.variable}  ${roboto.variable} ${robotoRegular.variable}`}
+      >
         <Providers>
           <Header />
           {children}
