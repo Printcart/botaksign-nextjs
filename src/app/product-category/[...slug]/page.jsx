@@ -15,7 +15,7 @@ export const generateStaticParams = async () => {
   const path = await res.json();
 
   if (path.length > 0) {
-    return path.map(_item => ({ slug: [_item.slug] }));
+    return path.map(item => ({ slug: [item.slug] }));
   }
 };
 
@@ -40,8 +40,8 @@ const getProductCategory = async (params) => {
   }
 
   try {
-    for (const _i of params.slug) {
-      const url = `${API_URL}wc/v3/products/categories?slug=${_i}`;
+    for (const i of params.slug) {
+      const url = `${API_URL}wc/v3/products/categories?slug=${i}`;
       const res = await fetch(url, headers)
       const data = await res.json();
       dataTopBar.push(...data)
