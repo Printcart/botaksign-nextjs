@@ -37,8 +37,8 @@ const Listing = (props) => {
   const pathname = usePathname();
   const lengthTopBar = dataTopBar.length;
   const currentSelect = dataTopBar[lengthTopBar - 1];
-  const loading = useRef(null);
-  const queryKey = 'product' + currentId;
+  const nextRef = useRef(null);
+  const queryKey = `product${currentId}`;
 
   const {
     data,
@@ -54,9 +54,9 @@ const Listing = (props) => {
   );
 
   useEffect(() => {
-    if (typeof window !== "undefined" && loading) {
+    if (typeof window !== "undefined" && nextRef) {
       const handleScroll = () => {
-        const bottom = loading?.current?.getBoundingClientRect()?.bottom;
+        const bottom = nextRef?.current?.getBoundingClientRect()?.bottom;
         const isBottomVisible = bottom <= window?.innerHeight;
         if (isBottomVisible) {
           fetchNextPage()
@@ -104,7 +104,7 @@ const Listing = (props) => {
                 price={item?.price}
               />
             )}
-            {hasNextPage && <div ref={loading} />}
+            {hasNextPage && <div ref={nextRef} style={{ width: '100%' }} />}
             {isFetchingNextPage && <Loading />}
           </>
         }
