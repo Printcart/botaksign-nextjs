@@ -1,5 +1,6 @@
 const PAGE_ID = 12599;
 const API_URL = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+const PAGE_MENU = process.env.NEXT_PUBLIC_MENU_PAGE_NUMBER;
 
 const headers = {
   'Content-Type': 'application/json',
@@ -77,6 +78,27 @@ export const fetcAssets = async () => {
 };
 
 export const fetcPrimaryMenu = async () => {
+  const fetMenus = [];
+
+  const fetMenu = (page) => {
+    const url = `${API_URL}pc/v2/menu-items?menus=478&page=${page}`
+    return fetch(url, { headers, method: 'GET' });
+  }
+
+  for (let index = 1; index <= PAGE_MENU; index++) {
+    const request = fetMenu(index);
+    fetMenus.push(request);
+  }
+
+  Promise.all(fetMenus)
+    .then(responses => responses.map(response => response.json()))
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
   const fetUrl = `${API_URL}pc/v2/menu-items?menus=478&page=1`
   const res = await fetch(fetUrl, { headers, method: 'GET' });
   if (!res.ok) {
