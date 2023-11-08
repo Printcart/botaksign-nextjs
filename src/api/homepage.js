@@ -79,34 +79,36 @@ export const fetcAssets = async () => {
 
 export const fetcPrimaryMenu = async () => {
   const fetMenus = [];
+  const pageMenu = 3;
 
-  const fetMenu = (page) => {
-    const url = `${API_URL}pc/v2/menu-items?menus=478&page=${page}`
-    return fetch(url, { headers, method: 'GET' });
+  const getMenuByPage = async (page) => {
+    const url = `${API_URL}pc/v2/menu-items?menus=478&page=${page}`;
+    const response = await fetch(url, { headers, method: 'GET' });
+    return response.json();
+  };
+
+  for (let index = 1; index <= pageMenu; index++) {
+    fetMenus.push(getMenuByPage(index));
   }
 
-  for (let index = 1; index <= PAGE_MENU; index++) {
-    const request = fetMenu(index);
-    fetMenus.push(request);
-  }
+  const data = await Promise.all(fetMenus).catch((error) => {
+    console.error('Error:', error);
+  });
 
-  Promise.all(fetMenus)
-    .then(responses => responses.map(response => response.json()))
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+  let menus = [];
 
-  const fetUrl = `${API_URL}pc/v2/menu-items?menus=478&page=1`
-  const res = await fetch(fetUrl, { headers, method: 'GET' });
-  if (!res.ok) {
-    throw new Error('Failed to fetch API');
-  }
-  const data = await res.json();
+  data.map((item) => {
+    menus = menus.concat(item);
+  });
 
-  return [...data];
+  return menus;
+
+  // const fetUrl = `${API_URL}pc/v2/menu-items?menus=478&page=1`;
+  // const res = await fetch(fetUrl, { headers, method: 'GET' });
+  // if (!res.ok) {
+  //   throw new Error('Failed to fetch API');
+  // }
+  // const data = await res.json();
 };
 
 export const fetchDataFooterTitle = async () => {
@@ -125,12 +127,12 @@ export const fetchDataFooterTitle = async () => {
   const fetchMenu =
     data?.length > 0
       ? data.map(async (menu) => {
-        const { id, name } = menu;
-        if (id === 55 || id === 56) {
-          const child = await fetchMenuFooterById(id);
-          return { id, name, children: child?.length > 0 ? child : [] };
-        }
-      })
+          const { id, name } = menu;
+          if (id === 55 || id === 56) {
+            const child = await fetchMenuFooterById(id);
+            return { id, name, children: child?.length > 0 ? child : [] };
+          }
+        })
       : [];
 
   const menusWithIdAndName = await Promise.all(fetchMenu);
