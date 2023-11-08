@@ -4,7 +4,7 @@ import Toastify from 'botak/utils/toastify';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import styles from './Listing.module.css';
 import { Loading, LoadingError } from './Loading';
 
@@ -48,29 +48,28 @@ const Listing = (props) => {
     isError,
     isFetchingNextPage,
     hasNextPage
-  } = useInfiniteQuery(
-    ['product-category', currentId],
-    ({ pageParam = 1 }) => fetchProduct(currentId, pageParam),
-    {
-      getNextPageParam: (lastPage) => lastPage.nextPage
+  } = useInfiniteQuery({
+    queryKey: ['product-category'],
+    queryFn: ({ pageParam = 1 }) => fetchProduct(currentId, pageParam),
+    initialPageParam: 1,
+    suspense: true,
+    getNextPageParam: (lastPage) => lastPage.nextPage
+  });
+
+  const handleScroll = () => {
+    const bottom = nextRef?.current?.getBoundingClientRect()?.bottom;
+    const isBottomVisible = bottom <= window?.innerHeight;
+    if (isBottomVisible) {
+      fetchNextPage();
     }
-  );
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined' && nextRef) {
-      const handleScroll = () => {
-        const bottom = nextRef?.current?.getBoundingClientRect()?.bottom;
-        const isBottomVisible = bottom <= window?.innerHeight;
-        if (isBottomVisible) {
-          fetchNextPage();
-        }
-      };
-
-      window.addEventListener('scroll', handleScroll);
-
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
+      if (!isFetchingNextPage) {
+        window.addEventListener('scroll', handleScroll);
+      }
+      return () => window.removeEventListener('scroll', handleScroll);
     }
   }, []);
 
@@ -104,7 +103,7 @@ const Listing = (props) => {
                   price={item?.price}
                 />
               ))}
-            {hasNextPage && <div ref={nextRef} style={{ width: '100%' }} />}
+            {hasNextPage && <div id='next-ref' ref={nextRef} style={{ width: '100%' }} />}
             {isFetchingNextPage && <Loading />}
           </>
         )}

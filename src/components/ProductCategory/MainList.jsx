@@ -7,7 +7,12 @@ const MainList = (props) => {
 
   return (
     <div className="d-flex">
-      {dataRefine && <Refine dataTopBar={dataTopBar} dataRefine={dataRefine} />}
+      {dataRefine &&
+        <Refine
+          dataTopBar={dataTopBar}
+          dataRefine={dataRefine}
+        />
+      }
       <Listing
         currentId={currentId}
         display={display}

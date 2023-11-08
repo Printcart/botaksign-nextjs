@@ -62,7 +62,7 @@ export const getProductCategory = async (params) => {
 
   // Check
   if (jsonOne.length > 0) {
-    const id = jsonOne[0].id;
+    const currentId = jsonOne[0].id;
     const display = jsonOne[0]?.display;
     const idRefine = jsonTwo[0].id;
 
@@ -78,13 +78,13 @@ export const getProductCategory = async (params) => {
 
     // Get Category
     if (display === 'subcategories' || display === 'both') {
-      const data = await fetch(`${API_URL}wc/v3/products/categories?parent=${id}&per_page=100`, headers);
+      const data = await fetch(`${API_URL}wc/v3/products/categories?parent=${currentId}&per_page=100`, headers);
       const categoryRes = await data.json();
       dataCategory.push(...categoryRes);
     }
 
     return {
-      currentId: id,
+      currentId,
       display,
       dataTopBar,
       dataRefine,
