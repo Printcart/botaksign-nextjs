@@ -75,23 +75,16 @@ export const fetcAssets = async () => {
 
   return json;
 };
+
 export const fetcPrimaryMenu = async () => {
-  const fetUrl = [
-    `${API_URL}wp/v2/menu-items?menus=478&page=1`,
-    `${API_URL}wp/v2/menu-items?menus=478&page=2`
-  ];
-
-  const [resOne, resTwo] = await Promise.all(
-    fetUrl.map((url) => fetch(url, { headers, method: 'GET' }))
-  );
-
-  if (!resOne.ok || !resTwo.ok) {
+  const fetUrl = `${API_URL}pc/v2/menu-items?menus=478&page=1`
+  const res = await fetch(fetUrl, { headers, method: 'GET' });
+  if (!res.ok) {
     throw new Error('Failed to fetch API');
   }
+  const data = await res.json();
 
-  const [jsonOne, jsonTwo] = await Promise.all([resOne.json(), resTwo.json()]);
-
-  return [...jsonOne, ...jsonTwo];
+  return [...data];
 };
 
 export const fetchDataFooterTitle = async () => {
@@ -110,12 +103,12 @@ export const fetchDataFooterTitle = async () => {
   const fetchMenu =
     data?.length > 0
       ? data.map(async (menu) => {
-          const { id, name } = menu;
-          if (id === 55 || id === 56) {
-            const child = await fetchMenuFooterById(id);
-            return { id, name, children: child?.length > 0 ? child : [] };
-          }
-        })
+        const { id, name } = menu;
+        if (id === 55 || id === 56) {
+          const child = await fetchMenuFooterById(id);
+          return { id, name, children: child?.length > 0 ? child : [] };
+        }
+      })
       : [];
 
   const menusWithIdAndName = await Promise.all(fetchMenu);
